@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufg.jatai.fsw.sisquest.controller;
-
-import java.io.Serializable;
-import org.springframework.stereotype.Controller;
+package br.ufg.jatai.fsw.sisquest.dao;
 
 /**
  *
  * @author dfranco
  */
-@Controller
-public class TurmaController implements Serializable{
-
+public class PessoaDAO {
+    
 }

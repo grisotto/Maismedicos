@@ -5,10 +5,14 @@
  */
 package br.ufg.jatai.fsw.sisquest.controller;
 
+import java.io.Serializable;
+import org.springframework.stereotype.Controller;
+
 /**
  *
  * @author dfranco
  */
-public class QuestaoController {
+@Controller
+public class QuestaoController implements Serializable{
     
 }
