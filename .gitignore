@@ -1,2 +1,5 @@
 /quest/target/
 /target/
+/src/main/webapp/WEB-INF/assets/bootstrap/
+/src/main/webapp/WEB-INF/assets/dist/
+/src/main/webapp/WEB-INF/assets/plugins/
