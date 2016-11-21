@@ -5,15 +5,30 @@
  */
 package br.ufg.jatai.fsw.sisquest.controller;
 
-import java.io.Serializable;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author dfranco
  */
-@Controller
-public class HomeController implements Serializable{
+@Controller(value = "/")
+public class HomeController {
    
     
+    @RequestMapping("/")
+    public String home(){
+        return "WEB-INF/views/home/index.jsp";
+    }
+    @RequestMapping(value = "/sobre")
+    public String sobre(){
+        return "WEB-INF/views/home/sobre.jsp";
+    }
+    @RequestMapping(value = "/entrar")
+    public String entrar(){
+        return "WEB-INF/views/home/entrar.jsp";
+    }
+
 }
