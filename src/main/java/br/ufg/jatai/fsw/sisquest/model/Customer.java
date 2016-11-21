@@ -2,6 +2,10 @@ package br.ufg.jatai.fsw.sisquest.model;
 
 import java.util.Date;
 
+/**
+ *
+ * @author dfranco
+ */
 public class Customer {
 
 	private Long id;
@@ -11,7 +15,15 @@ public class Customer {
 	private String mobile;
 	private Date dateOfBirth;
 
-	public Customer(long id, String firstName, String lastName, String email, String mobile) {
+    /**
+     *
+     * @param id
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param mobile
+     */
+    public Customer(long id, String firstName, String lastName, String email, String mobile) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -20,54 +32,105 @@ public class Customer {
 		this.dateOfBirth = new Date();
 	}
 
-	public Customer() {
+    /**
+     *
+     */
+    public Customer() {
 	}
 
-	public Long getId() {
+    /**
+     *
+     * @return
+     */
+    public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+    /**
+     *
+     * @param id
+     */
+    public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getFirstName() {
+    /**
+     *
+     * @return
+     */
+    public String getFirstName() {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+    /**
+     *
+     * @param firstName
+     */
+    public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	public String getLastName() {
+    /**
+     *
+     * @return
+     */
+    public String getLastName() {
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
+    /**
+     *
+     * @param lastName
+     */
+    public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	public String getEmail() {
+    /**
+     *
+     * @return
+     */
+    public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
+    /**
+     *
+     * @param email
+     */
+    public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public String getMobile() {
+    /**
+     *
+     * @return
+     */
+    public String getMobile() {
 		return mobile;
 	}
 
-	public void setMobile(String mobile) {
+    /**
+     *
+     * @param mobile
+     */
+    public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
-	public Date getDateOfBirth() {
+    /**
+     *
+     * @return
+     */
+    public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+    /**
+     *
+     * @param dateOfBirth
+     */
+    public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

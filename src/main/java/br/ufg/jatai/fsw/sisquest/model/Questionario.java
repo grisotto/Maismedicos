@@ -17,35 +17,68 @@ public class Questionario {
     private Team team;
     private List<Questao> questoes;
 
+    /**
+     *
+     * @param id
+     * @param team
+     * @param questoes
+     */
     public Questionario(Integer id, Team team, List<Questao> questoes) {
         this.id = id;
         this.team = team;
         this.questoes = questoes;
     }
 
+    /**
+     *
+     */
     public Questionario() {
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Team getTeam() {
         return team;
     }
 
+    /**
+     *
+     * @param team
+     */
     public void setTeam(Team team) {
         this.team = team;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Questao> getQuestoes() {
         return questoes;
     }
 
+    /**
+     *
+     * @param questoes
+     */
     public void setQuestoes(List<Questao> questoes) {
         this.questoes = questoes;
     }

@@ -17,35 +17,68 @@ public class Questao {
     private String questao;
     private List<Alternativa> alternativas;
 
+    /**
+     *
+     * @param id
+     * @param questao
+     * @param alternativas
+     */
     public Questao(Integer id, String questao, List<Alternativa> alternativas) {
         this.id = id;
         this.questao = questao;
         this.alternativas = alternativas;
     }
 
+    /**
+     *
+     */
     public Questao() {
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getQuestao() {
         return questao;
     }
 
+    /**
+     *
+     * @param questao
+     */
     public void setQuestao(String questao) {
         this.questao = questao;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Alternativa> getAlternativas() {
         return alternativas;
     }
 
+    /**
+     *
+     * @param alternativas
+     */
     public void setAlternativas(List<Alternativa> alternativas) {
         this.alternativas = alternativas;
     }

@@ -15,36 +15,69 @@ public class Alternativa {
     private String descricao;
     private boolean correto;
     
+    /**
+     *
+     */
     public Alternativa() {
         this(null, null, false);
     }
     
+    /**
+     *
+     * @param id
+     * @param descricao
+     * @param correto
+     */
     public Alternativa(Integer id, String descricao, boolean correto) {
         this.id = id;
         this.descricao = descricao;
         this.correto = correto;
     }
     
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
     
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getDescricao() {
         return descricao;
     }
     
+    /**
+     *
+     * @param descricao
+     */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean isCorreto() {
         return correto;
     }
     
+    /**
+     *
+     * @param correto
+     */
     public void setCorreto(boolean correto) {
         this.correto = correto;
     }

@@ -22,9 +22,22 @@ public class Tarefa {
     private Integer questionsSize;
     private List<Questionario> questionarios;
 
+    /**
+     *
+     */
     public Tarefa() {
     }
 
+    /**
+     *
+     * @param id
+     * @param descricao
+     * @param turma
+     * @param etapaAtual
+     * @param etapaEventos
+     * @param questionsSize
+     * @param questionarios
+     */
     public Tarefa(Integer id, String descricao, Turma turma, EtapaEvento etapaAtual, List<EtapaEvento> etapaEventos, Integer questionsSize, List<Questionario> questionarios) {
         this.id = id;
         this.descricao = descricao;
@@ -35,60 +48,114 @@ public class Tarefa {
         this.questionarios = questionarios;
     }
 
-    
-    
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescricao() {
         return descricao;
     }
 
+    /**
+     *
+     * @param descricao
+     */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
+    /**
+     *
+     * @return
+     */
     public Turma getTurma() {
         return turma;
     }
 
+    /**
+     *
+     * @param turma
+     */
     public void setTurma(Turma turma) {
         this.turma = turma;
     }
 
+    /**
+     *
+     * @return
+     */
     public EtapaEvento getEtapaAtual() {
         return etapaAtual;
     }
 
+    /**
+     *
+     * @param etapaAtual
+     */
     public void setEtapaAtual(EtapaEvento etapaAtual) {
         this.etapaAtual = etapaAtual;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<EtapaEvento> getEtapaEventos() {
         return etapaEventos;
     }
 
+    /**
+     *
+     * @param etapaEventos
+     */
     public void setEtapaEventos(List<EtapaEvento> etapaEventos) {
         this.etapaEventos = etapaEventos;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getQuestionsSize() {
         return questionsSize;
     }
 
+    /**
+     *
+     * @param questionsSize
+     */
     public void setQuestionsSize(Integer questionsSize) {
         this.questionsSize = questionsSize;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Questionario> getQuestionarios() {
         return questionarios;
     }
 
+    /**
+     *
+     * @param questionarios
+     */
     public void setQuestionarios(List<Questionario> questionarios) {
         this.questionarios = questionarios;
     }

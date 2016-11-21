@@ -19,9 +19,20 @@ public class Turma {
     private List<Tarefa> tarefas;
     private List<Team> teams;
 
+    /**
+     *
+     */
     public Turma() {
     }
 
+    /**
+     *
+     * @param id
+     * @param nome
+     * @param descricao
+     * @param tarefas
+     * @param teams
+     */
     public Turma(Integer id, String nome, String descricao, List<Tarefa> tarefas, List<Team> teams) {
         this.id = id;
         this.nome = nome;
@@ -30,43 +41,82 @@ public class Turma {
         this.teams = teams;
     }
 
-    
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     *
+     * @param nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescricao() {
         return descricao;
     }
 
+    /**
+     *
+     * @param descricao
+     */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Tarefa> getTarefas() {
         return tarefas;
     }
 
+    /**
+     *
+     * @param tarefas
+     */
     public void setTarefas(List<Tarefa> tarefas) {
         this.tarefas = tarefas;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Team> getTeams() {
         return teams;
     }
 
+    /**
+     *
+     * @param teams
+     */
     public void setTeams(List<Team> teams) {
         this.teams = teams;
     }

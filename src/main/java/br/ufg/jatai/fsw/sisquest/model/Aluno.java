@@ -17,36 +17,69 @@ public class Aluno extends Pessoa {
     private String email;
     private List<Turma> turmasCadastradas;
 
+    /**
+     *
+     */
     public Aluno() {
        
     }
 
+    /**
+     *
+     * @param matricula
+     * @param email
+     * @param turmasCadastradas
+     */
     public Aluno(String matricula, String email, List<Turma> turmasCadastradas) {
         this.matricula = matricula;
         this.email = email;
         this.turmasCadastradas = turmasCadastradas;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMatricula() {
         return matricula;
     }
 
+    /**
+     *
+     * @param matricula
+     */
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Turma> getTurmasCadastradas() {
         return turmasCadastradas;
     }
 
+    /**
+     *
+     * @param turmasCadastradas
+     */
     public void setTurmasCadastradas(List<Turma> turmasCadastradas) {
         this.turmasCadastradas = turmasCadastradas;
     }

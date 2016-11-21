@@ -18,9 +18,20 @@ public class Team {
     private String password;
     private Turma turma;
 
+    /**
+     *
+     */
     public Team() {
     }
 
+    /**
+     *
+     * @param id
+     * @param name
+     * @param students
+     * @param password
+     * @param turma
+     */
     public Team(Integer id, String name, List<Aluno> students, String password, Turma turma) {
         this.id = id;
         this.name = name;
@@ -29,44 +40,82 @@ public class Team {
         this.turma = turma;
     }
 
-    
-    
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Aluno> getStudents() {
         return students;
     }
 
+    /**
+     *
+     * @param students
+     */
     public void setStudents(List<Aluno> students) {
         this.students = students;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public Turma getTurma() {
         return turma;
     }
 
+    /**
+     *
+     * @param turma
+     */
     public void setTurma(Turma turma) {
         this.turma = turma;
     }
