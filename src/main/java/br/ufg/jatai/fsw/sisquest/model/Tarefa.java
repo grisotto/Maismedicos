@@ -22,6 +22,21 @@ public class Tarefa {
     private Integer questionsSize;
     private List<Questionario> questionarios;
 
+    public Tarefa() {
+    }
+
+    public Tarefa(Integer id, String descricao, Turma turma, EtapaEvento etapaAtual, List<EtapaEvento> etapaEventos, Integer questionsSize, List<Questionario> questionarios) {
+        this.id = id;
+        this.descricao = descricao;
+        this.turma = turma;
+        this.etapaAtual = etapaAtual;
+        this.etapaEventos = etapaEventos;
+        this.questionsSize = questionsSize;
+        this.questionarios = questionarios;
+    }
+
+    
+    
     public Integer getId() {
         return id;
     }

@@ -5,8 +5,6 @@
  */
 package br.ufg.jatai.fsw.sisquest.model.etapas;
 
-import java.util.Date;
-
 /**
  *
  * @author dfranco
@@ -16,5 +14,6 @@ public class EtapaAguardando extends EtapaEvento {
     public EtapaAguardando() {
         super(Etapas.AGUARDANDO);
     }
+    
 
 }
