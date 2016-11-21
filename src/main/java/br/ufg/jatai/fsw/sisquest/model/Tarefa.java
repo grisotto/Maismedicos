@@ -92,6 +92,55 @@ public class Tarefa {
     public void setQuestionarios(List<Questionario> questionarios) {
         this.questionarios = questionarios;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 79 * hash + (this.descricao != null ? this.descricao.hashCode() : 0);
+        hash = 79 * hash + (this.turma != null ? this.turma.hashCode() : 0);
+        hash = 79 * hash + (this.etapaAtual != null ? this.etapaAtual.hashCode() : 0);
+        hash = 79 * hash + (this.etapaEventos != null ? this.etapaEventos.hashCode() : 0);
+        hash = 79 * hash + (this.questionsSize != null ? this.questionsSize.hashCode() : 0);
+        hash = 79 * hash + (this.questionarios != null ? this.questionarios.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Tarefa other = (Tarefa) obj;
+        if ((this.descricao == null) ? (other.descricao != null) : !this.descricao.equals(other.descricao)) {
+            return false;
+        }
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        if (this.turma != other.turma && (this.turma == null || !this.turma.equals(other.turma))) {
+            return false;
+        }
+        if (this.etapaAtual != other.etapaAtual && (this.etapaAtual == null || !this.etapaAtual.equals(other.etapaAtual))) {
+            return false;
+        }
+        if (this.etapaEventos != other.etapaEventos && (this.etapaEventos == null || !this.etapaEventos.equals(other.etapaEventos))) {
+            return false;
+        }
+        if (this.questionsSize != other.questionsSize && (this.questionsSize == null || !this.questionsSize.equals(other.questionsSize))) {
+            return false;
+        }
+        if (this.questionarios != other.questionarios && (this.questionarios == null || !this.questionarios.equals(other.questionarios))) {
+            return false;
+        }
+        return true;
+    }
     
 
 }

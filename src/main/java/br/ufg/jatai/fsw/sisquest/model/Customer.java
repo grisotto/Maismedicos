@@ -71,4 +71,49 @@ public class Customer {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 53 * hash + (this.firstName != null ? this.firstName.hashCode() : 0);
+        hash = 53 * hash + (this.lastName != null ? this.lastName.hashCode() : 0);
+        hash = 53 * hash + (this.email != null ? this.email.hashCode() : 0);
+        hash = 53 * hash + (this.mobile != null ? this.mobile.hashCode() : 0);
+        hash = 53 * hash + (this.dateOfBirth != null ? this.dateOfBirth.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Customer other = (Customer) obj;
+        if ((this.firstName == null) ? (other.firstName != null) : !this.firstName.equals(other.firstName)) {
+            return false;
+        }
+        if ((this.lastName == null) ? (other.lastName != null) : !this.lastName.equals(other.lastName)) {
+            return false;
+        }
+        if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
+            return false;
+        }
+        if ((this.mobile == null) ? (other.mobile != null) : !this.mobile.equals(other.mobile)) {
+            return false;
+        }
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        if (this.dateOfBirth != other.dateOfBirth && (this.dateOfBirth == null || !this.dateOfBirth.equals(other.dateOfBirth))) {
+            return false;
+        }
+        return true;
+    }
+
 }

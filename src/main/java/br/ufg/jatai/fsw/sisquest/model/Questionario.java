@@ -49,6 +49,39 @@ public class Questionario {
     public void setQuestoes(List<Questao> questoes) {
         this.questoes = questoes;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 97 * hash + (this.team != null ? this.team.hashCode() : 0);
+        hash = 97 * hash + (this.questoes != null ? this.questoes.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Questionario other = (Questionario) obj;
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        if (this.team != other.team && (this.team == null || !this.team.equals(other.team))) {
+            return false;
+        }
+        if (this.questoes != other.questoes && (this.questoes == null || !this.questoes.equals(other.questoes))) {
+            return false;
+        }
+        return true;
+    }
     
     
 

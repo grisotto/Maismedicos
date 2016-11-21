@@ -48,5 +48,38 @@ public class Alternativa {
     public void setCorreto(boolean correto) {
         this.correto = correto;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 37 * hash + (this.descricao != null ? this.descricao.hashCode() : 0);
+        hash = 37 * hash + (this.correto ? 1 : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Alternativa other = (Alternativa) obj;
+        if (this.correto != other.correto) {
+            return false;
+        }
+        if ((this.descricao == null) ? (other.descricao != null) : !this.descricao.equals(other.descricao)) {
+            return false;
+        }
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
     
 }

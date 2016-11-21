@@ -70,5 +70,47 @@ public class Turma {
     public void setTeams(List<Team> teams) {
         this.teams = teams;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 17 * hash + (this.nome != null ? this.nome.hashCode() : 0);
+        hash = 17 * hash + (this.descricao != null ? this.descricao.hashCode() : 0);
+        hash = 17 * hash + (this.tarefas != null ? this.tarefas.hashCode() : 0);
+        hash = 17 * hash + (this.teams != null ? this.teams.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Turma other = (Turma) obj;
+        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
+            return false;
+        }
+        if ((this.descricao == null) ? (other.descricao != null) : !this.descricao.equals(other.descricao)) {
+            return false;
+        }
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        if (this.tarefas != other.tarefas && (this.tarefas == null || !this.tarefas.equals(other.tarefas))) {
+            return false;
+        }
+        if (this.teams != other.teams && (this.teams == null || !this.teams.equals(other.teams))) {
+            return false;
+        }
+        return true;
+    }
+    
     
 }

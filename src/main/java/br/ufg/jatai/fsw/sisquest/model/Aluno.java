@@ -51,4 +51,37 @@ public class Aluno extends Pessoa {
         this.turmasCadastradas = turmasCadastradas;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 71 * hash + (this.matricula != null ? this.matricula.hashCode() : 0);
+        hash = 71 * hash + (this.email != null ? this.email.hashCode() : 0);
+        hash = 71 * hash + (this.turmasCadastradas != null ? this.turmasCadastradas.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Aluno other = (Aluno) obj;
+        if ((this.matricula == null) ? (other.matricula != null) : !this.matricula.equals(other.matricula)) {
+            return false;
+        }
+        if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
+            return false;
+        }
+        if (this.turmasCadastradas != other.turmasCadastradas && (this.turmasCadastradas == null || !this.turmasCadastradas.equals(other.turmasCadastradas))) {
+            return false;
+        }
+        return true;
+    }
+
 }
