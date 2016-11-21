@@ -22,7 +22,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home() {
-        log.error("Teste de log");
+        log.info("Acessou");
         return "/home/index";
     }
 
