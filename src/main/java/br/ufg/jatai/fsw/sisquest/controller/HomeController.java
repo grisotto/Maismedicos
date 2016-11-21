@@ -5,10 +5,11 @@
  */
 package br.ufg.jatai.fsw.sisquest.controller;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
@@ -16,19 +17,23 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Controller(value = "/")
 public class HomeController {
-   
-    
+
+    private static Logger log = LoggerFactory.getLogger(HomeController.class.getName());
+
     @RequestMapping("/")
-    public String home(){
-        return "WEB-INF/views/home/index.jsp";
+    public String home() {
+        log.error("Teste de log");
+        return "/home/index";
     }
+
     @RequestMapping(value = "/sobre")
-    public String sobre(){
-        return "WEB-INF/views/home/sobre.jsp";
+    public String sobre() {
+        return "/home/sobre";
     }
+
     @RequestMapping(value = "/entrar")
-    public String entrar(){
-        return "WEB-INF/views/home/entrar.jsp";
+    public String entrar() {
+        return "/home/entrar";
     }
 
 }
