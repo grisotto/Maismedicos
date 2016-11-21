@@ -8,12 +8,12 @@ import java.util.Date;
  */
 public class Customer {
 
-	private Long id;
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String mobile;
-	private Date dateOfBirth;
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String mobile;
+    private Date dateOfBirth;
 
     /**
      *
@@ -24,115 +24,115 @@ public class Customer {
      * @param mobile
      */
     public Customer(long id, String firstName, String lastName, String email, String mobile) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.mobile = mobile;
-		this.dateOfBirth = new Date();
-	}
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.mobile = mobile;
+        this.dateOfBirth = new Date();
+    }
 
     /**
      *
      */
     public Customer() {
-	}
+    }
 
     /**
      *
      * @return
      */
     public Long getId() {
-		return id;
-	}
+        return id;
+    }
 
     /**
      *
      * @param id
      */
     public void setId(Long id) {
-		this.id = id;
-	}
+        this.id = id;
+    }
 
     /**
      *
      * @return
      */
     public String getFirstName() {
-		return firstName;
-	}
+        return firstName;
+    }
 
     /**
      *
      * @param firstName
      */
     public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+        this.firstName = firstName;
+    }
 
     /**
      *
      * @return
      */
     public String getLastName() {
-		return lastName;
-	}
+        return lastName;
+    }
 
     /**
      *
      * @param lastName
      */
     public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+        this.lastName = lastName;
+    }
 
     /**
      *
      * @return
      */
     public String getEmail() {
-		return email;
-	}
+        return email;
+    }
 
     /**
      *
      * @param email
      */
     public void setEmail(String email) {
-		this.email = email;
-	}
+        this.email = email;
+    }
 
     /**
      *
      * @return
      */
     public String getMobile() {
-		return mobile;
-	}
+        return mobile;
+    }
 
     /**
      *
      * @param mobile
      */
     public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
+        this.mobile = mobile;
+    }
 
     /**
      *
      * @return
      */
     public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
+        return dateOfBirth;
+    }
 
     /**
      *
      * @param dateOfBirth
      */
     public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+        this.dateOfBirth = dateOfBirth;
+    }
 
     @Override
     public int hashCode() {
