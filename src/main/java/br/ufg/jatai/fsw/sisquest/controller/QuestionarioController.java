@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class QuestionarioController implements Serializable {
     private static Logger log = LoggerFactory.getLogger(QuestionarioController.class.getName());
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = "/app/questionario")
     public String turmaHome() {
         return "/app/questionario/home";

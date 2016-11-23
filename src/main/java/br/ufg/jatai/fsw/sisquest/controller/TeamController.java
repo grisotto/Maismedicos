@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TeamController implements Serializable {
     private static Logger log = LoggerFactory.getLogger(TeamController.class.getName());
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = "/app/team")
     public String turmaHome() {
         return "/app/team/home";

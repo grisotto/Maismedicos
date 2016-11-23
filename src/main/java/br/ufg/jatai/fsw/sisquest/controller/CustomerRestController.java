@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+/**
+ *
+ * @author dfranco
+ */
 @RestController
 public class CustomerRestController {
 
@@ -23,13 +26,21 @@ public class CustomerRestController {
 	@Autowired
 	private CustomerDAO customerDAO;
 
-	
-	@GetMapping("/customers")
+    /**
+     *
+     * @return
+     */
+    @GetMapping("/customers")
 	public List getCustomers() {
 		return customerDAO.list();
 	}
 
-	@GetMapping("/customers/{id}")
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/customers/{id}")
 	public ResponseEntity getCustomer(@PathVariable("id") Long id) {
 
 		Customer customer = customerDAO.get(id);
@@ -40,7 +51,12 @@ public class CustomerRestController {
 		return new ResponseEntity(customer, HttpStatus.OK);
 	}
 
-	@PostMapping(value = "/customers")
+    /**
+     *
+     * @param customer
+     * @return
+     */
+    @PostMapping(value = "/customers")
 	public ResponseEntity createCustomer(@RequestBody Customer customer) {
 
 		customerDAO.create(customer);
@@ -48,7 +64,12 @@ public class CustomerRestController {
 		return new ResponseEntity(customer, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/customers/{id}")
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/customers/{id}")
 	public ResponseEntity deleteCustomer(@PathVariable Long id) {
 
 		if (null == customerDAO.delete(id)) {
@@ -59,7 +80,13 @@ public class CustomerRestController {
 
 	}
 
-	@PutMapping("/customers/{id}")
+    /**
+     *
+     * @param id
+     * @param customer
+     * @return
+     */
+    @PutMapping("/customers/{id}")
 	public ResponseEntity updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
 
 		customer = customerDAO.update(id, customer);

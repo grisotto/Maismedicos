@@ -19,6 +19,10 @@ public class AppController {
 
     private static Logger log = LoggerFactory.getLogger(AppController.class.getName());
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = "/app")
     public String index() {
        

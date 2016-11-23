@@ -13,6 +13,9 @@ import java.util.Date;
  */
 public class EtapaEsperandoSubmissao extends EtapaEvento{
 
+    /**
+     *
+     */
     public EtapaEsperandoSubmissao() {
         super(Etapas.ESPERANDO_SUBMISSAO);
     }

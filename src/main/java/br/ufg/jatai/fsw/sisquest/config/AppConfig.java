@@ -7,11 +7,19 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+/**
+ *
+ * @author dfranco
+ */
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "br.ufg.jatai.fsw.sisquest")
 public class AppConfig {
 
+    /**
+     *
+     * @return
+     */
     @Bean
     public ViewResolver getViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();

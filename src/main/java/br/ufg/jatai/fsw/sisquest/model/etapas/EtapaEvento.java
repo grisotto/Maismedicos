@@ -17,29 +17,74 @@ public abstract class EtapaEvento {
     private Date dataFinal;
     private final Etapas etapas;
 
+    /**
+     *
+     * @param etapas
+     */
     public EtapaEvento(Etapas etapas) {
         this.etapas = etapas;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDataInicial() {
         return dataInicial;
     }
 
+    /**
+     *
+     * @param dataInicial
+     */
     public void setDataInicial(Date dataInicial) {
         this.dataInicial = dataInicial;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDataFinal() {
         return dataFinal;
     }
 
+    /**
+     *
+     * @param dataFinal
+     */
     public void setDataFinal(Date dataFinal) {
         this.dataFinal = dataFinal;
     }
 
-   
-
+    /**
+     *
+     */
     public enum Etapas {
-        AGUARDANDO, ESPERANDO_SUBMISSAO, VALIDANDO_QUESTOES, RESPONDENDO, FINALIZADO
+
+        /**
+         *
+         */
+        AGUARDANDO, 
+
+        /**
+         *
+         */
+        ESPERANDO_SUBMISSAO, 
+
+        /**
+         *
+         */
+        VALIDANDO_QUESTOES, 
+
+        /**
+         *
+         */
+        RESPONDENDO, 
+
+        /**
+         *
+         */
+        FINALIZADO
     }
 }

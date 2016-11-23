@@ -13,6 +13,9 @@ import java.util.Date;
  */
 public class EtapaValidandoQuestoes extends EtapaEvento{
 
+    /**
+     *
+     */
     public EtapaValidandoQuestoes() {
         super(Etapas.VALIDANDO_QUESTOES);
     }

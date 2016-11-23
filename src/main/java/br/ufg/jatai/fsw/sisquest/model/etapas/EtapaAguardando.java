@@ -11,6 +11,9 @@ package br.ufg.jatai.fsw.sisquest.model.etapas;
  */
 public class EtapaAguardando extends EtapaEvento {
 
+    /**
+     *
+     */
     public EtapaAguardando() {
         super(Etapas.AGUARDANDO);
     }

@@ -6,7 +6,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-
+/**
+ *
+ * @author dfranco
+ */
 @Component
 public class CustomerDAO {
 

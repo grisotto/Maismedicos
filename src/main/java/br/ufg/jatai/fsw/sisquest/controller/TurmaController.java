@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TurmaController implements Serializable {
     private static Logger log = LoggerFactory.getLogger(TurmaController.class.getName());
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = "/app/turma")
     public String turmaHome() {
         return "/app/turma/home";

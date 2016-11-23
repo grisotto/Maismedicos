@@ -13,6 +13,9 @@ import java.util.Date;
  */
 public class EtapaRespondendo extends EtapaEvento{
 
+    /**
+     *
+     */
     public EtapaRespondendo() {
         super(Etapas.RESPONDENDO);
     }

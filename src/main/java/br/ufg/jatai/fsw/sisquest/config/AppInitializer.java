@@ -2,20 +2,35 @@ package br.ufg.jatai.fsw.sisquest.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-
+/**
+ *
+ * @author dfranco
+ */
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-	@Override
+    /**
+     *
+     * @return
+     */
+    @Override
 	protected Class[] getRootConfigClasses() {
 		return new Class[] { AppConfig.class };
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     */
+    @Override
 	protected Class[] getServletConfigClasses() {
 		return null;
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     */
+    @Override
 	protected String[] getServletMappings() {
 		return new String[] { "/" };
 	}

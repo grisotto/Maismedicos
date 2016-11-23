@@ -19,16 +19,28 @@ public class HomeController {
 
     private static Logger log = LoggerFactory.getLogger(HomeController.class.getName());
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping("/")
     public String home() {
         return "/home/index";
     }
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = "/sobre")
     public String sobre() {
         return "/home/sobre";
     }
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = "/entrar")
     public String entrar() {
         return "/home/entrar";

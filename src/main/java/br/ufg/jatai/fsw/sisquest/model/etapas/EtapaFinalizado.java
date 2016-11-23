@@ -13,6 +13,9 @@ import java.util.Date;
  */
 public class EtapaFinalizado extends EtapaEvento{
 
+    /**
+     *
+     */
     public EtapaFinalizado() {
         super(Etapas.FINALIZADO);
     }
