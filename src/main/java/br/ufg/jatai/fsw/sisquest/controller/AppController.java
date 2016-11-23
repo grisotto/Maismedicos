@@ -21,7 +21,7 @@ public class AppController {
 
     @RequestMapping(value = "/app")
     public String index() {
-        
+       
         return "/app/dash";
     }
 }
