@@ -11,4 +11,5 @@ A chamada dos css estão divididos em três.
 - Plugins (Ex. /**plugins**/datatables/css/dataTables.bootstrap.css) 
 
 **Todos estes  arquivos estão dentro da pasta assets na parte referente a Web Pages. Neste caso fica suprimdo o diretório assets.**
+
 ![Diretorios no Projeto](./imgReadMe/dir.png  "Dir")
