@@ -15,4 +15,5 @@ A chamada dos css estão divididos em três.
 **a.1) estrutura dos diretórios**
 
 ![Diretorios no Projeto](./imgReadMe/dir.png  "Dir")
+
 *Todos estes  arquivos estão dentro da pasta assets na parte referente a Web Pages. Neste caso fica suprimdo o diretório assets.*
