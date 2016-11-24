@@ -27,12 +27,19 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
+    /**
+     * Configurando os locais de acesso aos recursos
+     * @param registry 
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         log.info("Configurando Resouce Local");
-        registry
-                .addResourceHandler("/resources/**")
-                .addResourceLocations("/assets/");
+        registry.addResourceHandler("/tema/**")
+                .addResourceLocations("/assets/dist/");
+        registry.addResourceHandler("/plugins/**")
+                .addResourceLocations("/assets/plugins/");
+        registry.addResourceHandler("/bootstrap/**")
+                .addResourceLocations("/assets/bootstrap/");
     }
 
 }
