@@ -4,7 +4,8 @@
 **Dependências**
 
 - NodeJS (Versão: )
-- NPM (Versão)
+- NPM (Versão: )
+- Bower e Gulp
 - Java 7
 
 **Passo a Passo**
@@ -12,7 +13,7 @@
 - Clonar o repositório
 - Abrir o projeto na IDE preferida (Projeto [Maven](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html))
 - Rodar o Bower Install
-- Fazer o link do Gulb para a pasta do projeto
+- Fazer o link do Gulp para a pasta do projeto
 - Executar Gulb
 
 ###2. Dicas para implementação frontend
