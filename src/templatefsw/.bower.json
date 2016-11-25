@@ -25,8 +25,6 @@
     "/less",
     "Install-Template.sh",
     "teste",
-    "/test",
-    "test",
     "tests",
     "template"
   ],
@@ -36,11 +34,11 @@
     "dist/js/sb-admin-2.js",
     "dist/js/sb-admin-2.min.js"
   ],
-  "_release": "e450fdf6a5",
+  "_release": "0502d4fce7",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "e450fdf6a5c6eb913c77231557a159bb645228e2"
+    "commit": "0502d4fce7071da8c7d0cd0954d53ba9b06da9ab"
   },
   "_source": "https://github.com/grisotto/TemplateFSW.git",
   "_target": "*",
