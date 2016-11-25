@@ -3,8 +3,8 @@
 ###1. Passo a passo para configurar o Projeto
 **Dependências**
 
-- NodeJS (Versão: )
-- NPM (Versão: )
+- NodeJS (Versão: ```v6.9.1```)
+- NPM (Versão: ```3.10.8```)
 - Bower e Gulp
 - Java 7
 
