@@ -9,15 +9,15 @@ var gulp = require('gulp');
 gulp.task('copy', function() {
 
 gulp.src([
-    	'src/main/webapp/WEB-INF/assets/templatefsw/bootstrap/**/*'])
+    	'src/templatefsw/bootstrap/**/*'])
 		.pipe(gulp.dest('src/main/webapp/assets/bootstrap'));
 
 gulp.src([
-	'src/main/webapp/WEB-INF/assets/templatefsw/dist/**/*'])
+	'src/templatefsw/dist/**/*'])
 		.pipe(gulp.dest('src/main/webapp/assets/dist'));
 
 gulp.src([
-	'src/main/webapp/WEB-INF/assets/templatefsw/plugins/**/*'])
+	'src/templatefsw/plugins/**/*'])
 		.pipe(gulp.dest('src/main/webapp/assets/plugins'));
 })
 
