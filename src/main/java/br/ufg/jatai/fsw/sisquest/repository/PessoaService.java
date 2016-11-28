@@ -3,15 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufg.jatai.fsw.sisquest.dao;
+package br.ufg.jatai.fsw.sisquest.repository;
+
+import br.ufg.jatai.fsw.sisquest.model.Pessoa;
 
 /**
  *
  * @author dfranco
  */
+public interface PessoaService {
 
-public class PessoaDAO {
-
-
-
+    /**
+     *
+     * @param pessoa
+     */
+    public void savePessoa(Pessoa pessoa);
 }
