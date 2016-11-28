@@ -12,9 +12,11 @@
 
 - Clonar o repositório
 - Abrir o projeto na IDE preferida (Projeto [Maven](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html))
-- Rodar o Bower Install
-- Fazer o link do Gulp para a pasta do projeto
-- Executar Gulb
+- Adicionar ao projeto uma action e na seção build colocar o seguinte:
+```sh
+ exec:exec
+```
+Este comando executa o bower e o gulp, estes baixarão o template e colocarão na pasta correta.
 
 ###2. Dicas para implementação frontend
 
