@@ -28,7 +28,7 @@ public class HomeController {
     @RequestMapping("/")
     public String home() {
         log.debug("Funcionando");
-        p.save(new Pessoa(0, "Noem"));
+//        p.save(new Pessoa(0, "Noem"));
         return "/home/index";
     }
 

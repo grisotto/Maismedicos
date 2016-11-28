@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * @author dfranco
  */
 @Entity
-@Table(name = "PESSOA")
+@Table
 public class Pessoa implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
