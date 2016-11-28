@@ -6,10 +6,12 @@ import javax.sql.DataSource;
 import org.hibernate.ejb.HibernatePersistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -50,6 +52,15 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     private static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
     private static final String PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
 
+    private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/jsp/";
+    private static final String VIEW_RESOLVER_SUFFIX = ".jsp";
+
+    private static final String PROPERTY_NAME_HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
+    private static final String PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY = "hibernate.ejb.naming_strategy";
+
+    private static final String PROPERTY_NAME_MESSAGESOURCE_BASENAME = "message.source.basename";
+    private static final String PROPERTY_NAME_MESSAGESOURCE_USE_CODE_AS_DEFAULT_MESSAGE = "message.source.use.code.as.default.message";
+
     /**
      *
      * @return
@@ -58,8 +69,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public ViewResolver getViewResolver() {
         log.info("Configurando View Resolver");
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views");
-        resolver.setSuffix(".jsp");
+        resolver.setPrefix(VIEW_RESOLVER_PREFIX);
+        resolver.setSuffix(VIEW_RESOLVER_SUFFIX);
         return resolver;
     }
 
@@ -97,21 +108,22 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+
         entityManagerFactoryBean.setDataSource(dataSource());
-        entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
         entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN));
+        entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
 
-        entityManagerFactoryBean.setJpaProperties(hibProperties());
+        Properties jpaProterties = new Properties();
+        jpaProterties.put(PROPERTY_NAME_HIBERNATE_DIALECT, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
+        jpaProterties.put(PROPERTY_NAME_HIBERNATE_FORMAT_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_FORMAT_SQL));
+        jpaProterties.put(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO));
+        jpaProterties.put(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY));
+        jpaProterties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
+        jpaProterties.put("spring.jpa.hibernate.ddl-auto", "create");
 
+        entityManagerFactoryBean.setJpaProperties(jpaProterties);
+        
         return entityManagerFactoryBean;
-    }
-
-    private Properties hibProperties() {
-        Properties properties = new Properties();
-        properties.put(PROPERTY_NAME_HIBERNATE_DIALECT, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
-        properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
-        properties.put(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO));
-        return properties;
     }
 
     @Bean
@@ -121,4 +133,13 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return transactionManager;
     }
 
+//    @Bean
+//    public MessageSource messageSource() {
+//        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+//
+//        messageSource.setBasename(env.getRequiredProperty(PROPERTY_NAME_MESSAGESOURCE_BASENAME));
+//        messageSource.setUseCodeAsDefaultMessage(Boolean.parseBoolean(env.getRequiredProperty(PROPERTY_NAME_MESSAGESOURCE_USE_CODE_AS_DEFAULT_MESSAGE)));
+//
+//        return messageSource;
+//    }
 }

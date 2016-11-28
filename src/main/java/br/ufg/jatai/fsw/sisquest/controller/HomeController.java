@@ -5,15 +5,13 @@
  */
 package br.ufg.jatai.fsw.sisquest.controller;
 
-import br.ufg.jatai.fsw.sisquest.dao.PessoaDAO;
 import br.ufg.jatai.fsw.sisquest.model.Pessoa;
-import br.ufg.jatai.fsw.sisquest.repository.PessoaRepository;
-import br.ufg.jatai.fsw.sisquest.repository.PessoaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import br.ufg.jatai.fsw.sisquest.repository.PessoaRepository;
 
 /**
  *
@@ -25,7 +23,7 @@ public class HomeController {
     private static Logger log = LoggerFactory.getLogger(HomeController.class.getName());
 
     @Autowired
-    private PessoaService p;
+    private PessoaRepository p;
 
     @RequestMapping("/")
     public String home() {
