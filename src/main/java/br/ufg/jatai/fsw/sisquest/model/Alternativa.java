@@ -15,10 +15,10 @@ import javax.persistence.*;
 @Entity
 @Table
 
-public class Alternative {
+public class Alternativa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String descricao;
@@ -27,7 +27,7 @@ public class Alternative {
     /**
      *
      */
-    public Alternative() {
+    public Alternativa() {
         this(null, null, false);
     }
     
@@ -38,7 +38,7 @@ public class Alternative {
      * @param correto
      */
 
-    public Alternative(Integer id, String descricao, boolean correto) {
+    public Alternativa(Integer id, String descricao, boolean correto) {
         this.id = id;
         this.descricao = descricao;
         this.correto = correto;
@@ -112,7 +112,7 @@ public class Alternative {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Alternative other = (Alternative) obj;
+        final Alternativa other = (Alternativa) obj;
         if (this.correto != other.correto) {
             return false;
         }

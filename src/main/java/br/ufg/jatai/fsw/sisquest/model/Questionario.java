@@ -5,15 +5,22 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
  *
  * @author dfranco
  */
+
+@Entity
+@Table
 public class Questionario {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private Team team;
     private List<Questao> questoes;
 

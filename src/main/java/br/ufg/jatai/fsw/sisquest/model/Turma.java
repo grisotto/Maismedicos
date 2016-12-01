@@ -5,17 +5,25 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
  *
  * @author dfranco
  */
+
+@Entity
+@Table
 public class Turma {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
     private String descricao;
+
     private List<Tarefa> tarefas;
     private List<Team> teams;
 

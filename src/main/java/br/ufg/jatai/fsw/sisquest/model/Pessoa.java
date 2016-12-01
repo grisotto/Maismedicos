@@ -20,10 +20,11 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Pessoa implements Serializable{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
+
     private String nome;
 
     /**

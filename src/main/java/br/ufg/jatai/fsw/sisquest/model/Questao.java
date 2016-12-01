@@ -1,6 +1,8 @@
 package br.ufg.jatai.fsw.sisquest.model;
 
+import javax.persistence.*;
 import java.util.List;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,9 +13,15 @@ import java.util.List;
  *
  * @author dfranco
  */
+
+@Entity
+@Table
 public class Questao {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String questao;
     private List<Alternativa> alternativas;
 

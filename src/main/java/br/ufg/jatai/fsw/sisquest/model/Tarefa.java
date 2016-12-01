@@ -6,15 +6,23 @@
 package br.ufg.jatai.fsw.sisquest.model;
 
 import br.ufg.jatai.fsw.sisquest.model.etapas.EtapaEvento;
+
+import javax.persistence.*;
 import java.util.List;
 
 /**
  *
  * @author dfranco
  */
+
+@Entity
+@Table
 public class Tarefa {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String descricao;
     private Turma turma;
     private EtapaEvento etapaAtual;
