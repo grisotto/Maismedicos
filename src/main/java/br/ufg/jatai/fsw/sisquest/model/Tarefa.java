@@ -29,7 +29,6 @@ public class Tarefa implements Serializable {
     @ManyToOne
     private Turma turma;
 
-    
     @ManyToOne
     private EtapaEvento etapaAtual;
 

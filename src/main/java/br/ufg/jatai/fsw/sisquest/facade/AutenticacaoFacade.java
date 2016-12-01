@@ -10,5 +10,5 @@ package br.ufg.jatai.fsw.sisquest.facade;
  * @author dfranco
  */
 public class AutenticacaoFacade {
-    
+
 }

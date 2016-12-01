@@ -13,7 +13,7 @@ import javax.persistence.MappedSuperclass;
  * @author dfranco
  */
 @MappedSuperclass
-public class EtapaEsperandoSubmissao extends EtapaEvento{
+public class EtapaEsperandoSubmissao extends EtapaEvento {
 
     /**
      *
@@ -22,6 +22,4 @@ public class EtapaEsperandoSubmissao extends EtapaEvento{
         super(Etapas.ESPERANDO_SUBMISSAO);
     }
 
-    
-    
 }

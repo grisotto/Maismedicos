@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufg.jatai.fsw.sisquest.service;
+package br.ufg.jatai.fsw.sisquest.repository;
 
 import br.ufg.jatai.fsw.sisquest.model.Pessoa;
+import br.ufg.jatai.fsw.sisquest.model.Turma;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author dfranco
  */
-public interface PessoaService extends AbstractService<Pessoa, Integer> {
-
+public interface TurmaRepository extends JpaRepository<Turma, Integer> {
+    
 }

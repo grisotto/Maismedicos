@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufg.jatai.fsw.sisquest.dao;
+package br.ufg.jatai.fsw.sisquest.service;
+
+import br.ufg.jatai.fsw.sisquest.model.Equipe;
 
 /**
  *
  * @author dfranco
  */
-public class QuestionarioDAO {
-
+public interface EquipeService extends AbstractService<Equipe, Integer> {
+    
 }

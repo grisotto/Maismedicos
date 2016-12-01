@@ -20,6 +20,5 @@ public class EtapaAguardando extends EtapaEvento {
     public EtapaAguardando() {
         super(Etapas.AGUARDANDO);
     }
-    
 
 }

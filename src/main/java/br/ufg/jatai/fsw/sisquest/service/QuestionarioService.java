@@ -5,12 +5,13 @@
  */
 package br.ufg.jatai.fsw.sisquest.service;
 
-import br.ufg.jatai.fsw.sisquest.model.Pessoa;
+import br.ufg.jatai.fsw.sisquest.model.Equipe;
+import br.ufg.jatai.fsw.sisquest.model.Questionario;
 
 /**
  *
  * @author dfranco
  */
-public interface PessoaService extends AbstractService<Pessoa, Integer> {
-
+public interface QuestionarioService extends AbstractService<Questionario, Integer> {
+    
 }
