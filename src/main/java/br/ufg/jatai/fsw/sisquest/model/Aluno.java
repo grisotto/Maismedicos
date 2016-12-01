@@ -5,16 +5,24 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
  *
  * @author dfranco
  */
+
+@Entity
 public class Aluno extends Pessoa {
 
+    @Id
     private String matricula;
+
     private String email;
+
+    @OneToMany
+    @ElementCollection
     private List<Turma> turmasCadastradas;
 
     /**

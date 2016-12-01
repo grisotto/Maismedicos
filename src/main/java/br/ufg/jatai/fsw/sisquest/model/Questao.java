@@ -1,6 +1,8 @@
 package br.ufg.jatai.fsw.sisquest.model;
 
+import javax.persistence.*;
 import java.util.List;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,21 +13,30 @@ import java.util.List;
  *
  * @author dfranco
  */
+
+@Entity
+@Table
 public class Questao {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String questao;
+
+    private String question;
+
+    @OneToMany
+    @ElementCollection
     private List<Alternativa> alternativas;
 
     /**
      *
      * @param id
-     * @param questao
+     * @param question
      * @param alternativas
      */
-    public Questao(Integer id, String questao, List<Alternativa> alternativas) {
+    public Questao(Integer id, String question, List<Alternativa> alternativas) {
         this.id = id;
-        this.questao = questao;
+        this.question = question;
         this.alternativas = alternativas;
     }
 
@@ -55,16 +66,16 @@ public class Questao {
      *
      * @return
      */
-    public String getQuestao() {
-        return questao;
+    public String getQuestion() {
+        return question;
     }
 
     /**
      *
-     * @param questao
+     * @param question
      */
-    public void setQuestao(String questao) {
-        this.questao = questao;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     /**
@@ -87,7 +98,7 @@ public class Questao {
     public int hashCode() {
         int hash = 5;
         hash = 67 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 67 * hash + (this.questao != null ? this.questao.hashCode() : 0);
+        hash = 67 * hash + (this.question != null ? this.question.hashCode() : 0);
         hash = 67 * hash + (this.alternativas != null ? this.alternativas.hashCode() : 0);
         return hash;
     }
@@ -104,7 +115,7 @@ public class Questao {
             return false;
         }
         final Questao other = (Questao) obj;
-        if ((this.questao == null) ? (other.questao != null) : !this.questao.equals(other.questao)) {
+        if ((this.question == null) ? (other.question != null) : !this.question.equals(other.question)) {
             return false;
         }
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {

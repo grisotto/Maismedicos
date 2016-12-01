@@ -5,19 +5,30 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
  *
  * @author dfranco
  */
+
+@Entity
+@Table
 public class Turma {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
     private String descricao;
+
+    @ElementCollection
     private List<Tarefa> tarefas;
-    private List<Team> teams;
+
+    @ElementCollection
+    private List<Time> times;
 
     /**
      *
@@ -31,14 +42,14 @@ public class Turma {
      * @param nome
      * @param descricao
      * @param tarefas
-     * @param teams
+     * @param times
      */
-    public Turma(Integer id, String nome, String descricao, List<Tarefa> tarefas, List<Team> teams) {
+    public Turma(Integer id, String nome, String descricao, List<Tarefa> tarefas, List<Time> times) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.tarefas = tarefas;
-        this.teams = teams;
+        this.times = times;
     }
 
     /**
@@ -109,16 +120,16 @@ public class Turma {
      *
      * @return
      */
-    public List<Team> getTeams() {
-        return teams;
+    public List<Time> getTimes() {
+        return times;
     }
 
     /**
      *
-     * @param teams
+     * @param times
      */
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
+    public void setTimes(List<Time> times) {
+        this.times = times;
     }
 
     @Override
@@ -128,7 +139,7 @@ public class Turma {
         hash = 17 * hash + (this.nome != null ? this.nome.hashCode() : 0);
         hash = 17 * hash + (this.descricao != null ? this.descricao.hashCode() : 0);
         hash = 17 * hash + (this.tarefas != null ? this.tarefas.hashCode() : 0);
-        hash = 17 * hash + (this.teams != null ? this.teams.hashCode() : 0);
+        hash = 17 * hash + (this.times != null ? this.times.hashCode() : 0);
         return hash;
     }
 
@@ -156,7 +167,7 @@ public class Turma {
         if (this.tarefas != other.tarefas && (this.tarefas == null || !this.tarefas.equals(other.tarefas))) {
             return false;
         }
-        if (this.teams != other.teams && (this.teams == null || !this.teams.equals(other.teams))) {
+        if (this.times != other.times && (this.times == null || !this.times.equals(other.times))) {
             return false;
         }
         return true;

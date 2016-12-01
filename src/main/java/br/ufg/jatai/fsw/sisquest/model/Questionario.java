@@ -5,27 +5,38 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
  *
  * @author dfranco
  */
+
+@Entity
+@Table
 public class Questionario {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Team team;
+
+    @ManyToOne
+    private Time time;
+
+    @OneToMany
+    @ElementCollection
     private List<Questao> questoes;
 
     /**
      *
      * @param id
-     * @param team
+     * @param time
      * @param questoes
      */
-    public Questionario(Integer id, Team team, List<Questao> questoes) {
+    public Questionario(Integer id, Time time, List<Questao> questoes) {
         this.id = id;
-        this.team = team;
+        this.time = time;
         this.questoes = questoes;
     }
 
@@ -55,16 +66,16 @@ public class Questionario {
      *
      * @return
      */
-    public Team getTeam() {
-        return team;
+    public Time gettime() {
+        return time;
     }
 
     /**
      *
-     * @param team
+     * @param time
      */
-    public void setTeam(Team team) {
-        this.team = team;
+    public void settime(Time time) {
+        this.time = time;
     }
 
     /**
@@ -79,7 +90,7 @@ public class Questionario {
      *
      * @param questoes
      */
-    public void setQuestoes(List<Questao> questoes) {
+    public void setquestions(List<Questao> questoes) {
         this.questoes = questoes;
     }
 
@@ -87,7 +98,7 @@ public class Questionario {
     public int hashCode() {
         int hash = 7;
         hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 97 * hash + (this.team != null ? this.team.hashCode() : 0);
+        hash = 97 * hash + (this.time != null ? this.time.hashCode() : 0);
         hash = 97 * hash + (this.questoes != null ? this.questoes.hashCode() : 0);
         return hash;
     }
@@ -107,7 +118,7 @@ public class Questionario {
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
-        if (this.team != other.team && (this.team == null || !this.team.equals(other.team))) {
+        if (this.time != other.time && (this.time == null || !this.time.equals(other.time))) {
             return false;
         }
         if (this.questoes != other.questoes && (this.questoes == null || !this.questoes.equals(other.questoes))) {

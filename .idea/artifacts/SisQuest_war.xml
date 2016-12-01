@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SisQuest:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="SisQuest.war">
+      <element id="artifact" artifact-name="SisQuest:war exploded" />
+    </root>
+  </artifact>
+</component>
