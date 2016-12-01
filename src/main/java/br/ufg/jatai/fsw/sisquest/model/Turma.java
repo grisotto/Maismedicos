@@ -12,7 +12,6 @@ import java.util.List;
  *
  * @author dfranco
  */
-
 @Entity
 @Table
 public class Turma {
@@ -173,6 +172,5 @@ public class Turma {
         }
         return true;
     }
-    
-    
+
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class TurmaController implements Serializable {
+
     private static Logger log = LoggerFactory.getLogger(TurmaController.class.getName());
 
     /**

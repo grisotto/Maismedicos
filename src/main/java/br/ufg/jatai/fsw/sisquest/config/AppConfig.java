@@ -119,7 +119,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         jpaProterties.put("hibernate.hbm2ddl.auto", "create-drop");
 
         entityManagerFactoryBean.setJpaProperties(jpaProterties);
-        
+
         return entityManagerFactoryBean;
     }
 

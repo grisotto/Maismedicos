@@ -26,7 +26,6 @@ public class Equipe implements Serializable {
 
     private String nome;
 
-
     @ManyToMany
     private List<Aluno> alunos;
 

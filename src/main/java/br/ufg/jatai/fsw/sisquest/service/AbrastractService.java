@@ -5,12 +5,23 @@
  */
 package br.ufg.jatai.fsw.sisquest.service;
 
-import br.ufg.jatai.fsw.sisquest.model.Pessoa;
+import java.util.List;
 
 /**
  *
  * @author dfranco
+ * @param <T> Genérico
  */
-public interface PessoaService extends AbrastractService<Pessoa> {
+public interface AbrastractService<T> {
+
+    public T inserir(T entidade);
+
+    public void apagar(T entidade);
+
+    public T atualizar(T entidade);
+
+    public T find(T entidade);
+
+    public List<T> findAll();
 
 }

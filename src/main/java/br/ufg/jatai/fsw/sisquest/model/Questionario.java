@@ -13,7 +13,6 @@ import java.util.List;
  *
  * @author dfranco
  */
-
 @Entity
 @Table
 @SuppressWarnings("PersistenceUnitPresent")
@@ -26,7 +25,6 @@ public class Questionario implements Serializable {
     @ManyToOne
     private Equipe time;
 
- 
     @OneToMany(mappedBy = "questionario")
     private List<Questao> questoes;
 
@@ -114,8 +112,6 @@ public class Questionario implements Serializable {
     public void setTarefa(Tarefa tarefa) {
         this.tarefa = tarefa;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -149,7 +145,5 @@ public class Questionario implements Serializable {
         }
         return true;
     }
-    
-    
 
 }

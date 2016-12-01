@@ -10,5 +10,5 @@ package br.ufg.jatai.fsw.sisquest.dao;
  * @author dfranco
  */
 public class QuestionarioDAO {
-    
+
 }

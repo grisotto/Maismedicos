@@ -13,7 +13,6 @@ import java.util.List;
  *
  * @author dfranco
  */
-
 @Entity
 @Table
 public class Questao {
@@ -128,7 +127,5 @@ public class Questao {
         }
         return true;
     }
-    
-    
-    
+
 }

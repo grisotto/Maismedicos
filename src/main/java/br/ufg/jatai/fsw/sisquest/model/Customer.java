@@ -7,7 +7,6 @@ import java.util.Date;
  *
  * @author dfranco
  */
-
 @Entity
 @Table
 public class Customer {

@@ -7,6 +7,7 @@ package br.ufg.jatai.fsw.sisquest.service;
 
 import br.ufg.jatai.fsw.sisquest.model.Pessoa;
 import br.ufg.jatai.fsw.sisquest.repository.PessoaRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PessoaServiceImpl implements PessoaService {
@@ -15,9 +16,28 @@ public class PessoaServiceImpl implements PessoaService {
     private PessoaRepository pessoaRepository;
 
     @Override
-    public void savePessoa(Pessoa pessoa) {
-        pessoaRepository.findAll();
-        pessoaRepository.save(pessoa);
+    public Pessoa inserir(Pessoa entidade) {
+        return pessoaRepository.save(entidade);
+    }
+
+    @Override
+    public void apagar(Pessoa entidade) {
+        pessoaRepository.delete(entidade);
+    }
+
+    @Override
+    public Pessoa atualizar(Pessoa entidade) {
+        return pessoaRepository.save(entidade);
+    }
+
+    @Override
+    public Pessoa find(Pessoa entidade) {
+        return pessoaRepository.findOne(entidade.getId());
+    }
+
+    @Override
+    public List<Pessoa> findAll() {
+        return pessoaRepository.findAll();
     }
 
 }
