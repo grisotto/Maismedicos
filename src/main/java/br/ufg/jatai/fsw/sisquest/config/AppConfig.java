@@ -111,7 +111,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
 
         Properties jpaProterties = new Properties();
-        jpaProterties.put(PROPERTY_NAME_HIBERNATE_DIALECT, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
+        jpaProterties.put("org.hibernate.dialect.MySqlDialect", env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
         jpaProterties.put(PROPERTY_NAME_HIBERNATE_FORMAT_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_FORMAT_SQL));
         jpaProterties.put(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO));
         jpaProterties.put(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY));
