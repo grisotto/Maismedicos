@@ -27,6 +27,8 @@ public class Questao {
     @OneToMany
     @ElementCollection
     private List<Alternativa> alternativas;
+    @ManyToOne
+    private Questionario questionario;
 
     /**
      *

@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 /**
@@ -14,7 +15,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Alternativa {
+public class Alternativa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

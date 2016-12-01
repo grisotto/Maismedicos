@@ -6,11 +6,13 @@
 package br.ufg.jatai.fsw.sisquest.model.etapas;
 
 import java.util.Date;
+import javax.persistence.MappedSuperclass;
 
 /**
  *
  * @author dfranco
  */
+@MappedSuperclass
 public class EtapaValidandoQuestoes extends EtapaEvento{
 
     /**

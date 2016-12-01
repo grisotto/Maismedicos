@@ -25,10 +25,11 @@ public class Turma {
     private String descricao;
 
     @ElementCollection
+    @OneToMany(mappedBy = "turma")
     private List<Tarefa> tarefas;
 
     @ElementCollection
-    private List<Time> times;
+    private List<Equipe> times;
 
     /**
      *
@@ -44,7 +45,7 @@ public class Turma {
      * @param tarefas
      * @param times
      */
-    public Turma(Integer id, String nome, String descricao, List<Tarefa> tarefas, List<Time> times) {
+    public Turma(Integer id, String nome, String descricao, List<Tarefa> tarefas, List<Equipe> times) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -120,7 +121,7 @@ public class Turma {
      *
      * @return
      */
-    public List<Time> getTimes() {
+    public List<Equipe> getTimes() {
         return times;
     }
 
@@ -128,7 +129,7 @@ public class Turma {
      *
      * @param times
      */
-    public void setTimes(List<Time> times) {
+    public void setTimes(List<Equipe> times) {
         this.times = times;
     }
 

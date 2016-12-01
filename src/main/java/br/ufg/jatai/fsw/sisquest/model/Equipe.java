@@ -6,6 +6,7 @@
 package br.ufg.jatai.fsw.sisquest.model;
 
 import com.sun.mail.imap.protocol.ID;
+import java.io.Serializable;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,9 +15,10 @@ import java.util.List;
  *
  * @author dfranco
  */
-
-
-public class Time {
+@Entity
+@Table
+@SuppressWarnings("PersistenceUnitPresent")
+public class Equipe implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +26,8 @@ public class Time {
 
     private String nome;
 
-    @ElementCollection
+
+    @ManyToMany
     private List<Aluno> alunos;
 
     private String senha;
@@ -35,7 +38,7 @@ public class Time {
     /**
      *
      */
-    public Time() {
+    public Equipe() {
     }
 
     /**
@@ -46,7 +49,7 @@ public class Time {
      * @param senha
      * @param turma
      */
-    public Time(Integer id, String nome, List<Aluno> alunos, String senha, Turma turma) {
+    public Equipe(Integer id, String nome, List<Aluno> alunos, String senha, Turma turma) {
         this.id = id;
         this.nome = nome;
         this.alunos = alunos;
@@ -156,7 +159,7 @@ public class Time {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Time other = (Time) obj;
+        final Equipe other = (Equipe) obj;
         if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
             return false;
         }
@@ -174,5 +177,5 @@ public class Time {
         }
         return true;
     }
-    
+
 }

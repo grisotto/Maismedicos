@@ -14,22 +14,30 @@ import java.util.List;
  */
 
 @Entity
+@Table
+@SuppressWarnings("PersistenceUnitPresent")
 public class Aluno extends Pessoa {
 
-    @Id
+    @Column(unique = true)
     private String matricula;
 
+    @Column(unique = true)
     private String email;
 
     @OneToMany
     @ElementCollection
     private List<Turma> turmasCadastradas;
+    
+    
+
+    @ManyToMany(mappedBy = "alunos")
+    private List<Equipe> equipes;
 
     /**
      *
      */
     public Aluno() {
-       
+
     }
 
     /**
@@ -91,6 +99,15 @@ public class Aluno extends Pessoa {
     public void setTurmasCadastradas(List<Turma> turmasCadastradas) {
         this.turmasCadastradas = turmasCadastradas;
     }
+
+    public List<Equipe> getTeams() {
+        return equipes;
+    }
+
+    public void setTeams(List<Equipe> teams) {
+        this.equipes = teams;
+    }
+    
 
     @Override
     public int hashCode() {

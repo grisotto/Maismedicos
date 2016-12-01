@@ -12,10 +12,8 @@ import javax.persistence.*;
  *
  * @author dfranco
  */
-@Entity
-@Table
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Pessoa implements Serializable{
+@MappedSuperclass
+public class Pessoa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -99,5 +97,5 @@ public class Pessoa implements Serializable{
         }
         return true;
     }
-  
+
 }

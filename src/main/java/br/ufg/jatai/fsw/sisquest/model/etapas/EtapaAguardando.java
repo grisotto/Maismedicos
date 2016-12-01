@@ -5,10 +5,13 @@
  */
 package br.ufg.jatai.fsw.sisquest.model.etapas;
 
+import javax.persistence.MappedSuperclass;
+
 /**
  *
  * @author dfranco
  */
+@MappedSuperclass
 public class EtapaAguardando extends EtapaEvento {
 
     /**

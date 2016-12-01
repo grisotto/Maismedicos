@@ -5,17 +5,42 @@
  */
 package br.ufg.jatai.fsw.sisquest.model.etapas;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author dfranco
  */
-public abstract class EtapaEvento {
+@Entity
+@Table
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "etapas")
+@SuppressWarnings("PersistenceUnitPresent")
+public abstract class EtapaEvento implements Serializable {
 
+    @Id
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataInicial;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataFinal;
+
+    @Enumerated(EnumType.STRING)
     private final Etapas etapas;
+
+    public EtapaEvento() {
+        this.etapas = null;
+    }
 
     /**
      *
@@ -57,6 +82,10 @@ public abstract class EtapaEvento {
         this.dataFinal = dataFinal;
     }
 
+    public Etapas getEtapas() {
+        return etapas;
+    }
+
     /**
      *
      */
@@ -65,23 +94,19 @@ public abstract class EtapaEvento {
         /**
          *
          */
-        AGUARDANDO, 
-
+        AGUARDANDO,
         /**
          *
          */
-        ESPERANDO_SUBMISSAO, 
-
+        ESPERANDO_SUBMISSAO,
         /**
          *
          */
-        VALIDANDO_QUESTOES, 
-
+        VALIDANDO_QUESTOES,
         /**
          *
          */
-        RESPONDENDO, 
-
+        RESPONDENDO,
         /**
          *
          */

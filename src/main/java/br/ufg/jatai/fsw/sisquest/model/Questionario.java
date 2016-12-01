@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,18 +16,22 @@ import java.util.List;
 
 @Entity
 @Table
-public class Questionario {
+@SuppressWarnings("PersistenceUnitPresent")
+public class Questionario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    private Time time;
+    private Equipe time;
 
-    @OneToMany
-    @ElementCollection
+ 
+    @OneToMany(mappedBy = "questionario")
     private List<Questao> questoes;
+
+    @OneToOne
+    private Tarefa tarefa;
 
     /**
      *
@@ -34,7 +39,7 @@ public class Questionario {
      * @param time
      * @param questoes
      */
-    public Questionario(Integer id, Time time, List<Questao> questoes) {
+    public Questionario(Integer id, Equipe time, List<Questao> questoes) {
         this.id = id;
         this.time = time;
         this.questoes = questoes;
@@ -66,7 +71,7 @@ public class Questionario {
      *
      * @return
      */
-    public Time gettime() {
+    public Equipe gettime() {
         return time;
     }
 
@@ -74,7 +79,7 @@ public class Questionario {
      *
      * @param time
      */
-    public void settime(Time time) {
+    public void settime(Equipe time) {
         this.time = time;
     }
 
@@ -93,6 +98,24 @@ public class Questionario {
     public void setquestions(List<Questao> questoes) {
         this.questoes = questoes;
     }
+
+    public Equipe getTime() {
+        return time;
+    }
+
+    public void setTime(Equipe time) {
+        this.time = time;
+    }
+
+    public Tarefa getTarefa() {
+        return tarefa;
+    }
+
+    public void setTarefa(Tarefa tarefa) {
+        this.tarefa = tarefa;
+    }
+    
+    
 
     @Override
     public int hashCode() {

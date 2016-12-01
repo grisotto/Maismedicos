@@ -6,6 +6,7 @@
 package br.ufg.jatai.fsw.sisquest.model;
 
 import br.ufg.jatai.fsw.sisquest.model.etapas.EtapaEvento;
+import java.io.Serializable;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,10 +15,10 @@ import java.util.List;
  *
  * @author dfranco
  */
-
 @Entity
 @Table
-public class Tarefa {
+@SuppressWarnings("PersistenceUnitPresent")
+public class Tarefa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,16 +28,20 @@ public class Tarefa {
 
     @ManyToOne
     private Turma turma;
+
+    
     @ManyToOne
     private EtapaEvento etapaAtual;
 
-    @ElementCollection
+    @OneToMany
     private List<EtapaEvento> etapaEventos;
 
     private Integer tamanhoQuestoes;
 
-    @ElementCollection
+    @OneToMany(mappedBy = "tarefa")
     private List<Questionario> questionarios;
+    @OneToOne(mappedBy = "tarefa")
+    private Questionario questionario;
 
     /**
      *
@@ -224,6 +229,5 @@ public class Tarefa {
         }
         return true;
     }
-    
 
 }
