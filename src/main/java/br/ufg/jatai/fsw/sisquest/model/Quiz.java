@@ -15,31 +15,31 @@ import java.util.List;
 
 @Entity
 @Table
-public class Questionario {
+public class Quiz {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private Team team;
-    private List<Questao> questoes;
+    private List<Question> questions;
 
     /**
      *
      * @param id
      * @param team
-     * @param questoes
+     * @param questions
      */
-    public Questionario(Integer id, Team team, List<Questao> questoes) {
+    public Quiz(Integer id, Team team, List<Question> questions) {
         this.id = id;
         this.team = team;
-        this.questoes = questoes;
+        this.questions = questions;
     }
 
     /**
      *
      */
-    public Questionario() {
+    public Quiz() {
     }
 
     /**
@@ -78,16 +78,16 @@ public class Questionario {
      *
      * @return
      */
-    public List<Questao> getQuestoes() {
-        return questoes;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
     /**
      *
-     * @param questoes
+     * @param questions
      */
-    public void setQuestoes(List<Questao> questoes) {
-        this.questoes = questoes;
+    public void setquestions(List<Question> questions) {
+        this.questions = questions;
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Questionario {
         int hash = 7;
         hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 97 * hash + (this.team != null ? this.team.hashCode() : 0);
-        hash = 97 * hash + (this.questoes != null ? this.questoes.hashCode() : 0);
+        hash = 97 * hash + (this.questions != null ? this.questions.hashCode() : 0);
         return hash;
     }
 
@@ -110,14 +110,14 @@ public class Questionario {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Questionario other = (Questionario) obj;
+        final Quiz other = (Quiz) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
         if (this.team != other.team && (this.team == null || !this.team.equals(other.team))) {
             return false;
         }
-        if (this.questoes != other.questoes && (this.questoes == null || !this.questoes.equals(other.questoes))) {
+        if (this.questions != other.questions && (this.questions == null || !this.questions.equals(other.questions))) {
             return false;
         }
         return true;

@@ -5,7 +5,7 @@
  */
 package br.ufg.jatai.fsw.sisquest.repository;
 
-import br.ufg.jatai.fsw.sisquest.model.Pessoa;
+import br.ufg.jatai.fsw.sisquest.model.Person;
 
 /**
  *
@@ -15,7 +15,7 @@ public interface PessoaService {
 
     /**
      *
-     * @param pessoa
+     * @param person
      */
-    public void savePessoa(Pessoa pessoa);
+    public void savePessoa(Person person);
 }

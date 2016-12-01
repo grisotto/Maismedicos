@@ -15,37 +15,37 @@ import java.util.List;
 
 @Entity
 @Table
-public class Turma {
+public class Classes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String nome;
-    private String descricao;
+    private String name;
+    private String description;
 
-    private List<Tarefa> tarefas;
+    private List<Task> tasks;
     private List<Team> teams;
 
     /**
      *
      */
-    public Turma() {
+    public Classes() {
     }
 
     /**
      *
      * @param id
-     * @param nome
-     * @param descricao
-     * @param tarefas
+     * @param name
+     * @param description
+     * @param tasks
      * @param teams
      */
-    public Turma(Integer id, String nome, String descricao, List<Tarefa> tarefas, List<Team> teams) {
+    public Classes(Integer id, String name, String description, List<Task> tasks, List<Team> teams) {
         this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.tarefas = tarefas;
+        this.name = name;
+        this.description = description;
+        this.tasks = tasks;
         this.teams = teams;
     }
 
@@ -69,48 +69,48 @@ public class Turma {
      *
      * @return
      */
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
     /**
      *
-     * @param nome
+     * @param name
      */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getDescricao() {
-        return descricao;
-    }
-
-    /**
-     *
-     * @param descricao
-     */
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
      *
      * @return
      */
-    public List<Tarefa> getTarefas() {
-        return tarefas;
+    public String getDescription() {
+        return description;
     }
 
     /**
      *
-     * @param tarefas
+     * @param description
      */
-    public void setTarefas(List<Tarefa> tarefas) {
-        this.tarefas = tarefas;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    /**
+     *
+     * @param tasks
+     */
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -133,9 +133,9 @@ public class Turma {
     public int hashCode() {
         int hash = 5;
         hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 17 * hash + (this.nome != null ? this.nome.hashCode() : 0);
-        hash = 17 * hash + (this.descricao != null ? this.descricao.hashCode() : 0);
-        hash = 17 * hash + (this.tarefas != null ? this.tarefas.hashCode() : 0);
+        hash = 17 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 17 * hash + (this.description != null ? this.description.hashCode() : 0);
+        hash = 17 * hash + (this.tasks != null ? this.tasks.hashCode() : 0);
         hash = 17 * hash + (this.teams != null ? this.teams.hashCode() : 0);
         return hash;
     }
@@ -151,17 +151,17 @@ public class Turma {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Turma other = (Turma) obj;
-        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
+        final Classes other = (Classes) obj;
+        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
             return false;
         }
-        if ((this.descricao == null) ? (other.descricao != null) : !this.descricao.equals(other.descricao)) {
+        if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
             return false;
         }
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
-        if (this.tarefas != other.tarefas && (this.tarefas == null || !this.tarefas.equals(other.tarefas))) {
+        if (this.tasks != other.tasks && (this.tasks == null || !this.tasks.equals(other.tasks))) {
             return false;
         }
         if (this.teams != other.teams && (this.teams == null || !this.teams.equals(other.teams))) {

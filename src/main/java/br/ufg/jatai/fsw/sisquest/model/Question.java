@@ -16,31 +16,31 @@ import java.util.List;
 
 @Entity
 @Table
-public class Questao {
+public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String questao;
-    private List<Alternativa> alternativas;
+    private String question;
+    private List<Alternative> alternatives;
 
     /**
      *
      * @param id
-     * @param questao
-     * @param alternativas
+     * @param question
+     * @param alternatives
      */
-    public Questao(Integer id, String questao, List<Alternativa> alternativas) {
+    public Question(Integer id, String question, List<Alternative> alternatives) {
         this.id = id;
-        this.questao = questao;
-        this.alternativas = alternativas;
+        this.question = question;
+        this.alternatives = alternatives;
     }
 
     /**
      *
      */
-    public Questao() {
+    public Question() {
     }
 
     /**
@@ -63,40 +63,40 @@ public class Questao {
      *
      * @return
      */
-    public String getQuestao() {
-        return questao;
+    public String getQuestion() {
+        return question;
     }
 
     /**
      *
-     * @param questao
+     * @param question
      */
-    public void setQuestao(String questao) {
-        this.questao = questao;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     /**
      *
      * @return
      */
-    public List<Alternativa> getAlternativas() {
-        return alternativas;
+    public List<Alternative> getAlternatives() {
+        return alternatives;
     }
 
     /**
      *
-     * @param alternativas
+     * @param alternatives
      */
-    public void setAlternativas(List<Alternativa> alternativas) {
-        this.alternativas = alternativas;
+    public void setAlternatives(List<Alternative> alternatives) {
+        this.alternatives = alternatives;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 67 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 67 * hash + (this.questao != null ? this.questao.hashCode() : 0);
-        hash = 67 * hash + (this.alternativas != null ? this.alternativas.hashCode() : 0);
+        hash = 67 * hash + (this.question != null ? this.question.hashCode() : 0);
+        hash = 67 * hash + (this.alternatives != null ? this.alternatives.hashCode() : 0);
         return hash;
     }
 
@@ -111,14 +111,14 @@ public class Questao {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Questao other = (Questao) obj;
-        if ((this.questao == null) ? (other.questao != null) : !this.questao.equals(other.questao)) {
+        final Question other = (Question) obj;
+        if ((this.question == null) ? (other.question != null) : !this.question.equals(other.question)) {
             return false;
         }
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
-        if (this.alternativas != other.alternativas && (this.alternativas == null || !this.alternativas.equals(other.alternativas))) {
+        if (this.alternatives != other.alternatives && (this.alternatives == null || !this.alternatives.equals(other.alternatives))) {
             return false;
         }
         return true;

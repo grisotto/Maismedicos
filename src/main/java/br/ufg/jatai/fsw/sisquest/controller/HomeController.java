@@ -5,7 +5,6 @@
  */
 package br.ufg.jatai.fsw.sisquest.controller;
 
-import br.ufg.jatai.fsw.sisquest.model.Pessoa;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class HomeController {
     @RequestMapping("/")
     public String home() {
         log.debug("Funcionando");
-//        p.save(new Pessoa(0, "Noem"));
+//        p.save(new Person(0, "Noem"));
         return "/home/index";
     }
 

@@ -16,9 +16,9 @@ import java.util.List;
 public class Team {
     private Integer id;
     private String name;
-    private List<Aluno> students;
+    private List<Student> students;
     private String password;
-    private Turma turma;
+    private Classes classes;
 
     /**
      *
@@ -32,14 +32,14 @@ public class Team {
      * @param name
      * @param students
      * @param password
-     * @param turma
+     * @param classes
      */
-    public Team(Integer id, String name, List<Aluno> students, String password, Turma turma) {
+    public Team(Integer id, String name, List<Student> students, String password, Classes classes) {
         this.id = id;
         this.name = name;
         this.students = students;
         this.password = password;
-        this.turma = turma;
+        this.classes = classes;
     }
 
     /**
@@ -78,7 +78,7 @@ public class Team {
      *
      * @return
      */
-    public List<Aluno> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
@@ -86,7 +86,7 @@ public class Team {
      *
      * @param students
      */
-    public void setStudents(List<Aluno> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 
@@ -110,16 +110,16 @@ public class Team {
      *
      * @return
      */
-    public Turma getTurma() {
-        return turma;
+    public Classes getClasses() {
+        return classes;
     }
 
     /**
      *
-     * @param turma
+     * @param classes
      */
-    public void setTurma(Turma turma) {
-        this.turma = turma;
+    public void setClasses(Classes classes) {
+        this.classes = classes;
     }
 
     @Override
@@ -129,7 +129,7 @@ public class Team {
         hash = 41 * hash + (this.name != null ? this.name.hashCode() : 0);
         hash = 41 * hash + (this.students != null ? this.students.hashCode() : 0);
         hash = 41 * hash + (this.password != null ? this.password.hashCode() : 0);
-        hash = 41 * hash + (this.turma != null ? this.turma.hashCode() : 0);
+        hash = 41 * hash + (this.classes != null ? this.classes.hashCode() : 0);
         return hash;
     }
 
@@ -157,7 +157,7 @@ public class Team {
         if (this.students != other.students && (this.students == null || !this.students.equals(other.students))) {
             return false;
         }
-        if (this.turma != other.turma && (this.turma == null || !this.turma.equals(other.turma))) {
+        if (this.classes != other.classes && (this.classes == null || !this.classes.equals(other.classes))) {
             return false;
         }
         return true;

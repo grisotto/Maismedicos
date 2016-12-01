@@ -15,33 +15,33 @@ import javax.persistence.*;
 @Entity
 @Table
 
-public class Alternativa {
+public class Alternative {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String descricao;
-    private boolean correto;
+    private String description;
+    private boolean right;
     
     /**
      *
      */
-    public Alternativa() {
+    public Alternative() {
         this(null, null, false);
     }
     
     /**
      *
      * @param id
-     * @param descricao
-     * @param correto
+     * @param description
+     * @param right
      */
 
-    public Alternativa(Integer id, String descricao, boolean correto) {
+    public Alternative(Integer id, String description, boolean right) {
         this.id = id;
-        this.descricao = descricao;
-        this.correto = correto;
+        this.description = description;
+        this.right = right;
     }
     
     /**
@@ -64,40 +64,40 @@ public class Alternativa {
      *
      * @return
      */
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
     
     /**
      *
-     * @param descricao
+     * @param description
      */
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
     
     /**
      *
      * @return
      */
-    public boolean isCorreto() {
-        return correto;
+    public boolean isRight() {
+        return right;
     }
     
     /**
      *
-     * @param correto
+     * @param right
      */
-    public void setCorreto(boolean correto) {
-        this.correto = correto;
+    public void setRight(boolean right) {
+        this.right = right;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 37 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 37 * hash + (this.descricao != null ? this.descricao.hashCode() : 0);
-        hash = 37 * hash + (this.correto ? 1 : 0);
+        hash = 37 * hash + (this.description != null ? this.description.hashCode() : 0);
+        hash = 37 * hash + (this.right ? 1 : 0);
         return hash;
     }
 
@@ -112,11 +112,11 @@ public class Alternativa {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Alternativa other = (Alternativa) obj;
-        if (this.correto != other.correto) {
+        final Alternative other = (Alternative) obj;
+        if (this.right != other.right) {
             return false;
         }
-        if ((this.descricao == null) ? (other.descricao != null) : !this.descricao.equals(other.descricao)) {
+        if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
             return false;
         }
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {

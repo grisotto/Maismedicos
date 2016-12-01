@@ -6,7 +6,6 @@
 package br.ufg.jatai.fsw.sisquest.model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,28 +18,28 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-public class Pessoa implements Serializable{
+public class Person implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String nome;
+    private String name;
 
     /**
      *
      * @param id
-     * @param nome
+     * @param name
      */
-    public Pessoa(Integer id, String nome) {
+    public Person(Integer id, String name) {
         this.id = id;
-        this.nome = nome;
+        this.name = name;
     }
 
     /**
      *
      */
-    public Pessoa() {
+    public Person() {
     }
 
     /**
@@ -63,23 +62,23 @@ public class Pessoa implements Serializable{
      *
      * @return
      */
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
     /**
      *
-     * @param nome
+     * @param name
      */
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 31 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 31 * hash + (this.nome != null ? this.nome.hashCode() : 0);
+        hash = 31 * hash + (this.name != null ? this.name.hashCode() : 0);
         return hash;
     }
 
@@ -94,8 +93,8 @@ public class Pessoa implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Pessoa other = (Pessoa) obj;
-        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
+        final Person other = (Person) obj;
+        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
             return false;
         }
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {

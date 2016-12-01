@@ -16,47 +16,47 @@ import java.util.List;
 @Entity
 @Table
 
-public class Aluno extends Pessoa {
+public class Student extends Person {
 
     @Id
-    private String matricula;
+    private String enrollment;
 
     private String email;
-    private List<Turma> turmasCadastradas;
+    private List<Classes> registeredClasses;
 
     /**
      *
      */
-    public Aluno() {
+    public Student() {
        
     }
 
     /**
      *
-     * @param matricula
+     * @param enrollment
      * @param email
-     * @param turmasCadastradas
+     * @param registeredClasses
      */
-    public Aluno(String matricula, String email, List<Turma> turmasCadastradas) {
-        this.matricula = matricula;
+    public Student(String enrollment, String email, List<Classes> registeredClasses) {
+        this.enrollment = enrollment;
         this.email = email;
-        this.turmasCadastradas = turmasCadastradas;
+        this.registeredClasses = registeredClasses;
     }
 
     /**
      *
      * @return
      */
-    public String getMatricula() {
-        return matricula;
+    public String getEnrollment() {
+        return enrollment;
     }
 
     /**
      *
-     * @param matricula
+     * @param enrollment
      */
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
+    public void setEnrollment(String enrollment) {
+        this.enrollment = enrollment;
     }
 
     /**
@@ -79,24 +79,24 @@ public class Aluno extends Pessoa {
      *
      * @return
      */
-    public List<Turma> getTurmasCadastradas() {
-        return turmasCadastradas;
+    public List<Classes> getRegisteredClasses() {
+        return registeredClasses;
     }
 
     /**
      *
-     * @param turmasCadastradas
+     * @param registeredClasses
      */
-    public void setTurmasCadastradas(List<Turma> turmasCadastradas) {
-        this.turmasCadastradas = turmasCadastradas;
+    public void setRegisteredClasses(List<Classes> registeredClasses) {
+        this.registeredClasses = registeredClasses;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 71 * hash + (this.matricula != null ? this.matricula.hashCode() : 0);
+        hash = 71 * hash + (this.enrollment != null ? this.enrollment.hashCode() : 0);
         hash = 71 * hash + (this.email != null ? this.email.hashCode() : 0);
-        hash = 71 * hash + (this.turmasCadastradas != null ? this.turmasCadastradas.hashCode() : 0);
+        hash = 71 * hash + (this.registeredClasses != null ? this.registeredClasses.hashCode() : 0);
         return hash;
     }
 
@@ -111,14 +111,14 @@ public class Aluno extends Pessoa {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Aluno other = (Aluno) obj;
-        if ((this.matricula == null) ? (other.matricula != null) : !this.matricula.equals(other.matricula)) {
+        final Student other = (Student) obj;
+        if ((this.enrollment == null) ? (other.enrollment != null) : !this.enrollment.equals(other.enrollment)) {
             return false;
         }
         if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
             return false;
         }
-        if (this.turmasCadastradas != other.turmasCadastradas && (this.turmasCadastradas == null || !this.turmasCadastradas.equals(other.turmasCadastradas))) {
+        if (this.registeredClasses != other.registeredClasses && (this.registeredClasses == null || !this.registeredClasses.equals(other.registeredClasses))) {
             return false;
         }
         return true;
