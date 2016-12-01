@@ -11,6 +11,6 @@ import br.ufg.jatai.fsw.sisquest.model.Pessoa;
  *
  * @author dfranco
  */
-public interface PessoaService extends AbrastractService<Pessoa> {
+public interface PessoaService extends AbrastractService<Pessoa, Integer> {
 
 }

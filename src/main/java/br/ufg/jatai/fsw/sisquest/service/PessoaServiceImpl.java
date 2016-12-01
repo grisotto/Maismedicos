@@ -32,7 +32,12 @@ public class PessoaServiceImpl implements PessoaService {
 
     @Override
     public Pessoa find(Pessoa entidade) {
-        return pessoaRepository.findOne(entidade.getId());
+        return find(entidade.getId());
+    }
+
+    @Override
+    public Pessoa find(Integer id) {
+        return pessoaRepository.findOne(id);
     }
 
     @Override
