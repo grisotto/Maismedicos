@@ -6,38 +6,44 @@
 package br.ufg.jatai.fsw.sisquest.service;
 
 import br.ufg.jatai.fsw.sisquest.model.Turma;
+import br.ufg.jatai.fsw.sisquest.repository.TurmaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 public class TurmaServiceImpl implements TurmaService {
 
+    @Autowired
+    private TurmaRepository turmaRepository;
+
     @Override
     public Turma inserir(Turma entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return turmaRepository.save(entidade);
     }
 
     @Override
     public void apagar(Turma entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        turmaRepository.delete(entidade);
     }
 
     @Override
     public Turma atualizar(Turma entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return turmaRepository.save(entidade);
     }
 
     @Override
     public Turma find(Turma entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return find(entidade.getId());
     }
 
     @Override
     public Turma find(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return turmaRepository.findOne(id);
     }
 
     @Override
     public List<Turma> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return turmaRepository.findAll();
     }
 
 }

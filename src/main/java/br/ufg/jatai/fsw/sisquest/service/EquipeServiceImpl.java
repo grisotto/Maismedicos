@@ -6,39 +6,45 @@
 package br.ufg.jatai.fsw.sisquest.service;
 
 import br.ufg.jatai.fsw.sisquest.model.Equipe;
+import br.ufg.jatai.fsw.sisquest.repository.EquipeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 
 public class EquipeServiceImpl implements EquipeService {
 
+    @Autowired
+    private EquipeRepository equipeRepository;
+
     @Override
     public Equipe inserir(Equipe entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return equipeRepository.save(entidade);
     }
 
     @Override
     public void apagar(Equipe entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        equipeRepository.delete(entidade);
     }
 
     @Override
     public Equipe atualizar(Equipe entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return equipeRepository.save(entidade);
     }
 
     @Override
     public Equipe find(Equipe entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return find(entidade.getId());
     }
 
     @Override
     public Equipe find(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return equipeRepository.findOne(id);
     }
 
     @Override
     public List<Equipe> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return equipeRepository.findAll();
     }
     
 }

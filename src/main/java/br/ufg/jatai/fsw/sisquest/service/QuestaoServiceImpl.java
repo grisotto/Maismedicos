@@ -6,39 +6,45 @@
 package br.ufg.jatai.fsw.sisquest.service;
 
 import br.ufg.jatai.fsw.sisquest.model.Questao;
+import br.ufg.jatai.fsw.sisquest.repository.QuestaoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 
 public class QuestaoServiceImpl implements QuestaoService {
 
+    @Autowired
+    private QuestaoRepository questaoRepository;
+
     @Override
     public Questao inserir(Questao entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return questaoRepository.save(entidade);
     }
 
     @Override
     public void apagar(Questao entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        questaoRepository.delete(entidade);
     }
 
     @Override
     public Questao atualizar(Questao entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return questaoRepository.save(entidade);
     }
 
     @Override
     public Questao find(Questao entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return find(entidade.getId());
     }
 
     @Override
     public Questao find(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return questaoRepository.findOne(id);
     }
 
     @Override
     public List<Questao> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return questaoRepository.findAll();
     }
     
 }

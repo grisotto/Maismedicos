@@ -6,39 +6,45 @@
 package br.ufg.jatai.fsw.sisquest.service;
 
 import br.ufg.jatai.fsw.sisquest.model.Tarefa;
+import br.ufg.jatai.fsw.sisquest.repository.TarefaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 
 public class TarefaServiceImpl implements TarefaService {
 
+    @Autowired
+    private TarefaRepository tarefaRepository;
+
     @Override
     public Tarefa inserir(Tarefa entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tarefaRepository.save(entidade);
     }
 
     @Override
     public void apagar(Tarefa entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        tarefaRepository.delete(entidade);
     }
 
     @Override
     public Tarefa atualizar(Tarefa entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tarefaRepository.save(entidade);
     }
 
     @Override
     public Tarefa find(Tarefa entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return find(entidade.getId());
     }
 
     @Override
     public Tarefa find(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tarefaRepository.findOne(id);
     }
 
     @Override
     public List<Tarefa> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tarefaRepository.findAll();
     }
     
 }
