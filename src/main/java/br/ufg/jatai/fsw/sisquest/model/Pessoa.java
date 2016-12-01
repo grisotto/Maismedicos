@@ -18,28 +18,28 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-public class Person implements Serializable{
+public class Pessoa implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+    private String nome;
 
     /**
      *
      * @param id
-     * @param name
+     * @param nome
      */
-    public Person(Integer id, String name) {
+    public Pessoa(Integer id, String nome) {
         this.id = id;
-        this.name = name;
+        this.nome = nome;
     }
 
     /**
      *
      */
-    public Person() {
+    public Pessoa() {
     }
 
     /**
@@ -62,23 +62,23 @@ public class Person implements Serializable{
      *
      * @return
      */
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
     /**
      *
-     * @param name
+     * @param nome
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 31 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 31 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 31 * hash + (this.nome != null ? this.nome.hashCode() : 0);
         return hash;
     }
 
@@ -93,8 +93,8 @@ public class Person implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Person other = (Person) obj;
-        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+        final Pessoa other = (Pessoa) obj;
+        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
             return false;
         }
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {

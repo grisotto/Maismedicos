@@ -15,31 +15,31 @@ import java.util.List;
 
 @Entity
 @Table
-public class Quiz {
+public class Questionario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Team team;
-    private List<Question> questions;
+    private Time time;
+    private List<Questao> questoes;
 
     /**
      *
      * @param id
-     * @param team
-     * @param questions
+     * @param time
+     * @param questoes
      */
-    public Quiz(Integer id, Team team, List<Question> questions) {
+    public Questionario(Integer id, Time time, List<Questao> questoes) {
         this.id = id;
-        this.team = team;
-        this.questions = questions;
+        this.time = time;
+        this.questoes = questoes;
     }
 
     /**
      *
      */
-    public Quiz() {
+    public Questionario() {
     }
 
     /**
@@ -62,40 +62,40 @@ public class Quiz {
      *
      * @return
      */
-    public Team getTeam() {
-        return team;
+    public Time gettime() {
+        return time;
     }
 
     /**
      *
-     * @param team
+     * @param time
      */
-    public void setTeam(Team team) {
-        this.team = team;
+    public void settime(Time time) {
+        this.time = time;
     }
 
     /**
      *
      * @return
      */
-    public List<Question> getQuestions() {
-        return questions;
+    public List<Questao> getQuestoes() {
+        return questoes;
     }
 
     /**
      *
-     * @param questions
+     * @param questoes
      */
-    public void setquestions(List<Question> questions) {
-        this.questions = questions;
+    public void setquestions(List<Questao> questoes) {
+        this.questoes = questoes;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 97 * hash + (this.team != null ? this.team.hashCode() : 0);
-        hash = 97 * hash + (this.questions != null ? this.questions.hashCode() : 0);
+        hash = 97 * hash + (this.time != null ? this.time.hashCode() : 0);
+        hash = 97 * hash + (this.questoes != null ? this.questoes.hashCode() : 0);
         return hash;
     }
 
@@ -110,14 +110,14 @@ public class Quiz {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Quiz other = (Quiz) obj;
+        final Questionario other = (Questionario) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
-        if (this.team != other.team && (this.team == null || !this.team.equals(other.team))) {
+        if (this.time != other.time && (this.time == null || !this.time.equals(other.time))) {
             return false;
         }
-        if (this.questions != other.questions && (this.questions == null || !this.questions.equals(other.questions))) {
+        if (this.questoes != other.questoes && (this.questoes == null || !this.questoes.equals(other.questoes))) {
             return false;
         }
         return true;

@@ -16,31 +16,31 @@ import java.util.List;
 
 @Entity
 @Table
-public class Question {
+public class Questao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String question;
-    private List<Alternative> alternatives;
+    private List<Alternativa> alternativas;
 
     /**
      *
      * @param id
      * @param question
-     * @param alternatives
+     * @param alternativas
      */
-    public Question(Integer id, String question, List<Alternative> alternatives) {
+    public Questao(Integer id, String question, List<Alternativa> alternativas) {
         this.id = id;
         this.question = question;
-        this.alternatives = alternatives;
+        this.alternativas = alternativas;
     }
 
     /**
      *
      */
-    public Question() {
+    public Questao() {
     }
 
     /**
@@ -79,16 +79,16 @@ public class Question {
      *
      * @return
      */
-    public List<Alternative> getAlternatives() {
-        return alternatives;
+    public List<Alternativa> getAlternativas() {
+        return alternativas;
     }
 
     /**
      *
-     * @param alternatives
+     * @param alternativas
      */
-    public void setAlternatives(List<Alternative> alternatives) {
-        this.alternatives = alternatives;
+    public void setAlternativas(List<Alternativa> alternativas) {
+        this.alternativas = alternativas;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class Question {
         int hash = 5;
         hash = 67 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 67 * hash + (this.question != null ? this.question.hashCode() : 0);
-        hash = 67 * hash + (this.alternatives != null ? this.alternatives.hashCode() : 0);
+        hash = 67 * hash + (this.alternativas != null ? this.alternativas.hashCode() : 0);
         return hash;
     }
 
@@ -111,14 +111,14 @@ public class Question {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Question other = (Question) obj;
+        final Questao other = (Questao) obj;
         if ((this.question == null) ? (other.question != null) : !this.question.equals(other.question)) {
             return false;
         }
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
-        if (this.alternatives != other.alternatives && (this.alternatives == null || !this.alternatives.equals(other.alternatives))) {
+        if (this.alternativas != other.alternativas && (this.alternativas == null || !this.alternativas.equals(other.alternativas))) {
             return false;
         }
         return true;

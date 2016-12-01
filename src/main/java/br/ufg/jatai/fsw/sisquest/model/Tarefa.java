@@ -17,43 +17,43 @@ import java.util.List;
 
 @Entity
 @Table
-public class Task {
+public class Tarefa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String description;
-    private Classes classes;
+    private String descricao;
+    private Turma turma;
     private EtapaEvento etapaAtual;
     private List<EtapaEvento> etapaEventos;
-    private Integer questionsSize;
-    private List<Quiz> quizzes;
+    private Integer tamanhoQuestoes;
+    private List<Questionario> questionarios;
 
     /**
      *
      */
-    public Task() {
+    public Tarefa() {
     }
 
     /**
      *
      * @param id
-     * @param description
-     * @param classes
+     * @param descricao
+     * @param turma
      * @param etapaAtual
      * @param etapaEventos
-     * @param questionsSize
-     * @param quizzes
+     * @param tamanhoQuestoes
+     * @param questionarios
      */
-    public Task(Integer id, String description, Classes classes, EtapaEvento etapaAtual, List<EtapaEvento> etapaEventos, Integer questionsSize, List<Quiz> quizzes) {
+    public Tarefa(Integer id, String descricao, Turma turma, EtapaEvento etapaAtual, List<EtapaEvento> etapaEventos, Integer tamanhoQuestoes, List<Questionario> questionarios) {
         this.id = id;
-        this.description = description;
-        this.classes = classes;
+        this.descricao = descricao;
+        this.turma = turma;
         this.etapaAtual = etapaAtual;
         this.etapaEventos = etapaEventos;
-        this.questionsSize = questionsSize;
-        this.quizzes = quizzes;
+        this.tamanhoQuestoes = tamanhoQuestoes;
+        this.questionarios = questionarios;
     }
 
     /**
@@ -76,32 +76,32 @@ public class Task {
      *
      * @return
      */
-    public String getDescription() {
-        return description;
+    public String getDescricao() {
+        return descricao;
     }
 
     /**
      *
-     * @param description
+     * @param descricao
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     /**
      *
      * @return
      */
-    public Classes getClasses() {
-        return classes;
+    public Turma getTurma() {
+        return turma;
     }
 
     /**
      *
-     * @param classes
+     * @param turma
      */
-    public void setClasses(Classes classes) {
-        this.classes = classes;
+    public void setTurma(Turma turma) {
+        this.turma = turma;
     }
 
     /**
@@ -140,44 +140,44 @@ public class Task {
      *
      * @return
      */
-    public Integer getQuestionsSize() {
-        return questionsSize;
+    public Integer getTamanhoQuestoes() {
+        return tamanhoQuestoes;
     }
 
     /**
      *
-     * @param questionsSize
+     * @param tamanhoQuestoes
      */
-    public void setQuestionsSize(Integer questionsSize) {
-        this.questionsSize = questionsSize;
+    public void setTamanhoQuestoes(Integer tamanhoQuestoes) {
+        this.tamanhoQuestoes = tamanhoQuestoes;
     }
 
     /**
      *
      * @return
      */
-    public List<Quiz> getQuizzes() {
-        return quizzes;
+    public List<Questionario> getQuestionarios() {
+        return questionarios;
     }
 
     /**
      *
-     * @param quizzes
+     * @param questionarios
      */
-    public void setQuizzes(List<Quiz> quizzes) {
-        this.quizzes = quizzes;
+    public void setQuestionarios(List<Questionario> questionarios) {
+        this.questionarios = questionarios;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 79 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 79 * hash + (this.description != null ? this.description.hashCode() : 0);
-        hash = 79 * hash + (this.classes != null ? this.classes.hashCode() : 0);
+        hash = 79 * hash + (this.descricao != null ? this.descricao.hashCode() : 0);
+        hash = 79 * hash + (this.turma != null ? this.turma.hashCode() : 0);
         hash = 79 * hash + (this.etapaAtual != null ? this.etapaAtual.hashCode() : 0);
         hash = 79 * hash + (this.etapaEventos != null ? this.etapaEventos.hashCode() : 0);
-        hash = 79 * hash + (this.questionsSize != null ? this.questionsSize.hashCode() : 0);
-        hash = 79 * hash + (this.quizzes != null ? this.quizzes.hashCode() : 0);
+        hash = 79 * hash + (this.tamanhoQuestoes != null ? this.tamanhoQuestoes.hashCode() : 0);
+        hash = 79 * hash + (this.questionarios != null ? this.questionarios.hashCode() : 0);
         return hash;
     }
 
@@ -192,14 +192,14 @@ public class Task {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Task other = (Task) obj;
-        if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
+        final Tarefa other = (Tarefa) obj;
+        if ((this.descricao == null) ? (other.descricao != null) : !this.descricao.equals(other.descricao)) {
             return false;
         }
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
-        if (this.classes != other.classes && (this.classes == null || !this.classes.equals(other.classes))) {
+        if (this.turma != other.turma && (this.turma == null || !this.turma.equals(other.turma))) {
             return false;
         }
         if (this.etapaAtual != other.etapaAtual && (this.etapaAtual == null || !this.etapaAtual.equals(other.etapaAtual))) {
@@ -208,10 +208,10 @@ public class Task {
         if (this.etapaEventos != other.etapaEventos && (this.etapaEventos == null || !this.etapaEventos.equals(other.etapaEventos))) {
             return false;
         }
-        if (this.questionsSize != other.questionsSize && (this.questionsSize == null || !this.questionsSize.equals(other.questionsSize))) {
+        if (this.tamanhoQuestoes != other.tamanhoQuestoes && (this.tamanhoQuestoes == null || !this.tamanhoQuestoes.equals(other.tamanhoQuestoes))) {
             return false;
         }
-        if (this.quizzes != other.quizzes && (this.quizzes == null || !this.quizzes.equals(other.quizzes))) {
+        if (this.questionarios != other.questionarios && (this.questionarios == null || !this.questionarios.equals(other.questionarios))) {
             return false;
         }
         return true;

@@ -5,13 +5,13 @@
  */
 package br.ufg.jatai.fsw.sisquest.repository;
 
-import br.ufg.jatai.fsw.sisquest.model.Person;
+import br.ufg.jatai.fsw.sisquest.model.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author dfranco
  */
-public interface PessoaRepository extends JpaRepository<Person, Integer> {
+public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
     
 }
