@@ -5,13 +5,22 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
 /**
  *
  * @author dfranco
  */
-public class Alternativa {
 
+@Entity
+@Table
+public class Alternativa implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String descricao;
     private boolean correto;
     
@@ -28,6 +37,7 @@ public class Alternativa {
      * @param descricao
      * @param correto
      */
+
     public Alternativa(Integer id, String descricao, boolean correto) {
         this.id = id;
         this.descricao = descricao;

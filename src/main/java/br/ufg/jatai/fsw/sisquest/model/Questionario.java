@@ -5,27 +5,43 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
+import java.io.Serializable;
+import javax.persistence.*;
 import java.util.List;
 
 /**
  *
  * @author dfranco
  */
-public class Questionario {
 
+@Entity
+@Table
+@SuppressWarnings("PersistenceUnitPresent")
+public class Questionario implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Team team;
+
+    @ManyToOne
+    private Equipe time;
+
+ 
+    @OneToMany(mappedBy = "questionario")
     private List<Questao> questoes;
+
+    @OneToOne
+    private Tarefa tarefa;
 
     /**
      *
      * @param id
-     * @param team
+     * @param time
      * @param questoes
      */
-    public Questionario(Integer id, Team team, List<Questao> questoes) {
+    public Questionario(Integer id, Equipe time, List<Questao> questoes) {
         this.id = id;
-        this.team = team;
+        this.time = time;
         this.questoes = questoes;
     }
 
@@ -55,16 +71,16 @@ public class Questionario {
      *
      * @return
      */
-    public Team getTeam() {
-        return team;
+    public Equipe gettime() {
+        return time;
     }
 
     /**
      *
-     * @param team
+     * @param time
      */
-    public void setTeam(Team team) {
-        this.team = team;
+    public void settime(Equipe time) {
+        this.time = time;
     }
 
     /**
@@ -79,15 +95,33 @@ public class Questionario {
      *
      * @param questoes
      */
-    public void setQuestoes(List<Questao> questoes) {
+    public void setquestions(List<Questao> questoes) {
         this.questoes = questoes;
     }
+
+    public Equipe getTime() {
+        return time;
+    }
+
+    public void setTime(Equipe time) {
+        this.time = time;
+    }
+
+    public Tarefa getTarefa() {
+        return tarefa;
+    }
+
+    public void setTarefa(Tarefa tarefa) {
+        this.tarefa = tarefa;
+    }
+    
+    
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 97 * hash + (this.team != null ? this.team.hashCode() : 0);
+        hash = 97 * hash + (this.time != null ? this.time.hashCode() : 0);
         hash = 97 * hash + (this.questoes != null ? this.questoes.hashCode() : 0);
         return hash;
     }
@@ -107,7 +141,7 @@ public class Questionario {
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
-        if (this.team != other.team && (this.team == null || !this.team.equals(other.team))) {
+        if (this.time != other.time && (this.time == null || !this.time.equals(other.time))) {
             return false;
         }
         if (this.questoes != other.questoes && (this.questoes == null || !this.questoes.equals(other.questoes))) {

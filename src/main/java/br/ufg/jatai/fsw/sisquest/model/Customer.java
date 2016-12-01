@@ -1,14 +1,21 @@
 package br.ufg.jatai.fsw.sisquest.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  *
  * @author dfranco
  */
+
+@Entity
+@Table
 public class Customer {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String firstName;
     private String lastName;
     private String email;

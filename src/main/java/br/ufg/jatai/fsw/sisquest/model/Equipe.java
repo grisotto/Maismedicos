@@ -5,38 +5,55 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
+import com.sun.mail.imap.protocol.ID;
+import java.io.Serializable;
+
+import javax.persistence.*;
 import java.util.List;
 
 /**
  *
  * @author dfranco
  */
-public class Team {
+@Entity
+@Table
+@SuppressWarnings("PersistenceUnitPresent")
+public class Equipe implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private List<Aluno> students;
-    private String password;
+
+    private String nome;
+
+
+    @ManyToMany
+    private List<Aluno> alunos;
+
+    private String senha;
+
+    @ManyToOne
     private Turma turma;
 
     /**
      *
      */
-    public Team() {
+    public Equipe() {
     }
 
     /**
      *
      * @param id
-     * @param name
-     * @param students
-     * @param password
+     * @param nome
+     * @param alunos
+     * @param senha
      * @param turma
      */
-    public Team(Integer id, String name, List<Aluno> students, String password, Turma turma) {
+    public Equipe(Integer id, String nome, List<Aluno> alunos, String senha, Turma turma) {
         this.id = id;
-        this.name = name;
-        this.students = students;
-        this.password = password;
+        this.nome = nome;
+        this.alunos = alunos;
+        this.senha = senha;
         this.turma = turma;
     }
 
@@ -60,48 +77,48 @@ public class Team {
      *
      * @return
      */
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
     /**
      *
-     * @param name
+     * @param nome
      */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Aluno> getStudents() {
-        return students;
-    }
-
-    /**
-     *
-     * @param students
-     */
-    public void setStudents(List<Aluno> students) {
-        this.students = students;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     /**
      *
      * @return
      */
-    public String getPassword() {
-        return password;
+    public List<Aluno> getAlunos() {
+        return alunos;
     }
 
     /**
      *
-     * @param password
+     * @param alunos
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getSenha() {
+        return senha;
+    }
+
+    /**
+     *
+     * @param senha
+     */
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     /**
@@ -124,9 +141,9 @@ public class Team {
     public int hashCode() {
         int hash = 7;
         hash = 41 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 41 * hash + (this.name != null ? this.name.hashCode() : 0);
-        hash = 41 * hash + (this.students != null ? this.students.hashCode() : 0);
-        hash = 41 * hash + (this.password != null ? this.password.hashCode() : 0);
+        hash = 41 * hash + (this.nome != null ? this.nome.hashCode() : 0);
+        hash = 41 * hash + (this.alunos != null ? this.alunos.hashCode() : 0);
+        hash = 41 * hash + (this.senha != null ? this.senha.hashCode() : 0);
         hash = 41 * hash + (this.turma != null ? this.turma.hashCode() : 0);
         return hash;
     }
@@ -142,17 +159,17 @@ public class Team {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Team other = (Team) obj;
-        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+        final Equipe other = (Equipe) obj;
+        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
             return false;
         }
-        if ((this.password == null) ? (other.password != null) : !this.password.equals(other.password)) {
+        if ((this.senha == null) ? (other.senha != null) : !this.senha.equals(other.senha)) {
             return false;
         }
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
-        if (this.students != other.students && (this.students == null || !this.students.equals(other.students))) {
+        if (this.alunos != other.alunos && (this.alunos == null || !this.alunos.equals(other.alunos))) {
             return false;
         }
         if (this.turma != other.turma && (this.turma == null || !this.turma.equals(other.turma))) {
@@ -160,5 +177,5 @@ public class Team {
         }
         return true;
     }
-    
+
 }

@@ -6,21 +6,42 @@
 package br.ufg.jatai.fsw.sisquest.model;
 
 import br.ufg.jatai.fsw.sisquest.model.etapas.EtapaEvento;
+import java.io.Serializable;
+
+import javax.persistence.*;
 import java.util.List;
 
 /**
  *
  * @author dfranco
  */
-public class Tarefa {
+@Entity
+@Table
+@SuppressWarnings("PersistenceUnitPresent")
+public class Tarefa implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String descricao;
+
+    @ManyToOne
     private Turma turma;
+
+    
+    @ManyToOne
     private EtapaEvento etapaAtual;
+
+    @OneToMany
     private List<EtapaEvento> etapaEventos;
-    private Integer questionsSize;
+
+    private Integer tamanhoQuestoes;
+
+    @OneToMany(mappedBy = "tarefa")
     private List<Questionario> questionarios;
+    @OneToOne(mappedBy = "tarefa")
+    private Questionario questionario;
 
     /**
      *
@@ -35,16 +56,16 @@ public class Tarefa {
      * @param turma
      * @param etapaAtual
      * @param etapaEventos
-     * @param questionsSize
+     * @param tamanhoQuestoes
      * @param questionarios
      */
-    public Tarefa(Integer id, String descricao, Turma turma, EtapaEvento etapaAtual, List<EtapaEvento> etapaEventos, Integer questionsSize, List<Questionario> questionarios) {
+    public Tarefa(Integer id, String descricao, Turma turma, EtapaEvento etapaAtual, List<EtapaEvento> etapaEventos, Integer tamanhoQuestoes, List<Questionario> questionarios) {
         this.id = id;
         this.descricao = descricao;
         this.turma = turma;
         this.etapaAtual = etapaAtual;
         this.etapaEventos = etapaEventos;
-        this.questionsSize = questionsSize;
+        this.tamanhoQuestoes = tamanhoQuestoes;
         this.questionarios = questionarios;
     }
 
@@ -132,16 +153,16 @@ public class Tarefa {
      *
      * @return
      */
-    public Integer getQuestionsSize() {
-        return questionsSize;
+    public Integer getTamanhoQuestoes() {
+        return tamanhoQuestoes;
     }
 
     /**
      *
-     * @param questionsSize
+     * @param tamanhoQuestoes
      */
-    public void setQuestionsSize(Integer questionsSize) {
-        this.questionsSize = questionsSize;
+    public void setTamanhoQuestoes(Integer tamanhoQuestoes) {
+        this.tamanhoQuestoes = tamanhoQuestoes;
     }
 
     /**
@@ -168,7 +189,7 @@ public class Tarefa {
         hash = 79 * hash + (this.turma != null ? this.turma.hashCode() : 0);
         hash = 79 * hash + (this.etapaAtual != null ? this.etapaAtual.hashCode() : 0);
         hash = 79 * hash + (this.etapaEventos != null ? this.etapaEventos.hashCode() : 0);
-        hash = 79 * hash + (this.questionsSize != null ? this.questionsSize.hashCode() : 0);
+        hash = 79 * hash + (this.tamanhoQuestoes != null ? this.tamanhoQuestoes.hashCode() : 0);
         hash = 79 * hash + (this.questionarios != null ? this.questionarios.hashCode() : 0);
         return hash;
     }
@@ -200,7 +221,7 @@ public class Tarefa {
         if (this.etapaEventos != other.etapaEventos && (this.etapaEventos == null || !this.etapaEventos.equals(other.etapaEventos))) {
             return false;
         }
-        if (this.questionsSize != other.questionsSize && (this.questionsSize == null || !this.questionsSize.equals(other.questionsSize))) {
+        if (this.tamanhoQuestoes != other.tamanhoQuestoes && (this.tamanhoQuestoes == null || !this.tamanhoQuestoes.equals(other.tamanhoQuestoes))) {
             return false;
         }
         if (this.questionarios != other.questionarios && (this.questionarios == null || !this.questionarios.equals(other.questionarios))) {
@@ -208,6 +229,5 @@ public class Tarefa {
         }
         return true;
     }
-    
 
 }
