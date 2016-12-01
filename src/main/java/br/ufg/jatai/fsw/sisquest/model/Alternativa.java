@@ -5,20 +5,29 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
+import javax.persistence.*;
+
 /**
  *
  * @author dfranco
  */
-public class Alternativa {
 
+@Entity
+@Table
+
+public class Alternative {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     private String descricao;
     private boolean correto;
     
     /**
      *
      */
-    public Alternativa() {
+    public Alternative() {
         this(null, null, false);
     }
     
@@ -28,7 +37,8 @@ public class Alternativa {
      * @param descricao
      * @param correto
      */
-    public Alternativa(Integer id, String descricao, boolean correto) {
+
+    public Alternative(Integer id, String descricao, boolean correto) {
         this.id = id;
         this.descricao = descricao;
         this.correto = correto;
@@ -102,7 +112,7 @@ public class Alternativa {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Alternativa other = (Alternativa) obj;
+        final Alternative other = (Alternative) obj;
         if (this.correto != other.correto) {
             return false;
         }
