@@ -21,6 +21,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.AjaxThymeleafViewResolver;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 /**
  *
@@ -50,7 +54,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     private static final String PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
 
     private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/views/";
-    private static final String VIEW_RESOLVER_SUFFIX = ".jsp";
+    private static final String VIEW_RESOLVER_SUFFIX = ".xhtml";
 
     private static final String PROPERTY_NAME_HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
     private static final String PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY = "hibernate.ejb.naming_strategy";
@@ -62,13 +66,39 @@ public class AppConfig extends WebMvcConfigurerAdapter {
      *
      * @return
      */
-    @Bean
-    public ViewResolver getViewResolver() {
-        log.info("Configurando View Resolver");
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix(VIEW_RESOLVER_PREFIX);
-        resolver.setSuffix(VIEW_RESOLVER_SUFFIX);
-        return resolver;
+//    @Bean
+//    public ViewResolver getViewResolver() {
+//        log.info("Configurando View Resolver");
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setPrefix(VIEW_RESOLVER_PREFIX);
+//        resolver.setSuffix(VIEW_RESOLVER_SUFFIX);
+//        return resolver;
+//    }
+    @Bean(name = "templateResolver")
+    public ServletContextTemplateResolver getTemplateResolver() {
+        ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
+        templateResolver.setPrefix(VIEW_RESOLVER_PREFIX);
+        templateResolver.setSuffix(VIEW_RESOLVER_SUFFIX);
+        templateResolver.setTemplateMode("XHTML");
+        return templateResolver;
+    }
+
+    @Bean(name = "templateEngine")
+    public SpringTemplateEngine getTemplateEngine() {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(getTemplateResolver());
+        return templateEngine;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Bean(name = "viewResolver")
+    public ThymeleafViewResolver getViewResolver() {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(getTemplateEngine());
+        return viewResolver;
     }
 
     /**
@@ -116,7 +146,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         jpaProterties.put(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO));
         jpaProterties.put(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY));
         jpaProterties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
-        jpaProterties.put("hibernate.hbm2ddl.auto", "create-drop");
+        jpaProterties.put("hibernate.hbm2ddl.auto", "update");
 
         entityManagerFactoryBean.setJpaProperties(jpaProterties);
 
