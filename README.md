@@ -32,6 +32,12 @@ Altere “nomedobanco” pelo nome do banco de dados que deseja criar. Ex.: crea
 Altere usuario pelo nome do usuário que deseja criar e senha pela senha. Ex.: create user 'usuarioteste' identified by 'senhateste';
 4. Conceda acesso do banco para o usuário com o comando “GRANT ALL PRIVILEGES ON nomedobanco.* TO usuario; Altere “nomedobanco” e “usuario” pelo nome do banco de dados e o nome do usuário respectivamentes. Ex.: GRANT ALL PRIVILEGES ON bancoteste.* TO usuarioteste;
 
+
+```
+CREATE DATABASE sisQuest;
+CREATE USER 'dev' IDENTIFIED BY 'ABCe123?';
+GRANT ALL PRIVILEGES ON sisQuest.* TO dev;
+```
 ###2. Dicas para implementação frontend
 
 #####**a)** Chamadas dos CSS e JS (Thursday, 24. November 2016 03:23PM)
