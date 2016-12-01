@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufg.jatai.fsw.sisquest.dao;
+package br.ufg.jatai.fsw.sisquest.service;
 
 /**
  *
  * @author dfranco
  */
-public class QuestionarioDAO {
+public interface QuestaoSevice extends AbrastractService<QuestaoService, Integer> {
 
 }

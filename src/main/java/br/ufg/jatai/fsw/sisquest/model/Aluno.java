@@ -12,7 +12,6 @@ import java.util.List;
  *
  * @author dfranco
  */
-
 @Entity
 @Table
 @SuppressWarnings("PersistenceUnitPresent")
@@ -27,8 +26,6 @@ public class Aluno extends Pessoa {
     @OneToMany
     @ElementCollection
     private List<Turma> turmasCadastradas;
-    
-    
 
     @ManyToMany(mappedBy = "alunos")
     private List<Equipe> equipes;
@@ -107,7 +104,6 @@ public class Aluno extends Pessoa {
     public void setTeams(List<Equipe> teams) {
         this.equipes = teams;
     }
-    
 
     @Override
     public int hashCode() {

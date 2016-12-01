@@ -12,7 +12,6 @@ import javax.persistence.*;
  *
  * @author dfranco
  */
-
 @Entity
 @Table
 public class Alternativa implements Serializable {
@@ -23,27 +22,26 @@ public class Alternativa implements Serializable {
 
     private String descricao;
     private boolean correto;
-    
+
     /**
      *
      */
     public Alternativa() {
         this(null, null, false);
     }
-    
+
     /**
      *
      * @param id
      * @param descricao
      * @param correto
      */
-
     public Alternativa(Integer id, String descricao, boolean correto) {
         this.id = id;
         this.descricao = descricao;
         this.correto = correto;
     }
-    
+
     /**
      *
      * @return
@@ -51,7 +49,7 @@ public class Alternativa implements Serializable {
     public Integer getId() {
         return id;
     }
-    
+
     /**
      *
      * @param id
@@ -59,7 +57,7 @@ public class Alternativa implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     /**
      *
      * @return
@@ -67,7 +65,7 @@ public class Alternativa implements Serializable {
     public String getDescricao() {
         return descricao;
     }
-    
+
     /**
      *
      * @param descricao
@@ -75,7 +73,7 @@ public class Alternativa implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
+
     /**
      *
      * @return
@@ -83,7 +81,7 @@ public class Alternativa implements Serializable {
     public boolean isCorreto() {
         return correto;
     }
-    
+
     /**
      *
      * @param correto
@@ -124,5 +122,5 @@ public class Alternativa implements Serializable {
         }
         return true;
     }
-    
+
 }
