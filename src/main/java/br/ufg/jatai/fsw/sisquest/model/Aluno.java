@@ -14,14 +14,15 @@ import java.util.List;
  */
 
 @Entity
-@Table
-
 public class Aluno extends Pessoa {
 
     @Id
     private String matricula;
 
     private String email;
+
+    @OneToMany
+    @ElementCollection
     private List<Turma> turmasCadastradas;
 
     /**

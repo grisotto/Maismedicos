@@ -23,6 +23,9 @@ public class Questao {
     private Integer id;
 
     private String question;
+
+    @OneToMany
+    @ElementCollection
     private List<Alternativa> alternativas;
 
     /**

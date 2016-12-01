@@ -21,7 +21,11 @@ public class Questionario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne
     private Time time;
+
+    @OneToMany
+    @ElementCollection
     private List<Questao> questoes;
 
     /**

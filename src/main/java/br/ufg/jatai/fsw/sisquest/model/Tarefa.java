@@ -24,10 +24,18 @@ public class Tarefa {
     private Integer id;
 
     private String descricao;
+
+    @ManyToOne
     private Turma turma;
+    @ManyToOne
     private EtapaEvento etapaAtual;
+
+    @ElementCollection
     private List<EtapaEvento> etapaEventos;
+
     private Integer tamanhoQuestoes;
+
+    @ElementCollection
     private List<Questionario> questionarios;
 
     /**

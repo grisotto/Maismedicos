@@ -5,6 +5,9 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
+import com.sun.mail.imap.protocol.ID;
+
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -14,11 +17,19 @@ import java.util.List;
 
 
 public class Time {
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
+
+    @ElementCollection
     private List<Aluno> alunos;
+
     private String senha;
+
+    @ManyToOne
     private Turma turma;
 
     /**

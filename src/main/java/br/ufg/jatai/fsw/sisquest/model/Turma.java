@@ -24,7 +24,10 @@ public class Turma {
     private String nome;
     private String descricao;
 
+    @ElementCollection
     private List<Tarefa> tarefas;
+
+    @ElementCollection
     private List<Time> times;
 
     /**
