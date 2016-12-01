@@ -11,6 +11,6 @@ import br.ufg.jatai.fsw.sisquest.model.Tarefa;
  *
  * @author dfranco
  */
-public interface TarefaService extends AbrastractService<Tarefa, Integer> {
+public interface TarefaService extends AbstractService<Tarefa, Integer> {
 
 }

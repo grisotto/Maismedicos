@@ -11,6 +11,6 @@ import br.ufg.jatai.fsw.sisquest.model.Turma;
  *
  * @author dfranco
  */
-public interface TurmaService extends AbrastractService<Turma, Integer>{
+public interface TurmaService extends AbstractService<Turma, Integer> {
     
 }

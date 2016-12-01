@@ -14,7 +14,7 @@ import java.util.List;
  * @param <T> Genérico
  * @param <ID> Id
  */
-public interface AbrastractService<T extends Object, ID extends Serializable> {
+public interface AbstractService<T extends Object, ID extends Serializable> {
 
     /**
      * 

@@ -9,6 +9,6 @@ package br.ufg.jatai.fsw.sisquest.service;
  *
  * @author dfranco
  */
-public interface QuestaoSevice extends AbrastractService<QuestaoService, Integer> {
+public interface QuestaoSevice extends AbstractService<QuestaoService, Integer> {
 
 }

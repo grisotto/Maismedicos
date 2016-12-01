@@ -11,6 +11,6 @@ import br.ufg.jatai.fsw.sisquest.model.Equipe;
  *
  * @author dfranco
  */
-public interface EquipeService extends AbrastractService<Equipe, Integer>{
+public interface EquipeService extends AbstractService<Equipe, Integer> {
     
 }

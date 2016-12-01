@@ -11,6 +11,6 @@ import br.ufg.jatai.fsw.sisquest.model.Questao;
  *
  * @author dfranco
  */
-public interface  QuestaoService extends AbrastractService<Questao, Integer>{
+public interface  QuestaoService extends AbstractService<Questao, Integer> {
     
 }
