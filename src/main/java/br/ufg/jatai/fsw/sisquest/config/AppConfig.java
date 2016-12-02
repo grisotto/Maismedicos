@@ -16,13 +16,10 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.view.AjaxThymeleafViewResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
@@ -41,7 +38,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 //@SpringBootApplication
 public class AppConfig extends WebMvcConfigurerAdapter {
 
-    private static Logger log = LoggerFactory.getLogger(AppConfig.class.getName());
+    private static final Logger log = LoggerFactory.getLogger(AppConfig.class.getName());
 
     private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
     private static final String PROPERTY_NAME_DATABASE_PASSWORD = "db.password";
@@ -160,13 +157,5 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return transactionManager;
     }
 
-//    @Bean
-//    public MessageSource messageSource() {
-//        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-//
-//        messageSource.setBasename(env.getRequiredProperty(PROPERTY_NAME_MESSAGESOURCE_BASENAME));
-//        messageSource.setUseCodeAsDefaultMessage(Boolean.parseBoolean(env.getRequiredProperty(PROPERTY_NAME_MESSAGESOURCE_USE_CODE_AS_DEFAULT_MESSAGE)));
-//
-//        return messageSource;
-//    }
+    
 }

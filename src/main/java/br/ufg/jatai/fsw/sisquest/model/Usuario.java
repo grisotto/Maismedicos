@@ -29,6 +29,7 @@ public class Usuario implements Serializable {
     @Column(unique = true)
     private String login;
     private String senha;
+    private TipoUsuario tipoUsuario;
 
     public Usuario() {
     }
@@ -96,4 +97,7 @@ public class Usuario implements Serializable {
         return true;
     }
 
+    public enum TipoUsuario {
+        PROFESSOR, GRUPO, Aluno;
+    }
 }
