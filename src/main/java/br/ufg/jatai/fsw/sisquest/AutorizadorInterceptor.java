@@ -15,16 +15,18 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  */
 public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
+//    private UserLogado userLogado;
+
     @Override
     public boolean preHandle(HttpServletRequest request,
             HttpServletResponse response,
             Object controller) throws Exception {
-
+        
         if (request.getSession().getAttribute("usuarioLogado") != null) {
             return true;
         }
 
-        response.sendRedirect("/login?u="+request.getRequestURI());
+        response.sendRedirect("/login?u=" + request.getRequestURI());
         return false;
     }
 }
