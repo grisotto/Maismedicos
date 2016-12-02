@@ -99,9 +99,8 @@
             <type>jar</type>
         </dependency>
         
-        
-        
-        
+
+       
         <!-- LOG4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -129,8 +128,7 @@
             <version>2.5</version>
         </dependency>
         
-        
-        
+   
     </dependencies>
     <build>
         <finalName>SisQuest</finalName>
@@ -158,16 +156,7 @@
                         </arguments>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>org.eclipse.jetty</groupId>
-                    <artifactId>jetty-maven-plugin</artifactId>
-                    <version>9.3.14.v20161028</version>
-                    <configuration>
-                        <configuration>
-                            <scanIntervalSeconds>5</scanIntervalSeconds>
-                        </configuration>
-                    </configuration>
-                </plugin>
+ 
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
