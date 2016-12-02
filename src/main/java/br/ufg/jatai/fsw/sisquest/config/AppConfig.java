@@ -1,5 +1,6 @@
 package br.ufg.jatai.fsw.sisquest.config;
 
+import br.ufg.jatai.fsw.sisquest.AutorizadorInterceptor;
 import java.util.Properties;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -17,6 +18,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -76,6 +78,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
         templateResolver.setPrefix(VIEW_RESOLVER_PREFIX);
         templateResolver.setSuffix(VIEW_RESOLVER_SUFFIX);
+        templateResolver.setCacheable(false);
+
         templateResolver.setTemplateMode("XHTML");
         return templateResolver;
     }
@@ -157,5 +161,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return transactionManager;
     }
 
-    
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new LoggingInterceptor());
+        log.warn("Registrando o Bagulho");
+        registry.addInterceptor(new AutorizadorInterceptor()).addPathPatterns("/app/**");
+    }
 }

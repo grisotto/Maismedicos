@@ -31,14 +31,10 @@ public class HomeController {
         return "/home/index";
     }
 
-    @RequestMapping(value = "/sobre")
-    public String sobre() {
-        return "/home/sobre";
+    @RequestMapping(value = "/login")
+    public String login() {
+        return "/home/login";
     }
 
-    @RequestMapping(value = "/entrar")
-    public String entrar() {
-        return "/home/entrar";
-    }
 
 }
