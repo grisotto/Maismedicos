@@ -5,11 +5,9 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
-import java.io.Serializable;
+import java.util.List;
+import javax.persistence.*;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 /**
  *
@@ -18,24 +16,38 @@ import javax.persistence.Table;
 @Entity
 @Table
 @SuppressWarnings("PersistenceUnitPresent")
-public class Professor extends Pessoa implements Serializable {
+public class Professor extends Pessoa {
 
-    @OneToOne
+    @Column(unique = true)
+    private String email;
+
+    @ManyToOne
     private Usuario usuario;
 
-    private String email;
+    @OneToMany(mappedBy = "professor")
+    private List<Turma> turmas;
+
+    public Professor(String email, Usuario usuario) {
+        this.email = email;
+        this.usuario = usuario;
+    }
 
     public Professor() {
     }
 
-    public Professor(Usuario usuario, String email) {
-        this.usuario = usuario;
-        this.email = email;
+    /**
+     *
+     * @return
+     */
+    public String getEmail() {
+        return email;
     }
 
-    public Professor(Usuario usuario, String email, Integer id, String nome) {
-        super(id, nome);
-        this.usuario = usuario;
+    /**
+     *
+     * @param email
+     */
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -47,19 +59,11 @@ public class Professor extends Pessoa implements Serializable {
         this.usuario = usuario;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.usuario);
-        hash = 37 * hash + Objects.hashCode(this.email);
+        int hash = 5;
+        hash = 43 * hash + Objects.hashCode(this.email);
+        hash = 43 * hash + Objects.hashCode(this.usuario);
         return hash;
     }
 
@@ -82,6 +86,14 @@ public class Professor extends Pessoa implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
     }
 
 }

@@ -9,7 +9,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -23,24 +24,20 @@ import javax.persistence.Table;
 public class Usuario implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(unique = true)
     private String login;
-
     private String senha;
-
-    @Enumerated
     private TipoUsuario tipoUsuario;
-   
 
     public Usuario() {
     }
 
-    public Usuario(Integer id, String login, String senha, TipoUsuario tipoUsuario) {
+    public Usuario(Integer id, String login, String senha) {
         this.id = id;
         this.login = login;
         this.senha = senha;
-        this.tipoUsuario = tipoUsuario;
     }
 
     public Integer getId() {
@@ -67,21 +64,12 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    public TipoUsuario getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        hash = 67 * hash + Objects.hashCode(this.login);
-        hash = 67 * hash + Objects.hashCode(this.senha);
-        hash = 67 * hash + Objects.hashCode(this.tipoUsuario);
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.login);
+        hash = 29 * hash + Objects.hashCode(this.senha);
         return hash;
     }
 
@@ -106,14 +94,10 @@ public class Usuario implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (this.tipoUsuario != other.tipoUsuario) {
-            return false;
-        }
         return true;
     }
 
     public enum TipoUsuario {
-        GRUPO, PROFESSOR, ALUNO
+        PROFESSOR, GRUPO, Aluno;
     }
-
 }
