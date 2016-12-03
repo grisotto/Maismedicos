@@ -79,9 +79,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
         templateResolver.setPrefix(VIEW_RESOLVER_PREFIX);
         templateResolver.setSuffix(VIEW_RESOLVER_SUFFIX);
+        templateResolver.setTemplateMode("HTML5");
         templateResolver.setCacheable(false);
 
-        templateResolver.setTemplateMode("XHTML");
+
         return templateResolver;
     }
 
