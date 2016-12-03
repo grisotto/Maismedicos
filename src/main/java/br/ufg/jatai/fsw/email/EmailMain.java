@@ -26,14 +26,12 @@ public class EmailMain {
 
     public void sendAssincrono(Mensagem m) throws MessagingException {
 
-        MimeMessage mensagem = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mensagem, true);
 
-        helper.setTo(m.getDestinatario());
-        helper.setSubject(m.getAssunto());
-        helper.setText(m.getCorpo(),true);
+    }
 
-        javaMailSender.send(mensagem);
+    public void sendSincrono(Mensagem m) throws MessagingException {
+
+
 
     }
     
