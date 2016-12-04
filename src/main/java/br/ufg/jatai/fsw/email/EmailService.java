@@ -8,6 +8,7 @@ package br.ufg.jatai.fsw.email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
@@ -20,17 +21,19 @@ import java.io.File;
  */
 
 @Component
-public class EmailMain {
+public class EmailService {
 
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void sendAssincrono(Mensagem m) throws MessagingException {
-
-
+    public EmailService(JavaMailSender javaMailSender){
+        this.javaMailSender = javaMailSender;
     }
 
-    public void sendSincrono(Mensagem m) throws MessagingException {
+    @Async
+    public void enviaEmail(Mensagem m) throws MessagingException, InterruptedException {
+
+        Thread.sleep(1000);
 
         MimeMessage mensagem = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mensagem, true);
