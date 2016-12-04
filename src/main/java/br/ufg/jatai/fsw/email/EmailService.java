@@ -23,9 +23,10 @@ import java.io.File;
 @Component
 public class EmailService {
 
-    @Autowired
+
     private JavaMailSender javaMailSender;
 
+    @Autowired
     public EmailService(JavaMailSender javaMailSender){
         this.javaMailSender = javaMailSender;
     }
