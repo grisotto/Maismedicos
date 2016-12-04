@@ -38,16 +38,16 @@ public class HomeController {
         return "/home/index";
     }
 
-    @RequestMapping(value = "/login")
-    public String login() {
-        return "/home/login";
-    }
-
-    @RequestMapping(value = "/entrar")
-    public String entrar(String nome, HttpSession session, HttpServletResponse response) throws IOException {
-        session.setAttribute("usuarioLogado", new Usuario());
-        response.sendRedirect("/app");
-        return "/app/dash";
-    }
+//    @RequestMapping(value = "/login")
+//    public String login() {
+//        return "/home/login";
+//    }
+//
+//    @RequestMapping(value = "/entrar")
+//    public String entrar(String nome, HttpSession session, HttpServletResponse response) throws IOException {
+//        session.setAttribute("usuarioLogado", new Usuario());
+//        response.sendRedirect("/app");
+//        return "/app/dash";
+//    }
 
 }
