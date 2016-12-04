@@ -5,6 +5,8 @@
  */
 package br.ufg.jatai.fsw.sisquest.controller;
 
+import br.ufg.jatai.fsw.sisquest.annotations.Permissao;
+import br.ufg.jatai.fsw.sisquest.model.Usuario;
 import java.io.Serializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +26,7 @@ public class TurmaController implements Serializable {
      *
      * @return
      */
+    @Permissao(Usuario.TipoUsuario.PROFESSOR)
     @RequestMapping(value = "/app/turma")
     public String turmaHome() {
         return "/app/turma/home";

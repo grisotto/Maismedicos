@@ -8,6 +8,7 @@ package br.ufg.jatai.fsw.sisquest.controller;
 import br.ufg.jatai.fsw.sisquest.model.Usuario;
 import br.ufg.jatai.fsw.sisquest.service.UsuarioService;
 import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
@@ -40,8 +41,11 @@ public class LoginController {
 
     @PostMapping(value = "/login")
     private String login(String login, String senha, HttpSession session, HttpServletResponse response,
-            Model model) throws IOException {
+            Model model, HttpServletRequest request) throws IOException {
+        String parameter = request.getParameter("u");
         log.error("Enrou no postLogin");
+        log.error("parameter: " + parameter);
+
         Usuario usuarioByLogin = service.usuarioByLogin(login);
 
         if (usuarioByLogin != null) {
