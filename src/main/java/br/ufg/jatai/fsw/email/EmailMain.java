@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
 
 /**
  *
@@ -31,23 +32,19 @@ public class EmailMain {
 
     public void sendSincrono(Mensagem m) throws MessagingException {
 
-        int qtdDestinatarios = m.getDestinatarios().size();
-        int qtdBcc = m.getBcc().size();
-        int qtdAnexos = m.getAnexos().size();
-
         MimeMessage mensagem = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mensagem, true);
 
-        for (int i = 0; i < qtdDestinatarios; i++){
-            helper.addTo(m.getDestinatarios().get(i));
+        for (String destinatario : m.getDestinatarios()){
+            helper.addTo(destinatario);
         }
 
-        for (int i = 0; i < qtdBcc; i++){
-            helper.addBcc(m.getBcc().get(i));
+        for (String bcc : m.getBcc()){
+            helper.addBcc(bcc);
         }
 
-        for (int i = 0; i < qtdAnexos; i++){
-            helper.addAttachment(m.getAnexos().get(i).getName(),m.getAnexos().get(i));
+        for (File anexo : m.getAnexos()){
+            helper.addAttachment(anexo.getName(), anexo);
         }
 
         helper.setSubject(m.getAssunto());
