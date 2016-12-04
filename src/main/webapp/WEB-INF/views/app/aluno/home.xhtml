@@ -18,24 +18,27 @@ and open the template in the editor.
             <h1 class="page-header">Visualizando Alunos</h1>
 
             <div class="alunoslist" th:unless="${#lists.isEmpty(allAlunos)}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Matricula</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="sb : ${allAlunos}">
+                                <td th:text="${{sb.nome}}">13/01/2011</td>
+                                <td th:text="${{sb.matricula}}">13/01/2011</td>
+                                <td th:text="${sb.email}">yes</td>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th th:text="#{alunoRepository.matricula}">Matricula</th>
-                            <th th:text="#{alunoRepository.email}">Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="sb : ${allAlunos}">
-                            <td th:text="${{sb.matricula}}">13/01/2011</td>
-                            <td th:text="${sb.email}">yes</td>
 
-                            
-                        </tr>
-                    </tbody>
+                            </tr>
+                        </tbody>
 
-                </table>
+                    </table>
+                </div>
 
             </div>
 
