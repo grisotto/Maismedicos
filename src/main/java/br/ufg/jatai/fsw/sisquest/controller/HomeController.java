@@ -5,12 +5,16 @@
  */
 package br.ufg.jatai.fsw.sisquest.controller;
 
+import br.ufg.jatai.fsw.sisquest.model.Usuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import br.ufg.jatai.fsw.sisquest.repository.PessoaRepository;
+import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,6 +27,9 @@ public class HomeController {
 
     @Autowired
     private PessoaRepository p;
+//    
+//    @Autowired
+//    private UserLogado logado;
 
     @RequestMapping("/")
     public String home() {
@@ -31,14 +38,16 @@ public class HomeController {
         return "/home/index";
     }
 
-    @RequestMapping(value = "/sobre")
-    public String sobre() {
-        return "/home/sobre";
-    }
-
-    @RequestMapping(value = "/entrar")
-    public String entrar() {
-        return "/home/entrar";
-    }
+//    @RequestMapping(value = "/login")
+//    public String login() {
+//        return "/home/login";
+//    }
+//
+//    @RequestMapping(value = "/entrar")
+//    public String entrar(String nome, HttpSession session, HttpServletResponse response) throws IOException {
+//        session.setAttribute("usuarioLogado", new Usuario());
+//        response.sendRedirect("/app");
+//        return "/app/dash";
+//    }
 
 }
