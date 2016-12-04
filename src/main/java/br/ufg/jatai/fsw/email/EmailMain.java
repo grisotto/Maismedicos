@@ -31,7 +31,29 @@ public class EmailMain {
 
     public void sendSincrono(Mensagem m) throws MessagingException {
 
+        int qtdDestinatarios = m.getDestinatarios().size();
+        int qtdBcc = m.getBcc().size();
+        int qtdAnexos = m.getAnexos().size();
 
+        MimeMessage mensagem = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mensagem, true);
+
+        for (int i = 0; i < qtdDestinatarios; i++){
+            helper.addTo(m.getDestinatarios().get(i));
+        }
+
+        for (int i = 0; i < qtdBcc; i++){
+            helper.addBcc(m.getBcc().get(i));
+        }
+
+        for (int i = 0; i < qtdAnexos; i++){
+            helper.addAttachment(m.getAnexos().get(i).getName(),m.getAnexos().get(i));
+        }
+
+        helper.setSubject(m.getAssunto());
+        helper.setText(m.getCorpo());
+
+        javaMailSender.send(mensagem);
 
     }
     
