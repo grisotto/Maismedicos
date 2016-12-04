@@ -47,12 +47,12 @@ and open the template in the editor.
                     <a class="navbar-brand" href="#">Project name</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <form class="navbar-form navbar-right" role="form">
+                    <form class="navbar-form navbar-right" role="form"   method="POST" action="/login">
                         <div class="form-group">
-                            <input type="text" placeholder="Email" class="form-control"/>
+                            <input type="text" placeholder="Email" name="login" class="form-control"/>
                         </div>
                         <div class="form-group">
-                            <input type="password" placeholder="Password" class="form-control"/>
+                            <input type="password" placeholder="Password" name="senha" class="form-control"/>
                         </div>
                         <button type="submit" class="btn btn-success">Sign in</button>
                     </form>
