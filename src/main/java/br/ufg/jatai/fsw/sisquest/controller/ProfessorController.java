@@ -9,6 +9,7 @@ package br.ufg.jatai.fsw.sisquest.controller;
 import java.util.List;
 
 import br.ufg.jatai.fsw.sisquest.model.Professor;
+import br.ufg.jatai.fsw.sisquest.service.ProfessorService;
 import java.io.Serializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,12 +32,12 @@ public class ProfessorController implements Serializable {
     private static Logger log = LoggerFactory.getLogger(TeamController.class.getName());
 
     @Autowired
-    private ProfessorServiceImpl ProfessorService;
+    private ProfessorService service;
     
 
     @ModelAttribute("allProfessores")
     public List<Professor> populateVisualizarProfessor() {
-        return this.ProfessorService.findAll();
+        return this.service.findAll();
 
     }
 
@@ -53,7 +54,7 @@ public class ProfessorController implements Serializable {
              model.addAttribute("professor", professor); 
             return "app/professor";
         }
-        this.ProfessorService.inserir(professor);
+        this.service.inserir(professor);
         model.clear();
         return "redirect:/app/professor";
 

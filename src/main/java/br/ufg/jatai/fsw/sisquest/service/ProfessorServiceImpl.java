@@ -8,12 +8,14 @@ package br.ufg.jatai.fsw.sisquest.service;
 import br.ufg.jatai.fsw.sisquest.model.Professor;
 import br.ufg.jatai.fsw.sisquest.repository.ProfessorRepository;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProfessorServiceImpl implements ProfessorService {
 
+    @Autowired
     public ProfessorRepository repository;
 
     @Override

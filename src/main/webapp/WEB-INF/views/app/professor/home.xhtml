@@ -14,58 +14,11 @@ and open the template in the editor.
     </head>
     <div th:fragment="content">
 
-<!--        <div class="col-lg-12">
+        <div class="col-lg-12">
             <h1 class="page-header">Cadastro de Professores</h1>
 
-            <form action="#" th:action="@{/app/professor/home}" th:object="${professor}" method="post">
-
-                <fieldset>
-
-                    <ul th:if="${#fields.hasErrors('*')}" class="errorlist">
-                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Entrada inválida</li>
-                    </ul>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="col-md-4">
-                                <label for="nome">
-
-
-                                </label>
-                                <input type="text" placeholder="Nome Completo" required ="true" th:field="*{nome}" class="form-control" th:errorclass="fieldError" />
-                            </div>
-
-                            <div class="col-md-3">
-                                <label for="matricula">
-
-
-                                </label>
-                                <input type="text" placeholder="Matrícula" required ="true" th:field="*{matricula}" class="form-control" th:errorclass="fieldError"   />
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="email">
-
-
-                                </label>
-                                <input type="email" placeholder="E-mail" required ="true" th:field="*{email}" class="form-control" th:errorclass="fieldError"/>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="submit">
-                                    <button type="submit" class="btn btn-primary btn-lg"   name="save" >Adicionar Professor</button>    
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </fieldset>
-
-
-
-
-
-            </form>
-        </div>-->
+         
+        </div>
 
         <div class="col-lg-12">
             <h1 class="page-header">Visualizando Professores</h1>

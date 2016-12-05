@@ -32,9 +32,9 @@ public class AutorizacaoInterceptor extends HandlerInterceptorAdapter {
         HandlerMethod hm = (HandlerMethod) handler;
         Method method = hm.getMethod();
         if (method.getDeclaringClass().isAnnotationPresent(Controller.class)) {
-            log.error("Eu entrei aqui e tenho anotações: " + Arrays.toString(method.getAnnotations()));
+//            log.error("Eu entrei aqui e tenho anotações: " + Arrays.toString(method.getAnnotations()));
             if (method.isAnnotationPresent(Permissao.class)) {
-                log.error("Ele entrou aqui como: " + Arrays.toString(method.getAnnotation(Permissao.class).value()));
+//                log.error("Ele entrou aqui como: " + Arrays.toString(method.getAnnotation(Permissao.class).value()));
                 System.out.println(Arrays.toString(method.getAnnotation(Permissao.class).value()));
                 Usuario u = (Usuario) request.getSession().getAttribute("usuarioLogado");
                 if (Arrays.asList(method.getAnnotation(Permissao.class).value()).contains(u.getTipoUsuario())) {
@@ -47,7 +47,7 @@ public class AutorizacaoInterceptor extends HandlerInterceptorAdapter {
             } 
         }
 
-        log.error("Ele passou aqui");
+//        log.error("Ele passou aqui");
         return true;
     }
 }
