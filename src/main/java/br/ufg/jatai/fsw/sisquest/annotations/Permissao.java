@@ -15,8 +15,8 @@ import java.lang.annotation.Target;
  *
  * @author dyeimys
  */
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
+@Target(value = {ElementType.METHOD, ElementType.TYPE})
+@Retention(value = RetentionPolicy.RUNTIME)
 public @interface Permissao {
 
     Usuario.TipoUsuario[] value();

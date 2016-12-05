@@ -21,7 +21,7 @@ public class Professor extends Pessoa {
     @Column(unique = true)
     private String email;
 
-    @ManyToOne
+    @OneToOne
     private Usuario usuario;
 
     @OneToMany(mappedBy = "professor")

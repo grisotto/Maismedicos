@@ -13,7 +13,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  *
  * @author dfranco
  */
-public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
+public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 //    private UserLogado userLogado;
 
