@@ -5,10 +5,10 @@
  */
 package br.ufg.jatai.fsw.sisquest.controller;
 
-
 import java.util.List;
 
 import br.ufg.jatai.fsw.sisquest.model.Professor;
+import br.ufg.jatai.fsw.sisquest.model.Usuario;
 import br.ufg.jatai.fsw.sisquest.service.ProfessorService;
 import java.io.Serializable;
 import org.slf4j.Logger;
@@ -28,36 +28,38 @@ import org.springframework.validation.BindingResult;
  */
 @Controller
 public class ProfessorController implements Serializable {
-
-    private static Logger log = LoggerFactory.getLogger(TeamController.class.getName());
-
+    
+    private static Logger log = LoggerFactory.getLogger(ProfessorController.class.getName());
+    
     @Autowired
     private ProfessorService service;
     
-
     @ModelAttribute("allProfessores")
     public List<Professor> populateVisualizarProfessor() {
         return this.service.findAll();
-
+        
     }
-
+    
     @RequestMapping(value = "/app/professor")
     public String professorHome(final Professor professor) {
         return "/app/professor/home";
     }
-
-   
+    
     @RequestMapping(value = "/app/professor/home", params = {"save"})
     public String saveProfessor(@Valid final Professor professor, final BindingResult bindingResult, final ModelMap model) {
         
         if (bindingResult.hasErrors()) {
-             model.addAttribute("professor", professor); 
+            model.addAttribute("professor", professor);            
             return "app/professor";
         }
+        professor.getUsuario().setTipoUsuario(Usuario.TipoUsuario.PROFESSOR);
+        professor.getUsuario().setSenha("123");
+        log.error(professor.toString());
+
         this.service.inserir(professor);
-        model.clear();
+//        model.clear();
         return "redirect:/app/professor";
-
+        
     }
-
+    
 }

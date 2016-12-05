@@ -21,7 +21,7 @@ public class Professor extends Pessoa {
     @Column(unique = true)
     private String email;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
     @OneToMany(mappedBy = "professor")
@@ -95,5 +95,11 @@ public class Professor extends Pessoa {
     public void setTurmas(List<Turma> turmas) {
         this.turmas = turmas;
     }
+
+    @Override
+    public String toString() {
+        return "Professor{" + "email=" + email + ", usuario=" + usuario + ", turmas=" + turmas + '}';
+    }
+    
 
 }

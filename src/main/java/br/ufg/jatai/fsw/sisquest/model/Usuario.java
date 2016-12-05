@@ -122,6 +122,11 @@ public class Usuario implements Serializable {
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", login=" + login + ", senha=" + senha + ", tipoUsuario=" + tipoUsuario + ", professor=" + professor + '}';
+    }
     
     
     
