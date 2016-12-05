@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="fragments/basetemplate :: page">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <div th:fragment="content">
+
+<!--        <div class="col-lg-12">
+            <h1 class="page-header">Cadastro de Professores</h1>
+
+            <form action="#" th:action="@{/app/professor/home}" th:object="${professor}" method="post">
+
+                <fieldset>
+
+                    <ul th:if="${#fields.hasErrors('*')}" class="errorlist">
+                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Entrada inválida</li>
+                    </ul>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-md-4">
+                                <label for="nome">
+
+
+                                </label>
+                                <input type="text" placeholder="Nome Completo" required ="true" th:field="*{nome}" class="form-control" th:errorclass="fieldError" />
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="matricula">
+
+
+                                </label>
+                                <input type="text" placeholder="Matrícula" required ="true" th:field="*{matricula}" class="form-control" th:errorclass="fieldError"   />
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="email">
+
+
+                                </label>
+                                <input type="email" placeholder="E-mail" required ="true" th:field="*{email}" class="form-control" th:errorclass="fieldError"/>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="submit">
+                                    <button type="submit" class="btn btn-primary btn-lg"   name="save" >Adicionar Professor</button>    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+
+
+
+
+            </form>
+        </div>-->
+
+        <div class="col-lg-12">
+            <h1 class="page-header">Visualizando Professores</h1>
+
+            <div class="alunoslist" th:unless="${#lists.isEmpty(allProfessores)}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                             
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="sb : ${allProfessores}">
+                                <td th:text="${{sb.nome}}"></td>
+                                <td th:text="${sb.email}"></td>
+
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+</html>

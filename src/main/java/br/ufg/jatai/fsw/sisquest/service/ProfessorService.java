@@ -5,13 +5,13 @@
  */
 package br.ufg.jatai.fsw.sisquest.service;
 
-import br.ufg.jatai.fsw.sisquest.model.Aluno;
-import br.ufg.jatai.fsw.sisquest.model.Equipe;
+import br.ufg.jatai.fsw.sisquest.model.Usuario;
+import br.ufg.jatai.fsw.sisquest.model.Professor;
 
 /**
  *
  * @author dfranco
  */
-public interface ProfessorService extends AbstractService<Aluno, Integer> {
+public interface ProfessorService extends AbstractService<Professor, Integer> {
     
 }
