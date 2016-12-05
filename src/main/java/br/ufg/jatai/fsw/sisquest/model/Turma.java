@@ -35,6 +35,10 @@ public class Turma implements Serializable {
 
     @ManyToOne
     private Professor professor;
+    
+    
+    @ManyToMany
+    private List<Aluno> alunos;
 
     /**
      *
@@ -177,6 +181,22 @@ public class Turma implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
 
 }

@@ -7,6 +7,7 @@ package br.ufg.jatai.fsw.sisquest.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -23,12 +24,13 @@ public class Aluno extends Pessoa {
     @Column(unique = true)
     private String email;
 
-    @OneToMany
-    @ElementCollection
-    private List<Turma> turmasCadastradas;
+    
+    
 
     @ManyToMany(mappedBy = "alunos")
     private List<Equipe> equipes;
+    @ManyToMany(mappedBy = "alunos")
+    private List<Turma> turmas;
 
     /**
      *
@@ -37,17 +39,9 @@ public class Aluno extends Pessoa {
 
     }
 
-    /**
-     *
-     * @param matricula
-     * @param email
-     * @param turmasCadastradas
-     */
-    public Aluno(String matricula, String email, List<Turma> turmasCadastradas) {
-        this.matricula = matricula;
-        this.email = email;
-        this.turmasCadastradas = turmasCadastradas;
-    }
+  
+   
+    
 
     /**
      *
@@ -81,21 +75,7 @@ public class Aluno extends Pessoa {
         this.email = email;
     }
 
-    /**
-     *
-     * @return
-     */
-    public List<Turma> getTurmasCadastradas() {
-        return turmasCadastradas;
-    }
-
-    /**
-     *
-     * @param turmasCadastradas
-     */
-    public void setTurmasCadastradas(List<Turma> turmasCadastradas) {
-        this.turmasCadastradas = turmasCadastradas;
-    }
+   
 
     public List<Equipe> getTeams() {
         return equipes;
@@ -107,18 +87,16 @@ public class Aluno extends Pessoa {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + (this.matricula != null ? this.matricula.hashCode() : 0);
-        hash = 71 * hash + (this.email != null ? this.email.hashCode() : 0);
-        hash = 71 * hash + (this.turmasCadastradas != null ? this.turmasCadastradas.hashCode() : 0);
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.matricula);
+        hash = 29 * hash + Objects.hashCode(this.email);
+        hash = 29 * hash + Objects.hashCode(this.equipes);
+        hash = 29 * hash + Objects.hashCode(this.turmas);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -126,16 +104,20 @@ public class Aluno extends Pessoa {
             return false;
         }
         final Aluno other = (Aluno) obj;
-        if ((this.matricula == null) ? (other.matricula != null) : !this.matricula.equals(other.matricula)) {
+        if (!Objects.equals(this.matricula, other.matricula)) {
             return false;
         }
-        if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
+        if (!Objects.equals(this.email, other.email)) {
             return false;
         }
-        if (this.turmasCadastradas != other.turmasCadastradas && (this.turmasCadastradas == null || !this.turmasCadastradas.equals(other.turmasCadastradas))) {
+        if (!Objects.equals(this.equipes, other.equipes)) {
+            return false;
+        }
+        if (!Objects.equals(this.turmas, other.turmas)) {
             return false;
         }
         return true;
     }
 
+   
 }
