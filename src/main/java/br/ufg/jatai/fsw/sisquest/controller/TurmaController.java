@@ -21,6 +21,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,8 +55,10 @@ public class TurmaController implements Serializable {
 
     @RequestMapping(value = "/app/turma/home", params = {"save"})
     public String saveProfessor(@Valid final Turma turma, final BindingResult bindingResult, final ModelMap model) {
+        bindingResult.addError(new ObjectError("Deu erro", "Deu erro"));
         if (bindingResult.hasErrors()) {
             model.addAttribute("turma", turma);
+            
             return "app/turma";
         }
 

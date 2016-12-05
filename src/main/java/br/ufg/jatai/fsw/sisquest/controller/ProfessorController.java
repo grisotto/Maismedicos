@@ -21,6 +21,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -45,12 +47,12 @@ public class ProfessorController implements Serializable {
         return "/app/professor/home";
     }
     
-    @RequestMapping(value = "/app/professor/home", params = {"save"})
+    @PostMapping(value = "/app/professor", params = {"save"})
     public String saveProfessor(@Valid final Professor professor, final BindingResult bindingResult, final ModelMap model) {
-        
+//        bindingResult.addError(new FieldError("Professor", "professor.usuario.senha", "Deu merda"));
         if (bindingResult.hasErrors()) {
             model.addAttribute("professor", professor);            
-            return "app/professor";
+            return "/app/professor/home";
         }
         professor.getUsuario().setTipoUsuario(Usuario.TipoUsuario.PROFESSOR);
         professor.getUsuario().setSenha("123");
