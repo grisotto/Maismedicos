@@ -55,12 +55,12 @@ public class AlunoController implements Serializable {
      * @param model
      * @return 
      */
-    @RequestMapping(value = "/app/aluno/home", params = {"save"})
+    @RequestMapping(value = "/app/aluno", params = {"save"})
     public String saveAluno(@ModelAttribute("aluno") @Valid final Aluno aluno, final BindingResult bindingResult, final ModelMap model) {
         
         if (bindingResult.hasErrors()) {
              model.addAttribute("aluno", aluno); 
-            return "app/aluno";
+            return "/app/aluno/home";
         }
         this.AlunoService.inserir(aluno);
         model.clear();
