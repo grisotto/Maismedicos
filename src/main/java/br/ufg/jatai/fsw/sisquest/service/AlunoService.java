@@ -10,7 +10,7 @@ import br.ufg.jatai.fsw.sisquest.model.Equipe;
 
 /**
  *
- * @author dfranco
+ * @author vilela
  */
 public interface AlunoService extends AbstractService<Aluno, Integer> {
     

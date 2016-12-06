@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
- * @author dfranco
+ * @author vilela
  */
 public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
 
