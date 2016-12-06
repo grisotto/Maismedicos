@@ -5,10 +5,24 @@
  */
 package br.ufg.jatai.fsw.sisquest.facade;
 
+import br.ufg.jatai.fsw.sisquest.model.Equipe;
+
 /**
  *
  * @author dfranco
  */
 public class TeamFacade {
+
+    //Criar Grupo
+    public void criarGrupo(Equipe e) {
+        //Salvar Grupo
+        
+        
+        //Enviar email para todos do grupo com a senha
+        
+        
+        
+        
+    }
 
 }

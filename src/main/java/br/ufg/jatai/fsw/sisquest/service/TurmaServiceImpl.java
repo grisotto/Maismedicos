@@ -10,11 +10,10 @@ import br.ufg.jatai.fsw.sisquest.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 
-/**
- *
- * @author vilela
- */
+
+@Service
 public class TurmaServiceImpl implements TurmaService {
 
     @Autowired

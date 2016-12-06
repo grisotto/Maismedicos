@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,7 +15,8 @@ import java.util.List;
  */
 @Entity
 @Table
-public class Turma {
+@SuppressWarnings("PersistenceUnitPresent")
+public class Turma implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,12 +25,20 @@ public class Turma {
     private String nome;
     private String descricao;
 
-    @ElementCollection
+//    @ElementCollection
     @OneToMany(mappedBy = "turma")
     private List<Tarefa> tarefas;
 
-    @ElementCollection
+//    @ElementCollection
+    @OneToMany
     private List<Equipe> times;
+
+    @ManyToOne
+    private Professor professor;
+    
+    
+    @ManyToMany
+    private List<Aluno> alunos;
 
     /**
      *
@@ -171,6 +181,22 @@ public class Turma {
             return false;
         }
         return true;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
 
 }

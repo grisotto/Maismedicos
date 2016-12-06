@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="fragments/basetemplate :: page">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <div th:fragment="content">
+
+        <div class="col-lg-12">
+            <h1 class="page-header">Visualizando Turmas</h1>
+
+            <div class="col-lg-4">
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-pencil fa-fw"></i>Inserir Turma
+                    </div>
+                    <form action="#" th:action="@{/app/turma/home}" th:object="${turma}" method="post">
+
+                        <div class="panel-body">
+                            <fieldset>
+
+                                <!-- Form Name -->
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="control-label" for="nome">Nome</label>  
+                                    <input id="nome" name="nome" placeholder="Nome da Turma (POO 2016)" class="form-control input-md" required="" type="text"/>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="control-label" for="descricao">Descrição</label>  
+                                    <textarea id="descricao" name="descricao" required="" placeholder="" class="form-control input-md" type="text"/>
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+
+                        <!-- /.panel-body -->
+                        <div class="panel-footer  clearfix">
+                            <input class="btn btn-info pull-right" type="submit" name="save"  value="Salvar" />
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+            <div class="col-lg-8">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <i class="fa fa-list fa-fw"></i>Turmas Cadastradas
+                    </div>
+                    <div class="panel-body">
+
+
+                        <table class="table table-condensed table-striped">
+                            <thead>
+                                <tr>
+                                    <td style="width:20% ">Nome</td>
+                                    <td>Descricao</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:if="${allTurmas.empty}">
+                                    <td colspan="2">Não existem turmas cadastrados</td>
+                                </tr>
+                                <tr th:each="t : ${allTurmas}">
+                                    <td th:text="${t.nome}">1</td>
+                                    <td th:text="${t.descricao}">1</td>
+                                    <td>
+                                            <a  class="btn btn-success btn-sm "  th:href="@{/app/turma/}+${{t.id}}" >
+                                                    <span class="fa fa-send"> </span>
+                                            </a>
+
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</html>

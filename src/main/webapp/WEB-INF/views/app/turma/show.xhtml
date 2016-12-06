@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="fragments/basetemplate :: page">
+
+
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <div th:fragment="content">
+            <h1 class="page-header"> Turma: <span th:text="${{turma.nome}}"></span></h1>
+
+            <div class="col-md-12">
+
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <i class="fa fa-info-circle fa-fw"></i>Info
+                    </div>
+                    <div class="panel-body">
+                        <p class="col-md-3">
+                            <b>Nome:</b><span th:text="${{turma.nome}}"></span>
+
+                        </p>
+                        <p class="col-md-3">
+                            <b>Descricao:</b><span th:text="${{turma.descricao}}"></span>
+
+                        </p >
+                        <p class="col-md-3">
+                            <b>Alunos </b><span th:text="0" > </span>
+
+                        </p>
+                        <p class="col-md-3">
+                            <b>Tarefas:  </b><span th:text="0" > </span>
+
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+
+                    <div class="panel-heading">
+                        <i class="fa fa-users fa-fw"></i>Alunos
+
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-lg-12"> Aluno</label>
+                            <div class=" col-md-10">
+                                <select class="form-control" id="aluno" >
+
+                                    <option th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
+
+                                </select>
+                            </div>
+
+                            <a class="btn btn-default  col-md-1 fa fa-save fa-2x"></a>
+
+                            <hr/>
+                            <hr/>
+
+                        </div>
+                        <table class="table table-condensed table-striped">
+                            <thead>
+                                <tr>
+                                    <td style="width:20% ">Nome</td>
+                                    <td style="width:20% ">Qnr Times</td>
+                                    <td style="width:20% ">Status</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3">Turma sem Alunos</td>
+                                </tr>
+<!--                                <tr data-th-each="a : ${alunos}">
+                                    <td th:text="${a.nome}">1</td>
+                                </tr>-->
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+
+                    <div class="panel-heading">
+                        <i class="fa fa-tasks fa-fw"></i>Tarefas
+
+                    </div>
+
+                    <div class="panel-body">
+
+                        <table class="table table-condensed table-striped">
+                            <thead>
+                                <tr>
+                                    <td style="">#</td>
+                                    <td style="">Situação</td>
+                                    <td style="">Questionarios</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3">Turma sem tarefas</td>
+                                </tr>
+<!--                                <tr data-th-each="a : ${alunos}">
+                                    <td th:text="${a.nome}">1</td>
+                                </tr>-->
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>
