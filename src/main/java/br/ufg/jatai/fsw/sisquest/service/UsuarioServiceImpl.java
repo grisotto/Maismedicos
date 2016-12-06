@@ -17,10 +17,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     public UsuarioRepository repository;
 
-        @Override
-        public Usuario usuarioByLogin(String login) {
-            return repository.usuarioByLogin(login);
-        }
+    @Override
+    public Usuario usuarioForAuth(String login, String senha) {
+        return repository.userForAuth(login, senha);
+    }
 
     @Override
     public Usuario inserir(Usuario entidade) {

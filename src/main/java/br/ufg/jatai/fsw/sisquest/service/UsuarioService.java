@@ -12,5 +12,5 @@ import br.ufg.jatai.fsw.sisquest.model.Usuario;
  * @author dfranco
  */
 public interface UsuarioService extends AbstractService<Usuario, Integer> {
-    public Usuario usuarioByLogin(String login);
+    public Usuario usuarioForAuth(String login, String senha);
 }
