@@ -13,6 +13,9 @@ and open the template in the editor.
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+
     </head>
     <body>
         <div th:fragment="content">
@@ -20,27 +23,39 @@ and open the template in the editor.
 
             <div class="col-md-12">
 
-                <div class="panel panel-green">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <i class="fa fa-info-circle fa-fw"></i>Info
+                        <span class="panel-title">
+                            <i class="fa fa-info-circle fa-fw"></i>Info
+
+                        </span>
                     </div>
                     <div class="panel-body">
-                        <p class="col-md-3">
-                            <b>Nome:</b><span th:text="${{turma.nome}}"></span>
+                        <div class="form-inline">
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="nome">Nome:</label>
+                                <span class="form-control-static" th:text="${{turma.nome}}"></span>
 
-                        </p>
-                        <p class="col-md-3">
-                            <b>Descricao:</b><span th:text="${{turma.descricao}}"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label " for="desc">Descrição:</label>
+                                <span class="form-control-static" th:text="${{turma.descricao}}"></span>
 
-                        </p >
-                        <p class="col-md-3">
-                            <b>Alunos </b><span th:text="0" > </span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="alunos">Alunos:</label>
+                                <span class="form-control-static" th:text="0"></span>
 
-                        </p>
-                        <p class="col-md-3">
-                            <b>Tarefas:  </b><span th:text="0" > </span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="tarefas">Tarefas: </label>
+                                <span class="form-control-static" th:text="0"></span>
 
-                        </p>
+                            </div>
+                        </div>
+
+
+
 
                     </div>
                 </div>
@@ -49,25 +64,29 @@ and open the template in the editor.
                 <div class="panel panel-primary">
 
                     <div class="panel-heading">
-                        <i class="fa fa-users fa-fw"></i>Alunos
+                        <span class="panel-title">
 
+                            <i class="fa fa-users fa-fw"></i>Alunos
+                        </span>
                     </div>
 
                     <div class="panel-body">
                         <div class="form-group">
                             <label class="col-lg-12"> Aluno</label>
-                            <div class=" col-md-10">
-                                <select class="form-control" id="aluno" >
-
+                            <div class="input-group">
+                                <select class="form-control " id="aluno" >
                                     <option th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
-
                                 </select>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-success" type="submit">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                    </button>
+                                </div>
                             </div>
+                          
 
-                            <a class="btn btn-default  col-md-1 fa fa-save fa-2x"></a>
 
-                            <hr/>
-                            <hr/>
+
 
                         </div>
                         <table class="table table-condensed table-striped">
@@ -98,8 +117,10 @@ and open the template in the editor.
                 <div class="panel panel-primary">
 
                     <div class="panel-heading">
-                        <i class="fa fa-tasks fa-fw"></i>Tarefas
+                        <span class="panel-title">
 
+                            <i class="fa fa-tasks fa-fw"></i>Tarefas
+                        </span>
                     </div>
 
                     <div class="panel-body">
@@ -128,5 +149,6 @@ and open the template in the editor.
 
             </div>
         </div>
+
     </body>
 </html>
