@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -31,10 +32,11 @@ public class AlunoController implements Serializable {
 
     @Autowired
     private AlunoServiceImpl AlunoService;
-    
+
     /**
      * Cria um attributo AllAlunos que busca todos os alunos cadastrados
-     * @return 
+     *
+     * @return
      */
     @ModelAttribute("allAlunos")
     public List<Aluno> populateVisualizarAlunos() {
@@ -48,19 +50,21 @@ public class AlunoController implements Serializable {
     }
 
     /**
-     * Nesta funcao eh adicionado o aluno pelo controller.
-     * Faz a validacao pelo ModelAttribute e caso aconteca erro, o BindingResult retorna.
+     * Nesta funcao eh adicionado o aluno pelo controller. Faz a validacao pelo
+     * ModelAttribute e caso aconteca erro, o BindingResult retorna.
+     *
      * @param aluno
      * @param bindingResult
      * @param model
-     * @return 
+     * @return
      */
-    @RequestMapping(value = "/app/aluno/home", params = {"save"})
+
+    @PostMapping("/app/aluno")
     public String saveAluno(@ModelAttribute("aluno") @Valid final Aluno aluno, final BindingResult bindingResult, final ModelMap model) {
-        
+
         if (bindingResult.hasErrors()) {
-             model.addAttribute("aluno", aluno); 
-            return "app/aluno";
+            model.addAttribute("aluno", aluno);
+            return "/app/aluno/home";
         }
         this.AlunoService.inserir(aluno);
         model.clear();
