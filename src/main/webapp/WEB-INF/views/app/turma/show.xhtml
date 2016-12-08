@@ -23,7 +23,7 @@ and open the template in the editor.
 
             <div class="col-md-12">
 
-                <div class="panel panel-primary">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <span class="panel-title">
                             <i class="fa fa-info-circle fa-fw"></i>Info
@@ -68,23 +68,61 @@ and open the template in the editor.
 
                             <i class="fa fa-users fa-fw"></i>Alunos
                         </span>
+                        <button data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm pull-right" type="submit">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </button>
+                        <div class="clearfix"></div>
                     </div>
 
                     <div class="panel-body">
                         <div class="form-group">
-                            <label class="col-lg-12"> Aluno</label>
-                            <div class="input-group">
-                                <select class="form-control " id="aluno" >
-                                    <option th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
-                                </select>
-                                <div class="input-group-btn">
-                                    <button class="btn btn-success" type="submit">
-                                        <i class="glyphicon glyphicon-plus"></i>
-                                    </button>
+                            <!--<label class="col-lg-12"> Aluno</label>-->
+                            <!--                            <div class="input-group">
+                                                            <select class="form-control " id="aluno" >
+                                                                <option th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
+                                                            </select>
+                                                            <div class="input-group-btn">
+                                                                <button class="btn btn-success" type="submit">
+                                                                    <i class="glyphicon glyphicon-plus"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>-->
+
+
+
+                            <div id="myModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Adicionar Aunos</h4>
+                                        </div>
+                                        <form  action="#" th:action="@{/app/turma/add/aluno}" method="POST">
+                                            <div class="modal-body">
+                                                <label class="col-lg-12">Aluno</label>
+                                                <input hidden="true" name="turmaID" th:value="${turma.id}"/>
+
+
+
+                                                <div class="form-group">
+                                                    <select  name="alunoID" class="form-control " id="aluno" >
+                                                        <option  th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" name="save"  value="Salvar"  class="btn btn-success" >Inserir</button>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+
                                 </div>
                             </div>
-                          
-
 
 
 
@@ -98,12 +136,15 @@ and open the template in the editor.
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+
+                                <tr  th:if="${alunos.empty}">
                                     <td colspan="3">Turma sem Alunos</td>
                                 </tr>
-<!--                                <tr data-th-each="a : ${alunos}">
+                                <tr data-th-each="a : ${alunos}">
                                     <td th:text="${a.nome}">1</td>
-                                </tr>-->
+                                    <td >5</td>
+                                    <td >15</td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -121,6 +162,7 @@ and open the template in the editor.
 
                             <i class="fa fa-tasks fa-fw"></i>Tarefas
                         </span>
+                        <a  href="/app/tarefas" class="btn btn-sm btn-primary pull-right"> Ir para Tarefas <span class="fa fa-arrow-right"></span></a>
                     </div>
 
                     <div class="panel-body">
@@ -144,6 +186,8 @@ and open the template in the editor.
                         </table>
 
                     </div>
+
+
 
                 </div>
 

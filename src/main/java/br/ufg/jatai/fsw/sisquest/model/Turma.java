@@ -35,9 +35,8 @@ public class Turma implements Serializable {
 
     @ManyToOne
     private Professor professor;
-    
-    
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Aluno> alunos;
 
     /**

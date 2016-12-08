@@ -17,84 +17,91 @@ and open the template in the editor.
         <div class="col-lg-12">
             <h1 class="page-header">Visualizando Turmas</h1>
 
-            <div class="col-lg-4">
+        </div>
+
+        <div class="col-lg-4">
 
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <span class="panel-title">
                         <i class="fa fa-pencil fa-fw"></i>Inserir Turma
-                    </div>
-                    <form action="#" th:action="@{/app/turma/home}" th:object="${turma}" method="post">
 
-                        <div class="panel-body">
-                            <fieldset>
-
-                                <!-- Form Name -->
-
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="control-label" for="nome">Nome</label>  
-                                    <input id="nome" name="nome" placeholder="Nome da Turma (POO 2016)" class="form-control input-md" required="" type="text"/>
-                                </div>
-
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="control-label" for="descricao">Descrição</label>  
-                                    <textarea id="descricao" name="descricao" required="" placeholder="" class="form-control input-md" type="text"/>
-                                </div>
-
-                            </fieldset>
-
-                        </div>
-
-                        <!-- /.panel-body -->
-                        <div class="panel-footer  clearfix">
-                            <input class="btn btn-info pull-right" type="submit" name="save"  value="Salvar" />
-                        </div>
-                    </form>
+                    </span>
                 </div>
+                <form action="#" th:action="@{/app/turma/home}" th:object="${turma}" method="post">
 
-
-
-            </div>
-            <div class="col-lg-8">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <i class="fa fa-list fa-fw"></i>Turmas Cadastradas
-                    </div>
                     <div class="panel-body">
+                        <fieldset>
 
+                            <!-- Form Name -->
 
-                        <table class="table table-condensed table-striped">
-                            <thead>
-                                <tr>
-                                    <td style="width:20% ">Nome</td>
-                                    <td>Descricao</td>
-                                    <td></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:if="${allTurmas.empty}">
-                                    <td colspan="2">Não existem turmas cadastrados</td>
-                                </tr>
-                                <tr th:each="t : ${allTurmas}">
-                                    <td th:text="${t.nome}">1</td>
-                                    <td th:text="${t.descricao}">1</td>
-                                    <td>
-                                            <a  class="btn btn-success btn-sm "  th:href="@{/app/turma/}+${{t.id}}" >
-                                                    <span class="fa fa-send"> </span>
-                                            </a>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="control-label" for="nome">Nome</label>  
+                                <input id="nome" name="nome" placeholder="Nome da Turma (POO 2016)" class="form-control input-md" required="" type="text"/>
+                            </div>
 
-                                    </td>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="control-label" for="descricao">Descrição</label>  
+                                <textarea id="descricao" name="descricao" required="" placeholder="" class="form-control input-md" type="text"/>
+                            </div>
 
-                                </tr>
-                            </tbody>
-                        </table>
+                        </fieldset>
 
                     </div>
-                </div>
 
+                    <!-- /.panel-body -->
+                    <div class="panel-footer  clearfix">
+                        <input class="btn btn-info pull-right" type="submit" name="save"  value="Salvar" />
+                    </div>
+                </form>
             </div>
+
+
+
+        </div>
+        <div class="col-lg-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="panel-title">
+                        <i class="fa fa-list fa-fw"></i>Turmas Cadastradas
+                    </span>
+                </div>
+                <div class="panel-body">
+
+
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <td style="width:20% ">Nome</td>
+                                <td>Descricao</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${allTurmas.empty}">
+                                <td colspan="2">Não existem turmas cadastrados</td>
+                            </tr>
+                            <tr th:each="t : ${allTurmas}">
+                                <td th:text="${t.nome}">1</td>
+                                <td th:text="${t.descricao}">1</td>
+                                <td>
+                                    <a  class="btn btn-success btn-sm "  th:href="@{/app/turma/}+${{t.id}}" >
+                                        <span class="fa fa-send"> </span>
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
 
         </div>
     </div>
