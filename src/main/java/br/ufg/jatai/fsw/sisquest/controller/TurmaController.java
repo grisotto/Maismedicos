@@ -49,23 +49,21 @@ public class TurmaController implements Serializable {
      * @return
      */
     @Permissao(Usuario.TipoUsuario.PROFESSOR)
-    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/app/turma")
-    public String turmaHome() {
+    public String turmaHome(final Turma turma) {
         return "/app/turma/home";
     }
 
-    @RequestMapping(value = "/app/turma/home", params = {"save"})
-    public String saveProfessor(@Valid final Turma turma, final BindingResult bindingResult, final ModelMap model) {
-        bindingResult.addError(new ObjectError("Deu erro", "Deu erro"));
+    @PostMapping(value = "/app/turma", params = {"save"})
+    public String saveTurma(@Valid final Turma turma, final BindingResult bindingResult, final ModelMap model) {
+//        bindingResult.addError(new ObjectError("Deu erro", "Deu erro"));
         if (bindingResult.hasErrors()) {
             model.addAttribute("turma", turma);
-
-            return "app/turma";
+            return "/app/turma/home";
         }
 
         this.tService.inserir(turma);
-//        model.clear();
+        model.clear();
         return "redirect:/app/turma";
     }
 

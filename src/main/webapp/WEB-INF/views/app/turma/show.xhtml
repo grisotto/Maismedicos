@@ -140,7 +140,7 @@ and open the template in the editor.
                             <tbody>
 
                                 <tr  th:if="${alunos.empty}">
-                                    <td colspan="3">Turma sem Alunos</td>
+                                    <td colspan="4">Turma sem Alunos</td>
                                 </tr>
                                 <tr data-th-each="a : ${alunos}">
                                     <td th:text="${a.nome}">1</td>
