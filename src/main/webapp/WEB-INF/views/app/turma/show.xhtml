@@ -127,12 +127,14 @@ and open the template in the editor.
 
 
                         </div>
-                        <table class="table table-condensed table-striped">
+                        <table class="table table-condensed ">
                             <thead>
                                 <tr>
-                                    <td style="width:20% ">Nome</td>
-                                    <td style="width:20% ">Qnr Times</td>
-                                    <td style="width:20% ">Status</td>
+                                    <td>Nome</td>
+                                    <td >E-mail</td>
+                                    <td>Qnr Times</td>
+                                    <td >Status</td>
+                                    <td></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -142,8 +144,16 @@ and open the template in the editor.
                                 </tr>
                                 <tr data-th-each="a : ${alunos}">
                                     <td th:text="${a.nome}">1</td>
+                                    <td th:text="${a.email}"></td>
                                     <td >5</td>
                                     <td >15</td>
+                                    <td >
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a class="btn btn-sm  btn-danger fa fa-trash"/>
+                                            <a class="btn btn-sm  btn-primary fa fa-send"/>
+                                        </div>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
