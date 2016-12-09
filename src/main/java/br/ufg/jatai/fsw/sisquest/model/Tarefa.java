@@ -20,10 +20,13 @@ import java.util.List;
 @SuppressWarnings("PersistenceUnitPresent")
 public class Tarefa implements Serializable {
 
+    private static final long serialVersionUID = -8614032819378087155L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String titulo;
     private String descricao;
 
     @ManyToOne
@@ -227,6 +230,22 @@ public class Tarefa implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public Questionario getQuestionario() {
+        return questionario;
+    }
+
+    public void setQuestionario(Questionario questionario) {
+        this.questionario = questionario;
     }
 
 }

@@ -28,16 +28,28 @@ and open the template in the editor.
                         <i class="fa fa-pencil fa-fw"></i>Inserir Tarefa
                     </span>
                 </div>
-
+                <form th:object="${tarefa}" th:action="@{/app/tarefa}" method="POST">
                     <div class="panel-body">
-                 
-
+                        <div class="form-group">
+                            <label>Título</label>
+                            <input class="form-control" th:field="${tarefa.titulo}"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Descrição</label>
+                            <textArea class="form-control" th:field="${tarefa.descricao}"></textArea>
+                        </div>
+                        <div class="form-group">
+                            <label>Tamanho dos Questionários</label>
+                            <input class="form-control" th:field="${tarefa.tamanhoQuestoes}" type="number"/>
+                        </div>
                     </div>
-
-                    <!-- /.panel-body -->
+    
+                
+                <!-- /.panel-body -->
                     <div class="panel-footer  clearfix">
                         <input class="btn btn-info pull-right" type="submit" name="save"  value="Salvar" />
                     </div>
+                </form>
             </div>
 
 
@@ -52,8 +64,32 @@ and open the template in the editor.
                 </div>
                 <div class="panel-body">
 
+<table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <td>Descricao</td>
+                                <td class=" text-center">Situação</td>
+                                <td class="col-lg-1"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${allTarefas.empty}">
+                                <td colspan="3">Não existem turmas cadastrados</td>
+                            </tr>
+                            <tr th:each="t : ${allTarefas}">
+                                <td th:text="${t.descricao}">1</td>
+                                <td class=" text-center text-warning"><span class="fa fa-circle fa-2x "></span></td>
+                                <td>
+                                    <a  class="btn btn-success btn-sm "  th:href="@{/app/tarefa/}+${{t.id}}" >
+                                        <span class="fa fa-send"> </span>
+                                    </a>
 
-                
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
 
                 </div>
             </div>
