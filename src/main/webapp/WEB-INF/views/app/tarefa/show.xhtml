@@ -17,15 +17,86 @@ and open the template in the editor.
     <body>
         <div th:fragment="content">
             <div class="page-header">
-                <h1 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" href="/app/tarefa"></a> Tarefa <span th:text="${{tarefa.titulo}}"></span></h1>
+                <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" href="/app/tarefa"></a><b> Tarefa: </b>
+                    <span class="text-muted" th:text="${{tarefa.titulo}}"></span></h2>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-7">
+                <div class="panel panel-info">
 
+                    <div class="panel-heading">
+                        <span class="panel-title">
+                            <i class="fa fa-calendar fa-fw"></i><span class=""> Etapas da tarefa</span>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="text-danger">
+                            AQUI VAI TER QUE ORGANIZAR PARA QUANDO NAO TIVER ESSAS ETAPAS
+                            DEFINIDAS DEIXAR OS CAMPOS ABERTOS PARA COLOCAR E SALVAR E NAO
+                            DEIXAR FAZER MAIS NADA, NADA MSM.. NEM ADICIONAR GRUPOS E TALS.
+
+                            AI DEPOIS QUE TIVER COM AS DATAS AI PODE CRIAR OS GRUPOS
+                            <hr/>
+                        </div>
+                        <div class="form-horizontal ">
+                            <div class="form-group ">
+                                <label class="control-label col-sm-3">Aguardando</label>
+                                <div class="col-lg-8 form-inline">
+                                    <input class="form-control" placeholder="Data Inicial"/>
+                                    <input class="form-control" placeholder="Data Final"/>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">Esperando Submissão</label>
+                                <div class="col-lg-8 form-inline">
+                                    <input class="form-control" placeholder="Data Inicial"/>
+                                    <input class="form-control" placeholder="Data Final"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">Validando Questões</label>
+                                <div class="col-lg-8 form-inline">
+                                    <input class="form-control" placeholder="Data Inicial"/>
+                                    <input class="form-control" placeholder="Data Final"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">Respondendo Questões</label>
+                                <div class="col-lg-8 form-inline">
+                                    <input class="form-control" placeholder="Data Inicial"/>
+                                    <input class="form-control" placeholder="Data Final"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">Finalizado</label>
+                                <div class="col-lg-8 form-inline">
+                                    <input class="form-control" placeholder="Data "/>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="panel-footer">
+                        <a class="btn btn-info pull-right">Atualizar datas</a>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
 
             </div>
-            <div class="col-lg-6">
-
+            <div class="col-lg-5">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <span class="panel-title">
+                            <i class="fa fa-group fa-fw"></i><span class=""> Grupos</span>
+                        </span>
+                    </div>
+                    <div class="panel-body"></div>
+                </div>
 
             </div>
 
