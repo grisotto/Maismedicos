@@ -10,8 +10,13 @@ import br.ufg.jatai.fsw.sisquest.repository.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 
-
+/**
+ *
+ * @author vilela
+ */
+@Service
 public class TarefaServiceImpl implements TarefaService {
 
     @Autowired
@@ -46,5 +51,5 @@ public class TarefaServiceImpl implements TarefaService {
     public List<Tarefa> findAll() {
         return tarefaRepository.findAll();
     }
-    
+
 }

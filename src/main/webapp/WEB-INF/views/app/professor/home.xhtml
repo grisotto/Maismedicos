@@ -12,9 +12,10 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-    <div th:fragment="content">
+    <div th:fragment="content" >
+
         <div class="col-lg-12">
-            <h1 class="page-header">Alunos</h1>
+            <h1 class="page-header">Professores</h1>
         </div>
 
 
@@ -24,11 +25,11 @@ and open the template in the editor.
             <div class="panel panel-info">
                 <div class="panel-heading ">
                     <span class="panel-title">
-                        <i class="fa fa-pencil fa-fw"></i><span class="">Inserir Aluno </span>
+                        <i class="fa fa-pencil fa-fw"></i>Inserir Professor
                     </span>
                 </div>
 
-                <form action="#" th:action="@{/app/aluno}" th:object="${aluno}" method="POST">
+                <form action="#" th:action="@{/app/professor}" th:object="${professor}" method="POST">
 
 
                     <div class="panel-body">
@@ -48,16 +49,30 @@ and open the template in the editor.
                                 <input id="nome"   th:field="*{nome}"  placeholder="Insira o nome completo" class="form-control input-md"  type="text"/>
                             </div>
 
-                            <div class="form-group">
-                                <label class="control-label" for="Matrícula">Matrícula</label>  
-                                <input id="matricula"  th:field="*{matricula}" placeholder="20150000" class="form-control input-md" type="text"/>
-                            </div>
+                            <!-- Text input-->
                             <div class="form-group">
                                 <div   th:class="${#fields.hasErrors('email')}? has-error">
                                     <label class="control-label" for="email">E-mail</label>  
-                                    <input id="email" th:field="*{email}"  placeholder="email@servidor.com" class="form-control input-md  " type="email"/>
+                                    <input id="email" th:field="*{email}"  placeholder="email@servidor.com" class="form-control input-md  " type="text"/>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label" for="email">Nome de Usuário</label>  
+                                <input id="login"  th:field="*{usuario.login}" placeholder="jose" class="form-control input-md" type="text"/>
+                            </div>
+
+
+                            <!-- Multiple Checkboxes -->
+                            <!--                            <div class="form-group">
+                                                            <div class="checkbox">
+                                                                <label for="checkboxes-0">
+                                                                    <input name="checkboxes" id="checkboxes-0" value="1" type="checkbox"/>
+                                                                    Evia senha por email?
+                                                                </label>
+                                                            </div>
+                                                        </div>-->
+
+                            <!-- Button -->
 
 
                         </fieldset>
@@ -78,10 +93,9 @@ and open the template in the editor.
         <div class="col-lg-8">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <div class="panel-title">
-                        <i class="fa fa-list fa-fw"></i> <span class=""> Alunos Cadastrados</span>
-
-                    </div>
+                    <span class="panel-title">
+                        <i class="fa fa-list fa-fw"></i>Professores Cadastrados
+                    </span>
                 </div>
                 <div class="panel-body">
 
@@ -90,18 +104,18 @@ and open the template in the editor.
                         <thead>
                             <tr>
                                 <td>Nome</td>
-                                <td>Matrícula</td>
                                 <td>Email</td>
+                                <td>Login</td>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:if="${allAlunos.empty}">
-                                <td colspan="2">Não Existe Alunos Cadastrados</td>
+                            <tr th:if="${allProfessores.empty}">
+                                <td colspan="2">Não existe professores cadastrados</td>
                             </tr>
-                            <tr th:each="a : ${allAlunos}">
-                                <td th:text="${a.nome}">1</td>
-                                <td th:text="${a.matricula}">1</td>
-                                <td th:text="${a.email}">1</td>
+                            <tr th:each="p : ${allProfessores}">
+                                <td th:text="${p.nome}">1</td>
+                                <td th:text="${p.email}">1</td>
+                                <td th:text="${p.usuario.login}">1</td>
 
                             </tr>
                         </tbody>
@@ -111,6 +125,7 @@ and open the template in the editor.
             </div>
 
         </div>
+
 
     </div>
 </html>

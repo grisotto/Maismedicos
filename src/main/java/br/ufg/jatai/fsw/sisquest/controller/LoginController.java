@@ -5,9 +5,11 @@
  */
 package br.ufg.jatai.fsw.sisquest.controller;
 
+import br.ufg.jatai.fsw.sisquest.facade.AutenticacaoFacade;
 import br.ufg.jatai.fsw.sisquest.model.Usuario;
 import br.ufg.jatai.fsw.sisquest.service.UsuarioService;
 import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
@@ -29,7 +31,7 @@ public class LoginController {
     private static Logger log = LoggerFactory.getLogger(LoginController.class.getName());
 
     @Autowired
-    private UsuarioService service;
+    private AutenticacaoFacade facade;
 
     @GetMapping(value = "/login")
     private String login() {
@@ -40,29 +42,16 @@ public class LoginController {
 
     @PostMapping(value = "/login")
     private String login(String login, String senha, HttpSession session, HttpServletResponse response,
-            Model model) throws IOException {
-        log.error("Enrou no postLogin");
-        Usuario usuarioByLogin = service.usuarioByLogin(login);
+            Model model, HttpServletRequest request) throws IOException {
 
-        if (usuarioByLogin != null) {
-            log.error("O usuario existe");
-            if (usuarioByLogin.getSenha().equals(senha)) {
-                log.error("A senha confere: " + senha + " - " + usuarioByLogin.getSenha());
-                session.setAttribute("usuarioLogado", usuarioByLogin);
-                response.sendRedirect("/app");
-
-            } else {
-                log.error("A senha nao confere: " + senha + " - " + usuarioByLogin.getSenha());
-                model.addAttribute("erro", "A senha não confere");
-                return this.login();
-            }
+        Usuario u = new Usuario(0, login, senha);
+        if (facade.autenicar(u)) {
+            return "redirect:/app";
         } else {
-            log.error("Usuario nao existe");
-
-            model.addAttribute("erro", "Usuario não existe");
-            return this.login();
+            model.addAttribute("erro", "A senha não confere");
+            return login();
         }
-        return "/app/dash";
+
     }
 
     @GetMapping(value = "/logout")

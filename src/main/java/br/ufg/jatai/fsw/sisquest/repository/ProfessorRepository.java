@@ -5,14 +5,13 @@
  */
 package br.ufg.jatai.fsw.sisquest.repository;
 
-import br.ufg.jatai.fsw.sisquest.model.Equipe;
-import br.ufg.jatai.fsw.sisquest.model.Pessoa;
+import br.ufg.jatai.fsw.sisquest.model.Professor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
- * @author vilela
+ * @author dfranco
  */
-public interface EquipeRepository extends JpaRepository<Equipe, Integer> {
+public interface ProfessorRepository extends JpaRepository<Professor, Integer> {
     
 }

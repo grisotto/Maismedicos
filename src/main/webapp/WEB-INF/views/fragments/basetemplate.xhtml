@@ -1,14 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       th:fragment="page">
-
 
     <head>
 
@@ -28,7 +21,7 @@ and open the template in the editor.
         <div id="wrapper">
 
             <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0; margin-top: -22px">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -36,11 +29,12 @@ and open the template in the editor.
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/app">Sistema de Base de Questões Colaborativas e Avaliações</a>
+                    <a class="navbar-brand" href="/app">
+                        <spam class="fa  fa-edit"> </spam><b> S</b><small>QUEST</small></a>
                 </div>
                 <!-- /.navbar-header -->
 
-                <ul class="nav navbar-top-links navbar-right">
+                <ul class="nav navbar-nav navbar-right hidden-xs" style="margin-right:40px">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -57,7 +51,32 @@ and open the template in the editor.
                                     <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
                                 </a>
                             </li>
-                            -->                            <li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <strong>John Smith</strong>
+                                        <span class="pull-right text-muted">
+                                            <em>Yesterday</em>
+                                        </span>
+                                    </div>
+                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <strong>John Smith</strong>
+                                        <span class="pull-right text-muted">
+                                            <em>Yesterday</em>
+                                        </span>
+                                    </div>
+                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
                                 <a class="text-center" href="#">
                                     <strong>Read All Messages</strong>
                                     <i class="fa fa-angle-right"></i>
@@ -71,78 +90,78 @@ and open the template in the editor.
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
                         </a>
-                        <!--                        <ul class="dropdown-menu dropdown-tasks">
-                                                    <li>
-                                                        <a href="#">
-                                                            <div>
-                                                                <p>
-                                                                    <strong>Task 1</strong>
-                                                                    <span class="pull-right text-muted">40% Complete</span>
-                                                                </p>
-                                                                <div class="progress progress-striped active">
-                                                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                                                        <span class="sr-only">40% Complete (success)</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <div>
-                                                                <p>
-                                                                    <strong>Task 2</strong>
-                                                                    <span class="pull-right text-muted">20% Complete</span>
-                                                                </p>
-                                                                <div class="progress progress-striped active">
-                                                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                                                        <span class="sr-only">20% Complete</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <div>
-                                                                <p>
-                                                                    <strong>Task 3</strong>
-                                                                    <span class="pull-right text-muted">60% Complete</span>
-                                                                </p>
-                                                                <div class="progress progress-striped active">
-                                                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                                                        <span class="sr-only">60% Complete (warning)</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <div>
-                                                                <p>
-                                                                    <strong>Task 4</strong>
-                                                                    <span class="pull-right text-muted">80% Complete</span>
-                                                                </p>
-                                                                <div class="progress progress-striped active">
-                                                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                                                        <span class="sr-only">80% Complete (danger)</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <a class="text-center" href="#">
-                                                            <strong>See All Tasks</strong>
-                                                            <i class="fa fa-angle-right"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>-->
+                        <ul class="dropdown-menu dropdown-tasks">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <p>
+                                            <strong>Task 1</strong>
+                                            <span class="pull-right text-muted">40% Complete</span>
+                                        </p>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                <span class="sr-only">40% Complete (success)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <p>
+                                            <strong>Task 2</strong>
+                                            <span class="pull-right text-muted">20% Complete</span>
+                                        </p>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                                <span class="sr-only">20% Complete</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <p>
+                                            <strong>Task 3</strong>
+                                            <span class="pull-right text-muted">60% Complete</span>
+                                        </p>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                                <span class="sr-only">60% Complete (warning)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <p>
+                                            <strong>Task 4</strong>
+                                            <span class="pull-right text-muted">80% Complete</span>
+                                        </p>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                                <span class="sr-only">80% Complete (danger)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>See All Tasks</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
                         <!-- /.dropdown-tasks -->
                     </li>
                     <!-- /.dropdown -->
@@ -150,59 +169,59 @@ and open the template in the editor.
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
                         </a>
-                        <!--                        <ul class="dropdown-menu dropdown-alerts">
-                                                    <li>
-                                                        <a href="#">
-                                                            <div>
-                                                                <i class="fa fa-comment fa-fw"></i> New Comment
-                                                                <span class="pull-right text-muted small">4 minutes ago</span>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <div>
-                                                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                                                <span class="pull-right text-muted small">12 minutes ago</span>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <div>
-                                                                <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                                                <span class="pull-right text-muted small">4 minutes ago</span>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <div>
-                                                                <i class="fa fa-tasks fa-fw"></i> New Task
-                                                                <span class="pull-right text-muted small">4 minutes ago</span>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <div>
-                                                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                                                <span class="pull-right text-muted small">4 minutes ago</span>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <a class="text-center" href="#">
-                                                            <strong>See All Alerts</strong>
-                                                            <i class="fa fa-angle-right"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>-->
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-comment fa-fw"></i> New Comment
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                        <span class="pull-right text-muted small">12 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-tasks fa-fw"></i> New Task
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>See All Alerts</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
                         <!-- /.dropdown-alerts -->
                     </li>
                     <!-- /.dropdown -->
@@ -216,7 +235,7 @@ and open the template in the editor.
                             <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
                         <!-- /.dropdown-user -->
@@ -239,35 +258,45 @@ and open the template in the editor.
                                 </div>
                                 <!-- /input-group -->
                             </li>
+
                             <li>
                                 <a href="/app"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-graduation-cap fa-fw"></i> Alunos<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="/app/aluno/new">Cadastrar Aluno</a>
-                                    </li>
-                                    <li>
-                                        <a href="/app/aluno">Visualizar Alunos</a>
-                                    </li>
-                                </ul>
+                                <a href="/app/professor"><i class="fa fa-graduation-cap fa-fw"></i> Professores</a>
+
+                            </li>
+                            <li>
+                                <a href="/app/aluno"><i class="fa fa-male   fa-fw"></i> Alunos</a>
+                                <!--                                <ul class="nav nav-second-level">
+                                                                    <li>
+                                                                        <a href="/app/aluno/new">Cadastrar Aluno</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="/app/aluno">Visualizar Alunos</a>
+                                                                    </li>
+                                                                </ul>-->
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-tasks fa-fw"></i> Turmas<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="/app/turma/new">Criar Turma</a>
-                                    </li>
-                                    <li>
-                                        <a href="/app/turma">Visualizar Turmas</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-second-level -->
+                                <a href="/app/turma/"><i class="fa fa-users fa-fw"></i> Turmas</a>
                             </li>
+                            <!--                            <li>
+                                                            <a href="#"><i class="fa fa-tasks fa-fw"></i> Turmas<span class="fa arrow"></span></a>
+                                                            <ul class="nav nav-second-level">
+                                                                <li>
+                                                                    <a href="/app/turma/new">Criar Turma</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/app/turma">Visualizar Turmas</a>
+                                                                </li>
+                                                            </ul>
+                                                             /.nav-second-level 
+                                                        </li>-->
 
-
+                            <li>
+                                <a href="/app/tarefa/"><i class="fa fa-tasks fa-fw"></i> Tarefas</a>
+                            </li>
 
                             <!--                            <li>
                                                             <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
@@ -341,28 +370,24 @@ and open the template in the editor.
                 <!-- /.navbar-static-side -->
             </nav>
 
-
-            <!-- include here the content of the current page visited by the user -->
-
-
+            <!-- Page Content -->
             <div id="page-wrapper">
-
-                <div class="row">
-
-
-
+                <div class="container-fluid">
+                    <div class="row">
+                        <div th:include="this :: content"/>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
                 </div>
-                <div th:include="this :: content"/>
-
-
-
+                <!-- /.container-fluid -->
             </div>
-
+            <!-- /#page-wrapper -->
 
         </div>
+        <!-- /#wrapper -->
+        <!--/*/ <th:block th:include="fragments/footerinc :: footer"></th:block> /*/-->
 
 
     </body>
-    <!--/*/ <th:block th:include="fragments/footerinc :: footer"></th:block> /*/-->
-</html>
 
+</html>

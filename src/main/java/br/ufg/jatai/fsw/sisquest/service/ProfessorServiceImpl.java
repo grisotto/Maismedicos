@@ -5,51 +5,46 @@
  */
 package br.ufg.jatai.fsw.sisquest.service;
 
-import br.ufg.jatai.fsw.sisquest.model.Usuario;
-import br.ufg.jatai.fsw.sisquest.repository.UsuarioRepository;
+import br.ufg.jatai.fsw.sisquest.model.Professor;
+import br.ufg.jatai.fsw.sisquest.repository.ProfessorRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService {
+public class ProfessorServiceImpl implements ProfessorService {
 
     @Autowired
-    public UsuarioRepository repository;
+    public ProfessorRepository repository;
 
     @Override
-    public Usuario usuarioForAuth(String login, String senha) {
-        return repository.userForAuth(login, senha);
-    }
-
-    @Override
-    public Usuario inserir(Usuario entidade) {
+    public Professor inserir(Professor entidade) {
         return repository.save(entidade);
     }
 
     @Override
-    public void apagar(Usuario entidade) {
+    public void apagar(Professor entidade) {
         repository.delete(entidade);
     }
 
     @Override
-    public Usuario atualizar(Usuario entidade) {
+    public Professor atualizar(Professor entidade) {
         return repository.save(entidade);
     }
 
     @Override
-    public Usuario find(Usuario entidade) {
+    public Professor find(Professor entidade) {
         return this.find(entidade.getId());
     }
 
     @Override
-    public Usuario find(Integer id) {
-        return repository.findOne(id);
-
+    public Professor find(Integer id) {
+        return repository.getOne(id);
     }
 
     @Override
-    public List<Usuario> findAll() {
+    public List<Professor> findAll() {
         return repository.findAll();
     }
 

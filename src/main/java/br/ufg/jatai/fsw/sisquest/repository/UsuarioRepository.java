@@ -16,7 +16,7 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-    @Query(value = "select u from Usuario u where u.login = ?1")
-    public Usuario usuarioByLogin(String login);
+    @Query(value = "select u from Usuario u where u.login = ?1 and u.senha = ?2")
+    public Usuario userForAuth(String login, String senha);
 
 }

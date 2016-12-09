@@ -6,7 +6,7 @@
 package br.ufg.jatai.fsw.sisquest.controller;
 
 import java.util.List;
-
+import javax.servlet.http.HttpServletRequest;
 import br.ufg.jatai.fsw.sisquest.model.Aluno;
 import java.io.Serializable;
 import org.slf4j.Logger;
@@ -15,30 +15,61 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import br.ufg.jatai.fsw.sisquest.service.AlunoServiceImpl;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
  * @author rafael
  */
 @Controller
-public class AlunoController implements Serializable{
-    
+public class AlunoController implements Serializable {
+
     private static Logger log = LoggerFactory.getLogger(TeamController.class.getName());
-    
+
     @Autowired
-    private AlunoServiceImpl AlunoService;  
-    
+    private AlunoServiceImpl AlunoService;
+
+    /**
+     * Cria um attributo AllAlunos que busca todos os alunos cadastrados
+     *
+     * @return
+     */
     @ModelAttribute("allAlunos")
     public List<Aluno> populateVisualizarAlunos() {
         return this.AlunoService.findAll();
+
     }
-    
-    
+
     @RequestMapping(value = "/app/aluno")
-    public String alunoHome() {
+    public String alunoHome(final Aluno aluno) {
         return "/app/aluno/home";
     }
-    
+
+    /**
+     * Nesta funcao eh adicionado o aluno pelo controller. Faz a validacao pelo
+     * ModelAttribute e caso aconteca erro, o BindingResult retorna.
+     *
+     * @param aluno
+     * @param bindingResult
+     * @param model
+     * @return
+     */
+
+    @PostMapping("/app/aluno")
+    public String saveAluno(@ModelAttribute("aluno") @Valid final Aluno aluno, final BindingResult bindingResult, final ModelMap model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("aluno", aluno);
+            return "/app/aluno/home";
+        }
+        this.AlunoService.inserir(aluno);
+        model.clear();
+        return "redirect:/app/aluno";
+
+    }
+
 }

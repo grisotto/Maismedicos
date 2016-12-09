@@ -10,6 +10,10 @@ import br.ufg.jatai.fsw.sisquest.repository.PessoaRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ *
+ * @author vilela
+ */
 public class PessoaServiceImpl implements PessoaService {
 
     @Autowired

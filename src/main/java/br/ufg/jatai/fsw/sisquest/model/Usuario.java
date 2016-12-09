@@ -9,9 +9,12 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -29,7 +32,10 @@ public class Usuario implements Serializable {
     @Column(unique = true)
     private String login;
     private String senha;
+    @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
+    @OneToOne(mappedBy = "usuario")
+    private Professor professor;
 
     public Usuario() {
     }
@@ -98,6 +104,30 @@ public class Usuario implements Serializable {
     }
 
     public enum TipoUsuario {
-        PROFESSOR, GRUPO, Aluno;
+        PROFESSOR, GRUPO, ALUNO;
     }
+
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", login=" + login + ", senha=" + senha + ", tipoUsuario=" + tipoUsuario + ", professor=" + professor + '}';
+    }
+    
+    
+    
 }

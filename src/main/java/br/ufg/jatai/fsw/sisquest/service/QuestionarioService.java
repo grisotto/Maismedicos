@@ -10,7 +10,7 @@ import br.ufg.jatai.fsw.sisquest.model.Questionario;
 
 /**
  *
- * @author dfranco
+ * @author vilela
  */
 public interface QuestionarioService extends AbstractService<Questionario, Integer> {
     

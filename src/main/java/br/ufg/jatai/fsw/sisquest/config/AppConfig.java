@@ -1,6 +1,7 @@
 package br.ufg.jatai.fsw.sisquest.config;
 
-import br.ufg.jatai.fsw.sisquest.AutorizadorInterceptor;
+import br.ufg.jatai.fsw.sisquest.AutorizacaoInterceptor;
+import br.ufg.jatai.fsw.sisquest.LoginInterceptor;
 import java.util.Properties;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -144,7 +145,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
 
         Properties jpaProterties = new Properties();
-        jpaProterties.put("org.hibernate.dialect.MySqlDialect", env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
+        jpaProterties.put(PROPERTY_NAME_HIBERNATE_DIALECT, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
         jpaProterties.put(PROPERTY_NAME_HIBERNATE_FORMAT_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_FORMAT_SQL));
         jpaProterties.put(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO));
         jpaProterties.put(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY));
@@ -167,6 +168,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(new LoggingInterceptor());
         log.warn("Registrando o Bagulho");
-        registry.addInterceptor(new AutorizadorInterceptor()).addPathPatterns("/app/**");
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/app/**");
+        registry.addInterceptor(new AutorizacaoInterceptor()).addPathPatterns("/app/**");
     }
 }
