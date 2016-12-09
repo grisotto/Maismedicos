@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -47,5 +48,16 @@ public class TarefaController {
     public List<Tarefa> populateVisualizarProfessor() {
         return this.tarefaService.findAll();
 
+    }
+     @GetMapping(value = "/app/tarefa/{id}")
+    public String showTurma(@PathVariable Integer id, ModelMap map) {
+        map.addAttribute("tarefa", tarefaService.find(id));
+//        map.addAttribute("alunos", tService.find(id).getAlunos());
+
+        //NUNCA MAIS FAZ ISSO DYEIMYS
+//        map.addAttribute("todosAlunos", aService.findAll());
+
+        System.out.println(id);
+        return "/app/tarefa/show";
     }
 }
