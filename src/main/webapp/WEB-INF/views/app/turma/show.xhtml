@@ -19,8 +19,10 @@ and open the template in the editor.
     </head>
     <body>
         <div th:fragment="content">
-            <h1 class="page-header"> Turma: <span th:text="${{turma.nome}}"></span></h1>
-
+            <div class="page-header">
+                <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" href="/app/turma"></a><b> Turma: </b>
+                    <span class="text-muted" th:text="${{turma.nome}}"></span></h2>
+            </div>
             <div class="col-md-12">
 
                 <div class="panel panel-default">
