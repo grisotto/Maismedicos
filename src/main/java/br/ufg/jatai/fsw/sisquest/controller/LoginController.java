@@ -55,8 +55,8 @@ public class LoginController {
     }
 
     @GetMapping(value = "/logout")
-    private String logout(HttpSession session) {
-        session.removeAttribute("usuarioLogado");
+    private String logout() {
+        facade.autenicar(null);
         return this.login();
     }
 }

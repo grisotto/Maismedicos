@@ -29,7 +29,6 @@ and open the template in the editor.
                             <i class="fa fa-calendar fa-fw"></i><span class=""> Etapas da tarefa</span>
                         </span>
                     </div>
-
                     <div  th:if="${!tarefa.etapaEventos.empty}" class="panel-body">
                         <table    class="table table-responsive">
                             <thead>
@@ -41,8 +40,8 @@ and open the template in the editor.
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr data-th-each="e : ${tarefa.etapaEventos}">
-                                    <td th:text="${e.id}">1</td>
+                                <tr  th:each="e : ${tarefa.etapaEventos}">
+                                    <td th:text="${e.tipo.id()}">1</td>
                                     <td th:text="${e.tipo}">1</td>
                                     <td th:text="${e.dataInicial}">1</td>
                                     <td th:text="${e.dataFinal}">1</td>
