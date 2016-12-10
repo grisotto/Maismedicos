@@ -15,7 +15,6 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 
-
     </head>
     <body>
         <div th:fragment="content">
@@ -23,7 +22,7 @@ and open the template in the editor.
                 <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" href="/app/turma"></a><b> Turma: </b>
                     <span class="text-muted" th:text="${{turma.nome}}"></span></h2>
             </div>
-            <div class="col-md-12">
+<!--            <div class="col-md-12">
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -61,7 +60,7 @@ and open the template in the editor.
 
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="col-lg-6">
                 <div class="panel panel-primary">
 
@@ -70,25 +69,36 @@ and open the template in the editor.
 
                             <i class="fa fa-users fa-fw"></i>Alunos
                         </span>
-                        <button data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm pull-right" type="submit">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </button>
-                        <div class="clearfix"></div>
+                        <!--                        <button data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm pull-right" type="submit">
+                                                    <i class="glyphicon glyphicon-plus"></i>
+                                                </button>-->
+                        <!--                        <div class="clearfix"></div>-->
                     </div>
 
+
+                    <!--//capeta-->
                     <div class="panel-body">
                         <div class="form-group">
-                            <!--<label class="col-lg-12"> Aluno</label>-->
-                            <!--                            <div class="input-group">
-                                                            <select class="form-control " id="aluno" >
-                                                                <option th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
-                                                            </select>
-                                                            <div class="input-group-btn">
-                                                                <button class="btn btn-success" type="submit">
-                                                                    <i class="glyphicon glyphicon-plus"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>-->
+
+
+                            <label> Aluno</label>
+                            <form  name="alunoSalvar" action="#" th:action="@{/app/turma/add/aluno}" method="POST">
+
+
+                                <div class="input-group">
+                                    <input hidden="true" name="turmaID" th:value="${turma.id}"/>
+                                    <select  name="alunoID" data-placeholder="Selecione um aluno" class="form-control " id="aluno" >
+                                        <option  th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
+                                    </select>
+
+                                    <div class="input-group-btn">
+                                        <button type="submit" name="save"  value="Salvar"  class="btn btn-success" ><i class="glyphicon glyphicon-plus"></i></button>
+                                    </div>
+
+
+
+                                </div>
+                            </form>
 
 
 
@@ -101,6 +111,8 @@ and open the template in the editor.
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             <h4 class="modal-title">Adicionar Aunos</h4>
                                         </div>
+
+
                                         <form  action="#" th:action="@{/app/turma/add/aluno}" method="POST">
                                             <div class="modal-body">
                                                 <label class="col-lg-12">Aluno</label>
@@ -206,5 +218,40 @@ and open the template in the editor.
             </div>
         </div>
 
+
+
+
+
+
+
+        <div th:fragment="customCSS">
+
+            <link href="/plugins/select2/css/select2.min.css" th:href="@{/plugins/select2/css/select2.min.css}" rel="stylesheet" media="screen" />
+            <link href="/plugins/select2/css/select2_bootstrap.css" th:href="@{/plugins/select2/css/select2_bootstrap.css}" rel="stylesheet" media="screen" />
+            <script src="/plugins/select2/js/select2.min.js" th:src="@{/plugins/select2/js/select2.full.min.js}"></script>
+            <script src="/plugins/select2/js/i18n/pt-BR.js"  th:src="@{/plugins/select2/js/i18n/pt-BR.js}"></script>
+
+
+            <script type="text/javascript">
+                $.fn.select2.defaults.set("theme", "bootstrap");
+                $.fn.select2.defaults.set('language', 'pt-BR');
+                $.fn.select2.defaults.set('allowClear', true);
+
+
+
+
+                $("#aluno").select2({
+                    placeholder: "Selecione um aluno",
+                    allowclear: true
+                   
+
+                });
+
+
+            </script>
+
+
+
+        </div>
     </body>
 </html>
