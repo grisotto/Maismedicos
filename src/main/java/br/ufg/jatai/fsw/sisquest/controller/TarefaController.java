@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.sisquest.controller;
 
+import br.ufg.jatai.fsw.sisquest.controller.modelForm.EtapasModel;
 import br.ufg.jatai.fsw.sisquest.model.Tarefa;
 import br.ufg.jatai.fsw.sisquest.service.TarefaService;
 import java.util.List;
@@ -49,15 +50,36 @@ public class TarefaController {
         return this.tarefaService.findAll();
 
     }
-     @GetMapping(value = "/app/tarefa/{id}")
-    public String showTurma(@PathVariable Integer id, ModelMap map) {
-        map.addAttribute("tarefa", tarefaService.find(id));
-//        map.addAttribute("alunos", tService.find(id).getAlunos());
+
+    @GetMapping(value = "/app/tarefa/{id}")
+    public String showTurma(@PathVariable Integer id, ModelMap map, final EtapasModel etapas) {
+        Tarefa find = tarefaService.find(id);
+        map.addAttribute("tarefa", find);
+
+        map.addAttribute("etapas", new EtapasModel().buildeOvjeto(find.getEtapaEventos()));
 
         //NUNCA MAIS FAZ ISSO DYEIMYS
 //        map.addAttribute("todosAlunos", aService.findAll());
-
         System.out.println(id);
         return "/app/tarefa/show";
     }
+
+    @PostMapping(value = {"/app/tarefa/etapas"}, params = {"save"})
+    public String atualizaData(@Valid Integer idTarefa, @Valid EtapasModel etapas,
+            final BindingResult bindingResult, final ModelMap model) {
+        System.out.println("Passou aqui porra");
+        System.out.println(etapas.getAguardando().getTipo());
+        System.out.println(etapas.getEsperandoSubmissao().getTipo());
+        System.out.println(etapas.getValidandoQuestoes().getTipo());
+        System.out.println(etapas.getRespondendo().getTipo());
+        System.out.println(etapas.getFinalizado().getTipo());
+
+        Tarefa find = tarefaService.find(idTarefa);
+        find.getEtapaEventos().addAll(etapas.buildeLista());
+
+        tarefaService.atualizar(find);
+
+        return "redirect:/app/tarefa/" + idTarefa;
+    }
+
 }

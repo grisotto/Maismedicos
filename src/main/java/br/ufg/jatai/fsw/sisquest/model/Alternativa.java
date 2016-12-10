@@ -22,6 +22,8 @@ public class Alternativa implements Serializable {
 
     private String descricao;
     private boolean correto;
+    @ManyToOne
+    private Questao questao;
 
     /**
      *

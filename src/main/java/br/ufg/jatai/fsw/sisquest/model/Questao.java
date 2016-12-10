@@ -23,11 +23,11 @@ public class Questao {
 
     private String question;
 
-    @OneToMany
-    @ElementCollection
+    @OneToMany(mappedBy = "questao")
     private List<Alternativa> alternativas;
     @ManyToOne
     private Questionario questionario;
+   
 
     /**
      *

@@ -141,9 +141,9 @@ and open the template in the editor.
                             </thead>
                             <tbody>
 
-                                <tr  th:if="${alunos.empty}">
+<!--                                <tr  th:if="${alunos.empty}">
                                     <td colspan="4">Turma sem Alunos</td>
-                                </tr>
+                                </tr>-->
                                 <tr data-th-each="a : ${alunos}">
                                     <td th:text="${a.nome}">1</td>
                                     <td th:text="${a.email}"></td>
