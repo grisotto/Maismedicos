@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.sisquest;
 
+import br.ufg.jatai.fsw.sisquest.model.Professor;
 import br.ufg.jatai.fsw.sisquest.model.Usuario;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +93,10 @@ public class SessaoUsuario {
 
     public String getEmailUsuario() {
         return emailUsuario;
+    }
+
+    public Professor getProfessor() {
+        return getUsuario().getProfessor();
     }
 
 }
