@@ -5,12 +5,16 @@
  */
 package br.ufg.jatai.fsw.sisquest.service;
 
+import br.ufg.jatai.fsw.sisquest.model.Professor;
 import br.ufg.jatai.fsw.sisquest.model.Turma;
+import java.util.List;
 
 /**
  *
  * @author dfranco
  */
 public interface TurmaService extends AbstractService<Turma, Integer> {
+
+    public List<Turma> allOfProfessor(Professor professor);
     
 }

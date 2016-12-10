@@ -5,11 +5,13 @@
  */
 package br.ufg.jatai.fsw.sisquest.model;
 
-import br.ufg.jatai.fsw.sisquest.model.etapas.EtapaEvento;
 import java.io.Serializable;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -20,7 +22,7 @@ import java.util.List;
 @SuppressWarnings("PersistenceUnitPresent")
 public class Tarefa implements Serializable {
 
-    private static final long serialVersionUID = -8614032819378087155L;
+    private static final long serialVersionUID = -8612342342378087155L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,15 +37,14 @@ public class Tarefa implements Serializable {
     @ManyToOne
     private EtapaEvento etapaAtual;
 
-    @OneToMany
-    private List<EtapaEvento> etapaEventos;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<EtapaEvento> etapaEventos;
 
     private Integer tamanhoQuestoes;
 
-    @OneToMany(mappedBy = "tarefa")
-    private List<Questionario> questionarios;
-    @OneToOne(mappedBy = "tarefa")
-    private Questionario questionario;
+    @OneToMany(mappedBy = "tarefa",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Questionario> questionarios;
 
     /**
      *
@@ -61,7 +62,7 @@ public class Tarefa implements Serializable {
      * @param tamanhoQuestoes
      * @param questionarios
      */
-    public Tarefa(Integer id, String descricao, Turma turma, EtapaEvento etapaAtual, List<EtapaEvento> etapaEventos, Integer tamanhoQuestoes, List<Questionario> questionarios) {
+    public Tarefa(Integer id, String descricao, Turma turma, EtapaEvento etapaAtual, Set<EtapaEvento> etapaEventos, Integer tamanhoQuestoes, Set<Questionario> questionarios) {
         this.id = id;
         this.descricao = descricao;
         this.turma = turma;
@@ -139,7 +140,7 @@ public class Tarefa implements Serializable {
      *
      * @return
      */
-    public List<EtapaEvento> getEtapaEventos() {
+    public Set<EtapaEvento> getEtapaEventos() {
         return etapaEventos;
     }
 
@@ -147,7 +148,7 @@ public class Tarefa implements Serializable {
      *
      * @param etapaEventos
      */
-    public void setEtapaEventos(List<EtapaEvento> etapaEventos) {
+    public void setEtapaEventos(Set<EtapaEvento> etapaEventos) {
         this.etapaEventos = etapaEventos;
     }
 
@@ -171,7 +172,7 @@ public class Tarefa implements Serializable {
      *
      * @return
      */
-    public List<Questionario> getQuestionarios() {
+    public Set<Questionario> getQuestionarios() {
         return questionarios;
     }
 
@@ -179,7 +180,7 @@ public class Tarefa implements Serializable {
      *
      * @param questionarios
      */
-    public void setQuestionarios(List<Questionario> questionarios) {
+    public void setQuestionarios(Set<Questionario> questionarios) {
         this.questionarios = questionarios;
     }
 
@@ -238,14 +239,6 @@ public class Tarefa implements Serializable {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public Questionario getQuestionario() {
-        return questionario;
-    }
-
-    public void setQuestionario(Questionario questionario) {
-        this.questionario = questionario;
     }
 
 }

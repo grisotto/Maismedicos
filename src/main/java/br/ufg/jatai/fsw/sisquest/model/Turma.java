@@ -7,7 +7,7 @@ package br.ufg.jatai.fsw.sisquest.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -26,18 +26,18 @@ public class Turma implements Serializable {
     private String descricao;
 
 //    @ElementCollection
-    @OneToMany(mappedBy = "turma")
-    private List<Tarefa> tarefas;
+    @OneToMany(mappedBy = "turma",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<Tarefa> tarefas;
 
 //    @ElementCollection
-    @OneToMany
-    private List<Equipe> times;
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<Equipe> times;
 
     @ManyToOne
     private Professor professor;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Aluno> alunos;
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<Aluno> alunos;
 
     /**
      *
@@ -53,7 +53,7 @@ public class Turma implements Serializable {
      * @param tarefas
      * @param times
      */
-    public Turma(Integer id, String nome, String descricao, List<Tarefa> tarefas, List<Equipe> times) {
+    public Turma(Integer id, String nome, String descricao, Set<Tarefa> tarefas, Set<Equipe> times) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -113,7 +113,7 @@ public class Turma implements Serializable {
      *
      * @return
      */
-    public List<Tarefa> getTarefas() {
+    public Set<Tarefa> getTarefas() {
         return tarefas;
     }
 
@@ -121,7 +121,7 @@ public class Turma implements Serializable {
      *
      * @param tarefas
      */
-    public void setTarefas(List<Tarefa> tarefas) {
+    public void setTarefas(Set<Tarefa> tarefas) {
         this.tarefas = tarefas;
     }
 
@@ -129,7 +129,7 @@ public class Turma implements Serializable {
      *
      * @return
      */
-    public List<Equipe> getTimes() {
+    public Set<Equipe> getTimes() {
         return times;
     }
 
@@ -137,7 +137,7 @@ public class Turma implements Serializable {
      *
      * @param times
      */
-    public void setTimes(List<Equipe> times) {
+    public void setTimes(Set<Equipe> times) {
         this.times = times;
     }
 
@@ -190,11 +190,11 @@ public class Turma implements Serializable {
         this.professor = professor;
     }
 
-    public List<Aluno> getAlunos() {
+    public Set<Aluno> getAlunos() {
         return alunos;
     }
 
-    public void setAlunos(List<Aluno> alunos) {
+    public void setAlunos(Set<Aluno> alunos) {
         this.alunos = alunos;
     }
 

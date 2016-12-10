@@ -25,11 +25,13 @@ public class Questionario implements Serializable {
     @ManyToOne
     private Equipe time;
 
+
     @OneToMany(mappedBy = "questionario")
     private List<Questao> questoes;
-
-    @OneToOne
+    @ManyToOne
     private Tarefa tarefa;
+
+   
 
     /**
      *
@@ -105,13 +107,7 @@ public class Questionario implements Serializable {
         this.time = time;
     }
 
-    public Tarefa getTarefa() {
-        return tarefa;
-    }
-
-    public void setTarefa(Tarefa tarefa) {
-        this.tarefa = tarefa;
-    }
+   
 
     @Override
     public int hashCode() {
