@@ -20,6 +20,9 @@ and open the template in the editor.
                 <h1 class="page-header">Dashboard</h1>
 
             </div>
+            <p >Admin: <span th:text="${@sessaoUsuario.adminAutenticado}"></span></p>
+            <p >Professor: <span th:text="${@sessaoUsuario.professorAutenticado}"></span></p>
+            <p >Grupo: <span th:text="${@sessaoUsuario.grupoAutenticado}"></span></p>
 <!--            <div class="col-lg-12">
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary">

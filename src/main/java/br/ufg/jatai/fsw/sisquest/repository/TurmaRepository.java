@@ -5,14 +5,11 @@
  */
 package br.ufg.jatai.fsw.sisquest.repository;
 
-import br.ufg.jatai.fsw.sisquest.model.Professor;
 import br.ufg.jatai.fsw.sisquest.model.Turma;
 import java.io.Serializable;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
 /**
  *
