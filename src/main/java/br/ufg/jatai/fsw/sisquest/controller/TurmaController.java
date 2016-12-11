@@ -77,7 +77,8 @@ public class TurmaController implements Serializable {
     public String showTurma(@PathVariable Integer id, ModelMap map) {
         map.addAttribute("turma", tService.find(id));
         map.addAttribute("alunos", tService.find(id).getAlunos());
-
+        map.addAttribute("tarefas", tService.find(id).getTarefas());
+   
         //NUNCA MAIS FAZ ISSO DYEIMYS
         map.addAttribute("todosAlunos", aService.findAll());
 

@@ -183,17 +183,29 @@ and open the template in the editor.
                             <thead>
                                 <tr>
                                     <td style="">#</td>
-                                    <td style="">Situação</td>
+                                    <td style="">Título</td>
                                     <td style="">Questionarios</td>
+                                    <td style="">Descrição</td>
+                                    <td style="">Etapa Atual</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td colspan="3">Turma sem tarefas</td>
+
+                                <tr  th:if="${tarefas.empty}">
+                                    <td colspan="4">Turma sem Tarefas</td>
                                 </tr>
-<!--                                <tr data-th-each="a : ${alunos}">
-                                    <td th:text="${a.nome}">1</td>
-                                </tr>-->
+                                <tr data-th-each="t : ${tarefas}">
+                                    <td th:text="${t.titulo}">1</td>
+                                    <td th:text="${t.descrição}"></td>
+                                    <td th:text="${t.etapaAtual}"></td>
+                                    <td >
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a class="btn btn-sm  btn-danger fa fa-trash"/>
+                                            <a class="btn btn-sm  btn-primary fa fa-send"/>
+                                        </div>
+
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
 
