@@ -156,10 +156,10 @@ and open the template in the editor.
                             </thead>
                             <tbody>
 
-<!--                                <tr  th:if="${alunos.empty}">
+<!--                                <tr  th:if="${turma.alunos.empty}">
                                     <td colspan="4">Turma sem Alunos</td>
                                 </tr>-->
-                                <tr data-th-each="a : ${alunos}">
+                                <tr data-th-each="a : ${turma.alunos}">
                                     <td th:text="${a.nome}">1</td>
                                     <td th:text="${a.email}"></td>
                                     <td >5</td>
@@ -221,6 +221,11 @@ and open the template in the editor.
 
                                     </td>
                                 </tr>
+
+                                <tr data-th-each="a : ${turma.tarefas}">
+                                    <td th:text="${a.titulo}">1</td>
+                                </tr>
+
                             </tbody>
                         </table>
 

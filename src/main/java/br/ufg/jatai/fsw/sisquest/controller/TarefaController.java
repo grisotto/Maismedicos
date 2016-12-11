@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.sisquest.controller;
 
+import br.ufg.jatai.fsw.sisquest.SessaoUsuario;
 import br.ufg.jatai.fsw.sisquest.controller.modelForm.EtapasModel;
 import br.ufg.jatai.fsw.sisquest.model.Tarefa;
 import br.ufg.jatai.fsw.sisquest.service.TarefaService;
@@ -28,6 +29,8 @@ public class TarefaController {
 
     @Autowired
     private TarefaService tarefaService;
+    @Autowired
+    private SessaoUsuario sessaoUsuario;
 
     @GetMapping(value = {"/app/tarefa"})
     public String tarefaHome(final Tarefa tarefa) {
@@ -47,7 +50,7 @@ public class TarefaController {
 
     @ModelAttribute("allTarefas")
     public List<Tarefa> populateVisualizarProfessor() {
-        return this.tarefaService.findAll();
+        return this.tarefaService.allOfProfessor(sessaoUsuario.getProfessor());
 
     }
 

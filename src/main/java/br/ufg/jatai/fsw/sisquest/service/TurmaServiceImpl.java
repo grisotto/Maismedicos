@@ -5,13 +5,13 @@
  */
 package br.ufg.jatai.fsw.sisquest.service;
 
+import br.ufg.jatai.fsw.sisquest.model.Professor;
 import br.ufg.jatai.fsw.sisquest.model.Turma;
 import br.ufg.jatai.fsw.sisquest.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class TurmaServiceImpl implements TurmaService {
@@ -47,6 +47,11 @@ public class TurmaServiceImpl implements TurmaService {
     @Override
     public List<Turma> findAll() {
         return turmaRepository.findAll();
+    }
+
+    @Override
+    public List<Turma> allOfProfessor(Professor professor) {
+        return turmaRepository.findOfProfessor(professor.getId());
     }
 
 }
