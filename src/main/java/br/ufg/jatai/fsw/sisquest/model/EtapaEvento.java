@@ -126,7 +126,12 @@ public class EtapaEvento implements Serializable {
 
                     @Override
                     public Integer id() {
-                        return 10;
+                        return 1;
+                    }
+
+                    @Override
+                    public String toString() {
+                        return "Aguardando";
                     }
                 },
         /**
@@ -136,7 +141,12 @@ public class EtapaEvento implements Serializable {
 
                     @Override
                     public Integer id() {
-                        return 20;
+                        return 2;
+                    }
+
+                    @Override
+                    public String toString() {
+                        return "Esperando Submissão";
                     }
                 },
         /**
@@ -146,7 +156,12 @@ public class EtapaEvento implements Serializable {
 
                     @Override
                     public Integer id() {
-                        return 30;
+                        return 3;
+                    }
+
+                    @Override
+                    public String toString() {
+                        return "Validando Questões";
                     }
                 },
         /**
@@ -156,7 +171,12 @@ public class EtapaEvento implements Serializable {
 
                     @Override
                     public Integer id() {
-                        return 40;
+                        return 4;
+                    }
+
+                    @Override
+                    public String toString() {
+                        return "Respodendo";
                     }
                 },
         /**
@@ -166,11 +186,21 @@ public class EtapaEvento implements Serializable {
 
                     @Override
                     public Integer id() {
-                        return 50;
+                        return 5;
                     }
+
+                    @Override
+                    public String toString() {
+                        return "Finalizado";
+                    }
+
                 };
 
         public abstract Integer id();
+
+        @Override
+        public abstract String toString();
+
     }
 
     @Override

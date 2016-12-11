@@ -147,7 +147,7 @@ public class Turma implements Serializable {
         hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 17 * hash + (this.nome != null ? this.nome.hashCode() : 0);
         hash = 17 * hash + (this.descricao != null ? this.descricao.hashCode() : 0);
-        hash = 17 * hash + (this.tarefas != null ? this.tarefas.hashCode() : 0);
+//        hash = 17 * hash + (this.tarefas != null ? this.tarefas.hashCode() : 0);
         hash = 17 * hash + (this.times != null ? this.times.hashCode() : 0);
         return hash;
     }

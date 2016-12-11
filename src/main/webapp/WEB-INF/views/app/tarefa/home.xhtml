@@ -68,16 +68,18 @@ and open the template in the editor.
                         <thead>
                             <tr>
                                 <td>Descricao</td>
+                                <td>Turma</td>
                                 <td class=" text-center">Situação</td>
                                 <td class="col-lg-1"></td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:if="${allTarefas.empty}">
-                                <td colspan="3">Não existem turmas cadastrados</td>
+                                <td colspan="3">Não existem tarefas cadastrados</td>
                             </tr>
                             <tr th:each="t : ${allTarefas}">
                                 <td th:text="${t.descricao}">1</td>
+                                <td th:text="${t.turma.id}">1</td>
                                 <td class=" text-center text-warning"><span class="fa fa-circle fa-2x "></span></td>
                                 <td>
                                     <a  class="btn btn-success btn-sm "  th:href="@{/app/tarefa/}+${{t.id}}" >

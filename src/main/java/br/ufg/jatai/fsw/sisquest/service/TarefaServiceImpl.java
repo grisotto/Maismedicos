@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.sisquest.service;
 
+import br.ufg.jatai.fsw.sisquest.model.Professor;
 import br.ufg.jatai.fsw.sisquest.model.Tarefa;
 import br.ufg.jatai.fsw.sisquest.repository.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,11 @@ public class TarefaServiceImpl implements TarefaService {
     @Override
     public List<Tarefa> findAll() {
         return tarefaRepository.findAll();
+    }
+
+    @Override
+    public List<Tarefa> allOfProfessor(Professor professor) {
+        return tarefaRepository.findOfProfessor(professor.getId());
     }
 
 }

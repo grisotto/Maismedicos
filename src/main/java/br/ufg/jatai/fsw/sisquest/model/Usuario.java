@@ -104,7 +104,7 @@ public class Usuario implements Serializable {
     }
 
     public enum TipoUsuario {
-        PROFESSOR, GRUPO, ALUNO;
+        PROFESSOR, GRUPO, ALUNO, ADMIN;
     }
 
     public TipoUsuario getTipoUsuario() {
