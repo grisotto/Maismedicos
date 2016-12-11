@@ -22,7 +22,7 @@ and open the template in the editor.
                 <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" href="/app/turma"></a><b> Turma: </b>
                     <span class="text-muted" th:text="${{turma.nome}}"></span></h2>
             </div>
-<!--            <div class="col-md-12">
+            <div class="col-md-12 col-sm-8">
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -60,7 +60,10 @@ and open the template in the editor.
 
                     </div>
                 </div>
-            </div>-->
+            </div>
+
+
+
             <div class="col-lg-6">
                 <div class="panel panel-primary">
 
@@ -76,7 +79,7 @@ and open the template in the editor.
                     </div>
 
 
-                    <!--//capeta-->
+
                     <div class="panel-body">
                         <div class="form-group">
 
@@ -229,23 +232,40 @@ and open the template in the editor.
             <link href="/plugins/select2/css/select2.min.css" th:href="@{/plugins/select2/css/select2.min.css}" rel="stylesheet" media="screen" />
             <link href="/plugins/select2/css/select2_bootstrap.css" th:href="@{/plugins/select2/css/select2_bootstrap.css}" rel="stylesheet" media="screen" />
             <script src="/plugins/select2/js/select2.min.js" th:src="@{/plugins/select2/js/select2.full.min.js}"></script>
-            <script src="/plugins/select2/js/i18n/pt-BR.js"  th:src="@{/plugins/select2/js/i18n/pt-BR.js}"></script>
+            <!--<script src="/plugins/select2/js/i18n/pt-BR.js"  th:src="@{/plugins/select2/js/i18n/pt-BR.js}"></script>-->
 
 
             <script type="text/javascript">
+
                 $.fn.select2.defaults.set("theme", "bootstrap");
-                $.fn.select2.defaults.set('language', 'pt-BR');
-                $.fn.select2.defaults.set('allowClear', true);
-
-
-
-
+//                $.fn.select2.defaults.set('language', 'pt-BR');
+//                $.fn.select2.defaults.set('allowClear', true);
                 $("#aluno").select2({
-                    placeholder: "Selecione um aluno",
-                    allowclear: true
-                   
+                    placeholder: {
+                        id: "-1",
+                        placeholder: "Select an option"
+                    },
+//                    allowclear: true,
+                    language: {
+                        noResults: function (term) {
+//                            term = '<button data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm" type="submit">Aqui</button>';
+                                term = '<a href="/app/aluno"><i class="fa fa-male   fa-fw"></i> Alunos</a>';
+                            
+                            return "Não encontrou o aluno. Para cadastrar ele," + term ;
+
+//                            console.log(term);
+//                            console.log(event.target);
+//                            console.log(event.target.value);
+                        }
+                    },
+                    escapeMarkup: function (markup) {
+                        return markup;
+                    }
+
 
                 });
+
+
 
 
             </script>
