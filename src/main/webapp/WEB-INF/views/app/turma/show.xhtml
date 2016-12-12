@@ -14,6 +14,11 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+        <script type="text/css">
+            select2-selection--single{
+
+            }
+        </script>
 
     </head>
     <body>
@@ -89,7 +94,7 @@ and open the template in the editor.
 
 
                                 <div class="input-group">
-                                    <input hidden="true" name="turmaID" th:value="${turma.id}"/>
+                                    <input hidden="true" name="turmaID" th:value="${turma}"/>
                                     <select  name="alunoID" data-placeholder="Selecione um aluno" class="form-control " id="aluno" >
                                         <option  th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
                                     </select>
@@ -124,7 +129,7 @@ and open the template in the editor.
 
 
                                                 <div class="form-group">
-                                                    <select  name="alunoID" class="form-control " id="aluno" >
+                                                    <select  th:name="alunoID" class="form-control " id="aluno" >
                                                         <option  th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
                                                     </select>
 
@@ -194,40 +199,40 @@ and open the template in the editor.
 
                     <div class="panel-body">
 
-                        <table class="table table-condensed table-striped">
-                            <thead>
-                                <tr>
-                                    <td style="">#</td>
-                                    <td style="">Título</td>
-                                    <td style="">Questionarios</td>
-                                    <td style="">Descrição</td>
-                                    <td style="">Etapa Atual</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <tr  th:if="${tarefas.empty}">
-                                    <td colspan="4">Turma sem Tarefas</td>
-                                </tr>
-                                <tr data-th-each="t : ${tarefas}">
-                                    <td th:text="${t.titulo}">1</td>
-                                    <td th:text="${t.descrição}"></td>
-                                    <td th:text="${t.etapaAtual}"></td>
-                                    <td >
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a class="btn btn-sm  btn-danger fa fa-trash"/>
-                                            <a class="btn btn-sm  btn-primary fa fa-send"/>
-                                        </div>
-
-                                    </td>
-                                </tr>
-
-                                <tr data-th-each="a : ${turma.tarefas}">
-                                    <td th:text="${a.titulo}">1</td>
-                                </tr>
-
-                            </tbody>
-                        </table>
+                        <!--                        <table class="table table-condensed table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <td style="">#</td>
+                                                            <td style="">Título</td>
+                                                            <td style="">Questionarios</td>
+                                                            <td style="">Descrição</td>
+                                                            <td style="">Etapa Atual</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                        
+                                                        <tr  th:if="${turma.tarefas.empty}">
+                                                            <td colspan="4">Turma sem Tarefas</td>
+                                                        </tr>
+                                                        <tr data-th-each="t : ${turma.tarefas}">
+                                                            <td th:text="${t.titulo}">1</td>
+                                                            <td th:text="${t.descrição}"></td>
+                                                            <td th:text="${t.etapaAtual}"></td>
+                                                            <td >
+                                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                                    <a class="btn btn-sm  btn-danger fa fa-trash"/>
+                                                                    <a class="btn btn-sm  btn-primary fa fa-send"/>
+                                                                </div>
+                        
+                                                            </td>
+                                                        </tr>
+                        
+                                                        <tr data-th-each="a : ${turma.tarefas}">
+                                                            <td th:text="${a.titulo}">1</td>
+                                                        </tr>
+                        
+                                                    </tbody>
+                                                </table>-->
 
                     </div>
 
@@ -249,39 +254,42 @@ and open the template in the editor.
             <link href="/plugins/select2/css/select2.min.css" th:href="@{/plugins/select2/css/select2.min.css}" rel="stylesheet" media="screen" />
             <link href="/plugins/select2/css/select2_bootstrap.css" th:href="@{/plugins/select2/css/select2_bootstrap.css}" rel="stylesheet" media="screen" />
             <script src="/plugins/select2/js/select2.min.js" th:src="@{/plugins/select2/js/select2.full.min.js}"></script>
+
             <!--<script src="/plugins/select2/js/i18n/pt-BR.js"  th:src="@{/plugins/select2/js/i18n/pt-BR.js}"></script>-->
 
 
             <script type="text/javascript">
 
-                $.fn.select2.defaults.set("theme", "bootstrap");
+$.fn.select2.defaults.set("theme", "bootstrap");
 //                $.fn.select2.defaults.set('language', 'pt-BR');
 //                $.fn.select2.defaults.set('allowClear', true);
-                $("#aluno").select2({
-                    placeholder: {
-                        id: "-1",
-                        placeholder: "Select an option"
-                    },
+
+$("#aluno").select2({
+    placeholder: {
+        id: "-1",
+        placeholder: "Select an option"
+    },
 //                    allowclear: true,
-                    language: {
-                        noResults: function (term) {
+    language: {
+        noResults: function (term) {
 //                            term = '<button data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm" type="submit">Aqui</button>';
-                                term = '<a href="/app/aluno"><i class="fa fa-male   fa-fw"></i> Alunos</a>';
-                            
-                            return "Não encontrou o aluno. Para cadastrar ele," + term ;
+            term = '<a href="/app/aluno"><i class="fa fa-male   fa-fw"></i> Alunos</a>';
+
+            return "Não foi encontrado o aluno, apara cadastrar acesse: " + term;
 
 //                            console.log(term);
 //                            console.log(event.target);
 //                            console.log(event.target.value);
-                        }
-                    },
-                    escapeMarkup: function (markup) {
-                        return markup;
-                    }
+        }
+    },
+    escapeMarkup: function (markup) {
+        return markup;
+    }
 
 
-                });
-
+});
+var a = $(".select2-selection").addClass("form-control");
+var a = $(".select2-selection").removeClass("select2-selection--single");
 
 
 

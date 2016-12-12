@@ -189,7 +189,7 @@ public class Tarefa implements Serializable {
         int hash = 7;
         hash = 79 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 79 * hash + (this.descricao != null ? this.descricao.hashCode() : 0);
-        hash = 79 * hash + (this.turma != null ? this.turma.hashCode() : 0);
+//        hash = 79 * hash + (this.turma != null ? this.turma.hashCode() : 0);
         hash = 79 * hash + (this.etapaAtual != null ? this.etapaAtual.hashCode() : 0);
         hash = 79 * hash + (this.etapaEventos != null ? this.etapaEventos.hashCode() : 0);
         hash = 79 * hash + (this.tamanhoQuestoes != null ? this.tamanhoQuestoes.hashCode() : 0);

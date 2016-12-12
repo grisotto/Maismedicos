@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -33,10 +34,10 @@ public class EtapaEvento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-//    @DateTimeFormat(pattern = "dd/MM/yyyy")
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataInicial;
-//    @DateTimeFormat(pattern = "dd/MM/yyyy")
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataFinal;
 

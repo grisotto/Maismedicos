@@ -44,8 +44,11 @@ and open the template in the editor.
                                 <tr data-th-each="e : ${tarefa.etapaEventos}">
                                     <td th:text="${e.id}">1</td>
                                     <td th:text="${e.tipo}">1</td>
-                                    <td th:text="${e.dataInicial}">1</td>
-                                    <td th:text="${e.dataFinal}">1</td>
+                                    <!--<td th:text="${e.dataInicial}">1</td>-->
+                                    <td th:text="${#dates.format(e.dataInicial, 'dd/MM/yyyy')}">1</td>
+                                    <!--<td th:text="${e.dataInicial}">1</td>-->
+                                    <td th:text="${#dates.format(e.dataFinal, 'dd/MM/yyyy')}">1</td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
