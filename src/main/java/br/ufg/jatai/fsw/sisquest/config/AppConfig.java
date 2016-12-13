@@ -2,12 +2,14 @@ package br.ufg.jatai.fsw.sisquest.config;
 
 import br.ufg.jatai.fsw.sisquest.AutorizacaoInterceptor;
 import br.ufg.jatai.fsw.sisquest.LoginInterceptor;
+import br.ufg.jatai.fsw.sisquest.formatter.TurmaFormatter;
 import java.util.Properties;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -82,7 +85,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         templateResolver.setSuffix(VIEW_RESOLVER_SUFFIX);
         templateResolver.setTemplateMode("HTML5");
         templateResolver.setCacheable(false);
-
 
         return templateResolver;
     }
@@ -170,5 +172,13 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         log.warn("Registrando o Bagulho");
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/app/**");
         registry.addInterceptor(new AutorizacaoInterceptor()).addPathPatterns("/app/**");
+    }
+
+    @Autowired //Without autowire, this solution may not work
+    private TurmaFormatter turmaFormatter;
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(turmaFormatter);
     }
 }

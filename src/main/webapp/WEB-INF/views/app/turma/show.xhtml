@@ -14,7 +14,11 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+        <script type="text/css">
+            select2-selection--single{
 
+            }
+        </script>
 
     </head>
     <body>
@@ -23,7 +27,7 @@ and open the template in the editor.
                 <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" href="/app/turma"></a><b> Turma: </b>
                     <span class="text-muted" th:text="${{turma.nome}}"></span></h2>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-8">
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -62,6 +66,9 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
+
+
+
             <div class="col-lg-6">
                 <div class="panel panel-primary">
 
@@ -70,25 +77,36 @@ and open the template in the editor.
 
                             <i class="fa fa-users fa-fw"></i>Alunos
                         </span>
-                        <button data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm pull-right" type="submit">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </button>
-                        <div class="clearfix"></div>
+                        <!--                        <button data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm pull-right" type="submit">
+                                                    <i class="glyphicon glyphicon-plus"></i>
+                                                </button>-->
+                        <!--                        <div class="clearfix"></div>-->
                     </div>
+
+
 
                     <div class="panel-body">
                         <div class="form-group">
-                            <!--<label class="col-lg-12"> Aluno</label>-->
-                            <!--                            <div class="input-group">
-                                                            <select class="form-control " id="aluno" >
-                                                                <option th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
-                                                            </select>
-                                                            <div class="input-group-btn">
-                                                                <button class="btn btn-success" type="submit">
-                                                                    <i class="glyphicon glyphicon-plus"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>-->
+
+
+                            <label> Aluno</label>
+                            <form  name="alunoSalvar" action="#" th:action="@{/app/turma/add/aluno}" method="POST">
+
+
+                                <div class="input-group">
+                                    <input hidden="true" name="turmaID" th:value="${turma}"/>
+                                    <select  name="alunoID" data-placeholder="Selecione um aluno" class="form-control " id="aluno" >
+                                        <option  th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
+                                    </select>
+
+                                    <div class="input-group-btn">
+                                        <button type="submit" name="save"  value="Salvar"  class="btn btn-sm btn-success" ><i class="glyphicon glyphicon-plus"></i></button>
+                                    </div>
+
+
+
+                                </div>
+                            </form>
 
 
 
@@ -101,6 +119,8 @@ and open the template in the editor.
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             <h4 class="modal-title">Adicionar Aunos</h4>
                                         </div>
+
+
                                         <form  action="#" th:action="@{/app/turma/add/aluno}" method="POST">
                                             <div class="modal-body">
                                                 <label class="col-lg-12">Aluno</label>
@@ -109,7 +129,7 @@ and open the template in the editor.
 
 
                                                 <div class="form-group">
-                                                    <select  name="alunoID" class="form-control " id="aluno" >
+                                                    <select  th:name="alunoID" class="form-control " id="aluno" >
                                                         <option  th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
                                                     </select>
 
@@ -179,23 +199,40 @@ and open the template in the editor.
 
                     <div class="panel-body">
 
-                        <table class="table table-condensed table-striped">
-                            <thead>
-                                <tr>
-                                    <td style="">#</td>
-                                    <td style="">Situação</td>
-                                    <td style="">Questionarios</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td colspan="3">Turma sem tarefas</td>
-                                </tr>
-                                <tr data-th-each="a : ${turma.tarefas}">
-                                    <td th:text="${a.titulo}">1</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <!--                        <table class="table table-condensed table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <td style="">#</td>
+                                                            <td style="">Título</td>
+                                                            <td style="">Questionarios</td>
+                                                            <td style="">Descrição</td>
+                                                            <td style="">Etapa Atual</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                        
+                                                        <tr  th:if="${turma.tarefas.empty}">
+                                                            <td colspan="4">Turma sem Tarefas</td>
+                                                        </tr>
+                                                        <tr data-th-each="t : ${turma.tarefas}">
+                                                            <td th:text="${t.titulo}">1</td>
+                                                            <td th:text="${t.descrição}"></td>
+                                                            <td th:text="${t.etapaAtual}"></td>
+                                                            <td >
+                                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                                    <a class="btn btn-sm  btn-danger fa fa-trash"/>
+                                                                    <a class="btn btn-sm  btn-primary fa fa-send"/>
+                                                                </div>
+                        
+                                                            </td>
+                                                        </tr>
+                        
+                                                        <tr data-th-each="a : ${turma.tarefas}">
+                                                            <td th:text="${a.titulo}">1</td>
+                                                        </tr>
+                        
+                                                    </tbody>
+                                                </table>-->
 
                     </div>
 
@@ -206,5 +243,60 @@ and open the template in the editor.
             </div>
         </div>
 
+
+
+
+
+
+
+        <div th:fragment="customCSS">
+
+            <link href="/plugins/select2/css/select2.min.css" th:href="@{/plugins/select2/css/select2.min.css}" rel="stylesheet" media="screen" />
+            <link href="/plugins/select2/css/select2_bootstrap.css" th:href="@{/plugins/select2/css/select2_bootstrap.css}" rel="stylesheet" media="screen" />
+            <script src="/plugins/select2/js/select2.min.js" th:src="@{/plugins/select2/js/select2.full.min.js}"></script>
+
+            <!--<script src="/plugins/select2/js/i18n/pt-BR.js"  th:src="@{/plugins/select2/js/i18n/pt-BR.js}"></script>-->
+
+
+            <script type="text/javascript">
+
+$.fn.select2.defaults.set("theme", "bootstrap");
+//                $.fn.select2.defaults.set('language', 'pt-BR');
+//                $.fn.select2.defaults.set('allowClear', true);
+
+$("#aluno").select2({
+    placeholder: {
+        id: "-1",
+        placeholder: "Select an option"
+    },
+//                    allowclear: true,
+    language: {
+        noResults: function (term) {
+//                            term = '<button data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm" type="submit">Aqui</button>';
+            term = '<a href="/app/aluno"><i class="fa fa-male   fa-fw"></i> Alunos</a>';
+
+            return "Não foi encontrado o aluno, apara cadastrar acesse: " + term;
+
+//                            console.log(term);
+//                            console.log(event.target);
+//                            console.log(event.target.value);
+        }
+    },
+    escapeMarkup: function (markup) {
+        return markup;
+    }
+
+
+});
+$(".select2-selection").addClass("form-control");
+ $(".select2-selection").removeClass("select2-selection--single");
+
+
+
+            </script>
+
+
+
+        </div>
     </body>
 </html>

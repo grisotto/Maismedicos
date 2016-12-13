@@ -75,8 +75,12 @@ public class TurmaController implements Serializable {
 
     @GetMapping(value = "/app/turma/{id}")
     public String showTurma(@PathVariable Integer id, ModelMap map) {
+
         map.addAttribute("turma", facade.findTurma(id));
 
+//        map.addAttribute("turma", tService.find(id));
+//        map.addAttribute("alunos", tService.find(id).getAlunos());
+//        map.addAttribute("tarefas", tService.find(id).getTarefas());
         //NUNCA MAIS FAZ ISSO DYEIMYS
         map.addAttribute("todosAlunos", aService.findAll());
 
@@ -84,8 +88,8 @@ public class TurmaController implements Serializable {
     }
 
     @PostMapping(value = "/app/turma/add/aluno", params = {"save"})
-    public String adicionarAuluno(Integer turmaID, Integer alunoID, ModelMap map) {
-
+    public String adicionarAuluno(@Valid Integer turmaID, @Valid Integer alunoID, ModelMap map) {
+        System.out.println("ENTROU AQUI");
         Turma insertAluno = facade.insertAluno(turmaID, alunoID);
 
         map.addAttribute("turma", insertAluno);

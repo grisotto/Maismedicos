@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.sisquest.controller;
 
+import br.ufg.jatai.fsw.sisquest.annotations.Permissao;
 import java.util.List;
 
 import br.ufg.jatai.fsw.sisquest.model.Professor;
@@ -16,42 +17,44 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import br.ufg.jatai.fsw.sisquest.service.ProfessorServiceImpl;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
  * @author rafael
  */
+@Permissao(Usuario.TipoUsuario.ADMIN)
 @Controller
+
 public class ProfessorController implements Serializable {
-    
+
     private static Logger log = LoggerFactory.getLogger(ProfessorController.class.getName());
-    
+
     @Autowired
     private ProfessorService service;
-    
+
     @ModelAttribute("allProfessores")
     public List<Professor> populateVisualizarProfessor() {
         return this.service.findAll();
-        
+
     }
-    
+
+    @Permissao(Usuario.TipoUsuario.ADMIN)
     @RequestMapping(value = "/app/professor")
     public String professorHome(final Professor professor) {
         return "/app/professor/home";
     }
-    
+
+    @Permissao(Usuario.TipoUsuario.ADMIN)
     @PostMapping(value = "/app/professor", params = {"save"})
     public String saveProfessor(@Valid final Professor professor, final BindingResult bindingResult, final ModelMap model) {
 //        bindingResult.addError(new FieldError("Professor", "professor.usuario.senha", "Deu merda"));
         if (bindingResult.hasErrors()) {
-            model.addAttribute("professor", professor);            
+            model.addAttribute("professor", professor);
             return "/app/professor/home";
         }
         professor.getUsuario().setTipoUsuario(Usuario.TipoUsuario.PROFESSOR);
@@ -59,9 +62,9 @@ public class ProfessorController implements Serializable {
         log.error(professor.toString());
 
         this.service.inserir(professor);
-//        model.clear();
+        model.clear();
         return "redirect:/app/professor";
-        
+
     }
-    
+
 }
