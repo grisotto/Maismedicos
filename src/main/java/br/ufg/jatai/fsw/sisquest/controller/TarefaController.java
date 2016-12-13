@@ -28,55 +28,56 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class TarefaController {
-    
+
     @Autowired
     private TarefaService tarefaService;
     @Autowired
     private TurmaService turmaService;
     @Autowired
     private SessaoUsuario sessaoUsuario;
-    
+
     @GetMapping(value = {"/app/tarefa"})
     public String tarefaHome(final Tarefa tarefa) {
         return "/app/tarefa/home";
     }
-    
+
     @PostMapping(value = "/app/tarefa", params = {"save"})
     public String saveTarefa(@Valid final Tarefa tarefa, final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("tarefa", tarefa);
             return "/app/tarefa/home";
         }
-        
+
         tarefa.setTurma(turmaService.find(tarefa.getTurma().getId()));
-       
+
         tarefaService.inserir(tarefa);
         return "redirect:/app/tarefa";
     }
-    
+
     @ModelAttribute("allTarefas")
     public List<Tarefa> populateVisualizarProfessor() {
         return this.tarefaService.allOfProfessor(sessaoUsuario.getProfessor());
-        
+
     }
-    
+
     @ModelAttribute("allTurmas")
     public List<Turma> todasTurmas() {
+        System.out.println("ENTROU NO ALL TURMAS");
         return this.turmaService.allOfProfessor(sessaoUsuario.getProfessor());
-        
+
     }
-    
+
     @GetMapping(value = "/app/tarefa/{id}")
     public String showTurma(@PathVariable Integer id, ModelMap map, final EtapasModel etapas) {
         Tarefa find = tarefaService.find(id);
         map.addAttribute("tarefa", find);
-        
+
         map.addAttribute("etapas", new EtapasModel().buildeOvjeto(find.getEtapaEventos()));
 
         System.out.println(id);
         return "/app/tarefa/show";
     }
-    
+
     @PostMapping(value = {"/app/tarefa/etapas"}, params = {"save"})
     public String atualizaData(@Valid Integer idTarefa, @Valid EtapasModel etapas,
             final BindingResult bindingResult, final ModelMap model) {
@@ -86,13 +87,13 @@ public class TarefaController {
         System.out.println(etapas.getValidandoQuestoes().getTipo());
         System.out.println(etapas.getRespondendo().getTipo());
         System.out.println(etapas.getFinalizado().getTipo());
-        
+
         Tarefa find = tarefaService.find(idTarefa);
         find.getEtapaEventos().addAll(etapas.buildeLista());
-        
+
         tarefaService.atualizar(find);
-        
+
         return "redirect:/app/tarefa/" + idTarefa;
     }
-    
+
 }

@@ -43,11 +43,11 @@ and open the template in the editor.
                                 <tr  th:each="e : ${tarefa.etapaEventos}">
                                     <td th:text="${e.tipo.id()}">1</td>
                                     <td th:text="${e.tipo}">1</td>
-                                    <!--<td th:text="${e.dataInicial}">1</td>-->
-                                    <td th:text="${#dates.format(e.dataInicial, 'dd/MM/yyyy')}">1</td>
-                                    <!--<td th:text="${e.dataInicial}">1</td>-->
-                                    <td th:text="${#dates.format(e.dataFinal, 'dd/MM/yyyy')}">1</td>
-                                    
+                                    <td th:text="${e.dataInicial}">1</td>
+                                    <!--<td th:text="${#dates.format(e.dataInicial, 'dd/MM/yyyy')}">1</td>-->
+                                    <td  th:text="${e.dataInicial}">1</td>
+                                    <!--<td th:text="${#dates.format(e.dataFinal, 'dd/MM/yyyy')}">1</td>-->
+
                                 </tr>
                             </tbody>
                         </table>
@@ -124,20 +124,40 @@ and open the template in the editor.
                         <span class="panel-title">
                             <i class="fa fa-group fa-fw"></i><span class=""> Grupos</span>
                         </span>
+                        <div th:if="${!tarefa.etapaEventos.empty}" class="pull-right">
+                            <a class="btn btn-sm btn-default "><span class="fa fa-plus"></span> Adiociona Grupo</a>
+
+                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="alert alert-warning"  th:if="${tarefa.etapaEventos.empty}">
                             <b>Atenção</b>
                             <p>Antes de criar grupos é nescessário que você defina as datas referente a cada estapa da tarefa</p>
                         </div>
+                        <table  class="table table-responsive ">
+                            <thead>
+                                <tr>
+                                    <th>Nome </th>
+                                    <th class="col-md-3 text-center">Qnt. Part</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Beta</td>
+                                    <td class="col-md-3 text-center">5</td>
+                                </tr>
 
+                            </tbody>
+                        </table>
                     </div>
+
+
+
                 </div>
 
             </div>
 
             <div class="col-lg-6">
-
 
             </div>
         </div>
