@@ -265,11 +265,11 @@
                             <li>
                                 <a href="/app"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
-                            <li>
+                            <li  th:if="${@sessaoUsuario.adminAutenticado}">
                                 <a href="/app/professor"><i class="fa fa-graduation-cap fa-fw"></i> Professores</a>
 
                             </li>
-                            <li>
+                            <li  th:if="${@sessaoUsuario.professorAutenticado or @sessaoUsuario.adminAutenticado}">
                                 <a href="/app/aluno"><i class="fa fa-male   fa-fw"></i> Alunos</a>
                                 <!--                                <ul class="nav nav-second-level">
                                                                     <li>
@@ -281,7 +281,7 @@
                                                                 </ul>-->
                                 <!-- /.nav-second-level -->
                             </li>
-                            <li>
+                            <li  th:if="${@sessaoUsuario.professorAutenticado}">
                                 <a href="/app/turma/"><i class="fa fa-users fa-fw"></i> Turmas</a>
                             </li>
                             <!--                            <li>
@@ -297,7 +297,7 @@
                                                              /.nav-second-level 
                                                         </li>-->
 
-                            <li>
+                            <li  th:if="${@sessaoUsuario.professorAutenticado}">
                                 <a href="/app/tarefa/"><i class="fa fa-tasks fa-fw"></i> Tarefas</a>
                             </li>
 
