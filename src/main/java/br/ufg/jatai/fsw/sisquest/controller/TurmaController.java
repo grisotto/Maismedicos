@@ -8,6 +8,7 @@ package br.ufg.jatai.fsw.sisquest.controller;
 import br.ufg.jatai.fsw.sisquest.annotations.Permissao;
 import br.ufg.jatai.fsw.sisquest.facade.TurmaFacade;
 import br.ufg.jatai.fsw.sisquest.model.Aluno;
+import br.ufg.jatai.fsw.sisquest.model.Tarefa;
 import br.ufg.jatai.fsw.sisquest.model.Turma;
 import br.ufg.jatai.fsw.sisquest.model.Usuario;
 import br.ufg.jatai.fsw.sisquest.service.AlunoService;
@@ -85,6 +86,11 @@ public class TurmaController implements Serializable {
         map.addAttribute("todosAlunos", aService.findAll());
 
         return "/app/turma/show";
+    }
+
+     @ModelAttribute("todasTarefas")
+    public List<Tarefa> todasTarefas() {
+        return facade.tarefasOfProfessor();
     }
 
     @PostMapping(value = "/app/turma/add/aluno", params = {"save"})
