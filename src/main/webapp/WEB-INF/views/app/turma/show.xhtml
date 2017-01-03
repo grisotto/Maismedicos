@@ -50,12 +50,12 @@ and open the template in the editor.
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label" for="alunos">Alunos:</label>
-                                <span class="form-control-static" th:text="0"></span>
+                                <span class="form-control-static" th:text="${turma.alunos.size()}"> 0</span>
 
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label" for="tarefas">Tarefas: </label>
-                                <span class="form-control-static" th:text="0"></span>
+                                <span class="form-control-static" th:text="${turma.tarefas.size()}">0</span>
 
                             </div>
                         </div>
