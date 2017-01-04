@@ -18,4 +18,5 @@ public interface TarefaService extends AbstractService<Tarefa, Integer> {
 
     public List<Tarefa> allOfProfessor(Professor professor);
 
+
 }

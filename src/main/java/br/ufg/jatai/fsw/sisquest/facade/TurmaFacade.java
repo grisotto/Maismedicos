@@ -8,8 +8,10 @@ package br.ufg.jatai.fsw.sisquest.facade;
 import br.ufg.jatai.fsw.sisquest.SessaoUsuario;
 import br.ufg.jatai.fsw.sisquest.model.Aluno;
 import br.ufg.jatai.fsw.sisquest.model.Professor;
+import br.ufg.jatai.fsw.sisquest.model.Tarefa;
 import br.ufg.jatai.fsw.sisquest.model.Turma;
 import br.ufg.jatai.fsw.sisquest.service.AlunoService;
+import br.ufg.jatai.fsw.sisquest.service.TarefaService;
 import br.ufg.jatai.fsw.sisquest.service.TurmaService;
 import java.io.Serializable;
 import java.util.List;
@@ -27,6 +29,8 @@ public class TurmaFacade implements Serializable {
     private TurmaService turmaService;
     @Autowired
     private AlunoService alunoService;
+    @Autowired
+    private TarefaService tarefaService;
 
     @Autowired
     private SessaoUsuario sessaoUsuario;
@@ -64,6 +68,10 @@ public class TurmaFacade implements Serializable {
                 turmaService.find(idTurma),
                 alunoService.find(idAluno)
         );
+    }
+
+    public List<Tarefa> tarefasOfProfessor() {
+        return tarefaService.allOfProfessor(sessaoUsuario.getProfessor());
     }
 
 }
