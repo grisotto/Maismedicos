@@ -93,7 +93,7 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>bower</executable>
+                            <executable>exec:exec@bower</executable>
                             <arguments>
                                 <argument>install</argument>
                             </arguments>
@@ -107,7 +107,7 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>  
-                            <executable>gulp</executable>
+                            <executable>exec:exec@gulp</executable>
                             <arguments>
                                 <argument>--color</argument>
                             </arguments>

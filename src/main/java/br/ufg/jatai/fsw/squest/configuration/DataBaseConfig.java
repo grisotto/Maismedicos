@@ -39,6 +39,7 @@ public class DataBaseConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DataBaseConfig.class);
 
+
     @Bean
     public DataSource dataSourceH2() {
         DataSource build = DataSourceBuilder.create()
@@ -114,7 +115,7 @@ public class DataBaseConfig {
             Professor p = new Professor();
             p.setNome("Professor Algusto");
             p.setEmail("professor@email.com");
-            p.setUsuario(new Usuario("professor", "123"));
+            p.setUsuario(new Usuario("professor", "123", Usuario.TipoUsuario.PROFESSOR));
             LOGGER.info("Inserindo P1" + p);
             Professor professor = professorService.inserir(p);
 

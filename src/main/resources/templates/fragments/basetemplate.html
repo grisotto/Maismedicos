@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       th:fragment="page">
 
     <head>
@@ -265,7 +266,7 @@
                             <li>
                                 <a href="/app"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
-                            <li>
+                            <li sec:authorize="hasAuthority('ADMIN')">
                                 <a href="/app/professor"><i class="fa fa-graduation-cap fa-fw"></i> Professores</a>
 
                             </li>
@@ -282,7 +283,7 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <li >
-                                <a href="/app/turma/"><i class="fa fa-users fa-fw"></i> Turmas</a>
+                                <a sec:authorize="hasAuthority('PROFESSOR')" href="/app/turma/"><i class="fa fa-users fa-fw"></i> Turmas</a>
                             </li>
                             <!--                            <li>
                                                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Turmas<span class="fa arrow"></span></a>
@@ -298,7 +299,7 @@
                                                         </li>-->
 
                             <li >
-                                <a href="/app/tarefa/"><i class="fa fa-tasks fa-fw"></i> Tarefas</a>
+                                <a sec:authorize="hasAuthority('PROFESSOR')" href="/app/tarefa/"><i class="fa fa-tasks fa-fw"></i> Tarefas</a>
                             </li>
 
                             <!--                            <li>

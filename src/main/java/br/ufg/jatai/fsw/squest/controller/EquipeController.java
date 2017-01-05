@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 
-public class TeamController implements Serializable {
+public class EquipeController implements Serializable {
 
-    private static Logger log = LoggerFactory.getLogger(TeamController.class.getName());
+    private static Logger log = LoggerFactory.getLogger(EquipeController.class.getName());
 
     /**
      *

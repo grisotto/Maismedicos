@@ -54,11 +54,11 @@ public class TurmaFacade implements Serializable {
      */
 
     public List<Turma> turmasOfProfessor() {
-        return this.turmasOfProfessor(autenticateUser.getUsuario().getProfessor());
+        return this.turmasOfProfessor(autenticateUser.getProfessor());
     }
 
     public Turma createTurma(Turma turma) {
-        turma.setProfessor(autenticateUser.getUsuario().getProfessor());
+        turma.setProfessor(autenticateUser.getProfessor());
         return turmaService.inserir(turma);
     }
 
@@ -79,7 +79,7 @@ public class TurmaFacade implements Serializable {
     }
 
     public List<Tarefa> tarefasOfProfessor() {
-        return tarefaService.allOfProfessor(autenticateUser.getUsuario().getProfessor());
+        return tarefaService.allOfProfessor(autenticateUser.getProfessor());
     }
 
 }

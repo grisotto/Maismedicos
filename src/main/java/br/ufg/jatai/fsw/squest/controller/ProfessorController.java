@@ -13,6 +13,8 @@ import br.ufg.jatai.fsw.squest.service.ProfessorService;
 import java.io.Serializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author rafael
  */
 @Controller
+@PreAuthorize("hasAuthority('ADMIN')")
 public class ProfessorController implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(ProfessorController.class.getName());
@@ -40,11 +43,11 @@ public class ProfessorController implements Serializable {
 
     }
 
-
     @RequestMapping(value = "/app/professor")
     public String professorHome(final Professor professor) {
         return "/app/professor/home";
     }
+
 
     @PostMapping(value = "/app/professor", params = {"save"})
     public String saveProfessor(@Valid final Professor professor, final BindingResult bindingResult, final ModelMap model) {

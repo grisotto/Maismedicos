@@ -45,6 +45,8 @@ public class Tarefa implements Serializable {
 
     @OneToMany(mappedBy = "tarefa",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Questionario> questionarios;
+    @OneToMany(mappedBy = "tarefa")
+    private List<Equipe> equipes;
 
     /**
      *
@@ -184,6 +186,9 @@ public class Tarefa implements Serializable {
         this.questionarios = questionarios;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -240,5 +245,14 @@ public class Tarefa implements Serializable {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+
+    public List<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(List<Equipe> equipes) {
+        this.equipes = equipes;
+    }
+    
 
 }

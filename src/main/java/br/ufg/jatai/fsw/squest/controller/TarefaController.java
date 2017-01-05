@@ -14,6 +14,7 @@ import br.ufg.jatai.fsw.squest.service.TurmaService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author dyeimys
  */
 @Controller
+@PreAuthorize("hasAuthority('PROFESSOR')")
 public class TarefaController {
 
     @Autowired
@@ -58,14 +60,14 @@ public class TarefaController {
 
     @ModelAttribute("allTarefas")
     public List<Tarefa> populateVisualizarProfessor() {
-        return this.tarefaService.allOfProfessor(autenticateUser.getUsuario().getProfessor());
+        return this.tarefaService.allOfProfessor(autenticateUser.getProfessor());
 
     }
 
     @ModelAttribute("allTurmas")
     public List<Turma> todasTurmas() {
         System.out.println("ENTROU NO ALL TURMAS");
-        return this.turmaService.allOfProfessor(autenticateUser.getUsuario().getProfessor());
+        return this.turmaService.allOfProfessor(autenticateUser.getProfessor());
 
     }
 

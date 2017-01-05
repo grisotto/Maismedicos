@@ -25,7 +25,6 @@ public class HomeController {
     @RequestMapping("/")
     public String home() {
         log.debug("Funcionando");
-//        p.save(new Pessoa(0, "Noem"));
         return "/home/index";
     }
 
@@ -33,12 +32,6 @@ public class HomeController {
     public String login() {
         return "/home/login";
     }
-//
-//    @RequestMapping(value = "/entrar")
-//    public String entrar(String nome, HttpSession session, HttpServletResponse response) throws IOException {
-//        session.setAttribute("usuarioLogado", new Usuario());
-//        response.sendRedirect("/app");
-//        return "/app/dash";
-//    }
+
 
 }

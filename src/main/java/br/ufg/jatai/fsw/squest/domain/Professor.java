@@ -66,6 +66,7 @@ public class Professor extends Pessoa {
         this.usuario = usuario;
     }
 
+
     @Override
     public int hashCode() {
         int hash = 5;

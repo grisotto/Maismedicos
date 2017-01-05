@@ -37,9 +37,18 @@ public class Usuario implements Serializable {
     private TipoUsuario tipoUsuario;
 
     @OneToOne(mappedBy = "usuario")
+    private Equipe equipe;
+
+    @OneToOne(mappedBy = "usuario")
     private Professor professor;
 
     public Usuario() {
+    }
+
+    public Usuario(String login, String senha, TipoUsuario tipoUsuario) {
+        this.login = login;
+        this.senha = senha;
+        this.tipoUsuario = tipoUsuario;
     }
 
     public Usuario(Integer id, String login, String senha) {
@@ -169,5 +178,13 @@ public class Usuario implements Serializable {
                 ", senha='" + senha + '\'' +
                 ", tipoUsuario=" + tipoUsuario +
                 '}';
+    }
+
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
     }
 }

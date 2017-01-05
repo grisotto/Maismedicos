@@ -28,9 +28,7 @@ public class Turma implements Serializable {
     @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Tarefa> tarefas;
 
-    //    @ElementCollection
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<Equipe> times;
+   
 
     @ManyToOne
     private Professor professor;
@@ -51,12 +49,11 @@ public class Turma implements Serializable {
      * @param tarefas
      * @param times
      */
-    public Turma(Integer id, String nome, String descricao, Set<Tarefa> tarefas, Set<Equipe> times) {
+    public Turma(Integer id, String nome, String descricao, Set<Tarefa> tarefas) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.tarefas = tarefas;
-        this.times = times;
     }
 
     /**
@@ -115,19 +112,8 @@ public class Turma implements Serializable {
         this.tarefas = tarefas;
     }
 
-    /**
-     * @return
-     */
-    public Set<Equipe> getTimes() {
-        return times;
-    }
 
-    /**
-     * @param times
-     */
-    public void setTimes(Set<Equipe> times) {
-        this.times = times;
-    }
+
 
     @Override
     public int hashCode() {
@@ -136,7 +122,6 @@ public class Turma implements Serializable {
         hash = 17 * hash + (this.nome != null ? this.nome.hashCode() : 0);
         hash = 17 * hash + (this.descricao != null ? this.descricao.hashCode() : 0);
 //        hash = 17 * hash + (this.tarefas != null ? this.tarefas.hashCode() : 0);
-        hash = 17 * hash + (this.times != null ? this.times.hashCode() : 0);
         return hash;
     }
 
@@ -164,9 +149,7 @@ public class Turma implements Serializable {
         if (this.tarefas != other.tarefas && (this.tarefas == null || !this.tarefas.equals(other.tarefas))) {
             return false;
         }
-        if (this.times != other.times && (this.times == null || !this.times.equals(other.times))) {
-            return false;
-        }
+     
         return true;
     }
 

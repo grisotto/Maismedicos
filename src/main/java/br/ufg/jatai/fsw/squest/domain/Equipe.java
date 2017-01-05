@@ -32,7 +32,11 @@ public class Equipe implements Serializable {
     private String senha;
 
     @ManyToOne
-    private Turma turma;
+    private Tarefa tarefa;
+
+
+    @OneToOne
+    private Usuario usuario;
 
     /**
      *
@@ -46,14 +50,13 @@ public class Equipe implements Serializable {
      * @param nome
      * @param alunos
      * @param senha
-     * @param turma
      */
-    public Equipe(Integer id, String nome, List<Aluno> alunos, String senha, Turma turma) {
+    public Equipe(Integer id, String nome, List<Aluno> alunos, String senha, Tarefa tarefa) {
         this.id = id;
         this.nome = nome;
         this.alunos = alunos;
         this.senha = senha;
-        this.turma = turma;
+        this.tarefa = tarefa;
     }
 
     /**
@@ -120,22 +123,6 @@ public class Equipe implements Serializable {
         this.senha = senha;
     }
 
-    /**
-     *
-     * @return
-     */
-    public Turma getTurma() {
-        return turma;
-    }
-
-    /**
-     *
-     * @param turma
-     */
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -143,7 +130,7 @@ public class Equipe implements Serializable {
         hash = 41 * hash + (this.nome != null ? this.nome.hashCode() : 0);
         hash = 41 * hash + (this.alunos != null ? this.alunos.hashCode() : 0);
         hash = 41 * hash + (this.senha != null ? this.senha.hashCode() : 0);
-        hash = 41 * hash + (this.turma != null ? this.turma.hashCode() : 0);
+        hash = 41 * hash + (this.tarefa != null ? this.tarefa.hashCode() : 0);
         return hash;
     }
 
@@ -171,10 +158,18 @@ public class Equipe implements Serializable {
         if (this.alunos != other.alunos && (this.alunos == null || !this.alunos.equals(other.alunos))) {
             return false;
         }
-        if (this.turma != other.turma && (this.turma == null || !this.turma.equals(other.turma))) {
+        if (this.tarefa != other.tarefa && (this.tarefa == null || !this.tarefa.equals(other.tarefa))) {
             return false;
         }
         return true;
+    }
+
+    public Tarefa getTarefa() {
+        return tarefa;
+    }
+
+    public void setTarefa(Tarefa tarefa) {
+        this.tarefa = tarefa;
     }
 
 }

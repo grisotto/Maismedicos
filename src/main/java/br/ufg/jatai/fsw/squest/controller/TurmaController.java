@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author dfranco
  */
 @Controller
+@PreAuthorize("hasAuthority('PROFESSOR')")
 public class TurmaController implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(TurmaController.class.getName());
