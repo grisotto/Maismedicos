@@ -105,8 +105,10 @@ public class Professor extends Pessoa {
 
     @Override
     public String toString() {
-        return "Professor{" + "email=" + email + ", usuario=" + usuario + ", turmas=" + turmas + '}';
+        return "Professor{" +
+                "email='" + email + '\'' +
+                ", usuario.login=" + usuario.getLogin() +
+                ", turmas=" + turmas +
+                '}';
     }
-    
-
 }
