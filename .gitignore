@@ -1,6 +1,11 @@
 /target/
-
-/.idea/
+/quest/target/
+nbactions.xml
+node_modules/
+src/main/resources/static/
+/src/templatefsw/
 .idea/
+/.apt_generated/
+/.idea/
 SQuest.iml
 web/

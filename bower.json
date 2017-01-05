@@ -1,0 +1,14 @@
+{
+  "name": "SisQuest",
+  "homepage": "https://github.com/grisotto/SisQuest",
+  "authors": [
+    "Rafael Grisotto <grisotto18@gmail.com>",
+    "Gabriel Barra <gabrielvilelabarra@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "dependencies": {
+    "templatefsw": "FSWTemplate#*"
+  }
+}

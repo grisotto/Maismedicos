@@ -83,6 +83,44 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.5.0</version>
+                <executions>
+                    <execution>
+                        <id>bower</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>bower</executable>
+                            <arguments>
+                                <argument>install</argument>
+                            </arguments>
+                                      
+                   
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>gulp</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>  
+                            <executable>gulp</executable>
+                            <arguments>
+                                <argument>--color</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    
+                    
+                    
+                </executions>
+              
+               
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
@@ -90,5 +128,6 @@
                 </configuration>
             </plugin>
         </plugins>
+
     </build>
 </project>
