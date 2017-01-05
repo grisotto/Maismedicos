@@ -1,9 +1,2 @@
-/quest/target/
 /target/
-/src/main/webapp/WEB-INF/assets/templatefsw/
-nbactions.xml
-node_modules/
-/src/main/webapp/WEB-INF/assets/
-/src/main/webapp/assets/
-/src/templatefsw/
-.idea/
+
