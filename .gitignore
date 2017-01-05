@@ -1,2 +1,7 @@
+/quest/target/
 /target/
-
+nbactions.xml
+node_modules/
+src/main/resources/static/
+/src/templatefsw/
+.idea/
