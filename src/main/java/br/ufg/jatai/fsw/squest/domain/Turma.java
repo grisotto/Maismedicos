@@ -10,7 +10,6 @@ import javax.persistence.*;
 import java.util.Set;
 
 /**
- *
  * @author dfranco
  */
 @Entity
@@ -25,18 +24,18 @@ public class Turma implements Serializable {
     private String nome;
     private String descricao;
 
-//    @ElementCollection
-    @OneToMany(mappedBy = "turma",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    //    @ElementCollection
+    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Tarefa> tarefas;
 
-//    @ElementCollection
+    //    @ElementCollection
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Equipe> times;
 
     @ManyToOne
     private Professor professor;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Aluno> alunos;
 
     /**
@@ -46,7 +45,6 @@ public class Turma implements Serializable {
     }
 
     /**
-     *
      * @param id
      * @param nome
      * @param descricao
@@ -62,7 +60,6 @@ public class Turma implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public Integer getId() {
@@ -70,7 +67,6 @@ public class Turma implements Serializable {
     }
 
     /**
-     *
      * @param id
      */
     public void setId(Integer id) {
@@ -78,7 +74,6 @@ public class Turma implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public String getNome() {
@@ -86,7 +81,6 @@ public class Turma implements Serializable {
     }
 
     /**
-     *
      * @param nome
      */
     public void setNome(String nome) {
@@ -94,7 +88,6 @@ public class Turma implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public String getDescricao() {
@@ -102,7 +95,6 @@ public class Turma implements Serializable {
     }
 
     /**
-     *
      * @param descricao
      */
     public void setDescricao(String descricao) {
@@ -110,7 +102,6 @@ public class Turma implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public Set<Tarefa> getTarefas() {
@@ -118,7 +109,6 @@ public class Turma implements Serializable {
     }
 
     /**
-     *
      * @param tarefas
      */
     public void setTarefas(Set<Tarefa> tarefas) {
@@ -126,7 +116,6 @@ public class Turma implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public Set<Equipe> getTimes() {
@@ -134,7 +123,6 @@ public class Turma implements Serializable {
     }
 
     /**
-     *
      * @param times
      */
     public void setTimes(Set<Equipe> times) {
@@ -180,6 +168,16 @@ public class Turma implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Turma{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", professor.nome=" + professor.getNome() +
+                '}';
     }
 
     public Professor getProfessor() {

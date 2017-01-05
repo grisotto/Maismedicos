@@ -22,12 +22,9 @@ and open the template in the editor.
 
         Logged user: <span sec:authentication="name">Bob</span>
         Roles: <span sec:authentication="principal.authorities">[ALUNO, ADMIN, PROFESSOR, GRUPO]</span>
-        <span sec:authentication="authorities">[ALUNO, ADMIN, PROFESSOR, GRUPO]</span>
-
-
-
         <div sec:authorize="hasAuthority('ADMIN')">
-            Essa mensagem só aparece para quem é admin
+
+        Essa mensagem só aparece para quem é admin
 
         </div>
 

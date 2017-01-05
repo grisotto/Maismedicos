@@ -7,11 +7,15 @@ package br.ufg.jatai.fsw.squest.configuration;
 
 import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Professor;
+import br.ufg.jatai.fsw.squest.domain.Turma;
 import br.ufg.jatai.fsw.squest.domain.Usuario;
 import br.ufg.jatai.fsw.squest.service.AlunoService;
 import br.ufg.jatai.fsw.squest.service.ProfessorService;
+import br.ufg.jatai.fsw.squest.service.TurmaService;
 import br.ufg.jatai.fsw.squest.service.UsuarioService;
+
 import javax.sql.DataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +24,14 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /**
- *
  * @author dyeimys
  */
 @Configuration
@@ -52,6 +60,12 @@ public class DataBaseConfig {
         @Autowired
         private AlunoService alunoService;
 
+        @Autowired
+        private ProfessorService professorService;
+
+        @Autowired
+        private TurmaService turmaService;
+
         @Override
         public void run(ApplicationArguments args) throws Exception {
             LOGGER.info("RUN in ApplicationRunner");
@@ -77,11 +91,11 @@ public class DataBaseConfig {
             a4.setMatricula("63853");
             a4.setNome("Aparecida Antonio");
 
-            
+
             Usuario u = new Usuario("admin", "admin");
             u.setSenha("123");
             u.setTipoUsuario(Usuario.TipoUsuario.ADMIN);
-            
+
             LOGGER.info("Inserindo ADMIN:" + u);
             usuarioService.inserir(u);
 
@@ -96,6 +110,24 @@ public class DataBaseConfig {
 
             LOGGER.info("Inserindo A4" + a4);
             alunoService.inserir(a4);
+
+            Professor p = new Professor();
+            p.setNome("Professor Algusto");
+            p.setEmail("professor@email.com");
+            p.setUsuario(new Usuario("professor", "123"));
+            LOGGER.info("Inserindo P1" + p);
+            Professor professor = professorService.inserir(p);
+
+            Turma t = new Turma();
+            t.setNome("Turma 1");
+            t.setDescricao("Tuma numero 01");
+            t.setProfessor(professor);
+
+            LOGGER.info("Inserindo T1: " + t);
+            turmaService.inserir(t);
+
+            LOGGER.info("LOCALE DEFAULT: " + LocaleContextHolder.getLocale());
+            LOGGER.info("DATATIME ATUAL: " + new Date(System.currentTimeMillis()));
 
         }
     }
