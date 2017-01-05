@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.squest.controller;
 
+import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.controller.modelForm.EtapasModel;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
@@ -32,7 +33,10 @@ public class TarefaController {
     private TarefaService tarefaService;
     @Autowired
     private TurmaService turmaService;
- 
+
+    @Autowired
+    private AutenticateUser autenticateUser;
+
 
     @GetMapping(value = {"/app/tarefa"})
     public String tarefaHome(final Tarefa tarefa) {
@@ -54,14 +58,14 @@ public class TarefaController {
 
     @ModelAttribute("allTarefas")
     public List<Tarefa> populateVisualizarProfessor() {
-        return this.tarefaService.allOfProfessor(null);
+        return this.tarefaService.allOfProfessor(autenticateUser.getUsuario().getProfessor());
 
     }
 
     @ModelAttribute("allTurmas")
     public List<Turma> todasTurmas() {
         System.out.println("ENTROU NO ALL TURMAS");
-        return this.turmaService.allOfProfessor(null);
+        return this.turmaService.allOfProfessor(autenticateUser.getUsuario().getProfessor());
 
     }
 

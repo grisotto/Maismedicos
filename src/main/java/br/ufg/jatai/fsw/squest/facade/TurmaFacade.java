@@ -5,20 +5,25 @@
  */
 package br.ufg.jatai.fsw.squest.facade;
 
-import br.ufg.jatai.fsw.squest.domain.Aluno;
-import br.ufg.jatai.fsw.squest.domain.Professor;
-import br.ufg.jatai.fsw.squest.domain.Tarefa;
-import br.ufg.jatai.fsw.squest.domain.Turma;
+import br.ufg.jatai.fsw.squest.AutenticateUser;
+import br.ufg.jatai.fsw.squest.SecurityUserService;
+import br.ufg.jatai.fsw.squest.domain.*;
 import br.ufg.jatai.fsw.squest.service.AlunoService;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
 import br.ufg.jatai.fsw.squest.service.TurmaService;
+
 import java.io.Serializable;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 /**
- *
  * @author dfranco
  */
 @Component
@@ -30,8 +35,12 @@ public class TurmaFacade implements Serializable {
     private AlunoService alunoService;
     @Autowired
     private TarefaService tarefaService;
+    @Autowired
+    private AutenticateUser autenticateUser;
 
-    
+    public TurmaFacade() {
+
+    }
 
     @Deprecated
     public List<Turma> turmasOfProfessor(Professor professor) {
@@ -43,12 +52,13 @@ public class TurmaFacade implements Serializable {
      *
      * @return
      */
+
     public List<Turma> turmasOfProfessor() {
-        return this.turmasOfProfessor(null);
+        return this.turmasOfProfessor(autenticateUser.getUsuario().getProfessor());
     }
 
     public Turma createTurma(Turma turma) {
-        turma.setProfessor(null);
+        turma.setProfessor(autenticateUser.getUsuario().getProfessor());
         return turmaService.inserir(turma);
     }
 
@@ -69,7 +79,7 @@ public class TurmaFacade implements Serializable {
     }
 
     public List<Tarefa> tarefasOfProfessor() {
-        return tarefaService.allOfProfessor(null);
+        return tarefaService.allOfProfessor(autenticateUser.getUsuario().getProfessor());
     }
 
 }
