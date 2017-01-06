@@ -9,3 +9,7 @@ src/main/resources/static/
 /.idea/
 SQuest.iml
 web/
+.classpath
+.factorypath
+.project
+/.settings/
