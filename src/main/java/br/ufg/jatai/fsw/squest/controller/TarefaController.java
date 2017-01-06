@@ -7,10 +7,12 @@ package br.ufg.jatai.fsw.squest.controller;
 
 import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.controller.modelForm.EtapasModel;
+import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
 import br.ufg.jatai.fsw.squest.service.TurmaService;
+import br.ufg.jatai.fsw.squest.service.EquipeService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,7 @@ public class TarefaController {
     private TarefaService tarefaService;
     @Autowired
     private TurmaService turmaService;
-
+    
     @Autowired
     private AutenticateUser autenticateUser;
 
@@ -51,13 +53,13 @@ public class TarefaController {
             model.addAttribute("tarefa", tarefa);
             return "/app/tarefa/home";
         }
-
+       
         tarefa.setTurma(turmaService.find(tarefa.getTurma().getId()));
 
         tarefaService.inserir(tarefa);
         return "redirect:/app/tarefa";
     }
-
+    
     @ModelAttribute("allTarefas")
     public List<Tarefa> populateVisualizarProfessor() {
         return this.tarefaService.allOfProfessor(autenticateUser.getProfessor());
@@ -74,7 +76,13 @@ public class TarefaController {
     @GetMapping(value = "/app/tarefa/{id}")
     public String showTurma(@PathVariable Integer id, ModelMap map, final EtapasModel etapas) {
         Tarefa find = tarefaService.find(id);
+        
         map.addAttribute("tarefa", find);
+        
+        map.addAttribute("equipe", new Equipe());
+
+        
+        //aqui eu tenho que pegar os dados dos grupos desta Tarefa
 
         map.addAttribute("etapas", new EtapasModel().buildeOvjeto(find.getEtapaEventos()));
 

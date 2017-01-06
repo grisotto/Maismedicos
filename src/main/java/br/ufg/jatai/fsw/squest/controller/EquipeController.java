@@ -43,11 +43,14 @@ public class EquipeController implements Serializable {
     }
 
     @PostMapping(value = "/")
-    public void createEquipe(@Valid final Equipe equipe, final BindingResult bindingResult, final ModelMap model) {
+    public String createEquipe(@Valid final Equipe equipe, final BindingResult bindingResult, final ModelMap model) {
+    	 System.out.println("ENTROU AQUI nas equipes");
         if (bindingResult.hasErrors()) {
             model.addAttribute("equipe", equipe);
         }
         equipeFacade.adicionaEquipe(equipe);
+        //deve retornar para a mesma pagina, /app/tarefa/{equipe.tarefa.id}
+        return "redirect:/app/tarefa";
 
     }
 

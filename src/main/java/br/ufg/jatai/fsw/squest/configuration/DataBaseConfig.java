@@ -7,10 +7,12 @@ package br.ufg.jatai.fsw.squest.configuration;
 
 import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Professor;
+import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
 import br.ufg.jatai.fsw.squest.domain.Usuario;
 import br.ufg.jatai.fsw.squest.service.AlunoService;
 import br.ufg.jatai.fsw.squest.service.ProfessorService;
+import br.ufg.jatai.fsw.squest.service.TarefaService;
 import br.ufg.jatai.fsw.squest.service.TurmaService;
 import br.ufg.jatai.fsw.squest.service.UsuarioService;
 
@@ -67,6 +69,9 @@ public class DataBaseConfig {
 
         @Autowired
         private TurmaService turmaService;
+        
+        @Autowired
+        private TarefaService tarefaService;
 
 
         @Autowired
@@ -135,6 +140,14 @@ public class DataBaseConfig {
 
             LOGGER.info("Inserindo T1: " + t);
             turmaService.inserir(t);
+            
+            Tarefa taf = new Tarefa();
+            taf.setTurma(t);
+            taf.setDescricao("Muita coisa acontecendo nesta cidade");
+            taf.setTitulo("Atividade primeiro semestre");
+            taf.setTamanhoQuestoes(5);
+            tarefaService.inserir(taf);            
+            
 
             LOGGER.info("LOCALE DEFAULT: " + LocaleContextHolder.getLocale());
             LOGGER.info("DATATIME ATUAL: " + new Date(System.currentTimeMillis()));
