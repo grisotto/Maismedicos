@@ -98,8 +98,9 @@ public class DataBaseConfig {
             a4.setNome("Aparecida Antonio");
 
 
+
             Usuario u = new Usuario("admin", "admin");
-            u.setSenha(passwordEncoder.encode("123"));
+            u.setSenha("123");
             u.setTipoUsuario(Usuario.TipoUsuario.ADMIN);
 
             LOGGER.info("Inserindo ADMIN:" + u);
@@ -122,7 +123,7 @@ public class DataBaseConfig {
             p.setEmail("professor@email.com");
             p.setUsuario(
                     new Usuario("professor",
-                    passwordEncoder.encode("123"),
+                  "123",
                     Usuario.TipoUsuario.PROFESSOR));
             LOGGER.info("Inserindo P1" + p);
             Professor professor = professorService.inserir(p);

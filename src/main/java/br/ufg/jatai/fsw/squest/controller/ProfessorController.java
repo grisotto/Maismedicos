@@ -49,18 +49,15 @@ public class ProfessorController implements Serializable {
         return "/app/professor/home";
     }
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @PostMapping(value = "/app/professor", params = {"save"})
     public String saveProfessor(@Valid final Professor professor, final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("professor", professor);
             return "/app/professor/home";
-        }
+        }       
         professor.getUsuario().setTipoUsuario(Usuario.TipoUsuario.PROFESSOR);
-        professor.getUsuario().setSenha(passwordEncoder.encode("123"));
-        log.info("Senha Gerada"+professor.getUsuario().getSenha());
+
         this.service.inserir(professor);
         model.clear();
         return "redirect:/app/professor";

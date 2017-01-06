@@ -10,6 +10,8 @@ import br.ufg.jatai.fsw.squest.repository.EquipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,8 +24,14 @@ public class EquipeServiceImpl implements EquipeService {
     @Autowired
     private EquipeRepository equipeRepository;
 
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public Equipe inserir(Equipe entidade) {
+
+        entidade.getUsuario().setSenha(passwordEncoder.encode(entidade.getUsuario().getSenha()));
         return equipeRepository.save(entidade);
     }
 
