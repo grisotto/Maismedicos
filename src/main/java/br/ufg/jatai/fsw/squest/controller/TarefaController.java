@@ -10,6 +10,7 @@ import br.ufg.jatai.fsw.squest.controller.modelForm.EtapasModel;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
+import br.ufg.jatai.fsw.squest.facade.TarefaFacade;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
 import br.ufg.jatai.fsw.squest.service.TurmaService;
 import br.ufg.jatai.fsw.squest.service.EquipeService;
@@ -33,13 +34,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 @PreAuthorize("hasAuthority('PROFESSOR')")
 public class TarefaController {
 
+
     @Autowired
     private TarefaService tarefaService;
     @Autowired
     private TurmaService turmaService;
     
+
     @Autowired
-    private AutenticateUser autenticateUser;
+    private TarefaFacade tarefaFacade;
 
 
     @GetMapping(value = {"/app/tarefa"})
@@ -53,30 +56,35 @@ public class TarefaController {
             model.addAttribute("tarefa", tarefa);
             return "/app/tarefa/home";
         }
+
        
         tarefa.setTurma(turmaService.find(tarefa.getTurma().getId()));
 
         tarefaService.inserir(tarefa);
+
+
+      tarefaFacade.saveTarefa(tarefa);
+
         return "redirect:/app/tarefa";
     }
     
     @ModelAttribute("allTarefas")
     public List<Tarefa> populateVisualizarProfessor() {
-        return this.tarefaService.allOfProfessor(autenticateUser.getProfessor());
-
+        return tarefaFacade.tarefasFromProessorAuth();
     }
 
     @ModelAttribute("allTurmas")
     public List<Turma> todasTurmas() {
-        System.out.println("ENTROU NO ALL TURMAS");
-        return this.turmaService.allOfProfessor(autenticateUser.getProfessor());
+
+        return tarefaFacade.todasTurmas();
 
     }
 
     @GetMapping(value = "/app/tarefa/{id}")
     public String showTurma(@PathVariable Integer id, ModelMap map, final EtapasModel etapas) {
-        Tarefa find = tarefaService.find(id);
-        
+
+        Tarefa find = tarefaFacade.findTarefa(id);
+
         map.addAttribute("tarefa", find);
         
         map.addAttribute("equipe", new Equipe());
@@ -86,24 +94,16 @@ public class TarefaController {
 
         map.addAttribute("etapas", new EtapasModel().buildeOvjeto(find.getEtapaEventos()));
 
-        System.out.println(id);
         return "/app/tarefa/show";
     }
 
     @PostMapping(value = {"/app/tarefa/etapas"}, params = {"save"})
     public String atualizaData(@Valid Integer idTarefa, @Valid EtapasModel etapas,
             final BindingResult bindingResult, final ModelMap model) {
-        System.out.println("Passou aqui porra");
-        System.out.println(etapas.getAguardando().getTipo());
-        System.out.println(etapas.getEsperandoSubmissao().getTipo());
-        System.out.println(etapas.getValidandoQuestoes().getTipo());
-        System.out.println(etapas.getRespondendo().getTipo());
-        System.out.println(etapas.getFinalizado().getTipo());
 
-        Tarefa find = tarefaService.find(idTarefa);
-        find.getEtapaEventos().addAll(etapas.buildeLista());
 
-        tarefaService.atualizar(find);
+
+        tarefaFacade.atualizaDatasEtapas(idTarefa,etapas);
 
         return "redirect:/app/tarefa/" + idTarefa;
     }

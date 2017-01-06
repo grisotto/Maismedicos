@@ -30,6 +30,7 @@ public class Equipe implements Serializable {
     @ManyToMany
     private List<Aluno> alunos = new ArrayList<>();
 
+    private boolean ativa;
 
     @ManyToOne
     private Tarefa tarefa;
@@ -46,18 +47,16 @@ public class Equipe implements Serializable {
 
     /**
      *
-     * @param id
      * @param nome
      * @param alunos
-     * @param senha
      */
-    public Equipe(Integer id, String nome, List<Aluno> alunos, String senha, Tarefa tarefa) {
-        this.id = id;
+    public Equipe(String nome, List<Aluno> alunos, boolean ativa, Tarefa tarefa, Usuario usuario) {
         this.nome = nome;
         this.alunos = alunos;
+        this.ativa = ativa;
         this.tarefa = tarefa;
+        this.usuario = usuario;
     }
-
     /**
      *
      * @return
@@ -108,43 +107,6 @@ public class Equipe implements Serializable {
 
 
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 41 * hash + (this.nome != null ? this.nome.hashCode() : 0);
-        hash = 41 * hash + (this.alunos != null ? this.alunos.hashCode() : 0);
-        hash = 41 * hash + (this.tarefa != null ? this.tarefa.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Equipe other = (Equipe) obj;
-        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
-            return false;
-        }
-
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
-        if (this.alunos != other.alunos && (this.alunos == null || !this.alunos.equals(other.alunos))) {
-            return false;
-        }
-        if (this.tarefa != other.tarefa && (this.tarefa == null || !this.tarefa.equals(other.tarefa))) {
-            return false;
-        }
-        return true;
-    }
 
     public Tarefa getTarefa() {
         return tarefa;
@@ -160,6 +122,36 @@ public class Equipe implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public boolean isAtiva() {
+        return ativa;
+    }
+
+    public void setAtiva(boolean ativa) {
+        this.ativa = ativa;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Equipe)) return false;
+
+        Equipe equipe = (Equipe) o;
+
+        if (isAtiva() != equipe.isAtiva()) return false;
+        if (!getId().equals(equipe.getId())) return false;
+        if (!getNome().equals(equipe.getNome())) return false;
+        return getAlunos() != null ? getAlunos().equals(equipe.getAlunos()) : equipe.getAlunos() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getNome().hashCode();
+        result = 31 * result + (getAlunos() != null ? getAlunos().hashCode() : 0);
+        result = 31 * result + (isAtiva() ? 1 : 0);
+        return result;
     }
 
     public boolean add(Aluno aluno) {
