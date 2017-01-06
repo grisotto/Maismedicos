@@ -69,39 +69,40 @@ and open the template in the editor.
                                 <div  class="form-group ">
                                     <label class="control-label col-sm-3">Aguardando</label>
                                     <div class="col-lg-8 form-inline">
-                                        <input class="form-control" type="date" th:field="${etapas.aguardando.dataInicial}" placeholder="Data Inicial"/>
-                                        <input class="form-control" type="date" th:field="${etapas.aguardando.dataFinal}" placeholder="Data Final"/>
+                                        <input class="form-control" id='datetimeAguardandoIni' th:field="${etapas.aguardando.dataInicial}" placeholder="Data Inicial"/>
+                                        <input class="form-control" id='datetimeAguardandoFim' th:field="${etapas.aguardando.dataFinal}" placeholder="Data Final"/>
                                     </div>
 
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-sm-3">Esperando Submissão</label>
                                     <div class="col-lg-8 form-inline">
-                                        <input class="form-control" type="date" th:field="${etapas.esperandoSubmissao.dataInicial}" placeholder="Data Inicial"/>
-                                        <input class="form-control" type="date" th:field="${etapas.esperandoSubmissao.dataFinal}"  placeholder="Data Final"/>
+                                        <input class="form-control" id='datetimeEsperandoSubmissaoIni' th:field="${etapas.esperandoSubmissao.dataInicial}" placeholder="Data Inicial"/>
+                                        <input class="form-control" id='datetimeEsperandoSubmissaoFim' th:field="${etapas.esperandoSubmissao.dataFinal}"  placeholder="Data Final"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-sm-3">Validando Questões</label>
                                     <div class="col-lg-8 form-inline">
-                                        <input class="form-control" type="date" th:field="${etapas.validandoQuestoes.dataInicial}" placeholder="Data Inicial"/>
-                                        <input class="form-control" type="date" th:field="${etapas.validandoQuestoes.dataFinal}"  placeholder="Data Final"/>
+                                        <input class="form-control" id='datetimeValidandoQuestoesIni' th:field="${etapas.validandoQuestoes.dataInicial}" placeholder="Data Inicial"/>
+                                        <input class="form-control" id='datetimeValidandoQuestoesFim' th:field="${etapas.validandoQuestoes.dataFinal}"  placeholder="Data Final"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-sm-3">Respondendo Questões</label>
                                     <div class="col-lg-8 form-inline">
-                                        <input class="form-control" type="date" th:field="${etapas.respondendo.dataInicial}" placeholder="Data Inicial"/>
-                                        <input class="form-control" type="date" th:field="${etapas.respondendo.dataFinal}"  placeholder="Data Final"/>
+                                        <input class="form-control" id='datetimeRespondendoQuestoesIni' th:field="${etapas.respondendo.dataInicial}" placeholder="Data Inicial"/>
+                                        <input class="form-control" id='datetimeRespondendoQuestoesFim' th:field="${etapas.respondendo.dataFinal}"  placeholder="Data Final"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-sm-3">Finalizado</label>
                                     <div class="col-lg-8 form-inline">
-                                        <input class="form-control" type="date" th:field="${etapas.finalizado.dataInicial}" placeholder="Data "/>
-                                        <input class="form-control" type="date" th:field="${etapas.finalizado.dataFinal}"  placeholder="Data Final"/>
+                                        <input class="form-control" id='datetimeFinalizadoIni' th:field="${etapas.finalizado.dataInicial}" placeholder="Data "/>
+                                        <input class="form-control" id='datetimeFinalizadoFim' th:field="${etapas.finalizado.dataFinal}"  placeholder="Data Final"/>
+
                                     </div>
-                                </div>
+                                    </div>
 
 
                             </div>
@@ -170,6 +171,13 @@ and open the template in the editor.
             <script src="/plugins/datatables-plugins/dataTables.bootstrap.min.js" th:src="@{/plugins/datatables-plugins/dataTables.bootstrap.min.js}"></script>
             <script src="/plugins/datatables-responsive/dataTables.responsive.js" th:src="@{/plugins/datatables-responsive/dataTables.responsive.js}"></script>
 
+			
+			<script src="/plugins/moment/min/moment-with-locales.js" th:src="@{/plugins/moment/min/moment-with-locales.js}"></script>
+			<script src="/plugins/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js" th:src="@{/plugins/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js}"></script>
+		
+		      <link href="/plugins/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" th:href="@{/plugins/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css}" rel="stylesheet" media="screen" />	
+			
+			
             <!--<script src="/plugins/select2/js/i18n/pt-BR.js"  th:src="@{/plugins/select2/js/i18n/pt-BR.js}"></script>-->
 
 
@@ -190,6 +198,58 @@ and open the template in the editor.
 
 
             </script>
+            
+            <script type="text/javascript">
+            $(function () {
+            	
+            	datetimeEsperandoSubmissaoIni                           
+
+            	datetimeValidandoQuestoesIni
+            	datetimeRespondendoQuestoesIni
+            	datetimeFinalizadoIni
+
+            	//Definindo o formato padrao e o locale
+            	$('#datetimeAguardandoIni, #datetimeEsperandoSubmissaoIni, #datetimeValidandoQuestoesIni, #datetimeRespondendoQuestoesIni, #datetimeFinalizadoIni').datetimepicker({
+            		dayViewHeaderFormat:'DD/MM/YYYY hh:mm',
+                	locale: 'pt-br'
+            	});
+                $('#datetimeAguardandoFim, #datetimeEsperandoSubmissaoFim, #datetimeValidandoQuestoesFim, #datetimeRespondendoQuestoesFim, #datetimeFinalizadoFim').datetimepicker({
+                	dayViewHeaderFormat:'DD/MM/YYYY hh:mm',
+                	locale: 'pt-br',
+                    useCurrent: false //Important! See issue #1075
+                });
+                
+
+            	//Aqui eu olho para a data inicial e difinino uma data min para o Fim
+                $("#datetimeAguardandoIni, #datetimeEsperandoSubmissaoIni, #datetimeValidandoQuestoesIni, #datetimeRespondendoQuestoesIni, #datetimeFinalizadoIni").on("dp.change", function (e) {
+                	
+                    $('#datetimeAguardandoFim, #datetimeEsperandoSubmissaoFim, #datetimeValidandoQuestoesFim, #datetimeRespondendoQuestoesFim, #datetimeFinalizadoFim').data
+                    ("DateTimePicker").minDate(e.date);
+                    
+                   // console.log(e.date);
+                    //Pego a data e converto pegando os millisegundos
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+                   // console.log(outputDate);
+                   
+                  //  console.log(Date.parse(outputDate));
+                 //  console.log(outputDate.getTime());
+                });
+            	
+            	//Aqui ao contrario da anterior 
+                $("#datetimeAguardandoFim, #datetimeEsperandoSubmissaoFim, #datetimeValidandoQuestoesFim, #datetimeRespondendoQuestoesFim, #datetimeFinalizadoFim").on("dp.change", function (e) {
+                    $('#datetimeAguardandoIni, #datetimeEsperandoSubmissaoIni, #datetimeValidandoQuestoesIni, #datetimeRespondendoQuestoesIni, #datetimeFinalizadoIni').data
+                    ("DateTimePicker").maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+                    
+                });
+                		
+          
+                
+
+            });
+        </script>
 
 
 
