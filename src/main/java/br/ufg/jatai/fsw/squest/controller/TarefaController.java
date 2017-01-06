@@ -32,13 +32,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @PreAuthorize("hasAuthority('PROFESSOR')")
 public class TarefaController {
 
-    @Autowired
-    private TarefaService tarefaService;
-    @Autowired
-    private TurmaService turmaService;
-
-    @Autowired
-    private AutenticateUser autenticateUser;
 
     @Autowired
     private TarefaFacade tarefaFacade;
