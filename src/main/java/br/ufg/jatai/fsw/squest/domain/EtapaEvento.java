@@ -18,6 +18,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -35,11 +38,11 @@ public class EtapaEvento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dataInicial;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime dataInicial;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dataFinal;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime dataFinal;
 
     @Enumerated(EnumType.STRING)
     private TipoEtapa tipo;
@@ -67,36 +70,20 @@ public class EtapaEvento implements Serializable {
         this.id = id;
     }
 
-    /**
-     *
-     * @return
-     */
-    public Date getDataInicial() {
-        return dataInicial;
-    }
-
-    /**
-     *
-     * @param dataInicial
-     */
-    public void setDataInicial(Date dataInicial) {
-        this.dataInicial = dataInicial;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getDataFinal() {
+    public DateTime getDataFinal() {
         return dataFinal;
     }
 
-    /**
-     *
-     * @param dataFinal
-     */
-    public void setDataFinal(Date dataFinal) {
+    public DateTime getDataInicial() {
+        return dataInicial;
+    }
+
+    public void setDataFinal(DateTime dataFinal) {
         this.dataFinal = dataFinal;
+    }
+
+    public void setDataInicial(DateTime dataInicial) {
+        this.dataInicial = dataInicial;
     }
 
     public List<Tarefa> getTarefas() {
