@@ -25,6 +25,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
@@ -67,6 +68,10 @@ public class DataBaseConfig {
         @Autowired
         private TurmaService turmaService;
 
+
+        @Autowired
+        private PasswordEncoder passwordEncoder;
+
         @Override
         public void run(ApplicationArguments args) throws Exception {
             LOGGER.info("RUN in ApplicationRunner");
@@ -94,7 +99,7 @@ public class DataBaseConfig {
 
 
             Usuario u = new Usuario("admin", "admin");
-            u.setSenha("123");
+            u.setSenha(passwordEncoder.encode("123"));
             u.setTipoUsuario(Usuario.TipoUsuario.ADMIN);
 
             LOGGER.info("Inserindo ADMIN:" + u);
@@ -115,7 +120,10 @@ public class DataBaseConfig {
             Professor p = new Professor();
             p.setNome("Professor Algusto");
             p.setEmail("professor@email.com");
-            p.setUsuario(new Usuario("professor", "123", Usuario.TipoUsuario.PROFESSOR));
+            p.setUsuario(
+                    new Usuario("professor",
+                    passwordEncoder.encode("123"),
+                    Usuario.TipoUsuario.PROFESSOR));
             LOGGER.info("Inserindo P1" + p);
             Professor professor = professorService.inserir(p);
 

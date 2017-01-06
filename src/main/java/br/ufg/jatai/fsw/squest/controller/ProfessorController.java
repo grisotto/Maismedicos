@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,18 +49,18 @@ public class ProfessorController implements Serializable {
         return "/app/professor/home";
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping(value = "/app/professor", params = {"save"})
     public String saveProfessor(@Valid final Professor professor, final BindingResult bindingResult, final ModelMap model) {
-//        bindingResult.addError(new FieldError("Professor", "professor.usuario.senha", "Deu merda"));
         if (bindingResult.hasErrors()) {
             model.addAttribute("professor", professor);
             return "/app/professor/home";
         }
         professor.getUsuario().setTipoUsuario(Usuario.TipoUsuario.PROFESSOR);
-        professor.getUsuario().setSenha("123");
-        log.error(professor.toString());
-
+        professor.getUsuario().setSenha(passwordEncoder.encode("123"));
+        log.info("Senha Gerada"+professor.getUsuario().getSenha());
         this.service.inserir(professor);
         model.clear();
         return "redirect:/app/professor";
