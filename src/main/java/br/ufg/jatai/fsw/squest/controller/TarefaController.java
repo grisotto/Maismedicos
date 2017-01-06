@@ -87,7 +87,7 @@ public class TarefaController {
 
         map.addAttribute("tarefa", find);
         
-        map.addAttribute("equipe", new Equipe());
+//        map.addAttribute("equipe", new Equipe());
 
         
         //aqui eu tenho que pegar os dados dos grupos desta Tarefa
