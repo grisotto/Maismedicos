@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.squest.facade;
 
+import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.service.EquipeService;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- *
  * @author dyeimys
  */
 @Component
@@ -24,13 +24,18 @@ public class EquipeFacade {
     @Autowired
     private TarefaService tarefaService;
 
-//    @Autowired
-//    private SessaoUsuario sessaoUsuario;
+
+
     public void adicionaEquipe(Equipe e) {
         equipeService.inserir(e);
     }
 
-    public Tarefa findTarefa(Integer id) {
-        return tarefaService.find(id);
+    public void addAluno(Aluno aluno, Integer idEquipe){
+        Equipe equipe = equipeService.find(idEquipe);
+        equipe.add(aluno);
+        equipeService.atualizar(equipe);
+
     }
+
+
 }

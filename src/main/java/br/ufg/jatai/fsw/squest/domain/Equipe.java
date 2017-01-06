@@ -9,6 +9,7 @@ import com.sun.mail.imap.protocol.ID;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,9 +28,8 @@ public class Equipe implements Serializable {
     private String nome;
 
     @ManyToMany
-    private List<Aluno> alunos;
+    private List<Aluno> alunos = new ArrayList<>();
 
-    private String senha;
 
     @ManyToOne
     private Tarefa tarefa;
@@ -55,7 +55,6 @@ public class Equipe implements Serializable {
         this.id = id;
         this.nome = nome;
         this.alunos = alunos;
-        this.senha = senha;
         this.tarefa = tarefa;
     }
 
@@ -107,21 +106,7 @@ public class Equipe implements Serializable {
         this.alunos = alunos;
     }
 
-    /**
-     *
-     * @return
-     */
-    public String getSenha() {
-        return senha;
-    }
 
-    /**
-     *
-     * @param senha
-     */
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
 
     @Override
     public int hashCode() {
@@ -129,7 +114,6 @@ public class Equipe implements Serializable {
         hash = 41 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 41 * hash + (this.nome != null ? this.nome.hashCode() : 0);
         hash = 41 * hash + (this.alunos != null ? this.alunos.hashCode() : 0);
-        hash = 41 * hash + (this.senha != null ? this.senha.hashCode() : 0);
         hash = 41 * hash + (this.tarefa != null ? this.tarefa.hashCode() : 0);
         return hash;
     }
@@ -149,9 +133,7 @@ public class Equipe implements Serializable {
         if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
             return false;
         }
-        if ((this.senha == null) ? (other.senha != null) : !this.senha.equals(other.senha)) {
-            return false;
-        }
+
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
@@ -172,4 +154,7 @@ public class Equipe implements Serializable {
         this.tarefa = tarefa;
     }
 
+    public boolean add(Aluno aluno) {
+        return alunos.add(aluno);
+    }
 }
