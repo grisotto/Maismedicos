@@ -202,11 +202,6 @@ and open the template in the editor.
             <script type="text/javascript">
             $(function () {
             	
-            	datetimeEsperandoSubmissaoIni                           
-
-            	datetimeValidandoQuestoesIni
-            	datetimeRespondendoQuestoesIni
-            	datetimeFinalizadoIni
 
             	//Definindo o formato padrao e o locale
             	$('#datetimeAguardandoIni, #datetimeEsperandoSubmissaoIni, #datetimeValidandoQuestoesIni, #datetimeRespondendoQuestoesIni, #datetimeFinalizadoIni').datetimepicker({
@@ -221,10 +216,9 @@ and open the template in the editor.
                 
 
             	//Aqui eu olho para a data inicial e difinino uma data min para o Fim
-                $("#datetimeAguardandoIni, #datetimeEsperandoSubmissaoIni, #datetimeValidandoQuestoesIni, #datetimeRespondendoQuestoesIni, #datetimeFinalizadoIni").on("dp.change", function (e) {
+                $("#datetimeAguardandoIni").on("dp.change", function (e) {
                 	
-                    $('#datetimeAguardandoFim, #datetimeEsperandoSubmissaoFim, #datetimeValidandoQuestoesFim, #datetimeRespondendoQuestoesFim, #datetimeFinalizadoFim').data
-                    ("DateTimePicker").minDate(e.date);
+                    $('#datetimeAguardandoFim').data("DateTimePicker").minDate(e.date);
                     
                    // console.log(e.date);
                     //Pego a data e converto pegando os millisegundos
@@ -234,19 +228,92 @@ and open the template in the editor.
                    
                   //  console.log(Date.parse(outputDate));
                  //  console.log(outputDate.getTime());
-                });
+               		 });
+            	
+                    $("#datetimeEsperandoSubmissaoIni").on("dp.change", function (e) {
+                    	
+                        $('#datetimeEsperandoSubmissaoFim').data
+                        ("DateTimePicker").minDate(e.date);
+                        
+                        var outputDate = new Date(e.date);
+                        e.date = outputDate.getTime();
+
+                    });
+                    
+                    
+                        $("#datetimeValidandoQuestoesIni").on("dp.change", function (e) {
+                        	
+                            $('#datetimeValidandoQuestoesFim').data
+                            ("DateTimePicker").minDate(e.date);
+                            
+
+                            var outputDate = new Date(e.date);
+                            e.date = outputDate.getTime();
+
+                        });
+                        
+                            $("#datetimeRespondendoQuestoesIni").on("dp.change", function (e) {
+                            	
+                                $('#datetimeRespondendoQuestoesFim').data
+                                ("DateTimePicker").minDate(e.date);
+                                
+                                var outputDate = new Date(e.date);
+                                e.date = outputDate.getTime();
+
+                            });
+                            
+                                $("#datetimeFinalizadoIni").on("dp.change", function (e) {
+                                	
+                                    $('#datetimeFinalizadoFim').data
+                                    ("DateTimePicker").minDate(e.date);
+                                    
+
+                                    var outputDate = new Date(e.date);
+                                    e.date = outputDate.getTime();
+ 
+                                });
+            	
+
             	
             	//Aqui ao contrario da anterior 
-                $("#datetimeAguardandoFim, #datetimeEsperandoSubmissaoFim, #datetimeValidandoQuestoesFim, #datetimeRespondendoQuestoesFim, #datetimeFinalizadoFim").on("dp.change", function (e) {
-                    $('#datetimeAguardandoIni, #datetimeEsperandoSubmissaoIni, #datetimeValidandoQuestoesIni, #datetimeRespondendoQuestoesIni, #datetimeFinalizadoIni').data
+                $("#datetimeAguardandoFim").on("dp.change", function (e) {
+                    $('#datetimeAguardandoIni').data
                     ("DateTimePicker").maxDate(e.date);
                     var outputDate = new Date(e.date);
                     e.date = outputDate.getTime();
                     
                 });
-                		
-          
+                $("#datetimeEsperandoSubmissaoFim").on("dp.change", function (e) {
+                    $('#datetimeEsperandoSubmissaoIni').data
+                    ("DateTimePicker").maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+                    
+                });
                 
+                $("#datetimeValidandoQuestoesFim").on("dp.change", function (e) {
+                    $('#datetimeValidandoQuestoesIni').data
+                    ("DateTimePicker").maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+                    
+                });
+                
+                $("#datetimeRespondendoQuestoesFim").on("dp.change", function (e) {
+                    $('#datetimeRespondendoQuestoesIni').data
+                    ("DateTimePicker").maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+                    
+                });
+                
+                $("#datetimeFinalizadoFim").on("dp.change", function (e) {
+                    $('#datetimeFinalizadoIni').data
+                    ("DateTimePicker").maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+                    
+                });
 
             });
         </script>
