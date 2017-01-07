@@ -70,6 +70,7 @@ public class TarefaFacade {
     public void atualizaDatasEtapas(Integer idTarefa, EtapasModel etapasModel){
         Tarefa find = tarefaService.find(idTarefa);
 //        find.getEtapaEventos().clear();
+        find.setEtapaAtual(etapasModel.getAguardando());
         find.getEtapaEventos().addAll(etapasModel.buildeLista());
 
         tarefaService.atualizar(find);

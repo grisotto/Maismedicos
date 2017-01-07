@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +43,7 @@ public class Usuario implements Serializable {
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
 
-    @OneToOne(mappedBy = "usuario")
+    @OneToOne(mappedBy = "usuario",fetch = FetchType.EAGER)
     private Equipe equipe;
 
     @OneToOne(mappedBy = "usuario")
