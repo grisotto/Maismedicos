@@ -37,17 +37,258 @@ and open the template in the editor.
         </div>
 
         <div sec:authorize="hasAuthority('GRUPO')">
-            <!--<h1 th:text="${equipe.nome}">nome</h1>-->
+            <div class="col-md-6">
+                <h1>Equipe: <span th:text="${equipe.nome}"></span></h1>
+
+                <h3>Titulo: <span th:text="${equipe.tarefa.titulo}"></span></h3>
+                <h3>Descriçao: <span th:text="${equipe.tarefa.descricao}"></span></h3>
+
+
+            </div>
+
+            <div class="col-md-6">
+                <h4>Alunos <span th:text="${equipe.alunos}"></span></h4>
+                <table class="table table-responsive" id="Alunos">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="e :${equipe.alunos}">
+
+                        <td></td>
+                        <td th:text="${e.nome}">1</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <br/>
-            <!--<h1>Titulo: <span th:text="${equipe.tarefa.titulo}"></span></h1>-->
-            <!--<h1>Descriçao: <span th:text="${equipe.tarefa.descricao}"></span></h1>-->
 
+            <!--<h4>EtapasAtual: <span th:text="${equipe.tarefa.etapaAtual}"></span></h4>-->
+            <!--<h4>Etapas <span th:text="${equipe.tarefa.etapaEventos}"></span></h4>-->
+            <table class="table table-responsive" id="EtapasTarefa">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Etapa</th>
+                    <th>Data Incial</th>
+                    <th>Data Final</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="e :${equipe.tarefa.etapaEventos}">
+                    <td th:text="${e.tipo.id()}">1</td>
+                    <td th:text="${e.tipo}">1</td>
+                    <td th:text="${e.dataInicial}">1</td>
+                    <!--<td th:text="${#dates.format(e.dataInicial, 'dd/MM/yyyy')}">1</td>-->
+                    <td th:text="${e.dataFinal}">1</td>
+                    <!--<td th:text="${#dates.format(e.dataFinal, 'dd/MM/yyyy')}">1</td>-->
 
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
 </div>
+<div th:fragment="customCSS">
 
+    <link href="/plugins/datatables-plugins/dataTables.bootstrap.css"
+          th:href="@{/plugins/datatables-plugins/dataTables.bootstrap.css}"
+          rel="stylesheet" media="screen"/>
+    <link href="/plugins/datatables-responsive/dataTables.responsive.css"
+          th:href="@{/plugins/datatables-responsive/dataTables.responsive.css}"
+          rel="stylesheet" media="screen"/>
+    <script src="/plugins/datatables/js/jquery.dataTables.min.js"
+            th:src="@{/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+    <script src="/plugins/datatables-plugins/dataTables.bootstrap.min.js"
+            th:src="@{/plugins/datatables-plugins/dataTables.bootstrap.min.js}"></script>
+    <script src="/plugins/datatables-responsive/dataTables.responsive.js"
+            th:src="@{/plugins/datatables-responsive/dataTables.responsive.js}"></script>
+
+
+    <script src="/plugins/moment/min/moment-with-locales.js"
+            th:src="@{/plugins/moment/min/moment-with-locales.js}"></script>
+    <script
+            src="/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"
+            th:src="@{/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
+
+    <link
+            href="/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+            th:href="@{/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}"
+            rel="stylesheet" media="screen"/>
+
+
+    <!--<script src="/plugins/select2/js/i18n/pt-BR.js"  th:src="@{/plugins/select2/js/i18n/pt-BR.js}"></script>-->
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+        });
+        $('#EtapasTarefa').DataTable({
+            responsive: true,
+            "paging": false,
+            "searching": false,
+
+            "info": false,
+            "order": [[2, "asc"]]
+
+        });
+        $('#Alunos').DataTable({
+            responsive: true,
+            "paging": false,
+            "searching": false,
+
+            "info": false,
+            "order": [[1, "asc"]]
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            //Definindo o formato padrao e o locale
+            $(
+                '#datetimeAguardandoIni, #datetimeEsperandoSubmissaoIni, #datetimeValidandoQuestoesIni, #datetimeRespondendoQuestoesIni, #datetimeFinalizadoIni')
+                .datetimepicker({
+                    dayViewHeaderFormat: 'DD/MM/YYYY hh:mm',
+                    locale: 'pt-br'
+                });
+            $(
+                '#datetimeAguardandoFim, #datetimeEsperandoSubmissaoFim, #datetimeValidandoQuestoesFim, #datetimeRespondendoQuestoesFim, #datetimeFinalizadoFim')
+                .datetimepicker({
+                    dayViewHeaderFormat: 'DD/MM/YYYY hh:mm',
+                    locale: 'pt-br',
+                    useCurrent: false
+                    //Important! See issue #1075
+                });
+
+            //Aqui eu olho para a data inicial e difinino uma data min para o Fim
+            $("#datetimeAguardandoIni").on(
+                "dp.change",
+                function (e) {
+
+                    $('#datetimeAguardandoFim').data("DateTimePicker")
+                        .minDate(e.date);
+
+                    // console.log(e.date);
+                    //Pego a data e converto pegando os millisegundos
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+                    // console.log(outputDate);
+
+                    //  console.log(Date.parse(outputDate));
+                    //  console.log(outputDate.getTime());
+                });
+
+            $("#datetimeEsperandoSubmissaoIni").on(
+                "dp.change",
+                function (e) {
+
+                    $('#datetimeEsperandoSubmissaoFim').data(
+                        "DateTimePicker").minDate(e.date);
+
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            $("#datetimeValidandoQuestoesIni").on(
+                "dp.change",
+                function (e) {
+
+                    $('#datetimeValidandoQuestoesFim').data(
+                        "DateTimePicker").minDate(e.date);
+
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            $("#datetimeRespondendoQuestoesIni").on(
+                "dp.change",
+                function (e) {
+
+                    $('#datetimeRespondendoQuestoesFim').data(
+                        "DateTimePicker").minDate(e.date);
+
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            $("#datetimeFinalizadoIni").on(
+                "dp.change",
+                function (e) {
+
+                    $('#datetimeFinalizadoFim').data("DateTimePicker")
+                        .minDate(e.date);
+
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            //Aqui ao contrario da anterior
+            $("#datetimeAguardandoFim").on(
+                "dp.change",
+                function (e) {
+                    $('#datetimeAguardandoIni').data("DateTimePicker")
+                        .maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+            $("#datetimeEsperandoSubmissaoFim").on(
+                "dp.change",
+                function (e) {
+                    $('#datetimeEsperandoSubmissaoIni').data(
+                        "DateTimePicker").maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            $("#datetimeValidandoQuestoesFim").on(
+                "dp.change",
+                function (e) {
+                    $('#datetimeValidandoQuestoesIni').data(
+                        "DateTimePicker").maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            $("#datetimeRespondendoQuestoesFim").on(
+                "dp.change",
+                function (e) {
+                    $('#datetimeRespondendoQuestoesIni').data(
+                        "DateTimePicker").maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            $("#datetimeFinalizadoFim").on(
+                "dp.change",
+                function (e) {
+                    $('#datetimeFinalizadoIni').data("DateTimePicker")
+                        .maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+        });
+    </script>
+
+
+</div>
 
 </body>
 </html>

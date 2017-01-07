@@ -34,7 +34,7 @@ public class Tarefa implements Serializable {
     @ManyToOne
     private Turma turma;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private EtapaEvento etapaAtual;
 
     @LazyCollection(LazyCollectionOption.FALSE)

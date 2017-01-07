@@ -28,15 +28,21 @@ public class EquipeServiceImpl implements EquipeService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Override
     public Equipe inserir(Equipe entidade) {
         Usuario usuario = new Usuario();
+        
         usuario.setLogin(entidade.getNome());
         usuario.setSenha(passwordEncoder.encode("123"));
         usuario.setTipoUsuario(Usuario.TipoUsuario.GRUPO);
         entidade.setUsuario(usuario);
 
+        Usuario inserir = usuarioService.inserir(usuario);
+        entidade.setUsuario(inserir);
 
         return equipeRepository.save(entidade);
     }
