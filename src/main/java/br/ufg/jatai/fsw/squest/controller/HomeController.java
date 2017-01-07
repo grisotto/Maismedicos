@@ -7,10 +7,8 @@ package br.ufg.jatai.fsw.squest.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import br.ufg.jatai.fsw.squest.repository.PessoaRepository;
 
 /**
  *
@@ -19,15 +17,22 @@ import br.ufg.jatai.fsw.squest.repository.PessoaRepository;
 @Controller(value = "/")
 public class HomeController {
 
-    private static Logger log = LoggerFactory.getLogger(HomeController.class.getName());
+    private static final Logger log = LoggerFactory.getLogger(HomeController.class.getName());
 
-
+    /**
+     *
+     * @return
+     */
     @RequestMapping("/")
     public String home() {
         log.debug("Funcionando");
         return "/home/index";
     }
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = "/login")
     public String login() {
         return "/home/login";

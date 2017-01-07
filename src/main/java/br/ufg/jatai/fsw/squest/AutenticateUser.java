@@ -22,16 +22,28 @@ public class AutenticateUser {
     @Autowired
     private UsuarioService usuarioService;
 
+    /**
+     *
+     * @return
+     */
     public Usuario getUsuario() {
         UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return  (Usuario) usuarioService.usuarioForAuth(user.getUsername());
     }
 
+    /**
+     *
+     * @return
+     */
     public Professor getProfessor(){
 
         return getUsuario().getProfessor();
     }
 
+    /**
+     *
+     * @return
+     */
     public Equipe getEquipe(){
         LOGGER.info("Equipe"+
         getUsuario().getEquipe());

@@ -19,8 +19,10 @@ import java.util.Locale;
 @Configuration
 public class WebMvcConfig {
 
-
-
+    /**
+     *
+     * @return
+     */
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();

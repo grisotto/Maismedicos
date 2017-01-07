@@ -39,11 +39,19 @@ public class Professor extends Pessoa {
     @OneToMany(mappedBy = "professor")
     private List<Turma> turmas;
 
+    /**
+     *
+     * @param email
+     * @param usuario
+     */
     public Professor(String email, Usuario usuario) {
         this.email = email;
         this.usuario = usuario;
     }
 
+    /**
+     *
+     */
     public Professor() {
     }
 
@@ -63,10 +71,18 @@ public class Professor extends Pessoa {
         this.email = email;
     }
 
+    /**
+     *
+     * @return
+     */
     public Usuario getUsuario() {
         return usuario;
     }
 
+    /**
+     *
+     * @param usuario
+     */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
@@ -101,10 +117,18 @@ public class Professor extends Pessoa {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Turma> getTurmas() {
         return turmas;
     }
 
+    /**
+     *
+     * @param turmas
+     */
     public void setTurmas(List<Turma> turmas) {
         this.turmas = turmas;
     }

@@ -15,6 +15,11 @@ import java.util.List;
  */
 public interface TarefaService extends AbstractService<Tarefa, Integer> {
 
+    /**
+     *
+     * @param professor
+     * @return
+     */
     public List<Tarefa> allOfProfessor(Professor professor);
 
 

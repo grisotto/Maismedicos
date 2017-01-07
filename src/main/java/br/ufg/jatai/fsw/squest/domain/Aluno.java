@@ -78,12 +78,18 @@ public class Aluno extends Pessoa {
         this.email = email;
     }
 
-   
-
+    /**
+     *
+     * @return
+     */
     public List<Equipe> getTeams() {
         return equipes;
     }
 
+    /**
+     *
+     * @param teams
+     */
     public void setTeams(List<Equipe> teams) {
         this.equipes = teams;
     }

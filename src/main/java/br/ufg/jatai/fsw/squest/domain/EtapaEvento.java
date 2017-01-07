@@ -6,7 +6,6 @@
 package br.ufg.jatai.fsw.squest.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -17,11 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -50,6 +47,9 @@ public class EtapaEvento implements Serializable {
     @ManyToMany(mappedBy = "etapaEventos")
     private List<Tarefa> tarefas;
 
+    /**
+     *
+     */
     public EtapaEvento() {
         this.tipo = null;
     }
@@ -62,42 +62,82 @@ public class EtapaEvento implements Serializable {
         this.tipo = tipo;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public DateTime getDataFinal() {
         return dataFinal;
     }
 
+    /**
+     *
+     * @return
+     */
     public DateTime getDataInicial() {
         return dataInicial;
     }
 
+    /**
+     *
+     * @param dataFinal
+     */
     public void setDataFinal(DateTime dataFinal) {
         this.dataFinal = dataFinal;
     }
 
+    /**
+     *
+     * @param dataInicial
+     */
     public void setDataInicial(DateTime dataInicial) {
         this.dataInicial = dataInicial;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Tarefa> getTarefas() {
         return tarefas;
     }
 
+    /**
+     *
+     * @param tarefas
+     */
     public void setTarefas(List<Tarefa> tarefas) {
         this.tarefas = tarefas;
     }
 
+    /**
+     *
+     * @return
+     */
     public TipoEtapa getTipo() {
         return tipo;
     }
 
+    /**
+     *
+     * @param tipo
+     */
     public void setTipo(TipoEtapa tipo) {
         this.tipo = tipo;
     }
@@ -184,6 +224,10 @@ public class EtapaEvento implements Serializable {
 
                 };
 
+        /**
+         *
+         * @return
+         */
         public abstract Integer id();
 
         @Override

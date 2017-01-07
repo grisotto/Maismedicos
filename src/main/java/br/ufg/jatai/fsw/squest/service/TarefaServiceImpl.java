@@ -54,6 +54,11 @@ public class TarefaServiceImpl implements TarefaService {
         return tarefaRepository.findAll();
     }
 
+    /**
+     *
+     * @param professor
+     * @return
+     */
     @Override
     public List<Tarefa> allOfProfessor(Professor professor) {
         List a = new ArrayList<>();

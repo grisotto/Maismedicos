@@ -8,8 +8,6 @@ package br.ufg.jatai.fsw.squest.facade;
 import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
-import br.ufg.jatai.fsw.squest.domain.Tarefa;
-import br.ufg.jatai.fsw.squest.domain.Turma;
 import br.ufg.jatai.fsw.squest.service.AlunoService;
 import br.ufg.jatai.fsw.squest.service.EquipeService;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
@@ -79,6 +77,11 @@ public class EquipeFacade {
 
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Equipe findEquipe(Integer id) {
         return equipeService.find(id);
     }

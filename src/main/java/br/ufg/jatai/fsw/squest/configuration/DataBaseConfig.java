@@ -30,9 +30,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * @author dyeimys
@@ -42,7 +40,10 @@ public class DataBaseConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DataBaseConfig.class);
 
-
+    /**
+     *
+     * @return
+     */
     @Bean
     public DataSource dataSourceH2() {
         DataSource build = DataSourceBuilder.create()

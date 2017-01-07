@@ -45,6 +45,11 @@ public class AlunoController implements Serializable {
 
     }
 
+    /**
+     *
+     * @param aluno
+     * @return
+     */
     @RequestMapping(value = "/app/aluno")
     public String alunoHome(final Aluno aluno) {
         return "/app/aluno/home";

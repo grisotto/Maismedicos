@@ -153,18 +153,34 @@ public class Turma implements Serializable {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public Professor getProfessor() {
         return professor;
     }
 
+    /**
+     *
+     * @param professor
+     */
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
 
+    /**
+     *
+     * @return
+     */
     public Set<Aluno> getAlunos() {
         return alunos;
     }
 
+    /**
+     *
+     * @param alunos
+     */
     public void setAlunos(Set<Aluno> alunos) {
         this.alunos = alunos;
     }

@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -52,6 +51,13 @@ public class EquipeController implements Serializable {
         return "/app/equipe/home";
     }
 
+    /**
+     *
+     * @param equipe
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping(params = {"save"})
     public String createEquipe(@Valid final Equipe equipe, final BindingResult bindingResult, final ModelMap model) {
 
@@ -65,6 +71,13 @@ public class EquipeController implements Serializable {
 
     }
 
+    /**
+     *
+     * @param equipe
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping(params = {"modal"})
     public String createEquipeModal(@Valid final Equipe equipe, final BindingResult bindingResult, final ModelMap model) {
         log.info("Acessando Equipes");
@@ -80,6 +93,14 @@ public class EquipeController implements Serializable {
 
     }
 
+    /**
+     *
+     * @param aluno
+     * @param equipe
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping(value = "/addAluno")
     public String addAluno(@Valid final Aluno aluno, @Valid final Equipe equipe, final BindingResult bindingResult, final ModelMap model) {
         log.info("ENTROU veio aluno: " + aluno);
@@ -93,6 +114,12 @@ public class EquipeController implements Serializable {
         return "redirect:/app/equipe/" + 1;
     }
 
+    /**
+     *
+     * @param id
+     * @param map
+     * @return
+     */
     @GetMapping(value = "/{id}")
     public String showEquipe(@PathVariable Integer id, ModelMap map) {
 
@@ -106,11 +133,19 @@ public class EquipeController implements Serializable {
         return "/app/equipe/show";
     }
 
+    /**
+     *
+     * @return
+     */
     @ModelAttribute("allTarefas")
     public List<Tarefa> populateVisualizarProfessor() {
         return tarefaFacade.tarefasFromProessorAuth();
     }
 
+    /**
+     *
+     * @return
+     */
     @ModelAttribute("allEquipes")
     public List<Equipe> populateVisualizarEquipesProfessor() {
         //Ela esta errada. Eu sei, fiz apenas para continuar fazendo as views

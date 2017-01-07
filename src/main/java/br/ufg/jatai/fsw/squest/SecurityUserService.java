@@ -30,6 +30,12 @@ public class SecurityUserService implements UserDetailsService {
     @Autowired
     private UsuarioRepository userRepository;
 
+    /**
+     *
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         LOGGER.info(String.format("Find user %s!", username));

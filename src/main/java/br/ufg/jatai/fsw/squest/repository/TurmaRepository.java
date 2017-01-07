@@ -17,6 +17,11 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface TurmaRepository extends JpaRepository<Turma, Integer>, Serializable {
 
+    /**
+     *
+     * @param professor_id
+     * @return
+     */
     @Query("select t from Turma t where t.professor.id = ?1")
     public List<Turma> findOfProfessor(Integer professor_id);
 

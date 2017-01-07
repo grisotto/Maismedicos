@@ -67,6 +67,11 @@ public class TarefaFacade {
 
     }
 
+    /**
+     *
+     * @param idTarefa
+     * @param etapasModel
+     */
     public void atualizaDatasEtapas(Integer idTarefa, EtapasModel etapasModel){
         Tarefa find = tarefaService.find(idTarefa);
 //        find.getEtapaEventos().clear();

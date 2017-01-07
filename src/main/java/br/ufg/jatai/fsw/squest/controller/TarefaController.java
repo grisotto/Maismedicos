@@ -5,15 +5,12 @@
  */
 package br.ufg.jatai.fsw.squest.controller;
 
-import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.controller.modelForm.EtapasModel;
-import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
 import br.ufg.jatai.fsw.squest.facade.TarefaFacade;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
 import br.ufg.jatai.fsw.squest.service.TurmaService;
-import br.ufg.jatai.fsw.squest.service.EquipeService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +41,23 @@ public class TarefaController {
     @Autowired
     private TarefaFacade tarefaFacade;
 
-
+    /**
+     *
+     * @param tarefa
+     * @return
+     */
     @GetMapping(value = {"/app/tarefa"})
     public String tarefaHome(final Tarefa tarefa) {
         return "/app/tarefa/home";
     }
 
+    /**
+     *
+     * @param tarefa
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping(value = "/app/tarefa", params = {"save"})
     public String saveTarefa(@Valid final Tarefa tarefa, final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
@@ -68,11 +76,19 @@ public class TarefaController {
         return "redirect:/app/tarefa";
     }
     
+    /**
+     *
+     * @return
+     */
     @ModelAttribute("allTarefas")
     public List<Tarefa> populateVisualizarProfessor() {
         return tarefaFacade.tarefasFromProessorAuth();
     }
 
+    /**
+     *
+     * @return
+     */
     @ModelAttribute("allTurmas")
     public List<Turma> todasTurmas() {
 
@@ -80,6 +96,13 @@ public class TarefaController {
 
     }
 
+    /**
+     *
+     * @param id
+     * @param map
+     * @param etapas
+     * @return
+     */
     @GetMapping(value = "/app/tarefa/{id}")
     public String showTurma(@PathVariable Integer id, ModelMap map, final EtapasModel etapas) {
 
@@ -97,6 +120,14 @@ public class TarefaController {
         return "/app/tarefa/show";
     }
 
+    /**
+     *
+     * @param idTarefa
+     * @param etapas
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping(value = {"/app/tarefa/etapas"}, params = {"save"})
     public String atualizaData(@Valid Integer idTarefa, @Valid EtapasModel etapas,
             final BindingResult bindingResult, final ModelMap model) {
