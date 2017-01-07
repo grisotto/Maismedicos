@@ -12,5 +12,11 @@ import br.ufg.jatai.fsw.squest.domain.Usuario;
  * @author dfranco
  */
 public interface UsuarioService extends AbstractService<Usuario, Integer> {
+
+    /**
+     *
+     * @param login
+     * @return
+     */
     public Usuario usuarioForAuth(String login);
 }

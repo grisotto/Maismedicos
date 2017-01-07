@@ -238,18 +238,34 @@ public class Tarefa implements Serializable {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTitulo() {
         return titulo;
     }
 
+    /**
+     *
+     * @param titulo
+     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Equipe> getEquipes() {
         return equipes;
     }
 
+    /**
+     *
+     * @param equipes
+     */
     public void setEquipes(List<Equipe> equipes) {
         this.equipes = equipes;
     }

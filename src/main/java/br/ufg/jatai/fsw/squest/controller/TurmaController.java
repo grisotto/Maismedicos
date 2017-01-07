@@ -7,7 +7,6 @@ package br.ufg.jatai.fsw.squest.controller;
 
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
-import br.ufg.jatai.fsw.squest.domain.Usuario;
 import br.ufg.jatai.fsw.squest.facade.TurmaFacade;
 import br.ufg.jatai.fsw.squest.service.AlunoService;
 import java.io.Serializable;
@@ -17,8 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -56,6 +53,13 @@ public class TurmaController implements Serializable {
         return "/app/turma/home";
     }
 
+    /**
+     *
+     * @param turma
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping(value = "/app/turma", params = {"save"})
     public String saveTurma(@Valid final Turma turma, final BindingResult bindingResult, final ModelMap model) {
 
@@ -69,12 +73,22 @@ public class TurmaController implements Serializable {
         return "redirect:/app/turma";
     }
 
+    /**
+     *
+     * @return
+     */
     @ModelAttribute("allTurmas")
     public List<Turma> populateVisualizarTurma() {
         return facade.turmasOfProfessor();
 
     }
 
+    /**
+     *
+     * @param id
+     * @param map
+     * @return
+     */
     @GetMapping(value = "/app/turma/{id}")
     public String showTurma(@PathVariable Integer id, ModelMap map) {
 
@@ -89,11 +103,22 @@ public class TurmaController implements Serializable {
         return "/app/turma/show";
     }
 
-     @ModelAttribute("todasTarefas")
+    /**
+     *
+     * @return
+     */
+    @ModelAttribute("todasTarefas")
     public List<Tarefa> todasTarefas() {
         return facade.tarefasOfProfessor();
     }
 
+    /**
+     *
+     * @param turmaID
+     * @param alunoID
+     * @param map
+     * @return
+     */
     @PostMapping(value = "/app/turma/add/aluno", params = {"save"})
     public String adicionarAuluno(@Valid Integer turmaID, @Valid Integer alunoID, ModelMap map) {
         System.out.println("ENTROU AQUI");

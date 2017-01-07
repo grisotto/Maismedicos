@@ -11,12 +11,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ *
+ * @author dyeimys
+ */
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
+    /**
+     *
+     */
     @Autowired
     public UsuarioRepository repository;
 
+    /**
+     *
+     * @param login
+     * @return
+     */
     @Override
     public Usuario usuarioForAuth(String login) {
         return repository.userForAuth(login);

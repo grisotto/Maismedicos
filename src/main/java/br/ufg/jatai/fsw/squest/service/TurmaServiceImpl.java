@@ -13,6 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
+/**
+ *
+ * @author dyeimys
+ */
 @Service
 public class TurmaServiceImpl implements TurmaService {
 
@@ -49,6 +53,11 @@ public class TurmaServiceImpl implements TurmaService {
         return turmaRepository.findAll();
     }
 
+    /**
+     *
+     * @param professor
+     * @return
+     */
     @Override
     public List<Turma> allOfProfessor(Professor professor) {
         return turmaRepository.findOfProfessor(professor.getId());

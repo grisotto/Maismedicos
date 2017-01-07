@@ -99,10 +99,18 @@ public class Questionario implements Serializable {
         this.questoes = questoes;
     }
 
+    /**
+     *
+     * @return
+     */
     public Equipe getTime() {
         return time;
     }
 
+    /**
+     *
+     * @param time
+     */
     public void setTime(Equipe time) {
         this.time = time;
     }

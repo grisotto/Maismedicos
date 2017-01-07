@@ -49,21 +49,40 @@ public class Usuario implements Serializable {
     @OneToOne(mappedBy = "usuario")
     private Professor professor;
 
+    /**
+     *
+     */
     public Usuario() {
     }
 
+    /**
+     *
+     * @param login
+     * @param senha
+     * @param tipoUsuario
+     */
     public Usuario(String login, String senha, TipoUsuario tipoUsuario) {
         this.login = login;
         this.senha = senha;
         this.tipoUsuario = tipoUsuario;
     }
 
+    /**
+     *
+     * @param id
+     * @param login
+     * @param senha
+     */
     public Usuario(Integer id, String login, String senha) {
         this.id = id;
         this.login = login;
         this.senha = senha;
     }
 
+    /**
+     *
+     * @param u
+     */
     public Usuario(Usuario u) {
         setId(u.getId());
         setLogin(u.getLogin());
@@ -72,31 +91,60 @@ public class Usuario implements Serializable {
         setTipoUsuario(u.getTipoUsuario());
     }
 
+    /**
+     *
+     * @param login
+     * @param senha
+     */
     public Usuario(String login, String senha) {
         this.login = login;
         this.senha = senha;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getLogin() {
         return login;
     }
 
+    /**
+     *
+     * @param login
+     */
     public void setLogin(String login) {
         this.login = login;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSenha() {
         return senha;
     }
 
+    /**
+     *
+     * @param senha
+     */
     public void setSenha(String senha) {
         this.senha = senha;
     }
@@ -134,45 +182,87 @@ public class Usuario implements Serializable {
         return true;
     }
 
+    /**
+     *
+     */
     public enum TipoUsuario implements GrantedAuthority {
+
+        /**
+         *
+         */
         PROFESSOR {
             @Override
             public String getAuthority() {
                 return "PROFESSOR";
             }
-        }, GRUPO {
+        },
+
+        /**
+         *
+         */
+        GRUPO {
             @Override
             public String getAuthority() {
                 return "GRUPO";
             }
-        }, ALUNO {
+        },
+
+        /**
+         *
+         */
+        ALUNO {
             @Override
             public String getAuthority() {
                 return "ALUNO";
             }
-        }, ADMIN {
+        },
+
+        /**
+         *
+         */
+        ADMIN {
             @Override
             public String getAuthority() {
                 return "ADMIN";
             }
         };
 
+        /**
+         *
+         * @return
+         */
         @Override
         public abstract String getAuthority();
     }
 
+    /**
+     *
+     * @return
+     */
     public TipoUsuario getTipoUsuario() {
         return tipoUsuario;
     }
 
+    /**
+     *
+     * @param tipoUsuario
+     */
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
 
+    /**
+     *
+     * @return
+     */
     public Professor getProfessor() {
         return professor;
     }
 
+    /**
+     *
+     * @param professor
+     */
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
@@ -187,10 +277,18 @@ public class Usuario implements Serializable {
                 '}';
     }
 
+    /**
+     *
+     * @return
+     */
     public Equipe getEquipe() {
         return equipe;
     }
 
+    /**
+     *
+     * @param equipe
+     */
     public void setEquipe(Equipe equipe) {
         this.equipe = equipe;
     }

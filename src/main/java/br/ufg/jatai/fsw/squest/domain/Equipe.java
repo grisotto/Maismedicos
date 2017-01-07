@@ -5,7 +5,6 @@
  */
 package br.ufg.jatai.fsw.squest.domain;
 
-import com.sun.mail.imap.protocol.ID;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
@@ -111,29 +110,50 @@ public class Equipe implements Serializable {
         this.alunos = alunos;
     }
 
-
-
-
+    /**
+     *
+     * @return
+     */
     public Tarefa getTarefa() {
         return tarefa;
     }
 
+    /**
+     *
+     * @param tarefa
+     */
     public void setTarefa(Tarefa tarefa) {
         this.tarefa = tarefa;
     }
 
+    /**
+     *
+     * @return
+     */
     public Usuario getUsuario() {
         return usuario;
     }
 
+    /**
+     *
+     * @param usuario
+     */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isAtiva() {
         return ativa;
     }
 
+    /**
+     *
+     * @param ativa
+     */
     public void setAtiva(boolean ativa) {
         this.ativa = ativa;
     }
@@ -191,7 +211,11 @@ public class Equipe implements Serializable {
         return "Equipe{" + "id=" + id + ", nome=" + nome + ", ativa=" + ativa + '}';
     }
 
-    
+    /**
+     *
+     * @param aluno
+     * @return
+     */
     public boolean add(Aluno aluno) {
         return alunos.add(aluno);
     }

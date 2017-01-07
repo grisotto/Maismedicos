@@ -14,6 +14,11 @@ import br.ufg.jatai.fsw.squest.domain.Equipe;
 public class TeamFacade {
 
     //Criar Grupo
+
+    /**
+     *
+     * @param e
+     */
     public void criarGrupo(Equipe e) {
         //Salvar Grupo
         

@@ -16,6 +16,11 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface TarefaRepository extends JpaRepository<Tarefa, Integer> {
 
+    /**
+     *
+     * @param professor_id
+     * @return
+     */
     @Query("select t from Tarefa t where t.turma.professor.id = ?1")
     public Set<Tarefa> findOfProfessor(Integer professor_id);
 }

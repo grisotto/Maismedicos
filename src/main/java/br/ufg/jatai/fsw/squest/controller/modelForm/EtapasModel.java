@@ -23,52 +23,96 @@ public class EtapasModel {
     private EtapaEvento respondendo;
     private EtapaEvento finalizado;
 
+    /**
+     *
+     * @return
+     */
     public EtapaEvento getAguardando() {
         return aguardando;
     }
 
+    /**
+     *
+     * @param aguardando
+     */
     public void setAguardando(EtapaEvento aguardando) {
         aguardando.setTipo(EtapaEvento.TipoEtapa.AGUARDANDO);
         this.aguardando = aguardando;
     }
 
+    /**
+     *
+     * @return
+     */
     public EtapaEvento getEsperandoSubmissao() {
 
         return esperandoSubmissao;
     }
 
+    /**
+     *
+     * @param esperandoSubmissao
+     */
     public void setEsperandoSubmissao(EtapaEvento esperandoSubmissao) {
         esperandoSubmissao.setTipo(EtapaEvento.TipoEtapa.ESPERANDO_SUBMISSAO);
         this.esperandoSubmissao = esperandoSubmissao;
     }
 
+    /**
+     *
+     * @return
+     */
     public EtapaEvento getValidandoQuestoes() {
         return validandoQuestoes;
     }
 
+    /**
+     *
+     * @param validandoQuestoes
+     */
     public void setValidandoQuestoes(EtapaEvento validandoQuestoes) {
         validandoQuestoes.setTipo(EtapaEvento.TipoEtapa.VALIDANDO_QUESTOES);
         this.validandoQuestoes = validandoQuestoes;
     }
 
+    /**
+     *
+     * @return
+     */
     public EtapaEvento getRespondendo() {
         return respondendo;
     }
 
+    /**
+     *
+     * @param respondendo
+     */
     public void setRespondendo(EtapaEvento respondendo) {
         respondendo.setTipo(EtapaEvento.TipoEtapa.RESPONDENDO);
         this.respondendo = respondendo;
     }
 
+    /**
+     *
+     * @return
+     */
     public EtapaEvento getFinalizado() {
         return finalizado;
     }
 
+    /**
+     *
+     * @param finalizado
+     */
     public void setFinalizado(EtapaEvento finalizado) {
         finalizado.setTipo(EtapaEvento.TipoEtapa.FINALIZADO);
         this.finalizado = finalizado;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<EtapaEvento> buildeLista() {
         List<EtapaEvento> retorno = new ArrayList<EtapaEvento>();
         retorno.add(aguardando);
@@ -89,6 +133,11 @@ public class EtapasModel {
         return retorno;
     }
 
+    /**
+     *
+     * @param em
+     * @return
+     */
     public EtapasModel buildeOvjeto(Set<EtapaEvento> em) {
 
         EtapasModel retorno = new EtapasModel();
@@ -110,6 +159,11 @@ public class EtapasModel {
         return retorno;
     }
 
+    /**
+     *
+     * @param em
+     * @return
+     */
     public EtapasModel buildeOvjeto(List<EtapaEvento> em) {
         EtapasModel retorno = new EtapasModel();
         for (EtapaEvento e : em) {

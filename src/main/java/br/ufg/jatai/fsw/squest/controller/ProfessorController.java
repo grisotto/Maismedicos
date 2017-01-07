@@ -13,9 +13,7 @@ import br.ufg.jatai.fsw.squest.service.ProfessorService;
 import java.io.Serializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,18 +36,33 @@ public class ProfessorController implements Serializable {
     @Autowired
     private ProfessorService service;
 
+    /**
+     *
+     * @return
+     */
     @ModelAttribute("allProfessores")
     public List<Professor> populateVisualizarProfessor() {
         return this.service.findAll();
 
     }
 
+    /**
+     *
+     * @param professor
+     * @return
+     */
     @RequestMapping(value = "/app/professor")
     public String professorHome(final Professor professor) {
         return "/app/professor/home";
     }
 
-
+    /**
+     *
+     * @param professor
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping(value = "/app/professor", params = {"save"})
     public String saveProfessor(@Valid final Professor professor, final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {

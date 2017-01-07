@@ -44,6 +44,11 @@ public class AppController {
     @Autowired
     private AutenticateUser autenticateUser;
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping
     public String index(final Model model) {
         if (autenticateUser.getUsuario().getTipoUsuario().equals(Usuario.TipoUsuario.ADMIN)) {
@@ -66,7 +71,10 @@ public class AppController {
         return "/app/dash";
     }
 
-
+    /**
+     *
+     * @return
+     */
     @ModelAttribute("equipe")
     public Equipe getEquipe() {
         if (autenticateUser.getUsuario().getTipoUsuario().equals(Usuario.TipoUsuario.GRUPO)) {
@@ -79,6 +87,11 @@ public class AppController {
     }
 
     // Login form
+
+    /**
+     *
+     * @return
+     */
     @RequestMapping("/login")
     public String login() {
 
@@ -88,6 +101,11 @@ public class AppController {
     }
 
     // Login form with error
+
+    /**
+     *
+     * @param request
+     */
     @RequestMapping(value = "/logout")
     public void logout(HttpServletRequest request) {
         HttpSession  session = request.getSession(false);
@@ -97,6 +115,11 @@ public class AppController {
         }
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping("/login-error.html")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);

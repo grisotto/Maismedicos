@@ -15,6 +15,11 @@ import java.util.List;
  */
 public interface TurmaService extends AbstractService<Turma, Integer> {
 
+    /**
+     *
+     * @param professor
+     * @return
+     */
     public List<Turma> allOfProfessor(Professor professor);
     
 }
