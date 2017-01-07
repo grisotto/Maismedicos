@@ -6,9 +6,12 @@
 package br.ufg.jatai.fsw.squest.domain;
 
 import com.sun.mail.imap.protocol.ID;
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +28,8 @@ public class Equipe implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull
+    @NotBlank
     private String nome;
 
     @ManyToMany
@@ -36,7 +41,7 @@ public class Equipe implements Serializable {
     private Tarefa tarefa;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Usuario usuario;
 
     /**
@@ -147,10 +152,10 @@ public class Equipe implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getNome().hashCode();
-        result = 31 * result + (getAlunos() != null ? getAlunos().hashCode() : 0);
+        int result = (getId() != null ? getId().hashCode(): 0);
+        result = 31 * result + (getNome() != null ? getNome().hashCode() : 0);
         result = 31 * result + (isAtiva() ? 1 : 0);
+        result = 31 * result + (getUsuario()!= null? getUsuario().hashCode():0);
         return result;
     }
 

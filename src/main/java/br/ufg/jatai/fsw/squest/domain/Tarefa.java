@@ -253,6 +253,15 @@ public class Tarefa implements Serializable {
     public void setEquipes(List<Equipe> equipes) {
         this.equipes = equipes;
     }
-    
 
+    @Override
+    public String toString() {
+        return "Tarefa{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", turma=" + turma +
+                ", tamanhoQuestoes=" + tamanhoQuestoes +
+                '}';
+    }
 }

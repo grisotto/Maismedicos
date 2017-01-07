@@ -12,6 +12,7 @@ import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.facade.EquipeFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -32,23 +33,26 @@ public class EquipeController implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(EquipeController.class.getName());
 
+    @Autowired
     private EquipeFacade equipeFacade;
 
 
     /**
      * @return
      */
-    @GetMapping(value = "/")
-    public String turmaHome() {
+    @GetMapping()
+    public String equipeHome() {
         return "/app/equipe/home";
     }
 
-    @PostMapping(value = "/")
+    @PostMapping( params = {"save"})
     public String createEquipe(@Valid final Equipe equipe, final BindingResult bindingResult, final ModelMap model) {
-    	 System.out.println("ENTROU AQUI nas equipes");
+        log.info("Acessando Equipes");
         if (bindingResult.hasErrors()) {
             model.addAttribute("equipe", equipe);
         }
+        log.info("Equipe: "+equipe.getNome());
+
         equipeFacade.adicionaEquipe(equipe);
         //deve retornar para a mesma pagina, /app/tarefa/{equipe.tarefa.id}
         return "redirect:/app/tarefa";

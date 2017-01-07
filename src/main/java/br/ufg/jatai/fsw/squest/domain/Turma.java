@@ -153,16 +153,6 @@ public class Turma implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Turma{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", professor.nome=" + professor.getNome() +
-                '}';
-    }
-
     public Professor getProfessor() {
         return professor;
     }
@@ -179,4 +169,12 @@ public class Turma implements Serializable {
         this.alunos = alunos;
     }
 
+    @Override
+    public String toString() {
+        return "Turma{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                '}';
+    }
 }

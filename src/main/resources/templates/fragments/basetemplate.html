@@ -271,7 +271,7 @@
                                 <a href="/app/professor"><i class="fa fa-graduation-cap fa-fw"></i> Professores</a>
 
                             </li>
-                            <li >
+                            <li sec:authorize="hasAuthority('PROFESSOR') || hasAuthority('ADMIN') " >
                                 <a href="/app/aluno"><i class="fa fa-male   fa-fw"></i> Alunos</a>
                                 <!--                                <ul class="nav nav-second-level">
                                                                     <li>

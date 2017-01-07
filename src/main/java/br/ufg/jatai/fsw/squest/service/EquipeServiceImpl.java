@@ -6,6 +6,7 @@
 package br.ufg.jatai.fsw.squest.service;
 
 import br.ufg.jatai.fsw.squest.domain.Equipe;
+import br.ufg.jatai.fsw.squest.domain.Usuario;
 import br.ufg.jatai.fsw.squest.repository.EquipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,8 +31,13 @@ public class EquipeServiceImpl implements EquipeService {
 
     @Override
     public Equipe inserir(Equipe entidade) {
+        Usuario usuario = new Usuario();
+        usuario.setLogin(entidade.getNome());
+        usuario.setSenha(passwordEncoder.encode("123"));
+        usuario.setTipoUsuario(Usuario.TipoUsuario.GRUPO);
+        entidade.setUsuario(usuario);
 
-        entidade.getUsuario().setSenha(passwordEncoder.encode(entidade.getUsuario().getSenha()));
+
         return equipeRepository.save(entidade);
     }
 
