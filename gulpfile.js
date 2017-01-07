@@ -10,15 +10,15 @@ gulp.task('copy', function() {
 
 gulp.src([
     	'src/templatefsw/bootstrap/**/*'])
-		.pipe(gulp.dest('src/main/webapp/assets/bootstrap'));
+		.pipe(gulp.dest('src/main/resources/static/bootstrap'));
 
 gulp.src([
 	'src/templatefsw/dist/**/*'])
-		.pipe(gulp.dest('src/main/webapp/assets/dist'));
+		.pipe(gulp.dest('src/main/resources/static/tema'));
 
 gulp.src([
 	'src/templatefsw/plugins/**/*'])
-		.pipe(gulp.dest('src/main/webapp/assets/plugins'));
+		.pipe(gulp.dest('src/main/resources/static/plugins'));
 })
 
 // Run everything
