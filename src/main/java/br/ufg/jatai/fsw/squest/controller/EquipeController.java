@@ -40,10 +40,9 @@ public class EquipeController implements Serializable {
 
     @Autowired
     private EquipeFacade equipeFacade;
-    
+
     @Autowired
     private TarefaFacade tarefaFacade;
-
 
     /**
      * @return
@@ -53,28 +52,27 @@ public class EquipeController implements Serializable {
         return "/app/equipe/home";
     }
 
-    @PostMapping( params = {"save"})
+    @PostMapping(params = {"save"})
     public String createEquipe(@Valid final Equipe equipe, final BindingResult bindingResult, final ModelMap model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("equipe", equipe);
         }
 
-
         equipeFacade.adicionaEquipe(equipe);
 
         return "redirect:/app/equipe";
 
     }
-    
-    @PostMapping( params = {"modal"})
+
+    @PostMapping(params = {"modal"})
     public String createEquipeModal(@Valid final Equipe equipe, final BindingResult bindingResult, final ModelMap model) {
         log.info("Acessando Equipes");
         if (bindingResult.hasErrors()) {
             model.addAttribute("equipe", equipe);
         }
-        log.info("Equipe: "+equipe.getNome());
-        log.info("Tarefa: "+equipe.getTarefa());
+        log.info("Equipe: " + equipe.getNome());
+        log.info("Tarefa: " + equipe.getTarefa());
 
         equipeFacade.adicionaEquipe(equipe);
         //deve retornar para a mesma pagina, /app/tarefa/{equipe.tarefa.id}
@@ -82,39 +80,41 @@ public class EquipeController implements Serializable {
 
     }
 
-    @PostMapping(value = "/{idEquipe}/addAluno")
-    public void addAluno(@Valid final Aluno aluno, @Valid final Integer idEquipe, final BindingResult bindingResult, final ModelMap model){
+    @PostMapping(value = "/addAluno")
+    public String addAluno(@Valid final Aluno aluno, @Valid final Equipe equipe, final BindingResult bindingResult, final ModelMap model) {
+        log.info("ENTROU veio aluno: " + aluno);
+        log.info("ENTROU veio Equipe: " + equipe);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("idEquipe", idEquipe);
+            model.addAttribute("equipe", equipe);
             model.addAttribute("aluno", aluno);
         }
 
-        equipeFacade.addAluno(aluno,idEquipe);
+        equipeFacade.addAluno(aluno,equipe);
+        return "redirect:/app/equipe/" + 1;
     }
-    
+
     @GetMapping(value = "/{id}")
     public String showEquipe(@PathVariable Integer id, ModelMap map) {
 
         map.addAttribute("equipe", equipeFacade.findEquipe(id));
-        
+
         Equipe equipe = equipeFacade.findEquipe(id);
-        
+
         //TODO: Aqui esta errado, precisa de todos os alunos que estao na turma desta tarefa e que nao estao em nenhuma tarefa
         map.addAttribute("todosAlunos", equipeFacade.alunosFromEquipe(equipe));
 
         return "/app/equipe/show";
     }
-    
+
     @ModelAttribute("allTarefas")
     public List<Tarefa> populateVisualizarProfessor() {
         return tarefaFacade.tarefasFromProessorAuth();
     }
-    
+
     @ModelAttribute("allEquipes")
     public List<Equipe> populateVisualizarEquipesProfessor() {
-    	//Ela esta errada. Eu sei, fiz apenas para continuar fazendo as views
+        //Ela esta errada. Eu sei, fiz apenas para continuar fazendo as views
         return equipeFacade.todasEquipes();
     }
-
 
 }

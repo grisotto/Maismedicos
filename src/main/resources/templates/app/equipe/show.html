@@ -87,13 +87,13 @@ and open the template in the editor.
 
 
                             <label> Aluno</label>
-                            <form   action="#" th:action="@{/app/equipe/add/aluno}" method="POST">
+                            <form   action="#" th:action="@{/app/equipe/addAluno}" method="POST">
 
 
                                 <div class="input-group">
-                                 <!--    <input hidden="true" name="tarefaID" th:value="${tarefa.id}"/> -->
-                                    <select   name="alunoID" data-placeholder="Selecione um aluno" class="form-control " id="aluno" >
-                                        <option  th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
+                                     <input hidden="true" name="equipe" th:value="${equipe.id}"/> 
+                                    <select   name="aluno" data-placeholder="Selecione um aluno" class="form-control " id="aluno" >
+                                        <option  th:each="p : ${equipe.tarefa.turma.alunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
                                     </select>
 
                                     <div class="input-group-btn">

@@ -14,6 +14,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -32,7 +33,7 @@ public class Equipe implements Serializable {
     @NotBlank
     private String nome;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Aluno> alunos = new ArrayList<>();
 
     private boolean ativa;
@@ -138,27 +139,59 @@ public class Equipe implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Equipe)) return false;
-
-        Equipe equipe = (Equipe) o;
-
-        if (isAtiva() != equipe.isAtiva()) return false;
-        if (!getId().equals(equipe.getId())) return false;
-        if (!getNome().equals(equipe.getNome())) return false;
-        return getAlunos() != null ? getAlunos().equals(equipe.getAlunos()) : equipe.getAlunos() == null;
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Equipe other = (Equipe) obj;
+        if (this.ativa != other.ativa) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.alunos, other.alunos)) {
+            return false;
+        }
+        if (!Objects.equals(this.tarefa, other.tarefa)) {
+            return false;
+        }
+        if (!Objects.equals(this.usuario, other.usuario)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = (getId() != null ? getId().hashCode(): 0);
-        result = 31 * result + (getNome() != null ? getNome().hashCode() : 0);
-        result = 31 * result + (isAtiva() ? 1 : 0);
-        result = 31 * result + (getUsuario()!= null? getUsuario().hashCode():0);
-        return result;
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 59 * hash + Objects.hashCode(this.nome);
+        hash = 59 * hash + Objects.hashCode(this.alunos);
+        hash = 59 * hash + (this.ativa ? 1 : 0);
+        hash = 59 * hash + Objects.hashCode(this.tarefa);
+        hash = 59 * hash + Objects.hashCode(this.usuario);
+        return hash;
     }
 
+ 
+   
+
+    @Override
+    public String toString() {
+        return "Equipe{" + "id=" + id + ", nome=" + nome + ", ativa=" + ativa + '}';
+    }
+
+    
     public boolean add(Aluno aluno) {
         return alunos.add(aluno);
     }
