@@ -52,6 +52,7 @@ public class EquipeController implements Serializable {
             model.addAttribute("equipe", equipe);
         }
         log.info("Equipe: "+equipe.getNome());
+        log.info("Tarefa: "+equipe.getTarefa());
 
         equipeFacade.adicionaEquipe(equipe);
         //deve retornar para a mesma pagina, /app/tarefa/{equipe.tarefa.id}

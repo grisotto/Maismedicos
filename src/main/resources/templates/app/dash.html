@@ -24,12 +24,12 @@ and open the template in the editor.
         Roles: <span sec:authentication="principal.authorities">[ALUNO, ADMIN, PROFESSOR, GRUPO]</span>
         <div sec:authorize="hasAuthority('ADMIN')">
 
-        Essa mensagem só aparece para quem é admin
+            Essa mensagem só aparece para quem é admin
 
         </div>
 
         <div sec:authorize="hasAuthority('PROFESSOR')">
-            Essa mensagem só aparece para quem é  Professor
+            Essa mensagem só aparece para quem é Professor
         </div>
 
         <div sec:authorize="hasAuthority('ALUNO')">
@@ -37,7 +37,12 @@ and open the template in the editor.
         </div>
 
         <div sec:authorize="hasAuthority('GRUPO')">
-            Essa mensagem só aparece para quem é Grupo
+            <!--<h1 th:text="${equipe.nome}">nome</h1>-->
+            <br/>
+            <!--<h1>Titulo: <span th:text="${equipe.tarefa.titulo}"></span></h1>-->
+            <!--<h1>Descriçao: <span th:text="${equipe.tarefa.descricao}"></span></h1>-->
+
+
         </div>
     </div>
 

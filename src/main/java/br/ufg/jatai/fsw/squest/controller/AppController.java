@@ -5,10 +5,14 @@
  */
 package br.ufg.jatai.fsw.squest.controller;
 
+import br.ufg.jatai.fsw.squest.AutenticateUser;
+import br.ufg.jatai.fsw.squest.domain.Usuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -19,14 +23,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AppController {
 
     private static Logger log = LoggerFactory.getLogger(AppController.class.getName());
-
+    @Autowired
+    private AutenticateUser autenticateUser;
     /**
      *
      * @return
      */
     @RequestMapping(value = "/app")
-    public String index() {
-
+    public String index(final ModelMap model) {
+        if(autenticateUser.getUsuario().getTipoUsuario().equals(Usuario.TipoUsuario.GRUPO)){
+            model.put("equipe",autenticateUser.getEquipe());
+        }
         return "/app/dash";
     }
 
