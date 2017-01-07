@@ -5,9 +5,11 @@
  */
 package br.ufg.jatai.fsw.squest.facade;
 
+import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
+import br.ufg.jatai.fsw.squest.domain.Turma;
 import br.ufg.jatai.fsw.squest.service.EquipeService;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,10 @@ public class EquipeFacade {
     private EquipeService equipeService;
     @Autowired
     private TarefaService tarefaService;
+    
+
+    @Autowired
+    private AutenticateUser autenticateUser;
 
 
     /**
@@ -55,6 +61,21 @@ public class EquipeFacade {
     public List<Aluno> alunosFromEquipe(Equipe equipe){
        return equipeService.find(equipe.getId()).getAlunos();
 
+    }
+    
+    /**
+     * Listagem das Equipes para teste.
+     *
+     * @return
+     */
+    
+    public List<Equipe> todasEquipes() {
+        return this.equipeService.findAll();
+
+    }
+    
+    public Equipe findEquipe(Integer id) {
+        return equipeService.find(id);
     }
 
 

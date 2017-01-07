@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="fragments/basetemplate :: page">
+
+
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <script type="text/css">
+            select2-selection--single{
+
+            }
+        </script>
+
+    </head>
+    <body>
+        <div th:fragment="content">
+            <div class="page-header">
+                <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" href="/app/equipe"></a><b> Equipe: </b>
+                    <span class="text-muted" th:text="${{equipe.nome}}"></span></h2>
+            </div>
+            <div class="col-md-12 col-sm-8">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="panel-title">
+                            <i class="fa fa-info-circle fa-fw"></i>Info
+
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-inline">
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="nome">Nome:</label>
+                                <span class="form-control-static" th:text="${{equipe.nome}}"></span>
+
+                            </div>
+                             <div class="form-group col-md-3">
+                                <label class="control-label" for="tarefas">Tarefa: </label>
+                                <span class="form-control-static" th:text="${equipe.tarefa.titulo}">0</span>
+
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="alunos">Quantidade de Alunos:</label>
+                                <span class="form-control-static" th:text="${equipe.alunos.size()}"> 0</span>
+
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+
+                    <div class="panel-heading">
+                        <span class="panel-title">
+
+                            <i class="fa fa-users fa-fw"></i>Alunos
+                        </span>
+                        <!--                        <button data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm pull-right" type="submit">
+                                                    <i class="glyphicon glyphicon-plus"></i>
+                                                </button>-->
+                        <!--                        <div class="clearfix"></div>-->
+                    </div>
+
+
+
+                    <div class="panel-body">
+                        <div class="form-group">
+
+
+                            <label> Aluno</label>
+                            <form   action="#" th:action="@{/app/equipe/add/aluno}" method="POST">
+
+
+                                <div class="input-group">
+                                 <!--    <input hidden="true" name="tarefaID" th:value="${tarefa.id}"/> -->
+                                    <select   name="alunoID" data-placeholder="Selecione um aluno" class="form-control " id="aluno" >
+                                        <option  th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
+                                    </select>
+
+                                    <div class="input-group-btn">
+                                        <button type="submit" name="save"  value="Salvar"  class="btn btn-sm btn-success" ><i class="glyphicon glyphicon-plus"></i></button>
+                                    </div>
+
+
+
+                                </div>
+                            </form>
+
+
+
+
+
+
+                        </div>
+                        <table class="table table-condensed ">
+                            <thead>
+                                <tr>
+                                    <td>Nome</td>
+                                    <td >E-mail</td>
+
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                               <tr  th:if="${equipe.alunos.empty}">
+                                    <td colspan="4" class=" text-center">Equipe sem Alunos</td>
+                                </tr>
+                                <tr data-th-each="a : ${equipe.alunos}">
+                                    <td th:text="${a.nome}">1</td>
+                                    <td th:text="${a.email}"></td>
+
+                                    <td >
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a class="btn btn-sm  btn-danger fa fa-trash"/>
+                                            <a class="btn btn-sm  btn-primary fa fa-send"/>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+        <div th:fragment="customCSS">
+
+            <link href="/plugins/select2/css/select2.min.css" th:href="@{/plugins/select2/css/select2.min.css}" rel="stylesheet" media="screen" />
+            <link href="/plugins/select2/css/select2_bootstrap.css" th:href="@{/plugins/select2/css/select2_bootstrap.css}" rel="stylesheet" media="screen" />
+            <script src="/plugins/select2/js/select2.min.js" th:src="@{/plugins/select2/js/select2.full.min.js}"></script>
+
+            <!--<script src="/plugins/select2/js/i18n/pt-BR.js"  th:src="@{/plugins/select2/js/i18n/pt-BR.js}"></script>-->
+
+
+            <script type="text/javascript">
+
+                $.fn.select2.defaults.set("theme", "bootstrap");
+//                $.fn.select2.defaults.set('language', 'pt-BR');
+//                $.fn.select2.defaults.set('allowClear', true);
+
+                $("#aluno").select2({
+                    placeholder: {
+                        id: "-1",
+                        placeholder: "Select an option"
+                    },
+//                    allowclear: true,
+                    language: {
+                        noResults: function (term) {
+//                            term = '<button data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm" type="submit">Aqui</button>';
+                            term = '<a href="/app/aluno"><i class="fa fa-male   fa-fw"></i> Alunos</a>';
+
+                            return "Não foi encontrado o aluno, apara cadastrar acesse: " + term;
+
+//                            console.log(term);
+//                            console.log(event.target);
+//                            console.log(event.target.value);
+                        }
+                    },
+                    escapeMarkup: function (markup) {
+                        return markup;
+                    }
+
+
+                });
+                $(".select2-selection").addClass("form-control");
+                $(".select2-selection").removeClass("select2-selection--single");
+
+
+
+            </script>
+
+
+
+        </div>
+    </body>
+</html>
