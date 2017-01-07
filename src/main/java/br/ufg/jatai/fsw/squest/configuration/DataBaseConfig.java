@@ -105,7 +105,7 @@ public class DataBaseConfig {
 
 
             Usuario u = new Usuario("admin", "admin");
-            u.setSenha("123");
+            u.setSenha(passwordEncoder.encode("123"));
             u.setTipoUsuario(Usuario.TipoUsuario.ADMIN);
 
             LOGGER.info("Inserindo ADMIN:" + u);

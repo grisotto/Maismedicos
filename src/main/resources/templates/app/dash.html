@@ -24,9 +24,43 @@ and open the template in the editor.
         Roles: <span sec:authentication="principal.authorities">[ALUNO, ADMIN, PROFESSOR, GRUPO]</span>
         <div sec:authorize="hasAuthority('ADMIN')">
 
-            Essa mensagem só aparece para quem é admin
+
+            <div th:class="col-md-4">
+                <div class=" panel panel-info">
+                    <div class="panel-heading">
+                        <span class="panel-title"><span th:text="${usuarios.size()} "> </span> Sessões Ativas</span>
+                    </div>
+                    <div th:class="panel-body">
+                        <table th:class="table">
+                            <thead>
+                            <tr>
+                                <td>Usuário</td>
+                                <td>Tipo de Usuario</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="u : ${usuarios}">
+                                <tr>
+                                    <td th:text="${u.login}">A Smoke Test'</td>
+
+                                    <td  th:text="${u.tipoUsuario}">A Smoke Test'</td>
+                                    <td th:class="col-md-1" ><a class="btn btn-danger btn-sm fa fa-trash-o"></a></td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+
 
         </div>
+
 
         <div sec:authorize="hasAuthority('PROFESSOR')">
             Essa mensagem só aparece para quem é Professor
@@ -47,7 +81,6 @@ and open the template in the editor.
             </div>
 
             <div class="col-md-6">
-                <h4>Alunos <span th:text="${equipe.alunos}"></span></h4>
                 <table class="table table-responsive" id="Alunos">
                     <thead>
                     <tr>
