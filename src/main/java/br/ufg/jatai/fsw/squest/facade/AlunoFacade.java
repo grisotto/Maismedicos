@@ -41,6 +41,12 @@ public class AlunoFacade {
 
     }
 
+    public void updateAluno(Aluno aluno){
+
+        alunoService.atualizar(aluno);
+
+    }
+
     
 
 }
