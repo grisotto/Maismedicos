@@ -31,7 +31,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     public Professor inserir(Professor entidade) {
-        entidade.getUsuario().setSenha(passwordEncoder.encode(entidade.getUsuario().getSenha()));
+        entidade.getUsuario().setSenha(passwordEncoder.encode("123"));
         return repository.save(entidade);
     }
 
