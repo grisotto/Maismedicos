@@ -31,5 +31,11 @@ public class ProfessorFacade {
         return professorService.findAll();
     }
 
-    
+    public void inserirProfessor(Professor professor){
+
+        professorService.inserir(professor);
+
+    }
+
+
 }
