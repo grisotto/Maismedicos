@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/bootstrap/**", "/temas/**", "/", "/h2-console/**").permitAll()
-                .antMatchers("/app/**").authenticated();
+                .antMatchers("/app/**/**").authenticated();
         http
                 .sessionManagement()
                 .enableSessionUrlRewriting(true)
