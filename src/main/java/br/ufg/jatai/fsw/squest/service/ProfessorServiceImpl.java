@@ -8,6 +8,8 @@ package br.ufg.jatai.fsw.squest.service;
 import br.ufg.jatai.fsw.squest.domain.Professor;
 import br.ufg.jatai.fsw.squest.repository.ProfessorRepository;
 import java.util.List;
+
+import br.ufg.jatai.fsw.squest.util.GeradorSenha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,7 +33,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     public Professor inserir(Professor entidade) {
-        entidade.getUsuario().setSenha(passwordEncoder.encode("123"));
+        entidade.getUsuario().setSenha(passwordEncoder.encode(new GeradorSenha().gerarSenha()));
         return repository.save(entidade);
     }
 
