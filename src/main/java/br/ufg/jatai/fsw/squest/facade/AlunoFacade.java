@@ -71,6 +71,7 @@ public class AlunoFacade {
      * Listam as equipes que determinado aluno está inserido
      *
      * @param aluno
+     * @return 
      *
      */
     public Set<Equipe> equipesDoAluno(Aluno aluno) {

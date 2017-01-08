@@ -133,6 +133,22 @@ public class Aluno extends Pessoa {
         return "Aluno{" + "matricula=" + matricula + ", email=" + email + '}';
     }
 
+    public List<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(List<Equipe> equipes) {
+        this.equipes = equipes;
+    }
+
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
+    }
+
     
    
 }

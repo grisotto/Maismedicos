@@ -35,6 +35,7 @@ public class Equipe implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Aluno> alunos = new ArrayList<>();
 
+    
     private boolean ativa;
 
     @ManyToOne
