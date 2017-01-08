@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -47,6 +48,16 @@ public class AlunoFacade {
 
     }
 
-    
 
+    public Set<Equipe> equipesDoAluno(Aluno aluno){
+
+        return new HashSet<>(alunoService.find(aluno).getTeams());
+
+    }
+
+    public Set<Equipe> equipesDoAluno(Integer id){
+
+        return new HashSet<>(alunoService.find(id).getTeams());
+
+    }
 }
