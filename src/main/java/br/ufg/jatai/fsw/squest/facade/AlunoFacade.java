@@ -29,6 +29,12 @@ public class AlunoFacade {
     @Autowired
     private AutenticateUser autenticateUser;
 
+    /**
+     * Lista todos os alunos cadastrados
+     *
+     *
+     */
+
     public List<Aluno> listarAlunos(){
 
         log.trace("O usuário " + autenticateUser.getUsuario() + "está listando todos os alunos");
@@ -36,6 +42,12 @@ public class AlunoFacade {
         return alunoService.findAll();
 
     }
+
+    /**
+     * Insere um novo aluno
+     *
+     * @param aluno
+     */
 
 
     public void inserirAluno(Aluno aluno){
@@ -46,6 +58,12 @@ public class AlunoFacade {
 
     }
 
+    /**
+     * Atualiza o aluno
+     *
+     * @param aluno
+     */
+
     public void updateAluno(Aluno aluno){
 
         log.trace("O usuário " + autenticateUser.getUsuario() + "está atualizando o aluno: " + aluno.getNome());
@@ -53,6 +71,13 @@ public class AlunoFacade {
         alunoService.atualizar(aluno);
 
     }
+
+    /**
+     * Listam as equipes que determinado aluno está inserido
+     *
+     * @param aluno
+     *
+     */
 
 
     public Set<Equipe> equipesDoAluno(Aluno aluno){
@@ -70,6 +95,13 @@ public class AlunoFacade {
         return new HashSet<>(alunoService.find(id).getTeams());
 
     }
+
+    /**
+     * Listam as turmas que o aluno está inserido
+     *
+     * @param aluno
+     *
+     */
 
     public Set<Turma> turmasDoAluno(Aluno aluno){
 
