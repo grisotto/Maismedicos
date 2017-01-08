@@ -14,6 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import br.ufg.jatai.fsw.squest.domain.Aluno;
+
+import br.ufg.jatai.fsw.squest.facade.AlunoFacade;
+import br.ufg.jatai.fsw.squest.service.AlunoService;
 import br.ufg.jatai.fsw.squest.service.AlunoServiceImpl;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +35,8 @@ public class AlunoController implements Serializable {
     private static Logger log = LoggerFactory.getLogger(EquipeController.class.getName());
 
     @Autowired
-    private AlunoServiceImpl AlunoService;
+    private AlunoFacade alunoFacade;
+
 
     /**
      * Cria um attributo AllAlunos que busca todos os alunos cadastrados
@@ -41,7 +45,8 @@ public class AlunoController implements Serializable {
      */
     @ModelAttribute("allAlunos")
     public List<Aluno> populateVisualizarAlunos() {
-        return this.AlunoService.findAll();
+        return this.alunoFacade.listarAlunos();
+
 
     }
 
@@ -72,7 +77,8 @@ public class AlunoController implements Serializable {
             model.addAttribute("aluno", aluno);
             return "/app/aluno/home";
         }
-        this.AlunoService.inserir(aluno);
+        this.alunoFacade.inserirAluno(aluno);
+
         model.clear();
         return "redirect:/app/aluno";
 
