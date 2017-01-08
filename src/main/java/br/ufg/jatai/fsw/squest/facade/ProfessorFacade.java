@@ -31,9 +31,21 @@ public class ProfessorFacade {
     @Autowired
     private AutenticateUser autenticateUser;
 
+    /**
+     * Lista todos os professores
+     *
+     * @return
+     */
+
     public List<Professor> listarProfessores(){
         return professorService.findAll();
     }
+
+    /**
+     * Insere um novo professor
+     *
+     * @param professor
+     */
 
     public void inserirProfessor(Professor professor){
 
@@ -41,12 +53,23 @@ public class ProfessorFacade {
 
     }
 
+    /**
+     * Atualiza um professor específico
+     *
+     * @param professor
+     */
     public void updateProfessor(Professor professor){
 
         professorService.atualizar(professor);
 
     }
 
+    /**
+     * Lista todas as turmas do professor
+     *
+     * @param professor
+     * @return
+     */
     public Set<Turma> turmasDoProfessor(Professor professor) {
 
         return new HashSet<>(professorService.find(professor).getTurmas());
@@ -59,6 +82,6 @@ public class ProfessorFacade {
 
     }
 
-    
+
 
 }
