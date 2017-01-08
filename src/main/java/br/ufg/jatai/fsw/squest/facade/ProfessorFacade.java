@@ -37,5 +37,13 @@ public class ProfessorFacade {
 
     }
 
+    public void updateProfessor(Professor professor){
+
+        professorService.atualizar(professor);
+
+    }
+
+    
+
 
 }
