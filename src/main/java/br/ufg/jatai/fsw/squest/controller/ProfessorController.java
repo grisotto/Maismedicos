@@ -9,6 +9,7 @@ import java.util.List;
 
 import br.ufg.jatai.fsw.squest.domain.Professor;
 import br.ufg.jatai.fsw.squest.domain.Usuario;
+import br.ufg.jatai.fsw.squest.facade.ProfessorFacade;
 import br.ufg.jatai.fsw.squest.service.ProfessorService;
 import java.io.Serializable;
 import org.slf4j.Logger;
@@ -34,7 +35,7 @@ public class ProfessorController implements Serializable {
     private static Logger log = LoggerFactory.getLogger(ProfessorController.class.getName());
 
     @Autowired
-    private ProfessorService service;
+    private ProfessorFacade professorFacade;
 
     /**
      *
@@ -42,7 +43,7 @@ public class ProfessorController implements Serializable {
      */
     @ModelAttribute("allProfessores")
     public List<Professor> populateVisualizarProfessor() {
-        return this.service.findAll();
+        return this.professorFacade.listarProfessores();
 
     }
 
@@ -71,7 +72,7 @@ public class ProfessorController implements Serializable {
         }       
         professor.getUsuario().setTipoUsuario(Usuario.TipoUsuario.PROFESSOR);
 
-        this.service.inserir(professor);
+        this.professorFacade.inserirProfessor(professor);
         model.clear();
         return "redirect:/app/professor";
 
