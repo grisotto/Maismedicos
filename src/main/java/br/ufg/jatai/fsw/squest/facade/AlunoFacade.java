@@ -34,7 +34,13 @@ public class AlunoFacade {
 
     }
 
-    
 
+    public void inserirAluno(Aluno aluno){
+
+        alunoService.inserir(aluno);
+
+    }
+
+    
 
 }
