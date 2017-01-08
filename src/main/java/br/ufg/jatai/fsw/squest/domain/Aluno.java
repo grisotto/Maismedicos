@@ -94,6 +94,14 @@ public class Aluno extends Pessoa {
         this.equipes = teams;
     }
 
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
