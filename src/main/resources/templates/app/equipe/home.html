@@ -34,7 +34,7 @@ and open the template in the editor.
                             <label>Nome da Equipe</label>
                             <input class="form-control" th:field="${equipe.nome}"/>
                         </div>
-                       
+
                         <div class="form-group">
                             <label>Tarefa</label>
                             <select class="form-control"     th:field="${equipe.tarefa.id}">
@@ -43,9 +43,9 @@ and open the template in the editor.
                         </div>
 
                     </div>
-    
-                
-                <!-- /.panel-body -->
+
+
+                    <!-- /.panel-body -->
                     <div class="panel-footer  clearfix">
                         <input class="btn btn-info pull-right" type="submit" name="save"  value="Salvar" />
                     </div>
@@ -64,24 +64,35 @@ and open the template in the editor.
                 </div>
                 <div class="panel-body">
 
-<table class="table table-condensed table-striped">
+                    <table class="table table-condensed table-striped">
                         <thead>
                             <tr>
-                                <td>Nome</td>
-                                <td>Tarefa</td>
-                                <td class=" text-center">Quantidade de Membros</td>
-                                
+                                <th>Nome</th>
+                                <th>Tarefa</th>
+                                <th>Situação</th>
+                                <th class=" text-center">Quantidade de Membros</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                               <tr th:if="${allEquipes.empty}">
-                                <td colspan="3">nao pegou as equipes. Usuario ID toda hora alterando!!</td>
+                            <tr th:if="${allEquipes.empty}">
+                                <td colspan="4">nao pegou as equipes. Usuario ID toda hora alterando!!</td>
                             </tr>
-                            
+
                             <tr th:each="t : ${allEquipes}">
                                 <td th:text="${t.nome}">1</td>
                                 <td th:text="${t.tarefa.titulo}">1</td>
-                             	<td class=" text-center" th:text="${t.alunos.size()}">0</td>
+                                <td  th:if="${t.ativa}" >
+                                    <span class="label label-info">
+                                        Ativada
+                                    </span>
+                                </td>
+                                <td  th:if="${!t.ativa}" >
+                                    <span class="label label-warning fa-1">
+                                        Desativada
+                                    </span>
+                                </td>
+                                <td class=" text-center" th:text="${t.alunos.size()}">0</td>
                                 <td>
                                     <a  class="btn btn-success btn-sm "  th:href="@{/app/equipe/}+${{t.id}}" >
                                         <span class="fa  fa-arrow-right"> </span>

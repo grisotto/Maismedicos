@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.squest.controller;
 
+import br.ufg.jatai.fsw.squest.domain.Questionario;
 import java.io.Serializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +25,26 @@ public class QuestionarioController implements Serializable {
      *
      * @return
      */
-    @RequestMapping(value = "/app/questionario")
-    public String turmaHome() {
-        return "/app/questionario/home";
+    @RequestMapping(value = "/app/questionario/inserir")
+    public String QuestoesEquipeInserir(Questionario questionario) {
+        return "/app/questionario/inserir";
     }
+    
+    /**
+    *
+    * @return
+    */
+   @RequestMapping(value = "/app/questionario/responder")
+   public String QuestoesEquipeResponder(Questionario questionario) {
+       return "/app/questionario/responder";
+   }
+   
+   /**
+   *
+   * @return
+   */
+  @RequestMapping(value = "/app/questionario/pontuacao")
+  public String QuestoesEquipePontuacao(Questionario questionario) {
+      return "/app/questionario/pontuacao";
+  }
 }

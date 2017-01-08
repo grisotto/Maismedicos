@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import br.ufg.jatai.fsw.squest.domain.Aluno;
+
 import br.ufg.jatai.fsw.squest.facade.AlunoFacade;
 import br.ufg.jatai.fsw.squest.service.AlunoService;
 import br.ufg.jatai.fsw.squest.service.AlunoServiceImpl;
@@ -36,6 +37,7 @@ public class AlunoController implements Serializable {
     @Autowired
     private AlunoFacade alunoFacade;
 
+
     /**
      * Cria um attributo AllAlunos que busca todos os alunos cadastrados
      *
@@ -44,6 +46,7 @@ public class AlunoController implements Serializable {
     @ModelAttribute("allAlunos")
     public List<Aluno> populateVisualizarAlunos() {
         return this.alunoFacade.listarAlunos();
+
 
     }
 
@@ -75,6 +78,7 @@ public class AlunoController implements Serializable {
             return "/app/aluno/home";
         }
         this.alunoFacade.inserirAluno(aluno);
+
         model.clear();
         return "redirect:/app/aluno";
 
