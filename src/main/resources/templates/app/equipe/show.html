@@ -43,7 +43,7 @@ and open the template in the editor.
                                 <span class="form-control-static" th:text="${{equipe.nome}}"></span>
 
                             </div>
-                             <div class="form-group col-md-3">
+                            <div class="form-group col-md-3">
                                 <label class="control-label" for="tarefas">Tarefa: </label>
                                 <span class="form-control-static" th:text="${equipe.tarefa.titulo}">0</span>
 
@@ -52,6 +52,20 @@ and open the template in the editor.
                             <div class="form-group col-md-3">
                                 <label class="control-label" for="alunos">Quantidade de Alunos:</label>
                                 <span class="form-control-static" th:text="${equipe.alunos.size()}"> 0</span>
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="alunos">Situação</label>
+                                <span class="form-control-static" th:if="${equipe.ativa}" > 
+                                    <span class="label label-info">
+                                        Ativa
+                                    </span>
+                                </span>
+                                <span class="form-control-static" th:if="${!equipe.ativa}" > 
+                                    <span class="label label-warning " style="font-size: 1em">
+                                        Desativada
+                                    </span>
+                                </span>
 
                             </div>
 
@@ -91,7 +105,7 @@ and open the template in the editor.
 
 
                                 <div class="input-group">
-                                     <input hidden="true" name="equipe" th:value="${equipe.id}"/> 
+                                    <input hidden="true" name="equipe" th:value="${equipe.id}"/> 
                                     <select   name="aluno" data-placeholder="Selecione um aluno" class="form-control " id="aluno" >
                                         <option  th:each="p : ${equipe.tarefa.turma.alunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
                                     </select>
@@ -114,15 +128,14 @@ and open the template in the editor.
                         <table class="table table-condensed ">
                             <thead>
                                 <tr>
-                                    <td>Nome</td>
-                                    <td >E-mail</td>
-
-                                    <td></td>
+                                    <th>Nome</th>
+                                    <th>E-mail</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                               <tr  th:if="${equipe.alunos.empty}">
+                                <tr  th:if="${equipe.alunos.empty}">
                                     <td colspan="4" class=" text-center">Equipe sem Alunos</td>
                                 </tr>
                                 <tr data-th-each="a : ${equipe.alunos}">
@@ -166,36 +179,36 @@ and open the template in the editor.
 
             <script type="text/javascript">
 
-                $.fn.select2.defaults.set("theme", "bootstrap");
+$.fn.select2.defaults.set("theme", "bootstrap");
 //                $.fn.select2.defaults.set('language', 'pt-BR');
 //                $.fn.select2.defaults.set('allowClear', true);
 
-                $("#aluno").select2({
-                    placeholder: {
-                        id: "-1",
-                        placeholder: "Select an option"
-                    },
+$("#aluno").select2({
+    placeholder: {
+        id: "-1",
+        placeholder: "Select an option"
+    },
 //                    allowclear: true,
-                    language: {
-                        noResults: function (term) {
+    language: {
+        noResults: function (term) {
 //                            term = '<button data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm" type="submit">Aqui</button>';
-                            term = '<a href="/app/aluno"><i class="fa fa-male   fa-fw"></i> Alunos</a>';
+            term = '<a href="/app/aluno"><i class="fa fa-male   fa-fw"></i> Alunos</a>';
 
-                            return "Não foi encontrado o aluno, apara cadastrar acesse: " + term;
+            return "Não foi encontrado o aluno, apara cadastrar acesse: " + term;
 
 //                            console.log(term);
 //                            console.log(event.target);
 //                            console.log(event.target.value);
-                        }
-                    },
-                    escapeMarkup: function (markup) {
-                        return markup;
-                    }
+        }
+    },
+    escapeMarkup: function (markup) {
+        return markup;
+    }
 
 
-                });
-                $(".select2-selection").addClass("form-control");
-                $(".select2-selection").removeClass("select2-selection--single");
+});
+$(".select2-selection").addClass("form-control");
+$(".select2-selection").removeClass("select2-selection--single");
 
 
 
