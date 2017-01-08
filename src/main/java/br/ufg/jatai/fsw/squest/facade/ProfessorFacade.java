@@ -38,6 +38,9 @@ public class ProfessorFacade {
      */
 
     public List<Professor> listarProfessores(){
+
+        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando todos os professores");
+
         return professorService.findAll();
     }
 
@@ -49,6 +52,8 @@ public class ProfessorFacade {
 
     public void inserirProfessor(Professor professor){
 
+        log.trace("O usuário " + autenticateUser.getUsuario() + "está inserindo o professor: " + professor.getNome());
+
         professorService.inserir(professor);
 
     }
@@ -59,6 +64,8 @@ public class ProfessorFacade {
      * @param professor
      */
     public void updateProfessor(Professor professor){
+
+        log.trace("O usuário " + autenticateUser.getUsuario() + "está atualizando o professor: " + professor.getNome());
 
         professorService.atualizar(professor);
 
@@ -72,11 +79,15 @@ public class ProfessorFacade {
      */
     public Set<Turma> turmasDoProfessor(Professor professor) {
 
+        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando as turmas do professor: " + professor.getNome());
+
         return new HashSet<>(professorService.find(professor).getTurmas());
 
     }
 
     public Set<Turma> turmasDoProfessor(Integer id){
+
+        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando as turmas do professor: " + professorService.find(id).getNome());
 
         return new HashSet<>(professorService.find(id).getTurmas());
 
