@@ -46,7 +46,7 @@ public class EquipeFacade {
      * Adiciona um aluno à equipe
      *
      * @param aluno
-     * @param idEquipe
+     * @param equipe
      */
     public void addAluno(Aluno aluno, Equipe equipe) {
 
