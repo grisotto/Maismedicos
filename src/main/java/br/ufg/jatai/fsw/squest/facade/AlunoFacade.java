@@ -28,6 +28,13 @@ public class AlunoFacade {
     @Autowired
     private AutenticateUser autenticateUser;
 
+    public List<Aluno> listarAlunos(){
+
+        return alunoService.findAll();
+
+    }
+
+    
 
 
 }
