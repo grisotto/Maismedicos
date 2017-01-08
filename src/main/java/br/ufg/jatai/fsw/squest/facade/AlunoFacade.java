@@ -60,4 +60,16 @@ public class AlunoFacade {
         return new HashSet<>(alunoService.find(id).getTeams());
 
     }
+
+    public Set<Turma> turmasDoAluno(Aluno aluno){
+
+        return new HashSet<>(alunoService.find(aluno).getTurmas());
+
+    }
+
+    public Set<Turma> turmasDoAluno(Integer id){
+
+        return new HashSet<>(alunoService.find(id).getTurmas());
+
+    }
 }
