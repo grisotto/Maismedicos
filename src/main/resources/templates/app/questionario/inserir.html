@@ -126,7 +126,7 @@ and open the template in the editor.
 							function() {
 								$('input').click(
 										function() {
-											$('input:not(:checked)').parent()
+											$('input:not(:checked)').closest("div")
 													.removeClass("has-success");
 											$('input:checked').closest("div")
 													.addClass("has-success");
