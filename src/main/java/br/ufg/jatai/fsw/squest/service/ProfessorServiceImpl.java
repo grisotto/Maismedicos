@@ -8,6 +8,10 @@ package br.ufg.jatai.fsw.squest.service;
 import br.ufg.jatai.fsw.squest.domain.Professor;
 import br.ufg.jatai.fsw.squest.repository.ProfessorRepository;
 import java.util.List;
+
+import br.ufg.jatai.fsw.squest.util.GeradorSenha;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,19 +23,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProfessorServiceImpl implements ProfessorService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProfessorServiceImpl.class);
     /**
      *
      */
     @Autowired
     public ProfessorRepository repository;
 
-
+    @Autowired
+    private GeradorSenha geradorSenha;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     public Professor inserir(Professor entidade) {
-        entidade.getUsuario().setSenha(passwordEncoder.encode("123"));
+        String gerarSenha = geradorSenha.gerarSenha();
+        LOGGER.info("O Gerador está ativo?\n" + (geradorSenha.isAtivo() ? "sim" : "não"));
+        LOGGER.info("A senha gerada foi: " + gerarSenha);
+        entidade.getUsuario().setSenha(passwordEncoder.encode(gerarSenha));
         return repository.save(entidade);
     }
 
