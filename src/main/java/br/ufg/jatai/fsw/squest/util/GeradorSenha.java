@@ -3,10 +3,12 @@ package br.ufg.jatai.fsw.squest.util;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.UUID;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by thevilela on 08/01/17.
  */
+@Component
 public class GeradorSenha {
 
     @Value("${gerador.password}")
@@ -31,6 +33,14 @@ public class GeradorSenha {
         }
 
         return "123";
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
 
