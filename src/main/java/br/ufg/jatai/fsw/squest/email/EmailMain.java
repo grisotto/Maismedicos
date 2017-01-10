@@ -18,7 +18,7 @@ public class EmailMain {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void sendAssincrono(Mensagem m) throws MessagingException {
+    public void sendMail(Mensagem m) throws MessagingException {
 
         MimeMessage mensagem = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mensagem, true);
