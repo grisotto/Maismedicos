@@ -6,6 +6,8 @@ import br.ufg.jatai.fsw.squest.controller.ProfessorController;
 import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Professor;
 import br.ufg.jatai.fsw.squest.domain.Turma;
+import br.ufg.jatai.fsw.squest.email.EmailMain;
+import br.ufg.jatai.fsw.squest.email.Mensagem;
 import br.ufg.jatai.fsw.squest.service.ProfessorService;
 import br.ufg.jatai.fsw.squest.util.GeradorSenha;
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -63,11 +66,25 @@ public class ProfessorFacade {
         log.trace("O usuário " + autenticateUser.getUsuario() + "está inserindo o professor: " + professor.getNome());
 
         String gerarSenha = geradorSenha.gerarSenha();
-        log.info("O Gerador está ativo?\n" + (geradorSenha.isAtivo() ? "sim" : "não"));
-        log.info("A senha gerada foi: " + gerarSenha);
         professor.getUsuario().setSenha(passwordEncoder.encode(gerarSenha));
 
         professorService.inserir(professor);
+
+        try {
+
+            Mensagem m = new Mensagem();
+
+            m.setDestinatario(professor.getEmail());
+            m.setAssunto("Bem-vindo ao SisQuest!");
+            m.setCorpo("Olá, professor " + professor.getNome() + "\n\n"
+                    + "Seu login é: " + professor.getUsuario().getLogin()
+                    + "Sua senha é: " + professor.getUsuario().getSenha());
+
+            new EmailMain().sendMail(m);
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
 
     }
 
