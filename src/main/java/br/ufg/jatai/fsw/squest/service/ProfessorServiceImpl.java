@@ -30,17 +30,9 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Autowired
     public ProfessorRepository repository;
 
-    @Autowired
-    private GeradorSenha geradorSenha;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
     public Professor inserir(Professor entidade) {
-        String gerarSenha = geradorSenha.gerarSenha();
-        LOGGER.info("O Gerador está ativo?\n" + (geradorSenha.isAtivo() ? "sim" : "não"));
-        LOGGER.info("A senha gerada foi: " + gerarSenha);
-        entidade.getUsuario().setSenha(passwordEncoder.encode(gerarSenha));
         return repository.save(entidade);
     }
 

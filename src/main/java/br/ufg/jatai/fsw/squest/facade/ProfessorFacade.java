@@ -7,9 +7,11 @@ import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Professor;
 import br.ufg.jatai.fsw.squest.domain.Turma;
 import br.ufg.jatai.fsw.squest.service.ProfessorService;
+import br.ufg.jatai.fsw.squest.util.GeradorSenha;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -30,6 +32,12 @@ public class ProfessorFacade {
 
     @Autowired
     private AutenticateUser autenticateUser;
+
+    @Autowired
+    private GeradorSenha geradorSenha;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * Lista todos os professores
@@ -53,6 +61,11 @@ public class ProfessorFacade {
     public void inserirProfessor(Professor professor){
 
         log.trace("O usuário " + autenticateUser.getUsuario() + "está inserindo o professor: " + professor.getNome());
+
+        String gerarSenha = geradorSenha.gerarSenha();
+        log.info("O Gerador está ativo?\n" + (geradorSenha.isAtivo() ? "sim" : "não"));
+        log.info("A senha gerada foi: " + gerarSenha);
+        professor.getUsuario().setSenha(passwordEncoder.encode(gerarSenha));
 
         professorService.inserir(professor);
 
