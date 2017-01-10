@@ -26,12 +26,12 @@ public class EmailMain {
     private boolean ativo;
 
     public void sendMail(Mensagem m) throws MessagingException {
-
+        log.info("Email Ativo: "+ativo);
         if(isAtivo()){
 
             MimeMessage mensagem = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mensagem, true);
-
+            helper.setFrom("squest@jataiufg.net");
             helper.setTo(m.getDestinatario());
             helper.setSubject(m.getAssunto());
             helper.setText(m.getCorpo(),true);
@@ -41,6 +41,7 @@ public class EmailMain {
         } else {
 
             log.info("O envio de mensagens não está ativo.");
+            log.info("Mensagem: "+m);
 
         }
 
