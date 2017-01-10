@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.squest.controller;
 
+import br.ufg.jatai.fsw.squest.controller.modelForm.QuestãoModel;
 import br.ufg.jatai.fsw.squest.domain.Questionario;
 import java.io.Serializable;
 import org.slf4j.Logger;
@@ -17,16 +18,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author dfranco
  */
 @Controller
+@RequestMapping("/app/questionario")
 public class QuestionarioController implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(QuestionarioController.class.getName());
 
+
+    public void inserirQuestão(String correta, QuestãoModel questaoModel){
+
+
+    }
     /**
      *
      * @return
      */
-    @RequestMapping(value = "/app/questionario/inserir")
-    public String QuestoesEquipeInserir(Questionario questionario) {
+
+    @RequestMapping(value = "/inserir")
+    public String QuestoesEquipeInserir(QuestãoModel questionario) {
         return "/app/questionario/inserir";
     }
     
@@ -34,7 +42,7 @@ public class QuestionarioController implements Serializable {
     *
     * @return
     */
-   @RequestMapping(value = "/app/questionario/responder")
+   @RequestMapping(value = "/responder")
    public String QuestoesEquipeResponder(Questionario questionario) {
        return "/app/questionario/responder";
    }
@@ -43,7 +51,7 @@ public class QuestionarioController implements Serializable {
    *
    * @return
    */
-  @RequestMapping(value = "/app/questionario/pontuacao")
+  @RequestMapping(value = "/pontuacao")
   public String QuestoesEquipePontuacao(Questionario questionario) {
       return "/app/questionario/pontuacao";
   }

@@ -2,11 +2,16 @@ package br.ufg.jatai.fsw.squest.controller.modelForm;
 
 import br.ufg.jatai.fsw.squest.domain.Alternativa;
 import br.ufg.jatai.fsw.squest.domain.Questao;
+import br.ufg.jatai.fsw.squest.domain.Questionario;
 
 /**
- * Created by dyeimys on 09/01/17.
+ * @author dyeimys
+ *         Created by dyeimys on 09/01/17.
+ *         <p>
+ *         Classe para modelo para inserçaõ de questão
  */
 public class QuestãoModel {
+    private Questionario questionario;
     private String descricao;
     private Alternativa alternativaA;
     private Alternativa alternativaB;
@@ -21,6 +26,14 @@ public class QuestãoModel {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Questionario getQuestionario() {
+        return questionario;
+    }
+
+    public void setQuestionario(Questionario questionario) {
+        this.questionario = questionario;
     }
 
     public Alternativa getAlternativaA() {
@@ -63,7 +76,7 @@ public class QuestãoModel {
         this.alternativaE = alternativaE;
     }
 
-    public Questao getQuestao(){
+    public Questao getQuestao() {
         Questao questao = new Questao();
         questao.setQuestion(descricao);
         questao.getAlternativas().add(alternativaA);

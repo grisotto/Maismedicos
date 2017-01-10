@@ -35,7 +35,7 @@ and open the template in the editor.
 					<div class="panel-body">
 						<div class="col-md-3"></div>
 						<div class="col-md-6">
-							<form role="form">
+							<form th:object="${questaoModel}" role="form">
 								<div class="form-group">
 									<label>Questão</label>
 									<textarea class="form-control" rows="3"
@@ -46,12 +46,12 @@ and open the template in the editor.
 
 								<div class="form-group input-group has-success">
 									<span class="input-group-addon">A</span> 
-									<textarea type="text"
+									<textarea type="text" th:name="alternativaA"
 										class="form-control" required="true" id="inputSuccess" ></textarea> 
 										<span
 										class="input-group-addon"> 
 										<input type="radio"
-										name="optionsRadios" id="optionsRadios1" value="option1"
+										name="correto" id="optionsRadios1" value="A"
 										checked="true" />
 
 									</span>
@@ -60,9 +60,9 @@ and open the template in the editor.
 
 								<div class="form-group input-group">
 									<span class="input-group-addon">B</span> <textarea type="text"
-										class="form-control" required="true" id="inputError" ></textarea>  <span
+										class="form-control" th:name="alternativaB" required="true" id="inputError" ></textarea>  <span
 										class="input-group-addon"> <input type="radio"
-										name="optionsRadios" id="optionsRadios2" value="option2" />
+										name="correto" id="optionsRadios2" value="B" />
 
 									</span>
 								</div>
@@ -70,9 +70,9 @@ and open the template in the editor.
 
 								<div class="form-group input-group">
 									<span class="input-group-addon">C</span> <textarea type="text"
-										class="form-control" required="true" id="inputError" ></textarea>  <span
+										class="form-control" th:name="alternativaC" required="true" id="inputError" ></textarea>  <span
 										class="input-group-addon"> <input type="radio"
-										name="optionsRadios" id="optionsRadios3" value="option3" />
+										name="correto" id="optionsRadios3" value="C" />
 
 									</span>
 								</div>
@@ -80,9 +80,9 @@ and open the template in the editor.
 
 								<div class="form-group input-group">
 									<span class="input-group-addon">D</span> <textarea type="text"
-										class="form-control" required="true" id="inputError" ></textarea>  <span
+										class="form-control" th:name="alternativaD" required="true" id="inputError" ></textarea>  <span
 										class="input-group-addon"> <input type="radio"
-										name="optionsRadios" id="optionsRadios4" value="option4" />
+										name="correto" id="optionsRadios4" value="D" />
 
 									</span>
 								</div>
@@ -91,10 +91,10 @@ and open the template in the editor.
 
 								<div class="form-group input-group">
 									<span class="input-group-addon">E</span> <input type="text"
-										class="form-control" id="inputError" disabled="true"
+										class="form-control" id="inputError" th:name="alternativaE" disabled="true"
 										value="Nenhuma das alternativas" /> <span
 										class="input-group-addon"> <input type="radio"
-										name="optionsRadios" id="optionsRadios5" value="option5" />
+										name="correto" id="optionsRadios5" value="E" />
 
 									</span>
 
