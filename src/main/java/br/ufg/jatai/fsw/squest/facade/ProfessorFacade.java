@@ -81,7 +81,7 @@ public class ProfessorFacade {
             m.setAssunto("Bem-vindo ao SisQuest!");
             m.setCorpo("Olá, professor " + professor.getNome() + "\n\n"
                     + "Seu login é: " + professor.getUsuario().getLogin()
-                    + "Sua senha é: " + gerarSenha);
+                    + "\nSua senha é: " + gerarSenha);
 
           emailMain.sendMail(m);
 
