@@ -1,4 +1,4 @@
-package br.ufg.jatai.fsw.squest.email;
+package br.ufg.jatai.fsw.squest.configuration;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;

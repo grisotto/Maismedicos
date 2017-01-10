@@ -31,7 +31,7 @@ public class EmailMain {
 
             MimeMessage mensagem = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mensagem, true);
-
+            helper.setFrom("squest@jataiufg.net");
             helper.setTo(m.getDestinatario());
             helper.setSubject(m.getAssunto());
             helper.setText(m.getCorpo(),true);
