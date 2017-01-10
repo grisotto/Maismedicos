@@ -76,11 +76,9 @@ public class AppController {
      * @return
      */
     @ModelAttribute("equipe")
-    public Equipe getEquipe() {
+    public Equipe   getEquipe() {
         if (autenticateUser.getUsuario().getTipoUsuario().equals(Usuario.TipoUsuario.GRUPO)) {
-            LOGGER.info("LOGADO COMO GRUPO");
             return autenticateUser.getEquipe();
-
         } else {
             return null;
         }

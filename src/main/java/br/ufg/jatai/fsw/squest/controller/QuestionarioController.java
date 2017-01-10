@@ -5,15 +5,25 @@
  */
 package br.ufg.jatai.fsw.squest.controller;
 
+import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.controller.modelForm.QuestãoModel;
+import br.ufg.jatai.fsw.squest.domain.Questao;
 import br.ufg.jatai.fsw.squest.domain.Questionario;
+import br.ufg.jatai.fsw.squest.facade.QuestionarioFacade;
+import br.ufg.jatai.fsw.squest.repository.QuestionarioRepository;
+import br.ufg.jatai.fsw.squest.service.QuestaoService;
+import br.ufg.jatai.fsw.squest.service.QuestionarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * @author dfranco
@@ -24,22 +34,77 @@ public class QuestionarioController implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(QuestionarioController.class.getName());
 
+    @Autowired
+    private AutenticateUser user;
 
+    @Autowired
+    private QuestionarioFacade questionarioFacade;
+
+    @Autowired
+    private QuestionarioRepository questionarioRepository;
+    
+    @Autowired
+    private QuestionarioService questionarioService;
+
+    @Autowired
+    private QuestaoService questaoService;
+    
     @PostMapping("/addQuestao")
-    public String inserirQuestão(String correto, QuestãoModel questaoModel) {
-        log.info("CORRETA: " + correto);
+    public String inserirQuestão(final String correto, final QuestãoModel questaoModel,
+            final BindingResult bindingResult, final ModelMap model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("questaoModel", questaoModel);
+            model.addAttribute("correto", "C");
+            return "redirect:/app/questionario/inserir";
+
+        }
+
+        log.info("Entrda de Dados no @Controller");
+        log.info("Equipe: " + user.getEquipe());
+        log.info("Tarefa: " + user.getEquipe().getTarefa());
+        log.info("Descrição: " + questaoModel.getDescricao());
         log.info("Alternativa A: " + questaoModel.getAlternativaA().getDescricao());
         log.info("Alternativa B: " + questaoModel.getAlternativaB().getDescricao());
         log.info("Alternativa C: " + questaoModel.getAlternativaC().getDescricao());
         log.info("Alternativa D: " + questaoModel.getAlternativaD().getDescricao());
         log.info("Alternativa E: " + questaoModel.getAlternativaE().getDescricao());
+        log.info("CORRETA: " + correto);
+
+        if (correto.equals("A")) {
+            questaoModel.getAlternativaA().setCorreto(true);
+        } else if (correto.equals("B")) {
+            questaoModel.getAlternativaB().setCorreto(true);
+        } else if (correto.equals("C")) {
+            questaoModel.getAlternativaC().setCorreto(true);
+        } else if (correto.equals("D")) {
+            questaoModel.getAlternativaD().setCorreto(true);
+        } else if (correto.equals("E")) {
+            questaoModel.getAlternativaE().setCorreto(true);
+        }
+        Questao questao = questaoModel.getQuestao();
+        Questionario q = questionarioRepository.getFromTarefaEquipe(user.getEquipe().getId());
+        if (q == null) {
+
+            q = new Questionario();
+            q.setquestions(new ArrayList<>());
+            q.getQuestoes().add(questao);
+            q.setTime(user.getEquipe());
+            q.setTarefa(user.getEquipe().getTarefa());
+
+        } else {
+            questao.setQuestionario(q);
+            q.getQuestoes().add(questao);
+        }
+
+//        questionarioService.inserir(q);
+        questaoService.inserir(questao);
+
         return "redirect:/app/questionario/inserir";
     }
 
     /**
      * @return
      */
-
     @RequestMapping(value = "/inserir")
     public String QuestoesEquipeInserir(QuestãoModel questionario) {
         return "/app/questionario/inserir";

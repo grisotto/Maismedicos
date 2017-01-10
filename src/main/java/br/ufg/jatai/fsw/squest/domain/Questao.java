@@ -1,6 +1,7 @@
 package br.ufg.jatai.fsw.squest.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,7 +25,7 @@ public class Questao {
     private String question;
 
     @OneToMany(mappedBy = "questao")
-    private List<Alternativa> alternativas;
+    private List<Alternativa> alternativas = new ArrayList<>();
     @ManyToOne
     private Questionario questionario;
    
@@ -128,4 +129,13 @@ public class Questao {
         return true;
     }
 
+    public Questionario getQuestionario() {
+        return questionario;
+    }
+
+    public void setQuestionario(Questionario questionario) {
+        this.questionario = questionario;
+    }
+
+    
 }

@@ -45,8 +45,7 @@ public class AutenticateUser {
      * @return
      */
     public Equipe getEquipe(){
-        LOGGER.info("Equipe"+
-        getUsuario().getEquipe());
+
         return getUsuario().getEquipe();
     }
 

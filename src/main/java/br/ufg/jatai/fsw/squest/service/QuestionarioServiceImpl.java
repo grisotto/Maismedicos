@@ -10,11 +10,13 @@ import br.ufg.jatai.fsw.squest.repository.QuestionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author vilela
  */
+@Service
 public class QuestionarioServiceImpl implements QuestionarioService {
 
     @Autowired
