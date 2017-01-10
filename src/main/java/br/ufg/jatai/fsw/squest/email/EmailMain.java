@@ -26,7 +26,7 @@ public class EmailMain {
     private boolean ativo;
 
     public void sendMail(Mensagem m) throws MessagingException {
-
+        log.info("Email Ativo: "+ativo);
         if(isAtivo()){
 
             MimeMessage mensagem = javaMailSender.createMimeMessage();
@@ -40,7 +40,8 @@ public class EmailMain {
 
         } else {
 
-            log.trace("O envio de mensagens não está ativo.");
+            log.info("O envio de mensagens não está ativo.");
+            log.info("Mensagem: "+m);
 
         }
 

@@ -41,6 +41,9 @@ public class ProfessorFacade {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private EmailMain emailMain;
 
     /**
      * Lista todos os professores
@@ -80,7 +83,7 @@ public class ProfessorFacade {
                     + "Seu login é: " + professor.getUsuario().getLogin()
                     + "Sua senha é: " + professor.getUsuario().getSenha());
 
-            new EmailMain().sendMail(m);
+          emailMain.sendMail(m);
 
         } catch (MessagingException e) {
             e.printStackTrace();
