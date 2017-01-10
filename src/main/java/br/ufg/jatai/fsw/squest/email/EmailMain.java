@@ -40,7 +40,7 @@ public class EmailMain {
 
         } else {
 
-            log.trace("O envio de mensagens não está ativo.");
+            log.info("O envio de mensagens não está ativo.");
 
         }
 
