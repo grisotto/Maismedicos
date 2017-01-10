@@ -1,6 +1,9 @@
 package br.ufg.jatai.fsw.squest.email;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -14,20 +17,43 @@ import javax.mail.internet.MimeMessage;
 @Component
 public class EmailMain {
 
+    private static Logger log = LoggerFactory.getLogger(EmailMain.class.getName());
 
     @Autowired
     private JavaMailSender javaMailSender;
 
+    @Value("${fsw.email.ativo}")
+    private boolean ativo;
+
     public void sendMail(Mensagem m) throws MessagingException {
 
-        MimeMessage mensagem = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mensagem, true);
+        if(isAtivo()){
 
-        helper.setTo(m.getDestinatario());
-        helper.setSubject(m.getAssunto());
-        helper.setText(m.getCorpo(),true);
+            MimeMessage mensagem = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mensagem, true);
 
-        javaMailSender.send(mensagem);
+            helper.setTo(m.getDestinatario());
+            helper.setSubject(m.getAssunto());
+            helper.setText(m.getCorpo(),true);
+
+            javaMailSender.send(mensagem);
+
+        } else {
+
+            log.trace("O envio de mensagens não está ativo.");
+
+        }
+
+
 
     }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public boolean isAtivo(){
+        return this.ativo;
+    }
+
 }
