@@ -1,7 +1,6 @@
 package br.ufg.jatai.fsw.squest.configuration;
 
 import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +14,9 @@ import java.util.Properties;
  */
 
 @Configuration
-public class EmailConfiguration {
+public class EmailConfig {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(EmailConfiguration.class);
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(EmailConfig.class);
 
     @Value("${spring.mail.host}")
     private String host;
