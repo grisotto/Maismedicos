@@ -39,41 +39,62 @@ and open the template in the editor.
 								<p class="lead">Qual o nome do primeiro algoritmo de geração de circuferencias?</p>
 							<blockquote>
 							
-							<ul class="list-unstyled">
-                                <li >
-                                <input type="radio" name="optionsRadios" id="optionsRadiosA" value="optionA" class="btn btn-circle "
-										 />  <span class="bold">A. </span> 
-										 <span class="alternativa1">Algoritmo de Disktraa </span>
-										</li>
-										
-					                                <li >
-                                <input type="radio" name="optionsRadios" id="optionsRadiosA" value="optionAB" class="btn btn-circle"
-										 /> <span class="bold">B. </span> 
-										 <span class="alternativa2">Algoritmo de Rafael </span>
-										</li>
-										
-										
-					                                <li >
-                                <input type="radio" name="optionsRadios" id="optionsRadiosA" value="optionC" class="btn btn-circle"
-										 /> <span class="bold">C. </span> 
-										 <span class="alternativa3">Algoritmo de Grisotto </span>
-										</li>
-										
-					                                <li >
-                                <input type="radio" name="optionsRadios" id="optionsRadiosA" value="optionD" class="btn btn-info btn-circle"
-										 /> <span class="bold">D. </span> 
-										 <span class="alternativa4">Algoritmo de Razar </span>
-										</li>
-										
-					                                <li >
-                                <input type="radio" name="optionsRadios" id="optionsRadiosA" value="optionE" class="btn btn-info btn-circle"
-										 /> <span class="bold">E. </span> 
-										 <span class="alternativa5">Algoritmo de Jose </span>
-										</li>
-										
-									                            
-                            </ul>
-					
+
+                            	<div class="clearfix">
+                            	<div class="roundedOne pull-left">
+      								<input type="checkbox" value="alternativaA" id="roundedOneA" name="optionsRadios"  />
+      								<label for="roundedOneA"></label> 
+      										
+      								
+    								</div>&nbsp;
+    								<span class="bold">A. </span>  <span class="alternativaA">Algoritmo de Jose </span>
+    						</div>
+    						
+    								
+    							<div class="clearfix">	
+    							<div class="roundedOne pull-left">
+      								<input type="checkbox" value="alternativaB" id="roundedOneB" name="optionsRadios"  />
+      								<label for="roundedOneB"></label> 
+      										
+      								
+    								</div>&nbsp;
+    								<span class="bold">B. </span>  <span class="alternativaB">Algoritmo de Jose </span>
+                           
+							</div>
+							
+							<div class="clearfix">	
+    							<div class="roundedOne pull-left">
+      								<input type="checkbox" value="alternativaC" id="roundedOneC" name="optionsRadios"  />
+      								<label for="roundedOneC"></label> 
+      										
+      								
+    								</div>&nbsp;
+    								<span class="bold">C. </span>  <span class="alternativaC">Algoritmo de Jose </span>
+                           
+							</div>
+							
+							<div class="clearfix">	
+    							<div class="roundedOne pull-left">
+      								<input type="checkbox" value="alternativaC" id="roundedOneD" name="optionsRadios"  />
+      								<label for="roundedOneD"></label> 
+      										
+      								
+    								</div>&nbsp;
+    								<span class="bold">D. </span>  <span class="alternativaC">Algoritmo de Jose </span>
+                           
+							</div>
+							
+							<div class="clearfix">	
+    							<div class="roundedOne pull-left">
+      								<input type="checkbox" value="alternativaC" id="roundedOneE" name="optionsRadios"  />
+      								<label for="roundedOneE"></label> 
+      										
+      								
+    								</div>&nbsp;
+    								<span class="bold">E. </span>  <span class="alternativaC">Algoritmo de Jose </span>
+                           
+							</div>
+    								
 
 
 
@@ -96,9 +117,37 @@ and open the template in the editor.
 					</div>
 				</div>
 			</div>
-<!-- TOD: Este exemplo ajudaria bastante com as cores, mas no FUTURO
-http://codepen.io/BrianSassaman/pen/iLrpC -->
+<!--                    forma antiga             <li >
+                                <input type="radio" name="optionsRadios" id="optionsRadiosA" value="optionA" class="btn btn-circle "
+										 />  <span class="bold">A. </span> 
+										 <span class="alternativa1">Algoritmo de Disktraa </span>
+										</li> -->
 		</div>
+		
+		
+		     <div th:fragment="customCSS">
+		     
+			<SCRIPT type="text/javascript">
+			$("input:checkbox").on('click', function() {
+				  // in the handler, 'this' refers to the box clicked on
+				  var $box = $(this);
+				  if ($box.is(":checked")) {
+				    // the name of the box is retrieved using the .attr() method
+				    // as it is assumed and expected to be immutable
+				    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+				    // the checked state of the group/box on the other hand will change
+				    // and the current value is retrieved using .prop() method
+				    $(group).prop("checked", false);
+				    $box.prop("checked", true);
+				  } else {
+				    $box.prop("checked", false);
+				  }
+				});
+			
+			</SCRIPT>
+		     
+		     
+		     </div>
 	</div>
 </body>
 </html>
