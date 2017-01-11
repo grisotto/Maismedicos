@@ -78,8 +78,10 @@ and open the template in the editor.
 
                         <!--      Inicio do aguardando -->
                         <!--          th:if="{equipe.tarefa.aguardando}"  -->
-                        <!--<div class="col-lg-12"  th:if="${equipe.tarefa.etapaAtual.id} == '1'">-->
-                        <div class="col-lg-12"  >
+                     
+                        <div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.isAguardando()}" >
+                        
+                       
 
 
                             <div class="alert alert-warning">
@@ -97,9 +99,9 @@ and open the template in the editor.
 
 
 
-                        <!--      Inicio do inserindo -->
-                        <!--          th:if="{equipe.tarefa.inserindo}"  -->
-                        <div class="col-lg-12" >
+                        <!--      Inicio do ESPERANDO_SUBMISSAO -->
+                        
+                        <div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.isEsperandoSubmissao()}" >
                             <!--<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '2'">-->
 
 
@@ -154,12 +156,12 @@ and open the template in the editor.
                         </div>
 
 
-                        <!--       Fim do inserindo -->
+                        <!--       Fim do ESPERANDO_SUBMISSAO -->
 
                         <!--      Inicio do validando -->
                         <!--          th:if="{equipe.tarefa.validando}"  -->
-                        <!--<div class="col-lg-12"  th:if="${equipe.tarefa.etapaAtual.id} == '3'">-->
-                        <div class="col-lg-12" >
+                  
+                        <div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.isValidando()}">
 
 
                             <div class="alert alert-warning">
@@ -174,16 +176,12 @@ and open the template in the editor.
 
 
 
-                        <!--      Inicio do respondendo -->
-                        <!--          th:if="{equipe.tarefa.respondendo}"  -->
-                        <!--<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '4'">-->
-                        <div class="col-lg-12" >
 
 
 
                             <!--      Inicio do respondendo -->
                             <!--          th:if="{equipe.tarefa.respondendo}"  -->
-                            <div class="col-lg-12">
+                            <div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.isRespondendo()}">
 
                                 <div class="alert alert-info">
                                     <strong>Respondendo</strong> 
@@ -199,7 +197,7 @@ and open the template in the editor.
 
 
 
-                        </div>
+                     
 
                         <!--       Fim do respondendo -->
 
@@ -207,8 +205,8 @@ and open the template in the editor.
 
                         <!--      Inicio do finalizado -->
                         <!--          th:if="{equipe.tarefa.finalizado}"  -->
-                        <!--<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '5'">-->
-                        <div class="col-lg-12">
+                  
+                        <div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.isFinalizado()}">
 
 
                             <div class="alert alert-info">

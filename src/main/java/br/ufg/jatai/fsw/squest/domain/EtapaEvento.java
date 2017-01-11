@@ -145,7 +145,7 @@ public class EtapaEvento implements Serializable {
     public boolean isAguardando() {
         return tipo.equals(TipoEtapa.AGUARDANDO);
     }
-    public boolean isEsperandoSubmissão() {
+    public boolean isEsperandoSubmissao() {
         return tipo.equals(TipoEtapa.ESPERANDO_SUBMISSAO);
     }
     public boolean isValidando() {
