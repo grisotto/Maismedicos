@@ -15,6 +15,8 @@ import br.ufg.jatai.fsw.squest.service.ProfessorService;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
 import br.ufg.jatai.fsw.squest.service.TurmaService;
 import br.ufg.jatai.fsw.squest.service.UsuarioService;
+import br.ufg.jatai.fsw.squest.facade.ProfessorFacade;
+import br.ufg.jatai.fsw.squest.util.GeradorSenha;
 
 import javax.sql.DataSource;
 
@@ -74,6 +76,12 @@ public class DataBaseConfig {
         @Autowired
         private TarefaService tarefaService;
 
+           @Autowired
+    private ProfessorFacade professorFacade;
+
+    @Autowired
+    private GeradorSenha geradorSenha;
+
 
         @Autowired
         private PasswordEncoder passwordEncoder;
@@ -129,7 +137,7 @@ public class DataBaseConfig {
             p.setEmail("professor@email.com");
             p.setUsuario(
                     new Usuario("professor",
-                  "123",
+                   passwordEncoder.encode(geradorSenha.gerarSenha()),
                     Usuario.TipoUsuario.PROFESSOR));
             LOGGER.info("Inserindo P1" + p);
             Professor professor = professorService.inserir(p);
