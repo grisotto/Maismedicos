@@ -6,70 +6,71 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-	th:include="fragments/basetemplate :: page">
-<head>
-<title>Paginal Inicial do Sistema de Questões</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body>
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      th:include="fragments/basetemplate :: page">
+    <head>
+        <title>Paginal Inicial do Sistema de Questões</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
 
-	<div th:fragment="content">
+        <div th:fragment="content">
 
-		<div class="col-lg-12">
-			<h1 class="page-header">Dashboard</h1>
+            <div class="col-lg-12">
+                <h1 class="page-header">Dashboard</h1>
 
-			Logged user: <span sec:authentication="name">Bob</span> Roles: <span
-				sec:authentication="principal.authorities">[ALUNO, ADMIN,
-				PROFESSOR, GRUPO]</span>
-			<div sec:authorize="hasAuthority('ADMIN')">
-
-
-				<div th:class="col-md-4">
-					<div class=" panel panel-info">
-						<div class="panel-heading">
-							<span class="panel-title"><span
-								th:text="${usuarios.size()} "> </span> Sessões Ativas</span>
-						</div>
-						<div th:class="panel-body">
-							<table th:class="table">
-								<thead>
-									<tr>
-										<td>Usuário</td>
-										<td>Tipo de Usuario</td>
-									</tr>
-								</thead>
-								<tbody>
-									<th:block th:each="u : ${usuarios}">
-										<tr>
-											<td th:text="${u.login}">A Smoke Test'</td>
-
-											<td th:text="${u.tipoUsuario}">A Smoke Test'</td>
-											<td th:class="col-md-1"><a
-												class="btn btn-danger btn-sm fa fa-trash-o"></a></td>
-										</tr>
-									</th:block>
-								</tbody>
+                Logged user: <span sec:authentication="name">Bob</span> Roles: <span
+                    sec:authentication="principal.authorities">[ALUNO, ADMIN,
+                    PROFESSOR, GRUPO]</span>
+                <div sec:authorize="hasAuthority('ADMIN')">
 
 
-							</table>
-						</div>
-					</div>
-				</div>
+                    <div th:class="col-md-4">
+                        <div class=" panel panel-info">
+                            <div class="panel-heading">
+                                <span class="panel-title"><span
+                                        th:text="${usuarios.size()} "> </span> Sessões Ativas</span>
+                            </div>
+                            <div th:class="panel-body">
+                                <table th:class="table">
+                                    <thead>
+                                        <tr>
+                                            <td>Usuário</td>
+                                            <td>Tipo de Usuario</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <th:block th:each="u : ${usuarios}">
+                                            <tr>
+                                                <td th:text="${u.login}">A Smoke Test'</td>
+
+                                                <td th:text="${u.tipoUsuario}">A Smoke Test'</td>
+                                                <td th:class="col-md-1"><a
+                                                        class="btn btn-danger btn-sm fa fa-trash-o"></a></td>
+                                            </tr>
+                                        </th:block>
+                                    </tbody>
 
 
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
 
 
-			</div>
 
 
-			<div sec:authorize="hasAuthority('PROFESSOR')">Essa mensagem só
-				aparece para quem é Professor</div>
+                </div>
 
-			<div sec:authorize="hasAuthority('ALUNO')">Essa mensagem só
-				aparece para quem é Aluno</div>
+
+                <div sec:authorize="hasAuthority('PROFESSOR')">Essa mensagem só
+                    aparece para quem é Professor</div>
+
+                <div sec:authorize="hasAuthority('ALUNO')">Essa mensagem só
+                    aparece para quem é Aluno</div>
+
 
 			<div sec:authorize="hasAuthority('GRUPO')">
 				<div class="row">
@@ -86,10 +87,12 @@ and open the template in the editor.
 							<p>Esperando a liberação pelo professor para a inserções das
 								questões.</p>
 
-						</div>
-					</div>
 
-					<!--       Fim do aguardando -->
+                            </div>
+                        </div>
+
+                        <!--       Fim do aguardando -->
+
 
 
 
@@ -98,50 +101,52 @@ and open the template in the editor.
 					<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '2'">
 
 
-						<div class="alert alert-success">
-							<strong>Inserir Questões</strong>
 
-							<p>O grupo deve inserir as questões para serem validadas pelo
-								professor.</p>
+                            <div class="alert alert-success">
+                                <strong>Inserir Questões</strong>
 
-						</div>
-						<div class="panel panel-primary">
+                                <p>O grupo deve inserir as questões para serem validadas pelo
+                                    professor.</p>
 
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									Questões Inseridas  
-									<a href="/app/questionario/inserir"
-										class="btn btn-sm btn-default pull-right"> Add Nova Questão
-										<span class="fa fa-plus"></span>
-									</a>
-								</h3>
-							</div>
-							<div class="panel-body">
-								<table class="table table-responsive" id="Questoes">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Questão</th>
-											<th>Última modificação</th>
+                            </div>
+                            <div class="panel panel-primary">
 
-
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-
-											<td>1</td>
-											<td>Algoritmo de geracao de circulo</td>
-											<td>14/01/2017</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        Questões Inseridas  
+                                        <a href="/app/questionario/inserir"
+                                           class="btn btn-sm btn-default pull-right"> Add Nova Questão
+                                            <span class="fa fa-plus"></span>
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-responsive" id="Questoes">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Questão</th>
+                                                <th>Última modificação</th>
 
 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
 
-					</div>
+                                                <td>1</td>
+                                                <td>Algoritmo de geracao de circulo</td>
+                                                <td>14/01/2017</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
 
 					<!--       Fim do inserindo -->
 					
@@ -167,14 +172,19 @@ and open the template in the editor.
 					<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '4'">
 
 
-						<div class="alert alert-info">
-							<strong>Respondendo</strong> 
-							<a href="/app/questionario/responder"
-										class="btn btn-sm btn-default pull-right"> Responder
-										<span class="fa fa-check-square-o"></span>
-									</a>
 
-							<p>Responda as questões dos outros grupos.</p>
+                        <!--      Inicio do respondendo -->
+                        <!--          th:if="{equipe.tarefa.respondendo}"  -->
+                        <div class="col-lg-12">
+                          
+                            <div class="alert alert-info">
+                                <strong>Respondendo</strong> 
+                                <a href="/app/questionario/responder"
+                                   class="btn btn-sm btn-default pull-right"> Responder
+                                    <span class="fa fa-check-square-o"></span>
+                                </a>
+                             <p>Responda as questões dos outros grupos.</p>
+                        </div>
 
 						</div>
 						
@@ -298,210 +308,211 @@ and open the template in the editor.
 		</div>
 
 	</div>
-	<div th:fragment="customCSS">
+	
+        <div th:fragment="customCSS">
 
-		<link href="/plugins/datatables-plugins/dataTables.bootstrap.css"
-			th:href="@{/plugins/datatables-plugins/dataTables.bootstrap.css}"
-			rel="stylesheet" media="screen" />
-		<link href="/plugins/datatables-responsive/dataTables.responsive.css"
-			th:href="@{/plugins/datatables-responsive/dataTables.responsive.css}"
-			rel="stylesheet" media="screen" />
-		<script src="/plugins/datatables/js/jquery.dataTables.min.js"
-			th:src="@{/plugins/datatables/js/jquery.dataTables.min.js}"></script>
-		<script src="/plugins/datatables-plugins/dataTables.bootstrap.min.js"
-			th:src="@{/plugins/datatables-plugins/dataTables.bootstrap.min.js}"></script>
-		<script src="/plugins/datatables-responsive/dataTables.responsive.js"
-			th:src="@{/plugins/datatables-responsive/dataTables.responsive.js}"></script>
-
-
-		<script src="/plugins/moment/min/moment-with-locales.js"
-			th:src="@{/plugins/moment/min/moment-with-locales.js}"></script>
-		<script
-			src="/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"
-			th:src="@{/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
-
-		<link
-			href="/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
-			th:href="@{/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}"
-			rel="stylesheet" media="screen" />
+            <link href="/plugins/datatables-plugins/dataTables.bootstrap.css"
+                  th:href="@{/plugins/datatables-plugins/dataTables.bootstrap.css}"
+                  rel="stylesheet" media="screen" />
+            <link href="/plugins/datatables-responsive/dataTables.responsive.css"
+                  th:href="@{/plugins/datatables-responsive/dataTables.responsive.css}"
+                  rel="stylesheet" media="screen" />
+            <script src="/plugins/datatables/js/jquery.dataTables.min.js"
+            th:src="@{/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+            <script src="/plugins/datatables-plugins/dataTables.bootstrap.min.js"
+            th:src="@{/plugins/datatables-plugins/dataTables.bootstrap.min.js}"></script>
+            <script src="/plugins/datatables-responsive/dataTables.responsive.js"
+            th:src="@{/plugins/datatables-responsive/dataTables.responsive.js}"></script>
 
 
-		<!--<script src="/plugins/select2/js/i18n/pt-BR.js"  th:src="@{/plugins/select2/js/i18n/pt-BR.js}"></script>-->
+            <script src="/plugins/moment/min/moment-with-locales.js"
+            th:src="@{/plugins/moment/min/moment-with-locales.js}"></script>
+            <script
+                src="/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"
+            th:src="@{/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
+
+            <link
+                href="/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+                th:href="@{/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}"
+                rel="stylesheet" media="screen" />
 
 
-		<script type="text/javascript">
-			$(document).ready(function() {
-			});
-			$('#EtapasTarefa').DataTable({
-				responsive : true,
-				"paging" : false,
-				"searching" : false,
-
-				"info" : false,
-				"order" : [ [ 0, "asc" ] ]
-
-			});
-			$('#Alunos').DataTable({
-				responsive : true,
-				"paging" : false,
-				"searching" : false,
-
-				"info" : false,
-				"order" : [ [ 1, "asc" ] ]
-
-			});
-
-			$('#Questoes').DataTable({
-				responsive : true,
-				"paging" : false,
-				"searching" : false,
-
-				"info" : false,
-				"order" : [ [ 1, "asc" ] ]
-
-			});
-		</script>
-
-		<script type="text/javascript">
-			$(function() {
-
-				//Definindo o formato padrao e o locale
-				$(
-						'#datetimeAguardandoIni, #datetimeEsperandoSubmissaoIni, #datetimeValidandoQuestoesIni, #datetimeRespondendoQuestoesIni, #datetimeFinalizadoIni')
-						.datetimepicker({
-							dayViewHeaderFormat : 'DD/MM/YYYY hh:mm',
-							locale : 'pt-br'
-						});
-				$(
-						'#datetimeAguardandoFim, #datetimeEsperandoSubmissaoFim, #datetimeValidandoQuestoesFim, #datetimeRespondendoQuestoesFim, #datetimeFinalizadoFim')
-						.datetimepicker({
-							dayViewHeaderFormat : 'DD/MM/YYYY hh:mm',
-							locale : 'pt-br',
-							useCurrent : false
-						//Important! See issue #1075
-						});
-
-				//Aqui eu olho para a data inicial e difinino uma data min para o Fim
-				$("#datetimeAguardandoIni").on(
-						"dp.change",
-						function(e) {
-
-							$('#datetimeAguardandoFim').data("DateTimePicker")
-									.minDate(e.date);
-
-							// console.log(e.date);
-							//Pego a data e converto pegando os millisegundos
-							var outputDate = new Date(e.date);
-							e.date = outputDate.getTime();
-							// console.log(outputDate);
-
-							//  console.log(Date.parse(outputDate));
-							//  console.log(outputDate.getTime());
-						});
-
-				$("#datetimeEsperandoSubmissaoIni").on(
-						"dp.change",
-						function(e) {
-
-							$('#datetimeEsperandoSubmissaoFim').data(
-									"DateTimePicker").minDate(e.date);
-
-							var outputDate = new Date(e.date);
-							e.date = outputDate.getTime();
-
-						});
-
-				$("#datetimeValidandoQuestoesIni").on(
-						"dp.change",
-						function(e) {
-
-							$('#datetimeValidandoQuestoesFim').data(
-									"DateTimePicker").minDate(e.date);
-
-							var outputDate = new Date(e.date);
-							e.date = outputDate.getTime();
-
-						});
-
-				$("#datetimeRespondendoQuestoesIni").on(
-						"dp.change",
-						function(e) {
-
-							$('#datetimeRespondendoQuestoesFim').data(
-									"DateTimePicker").minDate(e.date);
-
-							var outputDate = new Date(e.date);
-							e.date = outputDate.getTime();
-
-						});
-
-				$("#datetimeFinalizadoIni").on(
-						"dp.change",
-						function(e) {
-
-							$('#datetimeFinalizadoFim').data("DateTimePicker")
-									.minDate(e.date);
-
-							var outputDate = new Date(e.date);
-							e.date = outputDate.getTime();
-
-						});
-
-				//Aqui ao contrario da anterior
-				$("#datetimeAguardandoFim").on(
-						"dp.change",
-						function(e) {
-							$('#datetimeAguardandoIni').data("DateTimePicker")
-									.maxDate(e.date);
-							var outputDate = new Date(e.date);
-							e.date = outputDate.getTime();
-
-						});
-				$("#datetimeEsperandoSubmissaoFim").on(
-						"dp.change",
-						function(e) {
-							$('#datetimeEsperandoSubmissaoIni').data(
-									"DateTimePicker").maxDate(e.date);
-							var outputDate = new Date(e.date);
-							e.date = outputDate.getTime();
-
-						});
-
-				$("#datetimeValidandoQuestoesFim").on(
-						"dp.change",
-						function(e) {
-							$('#datetimeValidandoQuestoesIni').data(
-									"DateTimePicker").maxDate(e.date);
-							var outputDate = new Date(e.date);
-							e.date = outputDate.getTime();
-
-						});
-
-				$("#datetimeRespondendoQuestoesFim").on(
-						"dp.change",
-						function(e) {
-							$('#datetimeRespondendoQuestoesIni').data(
-									"DateTimePicker").maxDate(e.date);
-							var outputDate = new Date(e.date);
-							e.date = outputDate.getTime();
-
-						});
-
-				$("#datetimeFinalizadoFim").on(
-						"dp.change",
-						function(e) {
-							$('#datetimeFinalizadoIni').data("DateTimePicker")
-									.maxDate(e.date);
-							var outputDate = new Date(e.date);
-							e.date = outputDate.getTime();
-
-						});
-
-			});
-		</script>
+            <!--<script src="/plugins/select2/js/i18n/pt-BR.js"  th:src="@{/plugins/select2/js/i18n/pt-BR.js}"></script>-->
 
 
-	</div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                });
+                $('#EtapasTarefa').DataTable({
+                    responsive: true,
+                    "paging": false,
+                    "searching": false,
 
-</body>
+                    "info": false,
+                    "order": [[0, "asc"]]
+
+                });
+                $('#Alunos').DataTable({
+                    responsive: true,
+                    "paging": false,
+                    "searching": false,
+
+                    "info": false,
+                    "order": [[1, "asc"]]
+
+                });
+
+                $('#Questoes').DataTable({
+                    responsive: true,
+                    "paging": false,
+                    "searching": false,
+
+                    "info": false,
+                    "order": [[1, "asc"]]
+
+                });
+            </script>
+
+            <script type="text/javascript">
+                $(function () {
+
+                    //Definindo o formato padrao e o locale
+                    $(
+                            '#datetimeAguardandoIni, #datetimeEsperandoSubmissaoIni, #datetimeValidandoQuestoesIni, #datetimeRespondendoQuestoesIni, #datetimeFinalizadoIni')
+                            .datetimepicker({
+                                dayViewHeaderFormat: 'DD/MM/YYYY hh:mm',
+                                locale: 'pt-br'
+                            });
+                    $(
+                            '#datetimeAguardandoFim, #datetimeEsperandoSubmissaoFim, #datetimeValidandoQuestoesFim, #datetimeRespondendoQuestoesFim, #datetimeFinalizadoFim')
+                            .datetimepicker({
+                                dayViewHeaderFormat: 'DD/MM/YYYY hh:mm',
+                                locale: 'pt-br',
+                                useCurrent: false
+                                        //Important! See issue #1075
+                            });
+
+                    //Aqui eu olho para a data inicial e difinino uma data min para o Fim
+                    $("#datetimeAguardandoIni").on(
+                            "dp.change",
+                            function (e) {
+
+                                $('#datetimeAguardandoFim').data("DateTimePicker")
+                                        .minDate(e.date);
+
+                                // console.log(e.date);
+                                //Pego a data e converto pegando os millisegundos
+                                var outputDate = new Date(e.date);
+                                e.date = outputDate.getTime();
+                                // console.log(outputDate);
+
+                                //  console.log(Date.parse(outputDate));
+                                //  console.log(outputDate.getTime());
+                            });
+
+                    $("#datetimeEsperandoSubmissaoIni").on(
+                            "dp.change",
+                            function (e) {
+
+                                $('#datetimeEsperandoSubmissaoFim').data(
+                                        "DateTimePicker").minDate(e.date);
+
+                                var outputDate = new Date(e.date);
+                                e.date = outputDate.getTime();
+
+                            });
+
+                    $("#datetimeValidandoQuestoesIni").on(
+                            "dp.change",
+                            function (e) {
+
+                                $('#datetimeValidandoQuestoesFim').data(
+                                        "DateTimePicker").minDate(e.date);
+
+                                var outputDate = new Date(e.date);
+                                e.date = outputDate.getTime();
+
+                            });
+
+                    $("#datetimeRespondendoQuestoesIni").on(
+                            "dp.change",
+                            function (e) {
+
+                                $('#datetimeRespondendoQuestoesFim').data(
+                                        "DateTimePicker").minDate(e.date);
+
+                                var outputDate = new Date(e.date);
+                                e.date = outputDate.getTime();
+
+                            });
+
+                    $("#datetimeFinalizadoIni").on(
+                            "dp.change",
+                            function (e) {
+
+                                $('#datetimeFinalizadoFim').data("DateTimePicker")
+                                        .minDate(e.date);
+
+                                var outputDate = new Date(e.date);
+                                e.date = outputDate.getTime();
+
+                            });
+
+                    //Aqui ao contrario da anterior
+                    $("#datetimeAguardandoFim").on(
+                            "dp.change",
+                            function (e) {
+                                $('#datetimeAguardandoIni').data("DateTimePicker")
+                                        .maxDate(e.date);
+                                var outputDate = new Date(e.date);
+                                e.date = outputDate.getTime();
+
+                            });
+                    $("#datetimeEsperandoSubmissaoFim").on(
+                            "dp.change",
+                            function (e) {
+                                $('#datetimeEsperandoSubmissaoIni').data(
+                                        "DateTimePicker").maxDate(e.date);
+                                var outputDate = new Date(e.date);
+                                e.date = outputDate.getTime();
+
+                            });
+
+                    $("#datetimeValidandoQuestoesFim").on(
+                            "dp.change",
+                            function (e) {
+                                $('#datetimeValidandoQuestoesIni').data(
+                                        "DateTimePicker").maxDate(e.date);
+                                var outputDate = new Date(e.date);
+                                e.date = outputDate.getTime();
+
+                            });
+
+                    $("#datetimeRespondendoQuestoesFim").on(
+                            "dp.change",
+                            function (e) {
+                                $('#datetimeRespondendoQuestoesIni').data(
+                                        "DateTimePicker").maxDate(e.date);
+                                var outputDate = new Date(e.date);
+                                e.date = outputDate.getTime();
+
+                            });
+
+                    $("#datetimeFinalizadoFim").on(
+                            "dp.change",
+                            function (e) {
+                                $('#datetimeFinalizadoIni').data("DateTimePicker")
+                                        .maxDate(e.date);
+                                var outputDate = new Date(e.date);
+                                e.date = outputDate.getTime();
+
+                            });
+
+                });
+            </script>
+
+
+        </div>
+
+    </body>
 </html>

@@ -10,6 +10,10 @@ public class Mensagem {
     private String assunto;
     private String corpo;
 
+    public Mensagem(){
+
+    }
+
     public Mensagem(String destinatario, String assunto, String corpo) {
         this.destinatario = destinatario;
         this.assunto = assunto;
