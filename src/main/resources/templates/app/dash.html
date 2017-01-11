@@ -78,7 +78,8 @@ and open the template in the editor.
 				
 					<!--      Inicio do aguardando -->
 					<!--          th:if="{equipe.tarefa.aguardando}"  -->
-					<div class="col-lg-12"  th:if="${equipe.tarefa.etapaAtual.id} == '1'">
+					<!--<div class="col-lg-12"  th:if="${equipe.tarefa.etapaAtual.id} == '1'">-->
+					<div class="col-lg-12"  >
 
 
 						<div class="alert alert-warning">
@@ -98,7 +99,8 @@ and open the template in the editor.
 
 					<!--      Inicio do inserindo -->
 					<!--          th:if="{equipe.tarefa.inserindo}"  -->
-					<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '2'">
+					<div class="col-lg-12" >
+					<!--<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '2'">-->
 
 
 
@@ -110,7 +112,7 @@ and open the template in the editor.
 
                             </div>
                             <div class="panel panel-primary">
-
+                                <span th:text="${questionario}"></span>
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
                                         Questões Inseridas  
@@ -132,10 +134,11 @@ and open the template in the editor.
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            
+                                            <tr th:each="e : ${questionario}">
 
                                                 <td>1</td>
-                                                <td>Algoritmo de geracao de circulo</td>
+                                                <td th:text="${e.question}"></td>
                                                 <td>14/01/2017</td>
                                             </tr>
                                         </tbody>
@@ -152,7 +155,8 @@ and open the template in the editor.
 					
 										<!--      Inicio do validando -->
 					<!--          th:if="{equipe.tarefa.validando}"  -->
-					<div class="col-lg-12"  th:if="${equipe.tarefa.etapaAtual.id} == '3'">
+					<!--<div class="col-lg-12"  th:if="${equipe.tarefa.etapaAtual.id} == '3'">-->
+					<div class="col-lg-12" >
 
 
 						<div class="alert alert-warning">
@@ -169,7 +173,8 @@ and open the template in the editor.
 					
 					<!--      Inicio do respondendo -->
 					<!--          th:if="{equipe.tarefa.respondendo}"  -->
-					<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '4'">
+					<!--<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '4'">-->
+					<div class="col-lg-12" >
 
 
 
@@ -199,7 +204,8 @@ and open the template in the editor.
 					
 					<!--      Inicio do finalizado -->
 					<!--          th:if="{equipe.tarefa.finalizado}"  -->
-					<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '5'">
+					<!--<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '5'">-->
+					<div class="col-lg-12">
 
 
 						<div class="alert alert-info">

@@ -1,5 +1,6 @@
 package br.ufg.jatai.fsw.squest.domain;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @Entity
 @Table
-public class Questao {
+public class Questao implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +25,9 @@ public class Questao {
 
     private String question;
 
-    @OneToMany(mappedBy = "questao")
+    @OneToMany(mappedBy = "questao", cascade = CascadeType.ALL)
     private List<Alternativa> alternativas = new ArrayList<>();
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Questionario questionario;
    
 
@@ -135,6 +136,11 @@ public class Questao {
 
     public void setQuestionario(Questionario questionario) {
         this.questionario = questionario;
+    }
+
+    @Override
+    public String toString() {
+        return "Questao{" + "id=" + id + ", question=" + question + ", alternativas=" + alternativas + '}';
     }
 
     

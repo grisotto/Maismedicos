@@ -79,6 +79,13 @@ public class QuestãoModel {
     public Questao getQuestao() {
         Questao questao = new Questao();
         questao.setQuestion(descricao);
+        
+        alternativaA.setQuestao(questao);
+        alternativaB.setQuestao(questao);
+        alternativaC.setQuestao(questao);
+        alternativaD.setQuestao(questao);
+        alternativaE.setQuestao(questao);
+        
         questao.getAlternativas().add(alternativaA);
         questao.getAlternativas().add(alternativaB);
         questao.getAlternativas().add(alternativaC);

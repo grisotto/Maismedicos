@@ -32,6 +32,14 @@ public class Alternativa implements Serializable {
         this(null, null, false);
     }
 
+    public Questao getQuestao() {
+        return questao;
+    }
+
+    public void setQuestao(Questao questao) {
+        this.questao = questao;
+    }
+
     /**
      *
      * @param id
