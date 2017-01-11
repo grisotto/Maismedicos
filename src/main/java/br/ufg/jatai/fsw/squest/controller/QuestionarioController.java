@@ -96,7 +96,7 @@ public class QuestionarioController implements Serializable {
             q.getQuestoes().add(questao);
         }
 
-//        questionarioService.inserir(q);
+        questionarioService.inserir(q);
         questaoService.inserir(questao);
 
         return "redirect:/app/questionario/inserir";
