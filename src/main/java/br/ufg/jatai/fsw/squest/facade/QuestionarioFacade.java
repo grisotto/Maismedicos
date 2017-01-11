@@ -5,10 +5,13 @@
  */
 package br.ufg.jatai.fsw.squest.facade;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author dfranco
  */
+@Component
 public class QuestionarioFacade {
 
 }

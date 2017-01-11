@@ -198,7 +198,7 @@ public class Tarefa implements Serializable {
         hash = 79 * hash + (this.etapaAtual != null ? this.etapaAtual.hashCode() : 0);
         hash = 79 * hash + (this.etapaEventos != null ? this.etapaEventos.hashCode() : 0);
         hash = 79 * hash + (this.tamanhoQuestoes != null ? this.tamanhoQuestoes.hashCode() : 0);
-        hash = 79 * hash + (this.questionarios != null ? this.questionarios.hashCode() : 0);
+//        hash = 79 * hash + (this.questionarios != null ? this.questionarios.hashCode() : 0);
         return hash;
     }
 

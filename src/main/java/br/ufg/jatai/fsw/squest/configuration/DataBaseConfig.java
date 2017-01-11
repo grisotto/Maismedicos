@@ -147,7 +147,8 @@ public class DataBaseConfig {
             taf.setDescricao("Muita coisa acontecendo nesta cidade");
             taf.setTitulo("Atividade primeiro semestre");
             taf.setTamanhoQuestoes(5);
-            tarefaService.inserir(taf);            
+            tarefaService.inserir(taf); 
+            
             
 
             LOGGER.info("LOCALE DEFAULT: " + LocaleContextHolder.getLocale());

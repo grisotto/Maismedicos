@@ -22,12 +22,13 @@ public class Questionario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @OneToOne   
     private Equipe time;
 
 
-    @OneToMany(mappedBy = "questionario")
+    @OneToMany(mappedBy = "questionario", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Questao> questoes;
+    
     @ManyToOne
     private Tarefa tarefa;
 
@@ -113,6 +114,14 @@ public class Questionario implements Serializable {
      */
     public void setTime(Equipe time) {
         this.time = time;
+    }
+
+    public Tarefa getTarefa() {
+        return tarefa;
+    }
+
+    public void setTarefa(Tarefa tarefa) {
+        this.tarefa = tarefa;
     }
 
    

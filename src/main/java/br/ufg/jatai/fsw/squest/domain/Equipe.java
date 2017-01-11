@@ -44,6 +44,8 @@ public class Equipe implements Serializable {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private Usuario usuario;
+    @OneToOne(mappedBy = "time",fetch =FetchType.EAGER)
+    private Questionario questionario;
 
     /**
      *
@@ -220,5 +222,14 @@ public class Equipe implements Serializable {
     public boolean add(Aluno aluno) {
         return alunos.add(aluno);
     }
+
+    public Questionario getQuestionario() {
+        return questionario;
+    }
+
+    public void setQuestionario(Questionario questionario) {
+        this.questionario = questionario;
+    }
+    
 }
 
