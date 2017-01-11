@@ -111,7 +111,7 @@ public class EquipeController implements Serializable {
         }
 
         equipeFacade.addAluno(aluno,equipe);
-        return "redirect:/app/equipe/" + 1;
+        return "redirect:/app/equipe/" + equipe.getId();
     }
 
     /**
