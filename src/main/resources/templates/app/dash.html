@@ -73,15 +73,16 @@ and open the template in the editor.
 
 			<div sec:authorize="hasAuthority('GRUPO')">
 				<div class="row">
-
+			
+				
 					<!--      Inicio do aguardando -->
 					<!--          th:if="{equipe.tarefa.aguardando}"  -->
-					<div class="col-lg-12">
+					<div class="col-lg-12"  th:if="${equipe.tarefa.etapaAtual.id} == '1'">
 
 
 						<div class="alert alert-warning">
 							<strong>Aguardando</strong>
-
+		
 							<p>Esperando a liberação pelo professor para a inserções das
 								questões.</p>
 
@@ -94,7 +95,7 @@ and open the template in the editor.
 
 					<!--      Inicio do inserindo -->
 					<!--          th:if="{equipe.tarefa.inserindo}"  -->
-					<div class="col-lg-12">
+					<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '2'">
 
 
 						<div class="alert alert-success">
@@ -144,10 +145,26 @@ and open the template in the editor.
 
 					<!--       Fim do inserindo -->
 					
+										<!--      Inicio do validando -->
+					<!--          th:if="{equipe.tarefa.validando}"  -->
+					<div class="col-lg-12"  th:if="${equipe.tarefa.etapaAtual.id} == '3'">
+
+
+						<div class="alert alert-warning">
+							<strong>Validando</strong>
+		
+							<p>O Professor esta validando as questoes inseridas.</p>
+
+						</div>
+					</div>
+
+					<!--       Fim do validando -->
+					
+					
 					
 					<!--      Inicio do respondendo -->
 					<!--          th:if="{equipe.tarefa.respondendo}"  -->
-					<div class="col-lg-12">
+					<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '4'">
 
 
 						<div class="alert alert-info">
@@ -172,7 +189,7 @@ and open the template in the editor.
 					
 					<!--      Inicio do finalizado -->
 					<!--          th:if="{equipe.tarefa.finalizado}"  -->
-					<div class="col-lg-12">
+					<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '5'">
 
 
 						<div class="alert alert-info">
