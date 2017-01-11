@@ -26,7 +26,7 @@ public class Questionario implements Serializable {
     private Equipe time;
 
 
-    @OneToMany(mappedBy = "questionario", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "questionario", fetch = FetchType.EAGER)
     private List<Questao> questoes;
     
     @ManyToOne
@@ -157,6 +157,11 @@ public class Questionario implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Questionario{" + "id=" + id + ", time=" + time + ", questoes=" + questoes + ", tarefa=" + tarefa + '}';
     }
 
 }

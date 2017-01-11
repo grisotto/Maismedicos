@@ -72,20 +72,21 @@ and open the template in the editor.
                     aparece para quem é Aluno</div>
 
 
-			<div sec:authorize="hasAuthority('GRUPO')">
-				<div class="row">
-			
-				
-					<!--      Inicio do aguardando -->
-					<!--          th:if="{equipe.tarefa.aguardando}"  -->
-					<div class="col-lg-12"  th:if="${equipe.tarefa.etapaAtual.id} == '1'">
+                <div sec:authorize="hasAuthority('GRUPO')">
+                    <div class="row">
 
 
-						<div class="alert alert-warning">
-							<strong>Aguardando</strong>
-		
-							<p>Esperando a liberação pelo professor para a inserções das
-								questões.</p>
+                        <!--      Inicio do aguardando -->
+                        <!--          th:if="{equipe.tarefa.aguardando}"  -->
+                        <!--<div class="col-lg-12"  th:if="${equipe.tarefa.etapaAtual.id} == '1'">-->
+                        <div class="col-lg-12"  >
+
+
+                            <div class="alert alert-warning">
+                                <strong>Aguardando</strong>
+
+                                <p>Esperando a liberação pelo professor para a inserções das
+                                    questões.</p>
 
 
                             </div>
@@ -96,9 +97,10 @@ and open the template in the editor.
 
 
 
-					<!--      Inicio do inserindo -->
-					<!--          th:if="{equipe.tarefa.inserindo}"  -->
-					<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '2'">
+                        <!--      Inicio do inserindo -->
+                        <!--          th:if="{equipe.tarefa.inserindo}"  -->
+                        <div class="col-lg-12" >
+                            <!--<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '2'">-->
 
 
 
@@ -110,7 +112,7 @@ and open the template in the editor.
 
                             </div>
                             <div class="panel panel-primary">
-
+                                <!--<span th:text="${questionario}"></span>-->
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
                                         Questões Inseridas  
@@ -132,12 +134,16 @@ and open the template in the editor.
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <div th:if="${questionario != null}">
 
-                                                <td>1</td>
-                                                <td>Algoritmo de geracao de circulo</td>
-                                                <td>14/01/2017</td>
-                                            </tr>
+
+                                                <tr th:each="e : ${questionario.questoes}">
+
+                                                    <td>1</td>
+                                                    <td th:text="${e.question}"></td>
+                                                    <td></td>
+                                                </tr>
+                                            </div>
                                         </tbody>
                                     </table>
                                 </div>
@@ -148,167 +154,170 @@ and open the template in the editor.
                         </div>
 
 
-					<!--       Fim do inserindo -->
-					
-										<!--      Inicio do validando -->
-					<!--          th:if="{equipe.tarefa.validando}"  -->
-					<div class="col-lg-12"  th:if="${equipe.tarefa.etapaAtual.id} == '3'">
+                        <!--       Fim do inserindo -->
+
+                        <!--      Inicio do validando -->
+                        <!--          th:if="{equipe.tarefa.validando}"  -->
+                        <!--<div class="col-lg-12"  th:if="${equipe.tarefa.etapaAtual.id} == '3'">-->
+                        <div class="col-lg-12" >
 
 
-						<div class="alert alert-warning">
-							<strong>Validando</strong>
-		
-							<p>O Professor esta validando as questoes inseridas.</p>
+                            <div class="alert alert-warning">
+                                <strong>Validando</strong>
 
-						</div>
-					</div>
+                                <p>O Professor esta validando as questoes inseridas.</p>
 
-					<!--       Fim do validando -->
-					
-					
-					
-					<!--      Inicio do respondendo -->
-					<!--          th:if="{equipe.tarefa.respondendo}"  -->
-					<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '4'">
+                            </div>
+                        </div>
+
+                        <!--       Fim do validando -->
 
 
 
                         <!--      Inicio do respondendo -->
                         <!--          th:if="{equipe.tarefa.respondendo}"  -->
-                        <div class="col-lg-12">
-                          
-                            <div class="alert alert-info">
-                                <strong>Respondendo</strong> 
-                                <a href="/app/questionario/responder"
-                                   class="btn btn-sm btn-default pull-right"> Responder
-                                    <span class="fa fa-check-square-o"></span>
-                                </a>
-                             <p>Responda as questões dos outros grupos.</p>
+                        <!--<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '4'">-->
+                        <div class="col-lg-12" >
+
+
+
+                            <!--      Inicio do respondendo -->
+                            <!--          th:if="{equipe.tarefa.respondendo}"  -->
+                            <div class="col-lg-12">
+
+                                <div class="alert alert-info">
+                                    <strong>Respondendo</strong> 
+                                    <a href="/app/questionario/responder"
+                                       class="btn btn-sm btn-default pull-right"> Responder
+                                        <span class="fa fa-check-square-o"></span>
+                                    </a>
+                                    <p>Responda as questões dos outros grupos.</p>
+                                </div>
+
+                            </div>
+
+
+
+
                         </div>
 
-						</div>
-						
-						
-						
-						
-					</div>
-
-					<!--       Fim do respondendo -->
-					
-					
-					
-					<!--      Inicio do finalizado -->
-					<!--          th:if="{equipe.tarefa.finalizado}"  -->
-					<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '5'">
-
-
-						<div class="alert alert-info">
-							<strong>Finalizado</strong>
-
-							<p>Grupo pode ver sua pontuação.</p>
-
-						</div>
-					</div>
-
-					<!--       Fim do finalizado -->
-
-
-					<div class="col-md-6">
-
-						<div class="col-md-12">
-							<div class="panel panel-danger">
-
-								<div class="panel-heading">
-									<h3 class="panel-title">
-										Equipe: <span th:text="${equipe.nome}"></span>
-									</h3>
-								</div>
-								<div class="panel-body">
-
-									<h4>
-										<b>Titulo: </b><span th:text="${equipe.tarefa.titulo}"></span>
-									</h4>
-									<h4>
-										<b>Descriçao: </b><span th:text="${equipe.tarefa.descricao}"></span>
-									</h4>
-								</div>
-							</div>
-						</div>
+                        <!--       Fim do respondendo -->
 
 
 
-						<div class="col-md-12">
-							<div class="panel panel-warning">
-
-								<div class="panel-heading">
-									<h1 class="panel-title">Participantes</h1>
-								</div>
-								<div class="panel-body">
-									<table class="table table-responsive" id="Alunos">
-										<thead>
-											<tr>
-												<th>Nome</th>
-
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="e :${equipe.alunos}">
-
-												<td th:text="${e.nome}">1</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-
-							</div>
-						</div>
-					</div>
+                        <!--      Inicio do finalizado -->
+                        <!--          th:if="{equipe.tarefa.finalizado}"  -->
+                        <!--<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.id} == '5'">-->
+                        <div class="col-lg-12">
 
 
-					<div class="col-md-6">
-						<div class="col-md-12">
-							<div class="panel panel-primary">
+                            <div class="alert alert-info">
+                                <strong>Finalizado</strong>
 
-								<div class="panel-heading">
-									<h1 class="panel-title">Etapas da Tarefa</h1>
-								</div>
-								<div class="panel-body">
-									<table class="table table-responsive" id="EtapasTarefa">
-										<thead>
-											<tr>
-												<th>#</th>
-												<th>Etapa</th>
-												<th>Data Incial</th>
-												<th>Data Final</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="e :${equipe.tarefa.etapaEventos}">
-												<td th:text="${e.tipo.id()}">1</td>
-												<td th:text="${e.tipo}">1</td>
-												<!--<td th:text="${e.dataInicial}">1</td>-->
-												<td
-													th:text="${#dates.format(e.dataInicial, 'dd/MM/yyyy hh:mm')}">1</td>
-												<!--<td th:text="${e.dataFinal}">1</td>-->
-												<td
-													th:text="${#dates.format(e.dataFinal, 'dd/MM/yyyy hh:mm')}">1</td>
+                                <p>Grupo pode ver sua pontuação.</p>
 
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
+                            </div>
+                        </div>
 
-					</div>
-				</div>
+                        <!--       Fim do finalizado -->
 
 
-			</div>
-		</div>
+                        <div class="col-md-6">
 
-	</div>
-	
+                            <div class="col-md-12">
+                                <div class="panel panel-danger">
+
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">
+                                            Equipe: <span th:text="${equipe.nome}"></span>
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body">
+
+                                        <h4>
+                                            <b>Titulo: </b><span th:text="${equipe.tarefa.titulo}"></span>
+                                        </h4>
+                                        <h4>
+                                            <b>Descriçao: </b><span th:text="${equipe.tarefa.descricao}"></span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class="panel panel-warning">
+
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title">Participantes</h1>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-responsive" id="Alunos">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="e :${equipe.alunos}">
+
+                                                    <td th:text="${e.nome}">1</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="panel panel-primary">
+
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title">Etapas da Tarefa</h1>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-responsive" id="EtapasTarefa">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Etapa</th>
+                                                    <th>Data Incial</th>
+                                                    <th>Data Final</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="e :${equipe.tarefa.etapaEventos}">
+                                                    <td th:text="${e.tipo.id()}">1</td>
+                                                    <td th:text="${e.tipo}">1</td>
+                                                    <!--<td th:text="${e.dataInicial}">1</td>-->
+                                                    <td
+                                                        th:text="${#dates.format(e.dataInicial, 'dd/MM/yyyy hh:mm')}">1</td>
+                                                    <!--<td th:text="${e.dataFinal}">1</td>-->
+                                                    <td
+                                                        th:text="${#dates.format(e.dataFinal, 'dd/MM/yyyy hh:mm')}">1</td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
         <div th:fragment="customCSS">
 
             <link href="/plugins/datatables-plugins/dataTables.bootstrap.css"

@@ -19,6 +19,7 @@ public class SQuestApplication {
      * @param args
      */
     public static void main(String[] args) {
+        LOGGER.debug("Inciando");
         SpringApplication.run(SQuestApplication.class, args);
     }
 }

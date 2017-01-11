@@ -40,7 +40,6 @@ public class AppController {
     @Autowired
     private SessionRegistry sessionRegistry;
 
-
     @Autowired
     private AutenticateUser autenticateUser;
 
@@ -64,7 +63,11 @@ public class AppController {
             model.addAttribute("usuarios", usuarios);
 
         }
-
+        if (autenticateUser.getUsuario().getTipoUsuario().equals(Usuario.TipoUsuario.GRUPO)) {
+            Equipe equipe = autenticateUser.getEquipe();
+            model.addAttribute("equipe", equipe);
+            model.addAttribute("questionario", equipe.getQuestionario());
+        }
 
         LOGGER.info("ENTROU NO CONTROLLER");
 
@@ -76,7 +79,7 @@ public class AppController {
      * @return
      */
     @ModelAttribute("equipe")
-    public Equipe   getEquipe() {
+    public Equipe getEquipe() {
         if (autenticateUser.getUsuario().getTipoUsuario().equals(Usuario.TipoUsuario.GRUPO)) {
             return autenticateUser.getEquipe();
         } else {
@@ -85,7 +88,6 @@ public class AppController {
     }
 
     // Login form
-
     /**
      *
      * @return
@@ -99,14 +101,13 @@ public class AppController {
     }
 
     // Login form with error
-
     /**
      *
      * @param request
      */
     @RequestMapping(value = "/logout")
     public void logout(HttpServletRequest request) {
-        HttpSession  session = request.getSession(false);
+        HttpSession session = request.getSession(false);
         SecurityContextHolder.clearContext();
         if (session != null) {
             session.invalidate();

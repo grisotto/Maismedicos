@@ -42,13 +42,13 @@ public class QuestionarioController implements Serializable {
 
     @Autowired
     private QuestionarioRepository questionarioRepository;
-    
+
     @Autowired
     private QuestionarioService questionarioService;
 
     @Autowired
     private QuestaoService questaoService;
-    
+
     @PostMapping("/addQuestao")
     public String inserirQuestão(final String correto, final QuestãoModel questaoModel,
             final BindingResult bindingResult, final ModelMap model) {
@@ -81,23 +81,26 @@ public class QuestionarioController implements Serializable {
         } else if (correto.equals("E")) {
             questaoModel.getAlternativaE().setCorreto(true);
         }
+
+        //Gerar a questão por meio do modelo
         Questao questao = questaoModel.getQuestao();
-        Questionario q = questionarioRepository.getFromTarefaEquipe(user.getEquipe().getId());
-        if (q == null) {
 
-            q = new Questionario();
-            q.setquestions(new ArrayList<>());
-            q.getQuestoes().add(questao);
-            q.setTime(user.getEquipe());
-            q.setTarefa(user.getEquipe().getTarefa());
+        //Pegar o questionario dessa equipe
+        Questionario questionario = questionarioRepository.getFromTarefaEquipe(user.getEquipe().getId());
 
-        } else {
-            questao.setQuestionario(q);
-            q.getQuestoes().add(questao);
+        //Verificar se o questionario é null, se for null é porque ainda não existe um questionario
+        if (questionario == null) {//Então Tem uqe criar um questionario
+            questionario = new Questionario();//Coloca uma instancia nele 
+            questionario.setTime(user.getEquipe());//Coloca a euipe
+            questionario.setTarefa(user.getEquipe().getTarefa());//Coloca a Tarefa
+            questionario.setquestions(new ArrayList<>());//Inicia as Questões dele
+            
+           
         }
-
-        questionarioService.inserir(q);
-        questaoService.inserir(questao);
+        questao.setQuestionario(questionario);
+        questionario.getQuestoes().add(questao);//Adiciona a questão que foi recuperada
+        questaoService.inserir(questao);// Insere no banco o questionario
+//        questaoService.inserir(questao);//Agora insere 
 
         return "redirect:/app/questionario/inserir";
     }
