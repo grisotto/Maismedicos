@@ -17,5 +17,6 @@ import java.util.List;
  */
 public interface EquipeRepository extends JpaRepository<Equipe, Integer> {
     @Query("select e from Equipe e where e.tarefa.turma.professor.id = :professorID")
+
     public List<Equipe> equipesDoProfessor(Integer professorID);
 }
