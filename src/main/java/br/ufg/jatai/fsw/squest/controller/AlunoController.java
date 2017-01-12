@@ -22,6 +22,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -29,14 +31,13 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author rafael
  */
 @Controller
-@Secured({"ADMIN","PROFESSOR"})
+@Secured({"ADMIN", "PROFESSOR"})
 public class AlunoController implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(EquipeController.class.getName());
 
     @Autowired
     private AlunoFacade alunoFacade;
-
 
     /**
      * Cria um attributo AllAlunos que busca todos os alunos cadastrados
@@ -46,7 +47,6 @@ public class AlunoController implements Serializable {
     @ModelAttribute("allAlunos")
     public List<Aluno> populateVisualizarAlunos() {
         return this.alunoFacade.listarAlunos();
-
 
     }
 
@@ -69,10 +69,14 @@ public class AlunoController implements Serializable {
      * @param model
      * @return
      */
-
     @PostMapping("/app/aluno")
     public String saveAluno(@ModelAttribute("aluno") @Valid final Aluno aluno, final BindingResult bindingResult, final ModelMap model) {
-
+        if (alunoFacade.emailExist(aluno.getEmail())) {
+            bindingResult.addError(new FieldError("aluno","email", "Já existe o email cadastrado"));
+        }
+        if (alunoFacade.existMatricula(aluno.getMatricula())) {
+            bindingResult.addError(new FieldError("aluno","matricula", "Já existe a matricula cadastrada"));
+        }
         if (bindingResult.hasErrors()) {
             model.addAttribute("aluno", aluno);
             return "/app/aluno/home";

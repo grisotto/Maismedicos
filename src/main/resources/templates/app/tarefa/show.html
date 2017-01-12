@@ -23,7 +23,15 @@ and open the template in the editor.
                                                                   th:text="${{tarefa.titulo}}"></span>
                 </h2>
             </div>
-
+            <div class="alert alert-info" th:if="${tarefa.etapaAtual.isValidando()}">
+                Agora o professor precisa validar  as questões
+            </div>
+            <div class="alert alert-success" th:if="${tarefa.etapaAtual.isRespondendo()}">
+                As equipes estão respondendo
+            </div>
+            <div class="alert alert-success" th:if="${tarefa.etapaAtual.isEsperandoSubmissao()}">
+                As equpipes estão inserindo questões
+            </div>
             <div class="col-md-7">
                 <div class="panel panel-info">
 
@@ -40,6 +48,7 @@ and open the template in the editor.
                                     <th>Etapa</th>
                                     <th>Data Incial</th>
                                     <th>Data Final</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,6 +61,8 @@ and open the template in the editor.
                                     <!--<td th:text="${e.dataFinal}">1</td>-->
                                     <td th:text="${#dates.format(e.dataFinal, 'dd/MM/yyyy hh:mm')}">1</td>
 
+                                    <td th:if="${tarefa.etapaAtual== e}"><a class="btn btn-success btn-sm fa fa-check-square"></a></td>
+                                    <td  th:if="${tarefa.etapaAtual!= e}"><a th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${e.id}" class="btn btn-danger btn-sm fa fa-square"></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -182,7 +193,7 @@ and open the template in the editor.
                                 <tr data-th-each="a : ${tarefa.equipes}">
                                     <td th:text="${a.nome}">1</td>
                                     <td class="col-md-3 text-center"
-                                        th:text="${tarefa.equipes.size()}">3</td>
+                                        th:text="${a.alunos.size()}">3</td>
                                     <td  th:if="${a.ativa}" >
                                         <span class="label label-info">
                                             Ativada
@@ -195,8 +206,8 @@ and open the template in the editor.
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a class="btn btn-sm  btn-danger fa fa-trash" /> <a
-                                                class="btn btn-sm  btn-primary fa fa-send" />
+                                            <!--<a class="btn btn-sm  btn-danger fa fa-trash" />-->
+                                            <a th:href="@{/app/equipe/}+${a.id}" class="btn btn-sm  btn-success fa fa-arrow-right" />
                                         </div>
 
                                     </td>

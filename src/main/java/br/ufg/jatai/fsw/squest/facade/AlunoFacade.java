@@ -111,4 +111,11 @@ public class AlunoFacade {
         return new HashSet<>(alunoService.find(id).getTurmas());
 
     }
+    public boolean emailExist(String email) {
+        return alunoService.findByEmail(email)!=null;
+    }
+    public boolean existMatricula(String matricula) {
+        return alunoService.findByMatricula(matricula)!=null;
+    }
+
 }

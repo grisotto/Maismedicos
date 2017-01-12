@@ -2,8 +2,10 @@ package br.ufg.jatai.fsw.squest.facade;
 
 import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.controller.modelForm.EtapasModel;
+import br.ufg.jatai.fsw.squest.domain.EtapaEvento;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
+import br.ufg.jatai.fsw.squest.service.EtapaEventoService;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
 import br.ufg.jatai.fsw.squest.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,5 +81,18 @@ public class TarefaFacade {
         find.getEtapaEventos().addAll(etapasModel.buildeLista());
 
         tarefaService.atualizar(find);
+    }
+    
+
+    @Autowired
+    EtapaEventoService etapaEventoService;
+    public void atualizaEtapaAtual(Integer idTarefa, Integer idEtapa) {
+        Tarefa tarefa = tarefaService.find(idTarefa);
+        EtapaEvento etapaEvento = etapaEventoService.find(idEtapa);
+        tarefa.setEtapaAtual(etapaEvento);
+        
+        tarefaService.atualizar(tarefa);
+        
+        
     }
 }

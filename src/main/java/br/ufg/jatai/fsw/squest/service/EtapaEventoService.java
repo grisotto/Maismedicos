@@ -5,14 +5,14 @@
  */
 package br.ufg.jatai.fsw.squest.service;
 
-import br.ufg.jatai.fsw.squest.domain.Aluno;
+import br.ufg.jatai.fsw.squest.domain.EtapaEvento;
+import java.io.Serializable;
+import org.springframework.stereotype.Service;
 
 /**
  *
- * @author vilela
+ * @author dyeimys
  */
-public interface AlunoService extends AbstractService<Aluno, Integer> {
-
-    public Aluno findByEmail(String email);
-    public Aluno findByMatricula(String matricula);
+public interface EtapaEventoService extends AbstractService<EtapaEvento, Integer>{
+    
 }

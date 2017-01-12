@@ -13,6 +13,8 @@ import br.ufg.jatai.fsw.squest.service.TarefaService;
 import br.ufg.jatai.fsw.squest.service.TurmaService;
 import java.util.List;
 import javax.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -31,12 +34,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @PreAuthorize("hasAuthority('PROFESSOR')")
 public class TarefaController {
 
-
     @Autowired
     private TarefaService tarefaService;
     @Autowired
     private TurmaService turmaService;
-    
 
     @Autowired
     private TarefaFacade tarefaFacade;
@@ -65,17 +66,15 @@ public class TarefaController {
             return "/app/tarefa/home";
         }
 
-       
         tarefa.setTurma(turmaService.find(tarefa.getTurma().getId()));
 
         tarefaService.inserir(tarefa);
 
-
-      tarefaFacade.saveTarefa(tarefa);
+        tarefaFacade.saveTarefa(tarefa);
 
         return "redirect:/app/tarefa";
     }
-    
+
     /**
      *
      * @return
@@ -109,12 +108,9 @@ public class TarefaController {
         Tarefa find = tarefaFacade.findTarefa(id);
 
         map.addAttribute("tarefa", find);
-        
+
 //        map.addAttribute("equipe", new Equipe());
-
-        
         //aqui eu tenho que pegar os dados dos grupos desta Tarefa
-
         map.addAttribute("etapas", new EtapasModel().buildeOvjeto(find.getEtapaEventos()));
 
         return "/app/tarefa/show";
@@ -132,10 +128,18 @@ public class TarefaController {
     public String atualizaData(@Valid Integer idTarefa, @Valid EtapasModel etapas,
             final BindingResult bindingResult, final ModelMap model) {
 
+        tarefaFacade.atualizaDatasEtapas(idTarefa, etapas);
 
-
-        tarefaFacade.atualizaDatasEtapas(idTarefa,etapas);
-
+        return "redirect:/app/tarefa/" + idTarefa;
+    }
+    private static final Logger LOGGER = LoggerFactory.getLogger(TarefaController.class);
+    @GetMapping("/app/tarefa/{idTarefa}/set/{idEtapa}")
+    public String modificaEtapaAtual(@PathVariable final Integer idTarefa, @PathVariable final Integer idEtapa) {
+        LOGGER.info("Entrou aqui com: \n"
+                + "\nidTarefa: "+idTarefa
+                + "\nidEtapa: "+idEtapa
+        );
+        tarefaFacade.atualizaEtapaAtual(idTarefa, idEtapa);
         return "redirect:/app/tarefa/" + idTarefa;
     }
 

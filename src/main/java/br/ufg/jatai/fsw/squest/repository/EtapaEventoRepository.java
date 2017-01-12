@@ -5,17 +5,15 @@
  */
 package br.ufg.jatai.fsw.squest.repository;
 
-import br.ufg.jatai.fsw.squest.domain.Aluno;
+import br.ufg.jatai.fsw.squest.domain.EtapaEvento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author vilela
+ * @author dyeimys
  */
 @Repository
-public interface AlunoRepository extends JpaRepository<Aluno, Integer> {
+public interface EtapaEventoRepository extends JpaRepository<EtapaEvento, Integer>{
     
-    public Aluno findByEmail(String email);
-    public Aluno findByMatricula(String matricula);
 }

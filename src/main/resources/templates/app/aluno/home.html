@@ -49,13 +49,17 @@ and open the template in the editor.
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label" for="Matrícula">Matrícula</label>  
-                                <input id="matricula"  th:field="*{matricula}" placeholder="20150000" class="form-control input-md" type="text"/>
+                                <div th:class="${#fields.hasErrors('matricula')}? has-error">
+                                    <label class="control-label" for="Matrícula">Matrícula</label>  
+                                    <input id="matricula"  th:field="*{matricula}" placeholder="20150000" class="form-control input-md" type="text"/>    
+                                </div>
+
                             </div>
                             <div class="form-group">
                                 <div   th:class="${#fields.hasErrors('email')}? has-error">
                                     <label class="control-label" for="email">E-mail</label>  
-                                    <input id="email" th:field="*{email}"  placeholder="email@servidor.com" class="form-control input-md  " type="email"/>
+                                    <input id="email" th:field="*{email}"  placeholder="email@servidor.com" class="form-control input-md  " 
+                                           type="email"/>
                                 </div>
                             </div>
 
