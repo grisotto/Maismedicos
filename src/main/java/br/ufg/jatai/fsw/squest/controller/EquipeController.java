@@ -5,28 +5,22 @@
  */
 package br.ufg.jatai.fsw.squest.controller;
 
-import java.io.Serializable;
-import java.util.List;
-
 import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.facade.EquipeFacade;
 import br.ufg.jatai.fsw.squest.facade.TarefaFacade;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author dfranco
@@ -52,7 +46,6 @@ public class EquipeController implements Serializable {
     }
 
     /**
-     *
      * @param equipe
      * @param bindingResult
      * @param model
@@ -72,7 +65,6 @@ public class EquipeController implements Serializable {
     }
 
     /**
-     *
      * @param equipe
      * @param bindingResult
      * @param model
@@ -94,7 +86,6 @@ public class EquipeController implements Serializable {
     }
 
     /**
-     *
      * @param aluno
      * @param equipe
      * @param bindingResult
@@ -103,38 +94,38 @@ public class EquipeController implements Serializable {
      */
     @PostMapping(value = "/addAluno")
     public String addAluno(@Valid final Aluno aluno, @Valid final Equipe equipe, final BindingResult bindingResult, final ModelMap model) {
-        log.info("ENTROU veio aluno: " + aluno);
-        log.info("ENTROU veio Equipe: " + equipe);
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("equipe", equipe);
             model.addAttribute("aluno", aluno);
         }
 
-        equipeFacade.addAluno(aluno,equipe);
+        equipeFacade.addAluno(aluno, equipe);
         return "redirect:/app/equipe/" + equipe.getId();
     }
 
     /**
-     *
      * @param id
      * @param map
      * @return
      */
     @GetMapping(value = "/{id}")
-    public String showEquipe(@PathVariable Integer id, ModelMap map) {
-
+    public String showEquipe(@PathVariable Integer id,final ModelMap map) {
+        map.clear();
         map.addAttribute("equipe", equipeFacade.findEquipe(id));
 
         Equipe equipe = equipeFacade.findEquipe(id);
 
-        //TODO: Aqui esta errado, precisa de todos os alunos que estao na turma desta tarefa e que nao estao em nenhuma tarefa
-        map.addAttribute("todosAlunos", equipeFacade.alunosFromEquipe(equipe));
 
+        List<Aluno> alunos = equipeFacade.alunosElegiveisParaEquipe(equipe.getTarefa().getTurma().getId());
+        //TODO: Aqui esta errado, precisa de todos os alunos que estao na turma desta tarefa e que nao estao em nenhuma tarefa
+        map.addAttribute("todosAlunos", alunos);
+        log.info("ALUNOS: " + alunos.size() + "\n" +
+                "" + alunos);
         return "/app/equipe/show";
     }
 
     /**
-     *
      * @return
      */
     @ModelAttribute("allTarefas")
@@ -143,7 +134,6 @@ public class EquipeController implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     @ModelAttribute("allEquipes")

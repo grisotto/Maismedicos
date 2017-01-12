@@ -23,14 +23,16 @@ and open the template in the editor.
                                                                   th:text="${{tarefa.titulo}}"></span>
                 </h2>
             </div>
-            <div class="alert alert-info" th:if="${tarefa.etapaAtual.isValidando()}">
-                Agora o professor precisa validar  as questões
-            </div>
-            <div class="alert alert-success" th:if="${tarefa.etapaAtual.isRespondendo()}">
-                As equipes estão respondendo
-            </div>
-            <div class="alert alert-success" th:if="${tarefa.etapaAtual.isEsperandoSubmissao()}">
-                As equpipes estão inserindo questões
+            <div th:if="${tarefa.etapaAtual!=null}">
+                <div class="alert alert-info" th:if="${tarefa.etapaAtual.isValidando()}">
+                    Agora o professor precisa validar  as questões
+                </div>
+                <div class="alert alert-success" th:if="${tarefa.etapaAtual.isRespondendo()}">
+                    As equipes estão respondendo
+                </div>
+                <div class="alert alert-success" th:if="${tarefa.etapaAtual.isEsperandoSubmissao()}">
+                    As equpipes estão inserindo questões
+                </div>
             </div>
             <div class="col-md-7">
                 <div class="panel panel-info">

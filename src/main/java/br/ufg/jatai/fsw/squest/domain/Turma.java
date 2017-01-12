@@ -7,6 +7,7 @@ package br.ufg.jatai.fsw.squest.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -26,7 +27,7 @@ public class Turma implements Serializable {
 
     //    @ElementCollection
     @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Tarefa> tarefas;
+    private Set<Tarefa> tarefas = new HashSet<>();
 
    
 
@@ -34,7 +35,7 @@ public class Turma implements Serializable {
     private Professor professor;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Aluno> alunos;
+    private Set<Aluno> alunos = new HashSet<>();
 
     /**
      *

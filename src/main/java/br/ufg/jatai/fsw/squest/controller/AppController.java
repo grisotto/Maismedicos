@@ -87,7 +87,7 @@ public class AppController {
         }
     }
 
-    // Login form
+    // Login form'
     /**
      *
      * @return
