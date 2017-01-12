@@ -62,4 +62,9 @@ public class AlunoServiceImpl implements AlunoService {
         return alunoRepository.findByMatricula(matricula);
     }
 
+    @Override
+    public List<Aluno> alunosElegiveisParaEquipe(Integer turmaID) {
+        return alunoRepository.alunosElegiveisParaEquipe(turmaID);
+    }
+
 }

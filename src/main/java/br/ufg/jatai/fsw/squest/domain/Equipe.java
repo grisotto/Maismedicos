@@ -230,6 +230,8 @@ public class Equipe implements Serializable {
     public void setQuestionario(Questionario questionario) {
         this.questionario = questionario;
     }
+
+
     
 }
 

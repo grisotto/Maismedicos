@@ -107,7 +107,7 @@ and open the template in the editor.
                                 <div class="input-group">
                                     <input hidden="true" name="equipe" th:value="${equipe.id}"/> 
                                     <select   name="aluno" data-placeholder="Selecione um aluno" class="form-control " id="aluno" >
-                                        <option  th:each="p : ${equipe.tarefa.turma.alunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
+                                        <option  th:each="p : ${todosAlunos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
                                     </select>
 
                                     <div class="input-group-btn">

@@ -29,6 +29,8 @@ public class EquipeFacade {
 
     @Autowired
     private AutenticateUser autenticateUser;
+    @Autowired
+    private AlunoService alunoService;
 
     /**
      * Periste um nova tarefa
@@ -38,9 +40,6 @@ public class EquipeFacade {
     public void adicionaEquipe(Equipe e) {
         equipeService.inserir(e);
     }
-
-    @Autowired
-    private AlunoService alunoService;
 
     /**
      * Adiciona um aluno à equipe
@@ -78,7 +77,6 @@ public class EquipeFacade {
     }
 
     /**
-     *
      * @param id
      * @return
      */
@@ -86,4 +84,8 @@ public class EquipeFacade {
         return equipeService.find(id);
     }
 
+    public List<Aluno> alunosElegiveisParaEquipe(Integer turmaID) {
+        return alunoService.alunosElegiveisParaEquipe(turmaID);
+
+    }
 }

@@ -7,6 +7,8 @@ package br.ufg.jatai.fsw.squest.service;
 
 import br.ufg.jatai.fsw.squest.domain.Aluno;
 
+import java.util.List;
+
 /**
  *
  * @author vilela
@@ -15,4 +17,5 @@ public interface AlunoService extends AbstractService<Aluno, Integer> {
 
     public Aluno findByEmail(String email);
     public Aluno findByMatricula(String matricula);
+    public List<Aluno> alunosElegiveisParaEquipe(Integer turmaID);
 }
