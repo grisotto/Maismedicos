@@ -182,7 +182,7 @@ and open the template in the editor.
                                 <tr data-th-each="a : ${tarefa.equipes}">
                                     <td th:text="${a.nome}">1</td>
                                     <td class="col-md-3 text-center"
-                                        th:text="${tarefa.equipes.size()}">3</td>
+                                        th:text="${a.alunos.size()}">3</td>
                                     <td  th:if="${a.ativa}" >
                                         <span class="label label-info">
                                             Ativada
@@ -195,8 +195,8 @@ and open the template in the editor.
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a class="btn btn-sm  btn-danger fa fa-trash" /> <a
-                                                class="btn btn-sm  btn-primary fa fa-send" />
+                                            <!--<a class="btn btn-sm  btn-danger fa fa-trash" />-->
+                                            <a th:href="@{/app/equipe/}+${a.id}" class="btn btn-sm  btn-success fa fa-arrow-right" />
                                         </div>
 
                                     </td>

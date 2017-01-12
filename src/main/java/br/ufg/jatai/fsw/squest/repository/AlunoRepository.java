@@ -16,4 +16,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Integer> {
     
+    public Aluno findByEmail(String email);
+    public Aluno findByMatricula(String matricula);
 }

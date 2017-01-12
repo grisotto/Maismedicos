@@ -12,5 +12,7 @@ import br.ufg.jatai.fsw.squest.domain.Aluno;
  * @author vilela
  */
 public interface AlunoService extends AbstractService<Aluno, Integer> {
-    
+
+    public Aluno findByEmail(String email);
+    public Aluno findByMatricula(String matricula);
 }

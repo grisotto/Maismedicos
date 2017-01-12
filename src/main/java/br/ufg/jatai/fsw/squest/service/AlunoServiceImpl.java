@@ -51,5 +51,15 @@ public class AlunoServiceImpl implements AlunoService {
     public List<Aluno> findAll() {
         return alunoRepository.findAll();
     }
-    
+
+    @Override
+    public Aluno findByEmail(String email) {
+        return alunoRepository.findByEmail(email);
+    }
+
+    @Override
+    public Aluno findByMatricula(String matricula) {
+        return alunoRepository.findByMatricula(matricula);
+    }
+
 }
