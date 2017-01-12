@@ -23,7 +23,15 @@ and open the template in the editor.
                                                                   th:text="${{tarefa.titulo}}"></span>
                 </h2>
             </div>
-
+            <div class="alert alert-info" th:if="${tarefa.etapaAtual.isValidando()}">
+                Agora o professor precisa validar  as questões
+            </div>
+            <div class="alert alert-success" th:if="${tarefa.etapaAtual.isRespondendo()}">
+                As equipes estão respondendo
+            </div>
+            <div class="alert alert-success" th:if="${tarefa.etapaAtual.isEsperandoSubmissao()}">
+                As equpipes estão inserindo questões
+            </div>
             <div class="col-md-7">
                 <div class="panel panel-info">
 
@@ -52,7 +60,7 @@ and open the template in the editor.
                                         th:text="${#dates.format(e.dataInicial, 'dd/MM/yyyy hh:mm')}">1</td>
                                     <!--<td th:text="${e.dataFinal}">1</td>-->
                                     <td th:text="${#dates.format(e.dataFinal, 'dd/MM/yyyy hh:mm')}">1</td>
-                                    
+
                                     <td th:if="${tarefa.etapaAtual== e}"><a class="btn btn-success btn-sm fa fa-check-square"></a></td>
                                     <td  th:if="${tarefa.etapaAtual!= e}"><a th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${e.id}" class="btn btn-danger btn-sm fa fa-square"></a></td>
                                 </tr>

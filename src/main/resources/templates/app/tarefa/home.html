@@ -86,7 +86,9 @@ and open the template in the editor.
                             <tr th:each="t : ${allTarefas}">
                                 <td th:text="${t.descricao}">1</td>
                                 <td th:text="${t.turma.nome}">1</td>
-                                <td class=" text-center text-warning"><span class="fa fa-circle fa-2x "></span></td>
+                                <td th:text="${t.etapaAtual.tipo}" class=" text-center ">
+                                    <!--<span class="fa fa-circle fa-2x "></span>-->
+                                </td>
                                 <td>
                                     <a  class="btn btn-success btn-sm "  th:href="@{/app/tarefa/}+${{t.id}}" >
                                         <span class="fa  fa-arrow-right"> </span>
