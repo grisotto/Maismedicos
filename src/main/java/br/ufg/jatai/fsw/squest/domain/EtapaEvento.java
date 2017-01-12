@@ -142,6 +142,22 @@ public class EtapaEvento implements Serializable {
         this.tipo = tipo;
     }
 
+    public boolean isAguardando() {
+        return tipo.equals(TipoEtapa.AGUARDANDO);
+    }
+    public boolean isEsperandoSubmissao() {
+        return tipo.equals(TipoEtapa.ESPERANDO_SUBMISSAO);
+    }
+    public boolean isValidando() {
+        return tipo.equals(TipoEtapa.VALIDANDO_QUESTOES);
+    }
+    public boolean isRespondendo() {
+        return tipo.equals(TipoEtapa.RESPONDENDO);
+    }
+    public boolean isFinalizado() {
+        return tipo.equals(TipoEtapa.FINALIZADO);
+    }
+
     /**
      *
      */
@@ -152,77 +168,77 @@ public class EtapaEvento implements Serializable {
          */
         AGUARDANDO {
 
-                    @Override
-                    public Integer id() {
-                        return 1;
-                    }
+            @Override
+            public Integer id() {
+                return 1;
+            }
 
-                    @Override
-                    public String toString() {
-                        return "Aguardando";
-                    }
-                },
+            @Override
+            public String toString() {
+                return "Aguardando";
+            }
+        },
         /**
          *
          */
         ESPERANDO_SUBMISSAO {
 
-                    @Override
-                    public Integer id() {
-                        return 2;
-                    }
+            @Override
+            public Integer id() {
+                return 2;
+            }
 
-                    @Override
-                    public String toString() {
-                        return "Esperando Submissão";
-                    }
-                },
+            @Override
+            public String toString() {
+                return "Esperando Submissão";
+            }
+        },
         /**
          *
          */
         VALIDANDO_QUESTOES {
 
-                    @Override
-                    public Integer id() {
-                        return 3;
-                    }
+            @Override
+            public Integer id() {
+                return 3;
+            }
 
-                    @Override
-                    public String toString() {
-                        return "Validando Questões";
-                    }
-                },
+            @Override
+            public String toString() {
+                return "Validando Questões";
+            }
+        },
         /**
          *
          */
         RESPONDENDO {
 
-                    @Override
-                    public Integer id() {
-                        return 4;
-                    }
+            @Override
+            public Integer id() {
+                return 4;
+            }
 
-                    @Override
-                    public String toString() {
-                        return "Respodendo";
-                    }
-                },
+            @Override
+            public String toString() {
+                return "Respodendo";
+            }
+        },
         /**
          *
          */
         FINALIZADO {
 
-                    @Override
-                    public Integer id() {
-                        return 5;
-                    }
+            @Override
+            public Integer id() {
+                return 5;
+            }
 
-                    @Override
-                    public String toString() {
-                        return "Finalizado";
-                    }
+            @Override
+            public String toString() {
+                return "Finalizado";
+            }
 
-                };
+        };
 
         /**
          *
