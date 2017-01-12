@@ -40,6 +40,7 @@ and open the template in the editor.
                                     <th>Etapa</th>
                                     <th>Data Incial</th>
                                     <th>Data Final</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,7 +52,9 @@ and open the template in the editor.
                                         th:text="${#dates.format(e.dataInicial, 'dd/MM/yyyy hh:mm')}">1</td>
                                     <!--<td th:text="${e.dataFinal}">1</td>-->
                                     <td th:text="${#dates.format(e.dataFinal, 'dd/MM/yyyy hh:mm')}">1</td>
-
+                                    
+                                    <td th:if="${tarefa.etapaAtual== e}"><a class="btn btn-success btn-sm fa fa-check-square"></a></td>
+                                    <td  th:if="${tarefa.etapaAtual!= e}"><a th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${e.id}" class="btn btn-danger btn-sm fa fa-square"></a></td>
                                 </tr>
                             </tbody>
                         </table>
