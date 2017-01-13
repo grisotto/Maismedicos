@@ -1,13 +1,11 @@
 package br.ufg.jatai.fsw.squest.facade;
 
 import br.ufg.jatai.fsw.squest.AutenticateUser;
-import br.ufg.jatai.fsw.squest.controller.AlunoController;
 import br.ufg.jatai.fsw.squest.controller.ProfessorController;
-import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Professor;
 import br.ufg.jatai.fsw.squest.domain.Turma;
-import br.ufg.jatai.fsw.squest.email.EmailMain;
-import br.ufg.jatai.fsw.squest.email.Mensagem;
+import br.ufg.jatai.fsw.squest.email.component.EmailMain;
+import br.ufg.jatai.fsw.squest.email.domain.Mensagem;
 import br.ufg.jatai.fsw.squest.service.ProfessorService;
 import br.ufg.jatai.fsw.squest.util.GeradorSenha;
 import org.slf4j.Logger;

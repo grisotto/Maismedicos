@@ -1,4 +1,4 @@
-package br.ufg.jatai.fsw.squest.email;
+package br.ufg.jatai.fsw.squest.email.domain;
 import java.io.File;
 import java.util.List;
 
@@ -8,8 +8,9 @@ import java.util.List;
  */
 public class Mensagem {
 
-    private List<String> destinatarios;
-    private List<String> bcc;
+    private List<EnderecoEletronico> destinatarios;
+    private List<EnderecoEletronico> bcc;
+    private List<EnderecoEletronico> cc;
     private List<File> anexos;
 
     private String assunto;
@@ -19,41 +20,28 @@ public class Mensagem {
 
     }
 
-    public Mensagem(List<String> destinatarios, String assunto, String corpo) {
-        this.destinatarios = destinatarios;
-        this.assunto = assunto;
-        this.corpo = corpo;
-    }
-
-    public Mensagem(List<String> destinatarios, List<String> bcc, String assunto, String corpo) {
-        this.destinatarios = destinatarios;
-        this.bcc = bcc;
-        this.assunto = assunto;
-        this.corpo = corpo;
-    }
-
-    public Mensagem(List<String> destinatarios, List<String> bcc, List<File> anexos, String assunto, String corpo) {
-        this.destinatarios = destinatarios;
-        this.bcc = bcc;
-        this.anexos = anexos;
-        this.assunto = assunto;
-        this.corpo = corpo;
-    }
-
-    public List<String> getDestinatarios() {
+    public List<EnderecoEletronico> getDestinatarios() {
         return destinatarios;
     }
 
-    public void setDestinatarios(List<String> destinatarioss) {
-        this.destinatarios = destinatarioss;
+    public void setDestinatarios(List<EnderecoEletronico> destinatarios) {
+        this.destinatarios = destinatarios;
     }
 
-    public List<String> getBcc() {
+    public List<EnderecoEletronico> getBcc() {
         return bcc;
     }
 
-    public void setBcc(List<String> bcc) {
+    public void setBcc(List<EnderecoEletronico> bcc) {
         this.bcc = bcc;
+    }
+
+    public List<EnderecoEletronico> getCc() {
+        return cc;
+    }
+
+    public void setCc(List<EnderecoEletronico> cc) {
+        this.cc = cc;
     }
 
     public String getAssunto() {

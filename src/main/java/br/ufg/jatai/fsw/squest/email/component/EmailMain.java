@@ -33,8 +33,9 @@
 //    }
 //}
 
-package br.ufg.jatai.fsw.squest.email;
+package br.ufg.jatai.fsw.squest.email.component;
 
+import br.ufg.jatai.fsw.squest.email.domain.Mensagem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +68,7 @@ public class EmailMain {
             MimeMessage mensagem = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mensagem, true);
             helper.setFrom("squest@jataiufg.net");
-            helper.setTo(m.getDestinatario());
+            //helper.setTo(m.getDestinatario());
             helper.setSubject(m.getAssunto());
             helper.setText(m.getCorpo(),true);
 

@@ -8,8 +8,8 @@ package br.ufg.jatai.fsw.squest.facade;
 import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
-import br.ufg.jatai.fsw.squest.email.EmailMain;
-import br.ufg.jatai.fsw.squest.email.Mensagem;
+import br.ufg.jatai.fsw.squest.email.component.EmailMain;
+import br.ufg.jatai.fsw.squest.email.domain.Mensagem;
 import br.ufg.jatai.fsw.squest.service.AlunoService;
 import br.ufg.jatai.fsw.squest.service.EquipeService;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
@@ -147,7 +147,7 @@ public class EquipeFacade {
         while (i.hasNext()){
 
             Aluno a = i.next();
-            m.setDestinatario(a.getEmail());
+            //m.setDestinatario(a.getEmail());
             try {
                 mailService.sendMail(m);
             } catch (MessagingException e) {
