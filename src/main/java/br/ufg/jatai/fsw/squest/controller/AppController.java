@@ -67,6 +67,10 @@ public class AppController {
             Equipe equipe = autenticateUser.getEquipe();
             model.addAttribute("equipe", equipe);
             model.addAttribute("questionario", equipe.getQuestionario());
+            try {
+                model.addAttribute("questoes", equipe.getQuestionario().getQuestoes());
+
+            }catch (Exception e){}
         }
 
         LOGGER.info("ENTROU NO CONTROLLER");

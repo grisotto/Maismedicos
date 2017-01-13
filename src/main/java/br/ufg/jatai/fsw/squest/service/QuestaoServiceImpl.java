@@ -10,6 +10,8 @@ import br.ufg.jatai.fsw.squest.repository.QuestaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -51,5 +53,9 @@ public class QuestaoServiceImpl implements QuestaoService {
     public List<Questao> findAll() {
         return questaoRepository.findAll();
     }
-    
+
+    @Override
+    public Set<Questao> questoesDoQuestionario(Integer questionarioID) {
+        return questaoRepository.questoesDoQuestionario(questionarioID);
+    }
 }
