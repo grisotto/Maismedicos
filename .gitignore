@@ -13,3 +13,4 @@ web/
 .factorypath
 .project
 /.settings/
+/lib/
