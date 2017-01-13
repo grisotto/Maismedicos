@@ -23,6 +23,7 @@ public class Questao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Lob
     private String question;
 
     @OneToMany(mappedBy = "questao", cascade = CascadeType.ALL)
