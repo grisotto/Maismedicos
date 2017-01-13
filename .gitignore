@@ -13,3 +13,4 @@ web/
 .factorypath
 .project
 /.settings/
+/lib/unknown/binary/mysql-connector-java-5.1.23-bin/SNAPSHOT/
