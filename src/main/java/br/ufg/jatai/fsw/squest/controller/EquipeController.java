@@ -54,7 +54,7 @@ public class EquipeController implements Serializable {
      */
     @PostMapping(params = {"save"})
     public String createEquipe(@Valid final Equipe equipe, final BindingResult bindingResult, final ModelMap model) {
-
+//Validando equipe unica
         if(equipeFacade.existeEquipe(equipe.getNome())){
             bindingResult.addError(new FieldError("equipe","nome","A Equipe já existe"));
         }
