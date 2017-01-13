@@ -6,8 +6,10 @@
 package br.ufg.jatai.fsw.squest.controller;
 
 import br.ufg.jatai.fsw.squest.controller.modelForm.EtapasModel;
+import br.ufg.jatai.fsw.squest.domain.Questionario;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
+import br.ufg.jatai.fsw.squest.facade.QuestionarioFacade;
 import br.ufg.jatai.fsw.squest.facade.TarefaFacade;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
 import br.ufg.jatai.fsw.squest.service.TurmaService;
@@ -41,6 +43,9 @@ public class TarefaController {
 
     @Autowired
     private TarefaFacade tarefaFacade;
+
+    @Autowired
+    private QuestionarioFacade questionarioFacade;
 
     /**
      *
@@ -132,6 +137,7 @@ public class TarefaController {
 
         return "redirect:/app/tarefa/" + idTarefa;
     }
+
     private static final Logger LOGGER = LoggerFactory.getLogger(TarefaController.class);
     @GetMapping("/app/tarefa/{idTarefa}/set/{idEtapa}")
     public String modificaEtapaAtual(@PathVariable final Integer idTarefa, @PathVariable final Integer idEtapa) {
@@ -141,6 +147,20 @@ public class TarefaController {
         );
         tarefaFacade.atualizaEtapaAtual(idTarefa, idEtapa);
         return "redirect:/app/tarefa/" + idTarefa;
+    }
+
+    @GetMapping(value = "/app/tarefa/{tarefaid}/questoes")
+    public String showQuestoesTurma(@PathVariable Integer tarefaid, ModelMap map, final EtapasModel etapas) {
+
+        Tarefa find = tarefaFacade.findTarefa(tarefaid);
+
+        map.addAttribute("tarefa", find);
+
+//        map.addAttribute("equipe", new Equipe());
+        //aqui eu tenho que pegar os dados dos grupos desta Tarefa
+
+
+        return "/app/tarefa/questoes";
     }
 
 }

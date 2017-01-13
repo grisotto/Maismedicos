@@ -142,7 +142,7 @@ and open the template in the editor.
                                                 <tr th:each="e : ${questoes}">
 
                                                     <td>1</td>
-                                                    <td th:text="${e.question}"></td>
+                                                    <td th:text="${#strings.abbreviate(e.question,100)}"></td>
                                                     <td></td>
                                                 </tr>
                                             </div>

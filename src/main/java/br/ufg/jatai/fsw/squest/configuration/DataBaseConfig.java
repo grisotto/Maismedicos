@@ -23,6 +23,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
@@ -46,16 +47,16 @@ public class DataBaseConfig {
      *
      * @return
      */
-    @Bean
-    public DataSource dataSourceH2() {
-        DataSource build = DataSourceBuilder.create()
-                .driverClassName("org.h2.Driver")
-                .username("su")
-                .password("")
-                .url("jdbc:h2:mem:~/squest")
-                .build();
-        return build;
-    }
+   @Bean
+   public DataSource dataSourceH2() {
+       DataSource build = DataSourceBuilder.create()
+               .driverClassName("org.h2.Driver")
+               .username("su")
+               .password("")
+               .url("jdbc:h2:mem:~/squest")
+               .build();
+       return build;
+   }
 
     @Component
     class DataLoader implements ApplicationRunner {
@@ -86,6 +87,7 @@ public class DataBaseConfig {
         @Autowired
         private PasswordEncoder passwordEncoder;
 
+//        @Value("${fsw.inicializadb}")
         @Override
         public void run(ApplicationArguments args) throws Exception {
             LOGGER.info("RUN in ApplicationRunner");
@@ -149,13 +151,13 @@ public class DataBaseConfig {
 
             LOGGER.info("Inserindo T1: " + t);
             turmaService.inserir(t);
-            
+
             Tarefa taf = new Tarefa();
             taf.setTurma(t);
             taf.setDescricao("Muita coisa acontecendo nesta cidade");
             taf.setTitulo("Atividade primeiro semestre");
             taf.setTamanhoQuestoes(5);
-            tarefaService.inserir(taf); 
+            tarefaService.inserir(taf);
             
             
 
