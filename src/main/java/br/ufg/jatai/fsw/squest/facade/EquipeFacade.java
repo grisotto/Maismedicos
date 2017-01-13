@@ -93,7 +93,8 @@ public class EquipeFacade {
         return equipeService.findEquipePorNome(nome)!=null;
     }
 
-    public void ativarEquipe(Equipe equipe) {
+    public void ativarEquipe(Integer idEquipe) {
+Equipe equipe = equipeService.find(idEquipe);
         equipe.setAtiva(!equipe.isAtiva());
         //Se a atual situação de ativa for true Envia um mail para todos da equipe
         //Falando que a equipe está ativa e o pessoal pode entrar no sistema.
