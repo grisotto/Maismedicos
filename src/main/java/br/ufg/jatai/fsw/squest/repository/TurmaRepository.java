@@ -25,4 +25,6 @@ public interface TurmaRepository extends JpaRepository<Turma, Integer>, Serializ
     @Query("select t from Turma t where t.professor.id = ?1")
     public List<Turma> findOfProfessor(Integer professor_id);
 
+
+
 }
