@@ -60,7 +60,7 @@ public class EquipeController implements Serializable {
         }
         if (bindingResult.hasErrors()) {
             model.addAttribute("equipe", equipe);
-            return "redirect:/app/equipe";
+            return "/app/equipe/home";
 
         }
 

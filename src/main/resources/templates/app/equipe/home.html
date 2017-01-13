@@ -30,18 +30,22 @@ and open the template in the editor.
             </div>
 
             <form th:object="${equipe}" th:action="@{/app/equipe}" method="POST">
-                <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <ul class="errorlist">
-                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Entrada inválida</li>
-                    </ul>
-                </div>
+
                 <div class="panel-body">
+                    <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <ul class="errorlist">
+                            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Entrada inválida</li>
+                        </ul>
+                    </div>
                     <div class="form-group">
                         <div th:class="${#fields.hasErrors('nome')}? has-error">
 
                             <label for="nomeEquipe" class="control-label">Nome da Equipe</label>
-                            <input id="nomeEquipe" class="form-control" th:field="*{nome}"/>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1" >#</span>
+                                <input id="nomeEquipe" class="form-control" th:field="*{nome}"/>
+                            </div>
                         </div>
 
                     </div>
