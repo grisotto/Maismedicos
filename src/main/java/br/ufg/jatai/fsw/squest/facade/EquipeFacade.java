@@ -99,31 +99,32 @@ public class EquipeFacade {
         return equipeService.findEquipePorNome(nome)!=null;
     }
 
-    public void ativarEquipe(Integer idEquipe) {
+    public void ativarEquipe(Integer idEquipe, boolean ativa) {
         Equipe equipe = equipeService.find(idEquipe);
-        equipe.setAtiva(!equipe.isAtiva());
+        equipe.setAtiva(ativa);
         //Se a atual situação de ativa for true Envia um mail para todos da equipe
         //Falando que a equipe está ativa e o pessoal pode entrar no sistema.
         //Pode avisar que apenas pode ficar logado uma vez
 
+        Mensagem m = new Mensagem();
+
+        Iterator<Aluno> i = equipe.getAlunos().iterator();
 
         if(equipe.isAtiva()){
 
-            Mensagem m = new Mensagem();
-
             m.setAssunto("A sua equipe está ativa!");
+
             StringBuilder corpo = new StringBuilder();
 
             corpo.append("O professor " + autenticateUser.getProfessor()
                     + " liberou o acesso da equipe '" + equipe.getNome() + "'."
                     + "\n\n. Membros:");
 
-            Iterator<Aluno> i = equipe.getAlunos().iterator();
 
             while (i.hasNext()){
 
                 Aluno a = i.next();
-                corpo.append("  _" + a.getNome());
+                corpo.append("  _ " + a.getNome());
 
             }
 
@@ -131,26 +132,30 @@ public class EquipeFacade {
 
             m.setCorpo(corpo.toString());
 
-            while (i.hasNext()){
-
-                Aluno a = i.next();
-                m.setDestinatario(a.getEmail());
-                try {
-                    mailService.sendMail(m);
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-
 
         }else{
 
             //Fala que é impossivel acessar apartir de agora porque o professor logado bloqueou o acessos
 
+            m.setAssunto("Bloqueio de acesso da equipe!");
+
+            m.setCorpo("O professor " + autenticateUser.getProfessor()
+                + " bloqueou o acesso de sua equipe.");
+
         }
 
         equipeService.atualizar(equipe);
+
+        while (i.hasNext()){
+
+            Aluno a = i.next();
+            m.setDestinatario(a.getEmail());
+            try {
+                mailService.sendMail(m);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 }
