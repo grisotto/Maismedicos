@@ -100,11 +100,10 @@ public class EquipeFacade {
     }
 
     public void ativarEquipe(Integer idEquipe, boolean ativa) {
+
         Equipe equipe = equipeService.find(idEquipe);
         equipe.setAtiva(ativa);
-        //Se a atual situação de ativa for true Envia um mail para todos da equipe
-        //Falando que a equipe está ativa e o pessoal pode entrar no sistema.
-        //Pode avisar que apenas pode ficar logado uma vez
+
 
         Mensagem m = new Mensagem();
 
@@ -135,12 +134,11 @@ public class EquipeFacade {
 
         }else{
 
-            //Fala que é impossivel acessar apartir de agora porque o professor logado bloqueou o acessos
 
             m.setAssunto("Bloqueio de acesso da equipe!");
 
             m.setCorpo("O professor " + autenticateUser.getProfessor()
-                + " bloqueou o acesso de sua equipe.");
+                + " bloqueou o acesso da equipe " + equipe.getNome());
 
         }
 
