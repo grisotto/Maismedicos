@@ -67,12 +67,12 @@ public class EquipeFacade {
     }
 
     /**
-     * Listagem das Equipes para teste.
+     * Listagem das Equipes do professor.
      *
      * @return
      */
-    public List<Equipe> todasEquipes() {
-        return this.equipeService.findAll();
+    public List<Equipe> todasEquipesDoProfessor() {
+        return this.equipeService.equipesDoProfessor(autenticateUser.getProfessor().getId());
 
     }
 
