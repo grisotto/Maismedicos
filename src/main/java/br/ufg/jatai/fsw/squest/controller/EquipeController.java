@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -54,8 +55,13 @@ public class EquipeController implements Serializable {
     @PostMapping(params = {"save"})
     public String createEquipe(@Valid final Equipe equipe, final BindingResult bindingResult, final ModelMap model) {
 
+        if(equipeFacade.existeEquipe(equipe.getNome())){
+            bindingResult.addError(new FieldError("equipe","nome","A Equipe já existe"));
+        }
         if (bindingResult.hasErrors()) {
             model.addAttribute("equipe", equipe);
+            return "redirect:/app/equipe";
+
         }
 
         equipeFacade.adicionaEquipe(equipe);
