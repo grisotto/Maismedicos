@@ -139,7 +139,7 @@ public class EquipeController implements Serializable {
     @ModelAttribute("allEquipes")
     public List<Equipe> populateVisualizarEquipesProfessor() {
         //Ela esta errada. Eu sei, fiz apenas para continuar fazendo as views
-        return equipeFacade.todasEquipes();
+        return equipeFacade.todasEquipesDoProfessor();
     }
 
 }

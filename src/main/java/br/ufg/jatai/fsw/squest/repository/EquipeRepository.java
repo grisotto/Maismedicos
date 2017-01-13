@@ -7,11 +7,16 @@ package br.ufg.jatai.fsw.squest.repository;
 
 import br.ufg.jatai.fsw.squest.domain.Equipe;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 /**
  *
  * @author vilela
  */
 public interface EquipeRepository extends JpaRepository<Equipe, Integer> {
-    
+    @Query("select e from Equipe e where e.tarefa.turma.professor.id = :professorID")
+    public List<Equipe> equipesDoProfessor(@Param("professorID") Integer professorID);
 }

@@ -80,4 +80,8 @@ public class EquipeServiceImpl implements EquipeService {
         return equipeRepository.findAll();
     }
 
+    @Override
+    public List<Equipe> equipesDoProfessor(Integer professorID) {
+        return equipeRepository.equipesDoProfessor(professorID);
+    }
 }
