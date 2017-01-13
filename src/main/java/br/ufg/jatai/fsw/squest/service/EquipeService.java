@@ -7,10 +7,14 @@ package br.ufg.jatai.fsw.squest.service;
 
 import br.ufg.jatai.fsw.squest.domain.Equipe;
 
+import java.util.List;
+
 /**
  *
  * @author dfranco
  */
 public interface EquipeService extends AbstractService<Equipe, Integer> {
+
+    public List<Equipe> equipesDoProfessor(Integer professorID);
     
 }
