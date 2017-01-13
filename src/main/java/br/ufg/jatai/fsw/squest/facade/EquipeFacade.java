@@ -88,4 +88,25 @@ public class EquipeFacade {
         return alunoService.alunosElegiveisParaEquipe(turmaID);
 
     }
+
+    public boolean existeEquipe(String nome){
+        return equipeService.findEquipePorNome(nome)!=null;
+    }
+
+    public void ativarEquipe(Integer idEquipe) {
+Equipe equipe = equipeService.find(idEquipe);
+        equipe.setAtiva(!equipe.isAtiva());
+        //Se a atual situação de ativa for true Envia um mail para todos da equipe
+        //Falando que a equipe está ativa e o pessoal pode entrar no sistema.
+        //Pode avisar que apenas pode ficar logado uma vez
+
+        /*
+        if(equipe.isAtiva()){
+            //Envia email falando que vai ativar. Falando que o o professor logado ativou
+        }else{
+            //Fala que é impossivel acessar apartir de agora porque o professor logado bloqueou o acessos
+        }
+        */
+        equipeService.atualizar(equipe);
+    }
 }

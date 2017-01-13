@@ -84,4 +84,10 @@ public class EquipeServiceImpl implements EquipeService {
     public List<Equipe> equipesDoProfessor(Integer professorID) {
         return equipeRepository.equipesDoProfessor(professorID);
     }
+
+    @Override
+    public Equipe findEquipePorNome(String nome) {
+
+        return equipeRepository.findEqipePorNome(nome);
+    }
 }

@@ -5,111 +5,125 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
       th:include="fragments/basetemplate :: page">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <div th:fragment="content">
+<head>
+    <title>TODO supply a title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<div th:fragment="content">
 
-        <div class="col-lg-12">
-            <h1 class="page-header">Equipes</h1>
+    <div class="col-lg-12">
+        <h1 class="page-header">Equipes</h1>
 
-        </div>
+    </div>
 
-        <div class="col-lg-4">
+    <div class="col-lg-4">
 
 
-            <div class="panel panel-info">
-                <div class="panel-heading">
+        <div class="panel panel-info">
+            <div class="panel-heading">
                     <span class="panel-title">
                         <i class="fa fa-pencil fa-fw"></i>Inserir Equipe
                     </span>
-                </div>
-                <form th:object="${equipe}" th:action="@{/app/equipe}" method="POST">
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label>Nome da Equipe</label>
-                            <input class="form-control" th:field="${equipe.nome}"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Tarefa</label>
-                            <select class="form-control"     th:field="${equipe.tarefa.id}">
-                                <option th:each="t : ${allTarefas}" th:value="${t.id}"  th:text="${t.titulo}">1</option>
-                            </select>
-                        </div>
-
-                    </div>
-
-
-                    <!-- /.panel-body -->
-                    <div class="panel-footer  clearfix">
-                        <input class="btn btn-info pull-right" type="submit" name="save"  value="Salvar" />
-                    </div>
-                </form>
             </div>
 
+            <form th:object="${equipe}" th:action="@{/app/equipe}" method="POST">
+
+                <div class="panel-body">
+                    <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <ul class="errorlist">
+                            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Entrada inválida</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <div th:class="${#fields.hasErrors('nome')}? has-error">
+
+                            <label for="nomeEquipe" class="control-label">Nome da Equipe</label>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1" >#</span>
+                                <input id="nomeEquipe" class="form-control" th:field="*{nome}"/>
+                            </div>
+                        </div>
+
+                    </div>
 
 
+                    <div class="form-group">
+                        <label>Tarefa</label>
+                        <select required="true" class="form-control" th:field="${equipe.tarefa.id}">
+                            <option th:each="t : ${allTarefas}" th:value="${t.id}" th:text="${t.titulo}">1</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <!-- /.panel-body -->
+                <div class="panel-footer  clearfix">
+                    <input class="btn btn-info pull-right" type="submit" name="save" value="Salvar"/>
+                </div>
+            </form>
         </div>
-        <div class="col-lg-8">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
+
+
+    </div>
+    <div class="col-lg-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
                     <span class="panel-title">
                         <i class="fa fa-list fa-fw"></i>Equipes Cadastradas
                     </span>
-                </div>
-                <div class="panel-body">
+            </div>
+            <div class="panel-body">
 
-                    <table class="table table-condensed table-striped">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Tarefa</th>
-                                <th>Situação</th>
-                                <th class=" text-center">Quantidade de Membros</th>
+                <table class="table table-condensed table-striped">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tarefa</th>
+                        <th>Situação</th>
+                        <th class=" text-center">Quantidade de Membros</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:if="${allEquipes.empty}">
-                                <td colspan="4">nao pegou as equipes. Usuario ID toda hora alterando!!</td>
-                            </tr>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${allEquipes.empty}">
+                        <td colspan="4">nao pegou as equipes. Usuario ID toda hora alterando!!</td>
+                    </tr>
 
-                            <tr th:each="t : ${allEquipes}">
-                                <td th:text="${t.nome}">1</td>
-                                <td th:text="${t.tarefa.titulo}">1</td>
-                                <td  th:if="${t.ativa}" >
+                    <tr th:each="t : ${allEquipes}">
+                        <td th:text="${t.nome}">1</td>
+                        <td th:text="${t.tarefa.titulo}">1</td>
+                        <td th:if="${t.ativa}">
                                     <span class="label label-info">
                                         Ativada
                                     </span>
-                                </td>
-                                <td  th:if="${!t.ativa}" >
+                        </td>
+                        <td th:if="${!t.ativa}">
                                     <span class="label label-warning fa-1">
                                         Desativada
                                     </span>
-                                </td>
-                                <td class=" text-center" th:text="${t.alunos.size()}">0</td>
-                                <td>
-                                    <a  class="btn btn-success btn-sm "  th:href="@{/app/equipe/}+${{t.id}}" >
-                                        <span class="fa  fa-arrow-right"> </span>
-                                    </a>
+                        </td>
+                        <td class=" text-center" th:text="${t.alunos.size()}">0</td>
+                        <td>
+                            <a class="btn btn-success btn-sm " th:href="@{/app/equipe/}+${{t.id}}">
+                                <span class="fa  fa-arrow-right"> </span>
+                            </a>
 
-                                </td>
+                        </td>
 
-                            </tr>
-                        </tbody>
-                    </table>
+                    </tr>
+                    </tbody>
+                </table>
 
 
-                </div>
             </div>
-
-
-
         </div>
+
+
     </div>
+</div>
 </html>

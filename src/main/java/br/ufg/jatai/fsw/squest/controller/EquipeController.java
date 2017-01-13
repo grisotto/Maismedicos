@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -53,9 +54,14 @@ public class EquipeController implements Serializable {
      */
     @PostMapping(params = {"save"})
     public String createEquipe(@Valid final Equipe equipe, final BindingResult bindingResult, final ModelMap model) {
-
+//Validando equipe unica
+        if (equipeFacade.existeEquipe(equipe.getNome())) {
+            bindingResult.addError(new FieldError("equipe", "nome", "A Equipe já existe"));
+        }
         if (bindingResult.hasErrors()) {
             model.addAttribute("equipe", equipe);
+            return "/app/equipe/home";
+
         }
 
         equipeFacade.adicionaEquipe(equipe);
@@ -103,6 +109,12 @@ public class EquipeController implements Serializable {
         equipeFacade.addAluno(aluno, equipe);
         return "redirect:/app/equipe/" + equipe.getId();
     }
+    @GetMapping("{idEquipe}/ativar")
+    public String ativarEquipe(@PathVariable("idEquipe")Integer idEquipe) {
+        log.info("Acessando aqui o controller Equipe no metodo ativar com a equipe: "+idEquipe);
+        equipeFacade.ativarEquipe(idEquipe);
+        return "redirect:/app/equipe/" + idEquipe;
+    }
 
     /**
      * @param id
@@ -110,7 +122,7 @@ public class EquipeController implements Serializable {
      * @return
      */
     @GetMapping(value = "/{id}")
-    public String showEquipe(@PathVariable Integer id,final ModelMap map) {
+    public String showEquipe(@PathVariable Integer id, final ModelMap map) {
         map.clear();
         map.addAttribute("equipe", equipeFacade.findEquipe(id));
 
@@ -118,12 +130,12 @@ public class EquipeController implements Serializable {
 
 
         List<Aluno> alunos = equipeFacade.alunosElegiveisParaEquipe(equipe.getTarefa().getTurma().getId());
-        //TODO: Aqui esta errado, precisa de todos os alunos que estao na turma desta tarefa e que nao estao em nenhuma tarefa
         map.addAttribute("todosAlunos", alunos);
         log.info("ALUNOS: " + alunos.size() + "\n" +
                 "" + alunos);
         return "/app/equipe/show";
     }
+
 
     /**
      * @return
@@ -138,8 +150,10 @@ public class EquipeController implements Serializable {
      */
     @ModelAttribute("allEquipes")
     public List<Equipe> populateVisualizarEquipesProfessor() {
-        //Ela esta errada. Eu sei, fiz apenas para continuar fazendo as views
         return equipeFacade.todasEquipesDoProfessor();
     }
+
+
+
 
 }

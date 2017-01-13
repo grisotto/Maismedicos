@@ -8,6 +8,8 @@ package br.ufg.jatai.fsw.squest.controller;
 import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Usuario;
+import br.ufg.jatai.fsw.squest.service.QuestaoService;
+import br.ufg.jatai.fsw.squest.service.QuestionarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,12 +69,18 @@ public class AppController {
             Equipe equipe = autenticateUser.getEquipe();
             model.addAttribute("equipe", equipe);
             model.addAttribute("questionario", equipe.getQuestionario());
+            try {
+                model.addAttribute("questoes", questaoService.questoesDoQuestionario(equipe.getQuestionario().getId()));
+
+            }catch (Exception e){}
         }
 
         LOGGER.info("ENTROU NO CONTROLLER");
 
         return "/app/dash";
     }
+    @Autowired
+    private QuestaoService questaoService;
 
     /**
      *
