@@ -16,5 +16,7 @@ import java.util.List;
 public interface EquipeService extends AbstractService<Equipe, Integer> {
 
     public List<Equipe> equipesDoProfessor(Integer professorID);
+
+    public Equipe findEquipePorNome(String nome);
     
 }

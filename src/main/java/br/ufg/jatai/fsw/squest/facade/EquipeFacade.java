@@ -88,4 +88,8 @@ public class EquipeFacade {
         return alunoService.alunosElegiveisParaEquipe(turmaID);
 
     }
+
+    public boolean existeEquipe(String nome){
+        return equipeService.findEquipePorNome(nome)!=null;
+    }
 }
