@@ -120,19 +120,19 @@ public class EquipeFacade {
 
             StringBuilder corpo = new StringBuilder();
 
-            corpo.append("O professor " + autenticateUser.getProfessor()
+            corpo.append("<h4>O professor " + autenticateUser.getProfessor().getNome()
                     + " liberou o acesso da equipe '" + equipe.getNome() + "'."
-                    + "\n\n. Membros:");
+                    + "<br><br><b>. Membros:");
 
 
             while (i.hasNext()){
 
                 Aluno a = i.next();
-                corpo.append("  _ " + a.getNome());
+                corpo.append("<br><br> _ " + a.getNome());
 
             }
 
-            corpo.append("\n\n PS.: A equipe pode estar logada apenas uma vez!");
+            corpo.append("</b><br><br>PS.: A equipe pode estar logada apenas uma vez!</h4>");
 
             m.setCorpo(corpo.toString());
 
@@ -143,7 +143,7 @@ public class EquipeFacade {
             m.setAssunto("Bloqueio de acesso da equipe!");
 
             m.setCorpo("O professor " + autenticateUser.getProfessor()
-                + " bloqueou o acesso da equipe " + equipe.getNome());
+                + " bloqueou o acesso da equipe " + equipe.getNome() + "!");
 
         }
 
