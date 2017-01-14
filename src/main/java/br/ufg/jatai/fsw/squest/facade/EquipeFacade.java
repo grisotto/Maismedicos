@@ -142,8 +142,8 @@ public class EquipeFacade {
 
             m.setAssunto("Bloqueio de acesso da equipe!");
 
-            m.setCorpo("O professor " + autenticateUser.getProfessor()
-                + " bloqueou o acesso da equipe " + equipe.getNome() + "!");
+            m.setCorpo("O professor " + autenticateUser.getProfessor().getNome()
+                + " bloqueou o acesso da equipe '" + equipe.getNome() + "'!");
 
         }
 
