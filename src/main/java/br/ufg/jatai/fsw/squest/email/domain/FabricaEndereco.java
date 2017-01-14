@@ -4,6 +4,7 @@ import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Professor;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class FabricaEndereco {
 
         Iterator<Aluno> i = equipe.getAlunos().iterator();
 
-        List<EnderecoEletronico> enderecos = null;
+        ArrayList<EnderecoEletronico> enderecos = new ArrayList<>();
 
         while (i.hasNext()){
 
