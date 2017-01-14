@@ -102,11 +102,13 @@ public class EquipeFacade {
         return equipeService.findEquipePorNome(nome)!=null;
     }
 
-    public void ativarEquipe(Integer idEquipe, boolean ativa) {
+    public void ativarEquipe(Integer idEquipe) {
 
         Equipe equipe = equipeService.find(idEquipe);
-        equipe.setAtiva(ativa);
+        boolean ativa = equipe.isAtiva();
+        equipe.setAtiva(!ativa);
 
+        equipeService.atualizar(equipe);
 
         Mensagem m = new Mensagem();
 
@@ -144,8 +146,6 @@ public class EquipeFacade {
                 + " bloqueou o acesso da equipe " + equipe.getNome());
 
         }
-
-        equipeService.atualizar(equipe);
 
         m.setDestinatarios(fabrica.criaEndereco(equipe));
 
