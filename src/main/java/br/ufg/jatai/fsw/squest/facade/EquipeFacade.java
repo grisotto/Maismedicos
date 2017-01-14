@@ -9,6 +9,7 @@ import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.email.component.EmailMain;
+import br.ufg.jatai.fsw.squest.email.domain.FabricaEndereco;
 import br.ufg.jatai.fsw.squest.email.domain.Mensagem;
 import br.ufg.jatai.fsw.squest.service.AlunoService;
 import br.ufg.jatai.fsw.squest.service.EquipeService;
@@ -37,6 +38,8 @@ public class EquipeFacade {
     private AlunoService alunoService;
     @Autowired
     private EmailMain mailService;
+
+    private FabricaEndereco fabrica;
 
     /**
      * Periste um nova tarefa
@@ -144,16 +147,14 @@ public class EquipeFacade {
 
         equipeService.atualizar(equipe);
 
-        while (i.hasNext()){
+        m.setDestinatarios(fabrica.criaEndereco(equipe));
 
-            Aluno a = i.next();
-            //m.setDestinatario(a.getEmail());
-            try {
-                mailService.sendMail(m);
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
-
+        try {
+            mailService.sendMail(m);
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
+
+
     }
 }
