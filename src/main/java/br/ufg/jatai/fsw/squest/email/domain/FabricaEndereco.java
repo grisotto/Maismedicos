@@ -2,6 +2,7 @@ package br.ufg.jatai.fsw.squest.email.domain;
 
 import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
+import br.ufg.jatai.fsw.squest.domain.Professor;
 
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +18,17 @@ public class FabricaEndereco {
 
         endereco.setNome(aluno.getNome());
         endereco.setEmail(aluno.getEmail());
+
+        return endereco;
+
+    }
+
+    public EnderecoEletronico criaEndereco(Professor professor){
+
+        EnderecoEletronico endereco = new EnderecoEletronico();
+
+        endereco.setNome(professor.getNome());
+        endereco.setEmail(professor.getEmail());
 
         return endereco;
 

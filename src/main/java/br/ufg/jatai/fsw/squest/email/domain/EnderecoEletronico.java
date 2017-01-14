@@ -28,4 +28,8 @@ public class EnderecoEletronico {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return "\"" + nome + "\" <" + email + ">";
+    }
 }
