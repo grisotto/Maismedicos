@@ -45,7 +45,7 @@ public class ProfessorFacade {
     
     @Autowired
     private EmailMain emailMain;
-    @Autowired
+
     private FabricaEndereco fabrica;
     /**
      * Lista todos os professores
