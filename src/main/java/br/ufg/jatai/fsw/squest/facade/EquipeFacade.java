@@ -38,7 +38,7 @@ public class EquipeFacade {
     private AlunoService alunoService;
     @Autowired
     private EmailMain mailService;
-
+    @Autowired
     private FabricaEndereco fabrica;
 
     /**
