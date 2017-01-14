@@ -46,6 +46,7 @@ public class ProfessorFacade {
     @Autowired
     private EmailMain emailMain;
 
+    @Autowired
     private FabricaEndereco fabrica;
     /**
      * Lista todos os professores
@@ -85,9 +86,9 @@ public class ProfessorFacade {
 
             m.setDestinatarios(to);
             m.setAssunto("Bem-vindo ao SisQuest!");
-            m.setCorpo("Olá, professor " + professor.getNome() + "\n\n"
-                    + "Seu login é: " + professor.getUsuario().getLogin()
-                    + "\nSua senha é: " + gerarSenha);
+            m.setCorpo("Olá, professor " + professor.getNome()
+                    + "<br>Seu login é: " + professor.getUsuario().getLogin()
+                    + "<br>Sua senha é: " + gerarSenha);
 
           emailMain.sendMail(m);
 

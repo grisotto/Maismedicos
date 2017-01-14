@@ -3,6 +3,7 @@ package br.ufg.jatai.fsw.squest.email.domain;
 import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Professor;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by thevilela on 13/01/17.
  */
 
-
+@Component
 public class FabricaEndereco {
 
     public EnderecoEletronico criaEndereco(Aluno aluno){

@@ -83,6 +83,7 @@ public class EmailMain {
 
             }
 
+            try{
             Iterator<EnderecoEletronico> iB = m.getBcc().iterator();
 
             while (iB.hasNext()){
@@ -91,8 +92,11 @@ public class EmailMain {
 
                 helper.addBcc(e.getEmail());
 
+            }} catch(NullPointerException e){
+                e.printStackTrace();
             }
 
+            try{
             Iterator<EnderecoEletronico> iC = m.getCc().iterator();
 
             while (iC.hasNext()){
@@ -101,6 +105,8 @@ public class EmailMain {
 
                 helper.addCc(e.getEmail());
 
+            }}catch(NullPointerException e){
+                e.printStackTrace();
             }
 
 
