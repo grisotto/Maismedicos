@@ -121,7 +121,7 @@ public class EquipeFacade {
             StringBuilder corpo = new StringBuilder();
 
             corpo.append("<h4>O professor " + autenticateUser.getProfessor().getNome()
-                    + " liberou o acesso da equipe '" + equipe.getNome() + "'."
+                    + " liberou o acesso da equipe '" + equipe.getNome() + "'. À partir de agora a equipe já pode enviar suas questões. "
                     + "<br><br><b>. Membros:");
 
 
