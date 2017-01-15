@@ -7,10 +7,14 @@ package br.ufg.jatai.fsw.squest.service;
 
 import br.ufg.jatai.fsw.squest.domain.Questionario;
 
+import java.util.List;
+
 /**
  *
  * @author vilela
  */
 public interface QuestionarioService extends AbstractService<Questionario, Integer> {
+
+    public List<Questionario> questoesDaTarefa(Integer tarefaID);
     
 }

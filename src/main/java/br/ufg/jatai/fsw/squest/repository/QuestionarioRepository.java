@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 /**
  *
  * @author vilela
@@ -19,4 +21,7 @@ public interface QuestionarioRepository extends JpaRepository<Questionario, Inte
 
     @Query("select q from  Questionario q where q.time.id=:equipeID")
     public Questionario getFromTarefaEquipe(@Param("equipeID") Integer equipeID);
+
+    @Query("select q from Questionario q where q.tarefa.id = :tarefaID")
+    public List<Questionario> questoesDaTarefa(@Param("tarefaID") Integer tarefaID);
 }

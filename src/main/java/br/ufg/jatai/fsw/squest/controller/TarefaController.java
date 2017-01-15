@@ -11,6 +11,7 @@ import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
 import br.ufg.jatai.fsw.squest.facade.QuestionarioFacade;
 import br.ufg.jatai.fsw.squest.facade.TarefaFacade;
+import br.ufg.jatai.fsw.squest.service.QuestionarioService;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
 import br.ufg.jatai.fsw.squest.service.TurmaService;
 import java.util.List;
@@ -43,6 +44,9 @@ public class TarefaController {
 
     @Autowired
     private TarefaFacade tarefaFacade;
+
+    @Autowired
+    private QuestionarioService questionarioService;
 
     @Autowired
     private QuestionarioFacade questionarioFacade;
@@ -149,10 +153,13 @@ public class TarefaController {
         return "redirect:/app/tarefa/" + idTarefa;
     }
 
+
     @GetMapping(value = "/app/tarefa/{tarefaid}/questoes")
     public String showQuestoesTurma(@PathVariable Integer tarefaid, ModelMap map, final EtapasModel etapas) {
 
         Tarefa find = tarefaFacade.findTarefa(tarefaid);
+
+        map.addAttribute("questoesturma", questionarioService.questoesDaTarefa(tarefaid));
 
         map.addAttribute("tarefa", find);
 
@@ -162,5 +169,7 @@ public class TarefaController {
 
         return "/app/tarefa/questoes";
     }
+
+
 
 }
