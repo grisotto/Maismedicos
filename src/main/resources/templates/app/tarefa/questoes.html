@@ -51,11 +51,7 @@ and open the template in the editor.
 
                     </div>
 
-                    <div class="form-group col-md-3">
-                        <label class="control-label" for="tarefas">Questoes: </label>
-                        <span class="form-control-static" th:text="${questoesturma}">0</span>
 
-                    </div>
 
                 </div>
 
@@ -87,8 +83,8 @@ and open the template in the editor.
                         <th>#</th>
                         <th>Equipe</th>
                         <th>Questão</th>
-                        <th>Th:if Aceita ou Negada</th>
                         <th>Ver Respostas</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -98,22 +94,22 @@ and open the template in the editor.
                     <!--<td colspan="4" class=" text-center">Equipe sem Alunos</td>-->
                     <!--</tr>-->
                     <tr th:each="q : ${questoesturma}">
-                        <td>1</td>
+                        <td >1</td>
                         <td th:text="${q.time.nome}">1</td>
                         <td th:text="${q.questoes}">1</td>
 
                         <td>
-
-                        <td>
                             <div class="btn-group" role="group">
-                                <!--<a class="btn btn-sm  btn-danger fa fa-trash" />-->
-                                <a th:href="@{/app/equipe/}" class="btn btn-sm  btn-success fa fa-check-circle-o"/>
+
+                                <a th:href="@{/app/questionario//show}" class="btn btn-sm  btn-success fa fa-send"/>
                             </div>
                         </td>
-                        <td ><a class="btn btn-success btn-sm fa fa-check-square"></a></td>
-                        <td  ><a th:href="@{/app/questionario/responder/}+${tarefa.id}" class="btn btn-danger btn-sm fa fa-times-circle-o"></a></td>
 
-                        </td>
+
+                        <td th:if="${q.time.ativa == true}" ><a class="btn btn-success btn-sm fa fa-check-square"></a></td>
+                        <td th:if="${q.time.ativa == false}" ><a th:href="@{/app/questionario/responder/}+${tarefa.id}" class="btn btn-danger btn-sm fa fa-times-circle-o"></a></td>
+
+
                     </tr>
                     </tbody>
                 </table>
