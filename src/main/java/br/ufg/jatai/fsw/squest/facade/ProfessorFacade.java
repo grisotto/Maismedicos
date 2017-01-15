@@ -1,13 +1,13 @@
 package br.ufg.jatai.fsw.squest.facade;
 
 import br.ufg.jatai.fsw.squest.AutenticateUser;
-import br.ufg.jatai.fsw.squest.controller.AlunoController;
 import br.ufg.jatai.fsw.squest.controller.ProfessorController;
-import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Professor;
 import br.ufg.jatai.fsw.squest.domain.Turma;
-import br.ufg.jatai.fsw.squest.email.EmailMain;
-import br.ufg.jatai.fsw.squest.email.Mensagem;
+import br.ufg.jatai.fsw.squest.email.component.EmailMain;
+import br.ufg.jatai.fsw.squest.email.domain.EnderecoEletronico;
+import br.ufg.jatai.fsw.squest.email.domain.FabricaEndereco;
+import br.ufg.jatai.fsw.squest.email.domain.Mensagem;
 import br.ufg.jatai.fsw.squest.service.ProfessorService;
 import br.ufg.jatai.fsw.squest.util.GeradorSenha;
 import org.slf4j.Logger;
@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,6 +46,8 @@ public class ProfessorFacade {
     @Autowired
     private EmailMain emailMain;
 
+    @Autowired
+    private FabricaEndereco fabrica;
     /**
      * Lista todos os professores
      *
@@ -77,11 +80,15 @@ public class ProfessorFacade {
 
             Mensagem m = new Mensagem();
 
-            m.setDestinatario(professor.getEmail());
+            ArrayList<EnderecoEletronico> to = new ArrayList<>();
+
+            to.add(fabrica.criaEndereco(professor));
+
+            m.setDestinatarios(to);
             m.setAssunto("Bem-vindo ao SisQuest!");
-            m.setCorpo("Olá, professor " + professor.getNome() + "\n\n"
-                    + "Seu login é: " + professor.getUsuario().getLogin()
-                    + "\nSua senha é: " + gerarSenha);
+            m.setCorpo("<h4>Olá, professor " + professor.getNome()
+                    + "br>Seu login é: " + professor.getUsuario().getLogin()
+                    + "<br>Sua senha é: " + gerarSenha + "</h4>");
 
           emailMain.sendMail(m);
 

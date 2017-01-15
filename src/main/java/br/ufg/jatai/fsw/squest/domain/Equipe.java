@@ -38,6 +38,7 @@ public class Equipe implements Serializable {
     
     private boolean ativa;
 
+
     @ManyToOne
     private Tarefa tarefa;
 

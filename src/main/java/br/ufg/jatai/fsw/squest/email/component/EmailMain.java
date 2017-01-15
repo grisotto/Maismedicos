@@ -33,8 +33,10 @@
 //    }
 //}
 
-package br.ufg.jatai.fsw.squest.email;
+package br.ufg.jatai.fsw.squest.email.component;
 
+import br.ufg.jatai.fsw.squest.email.domain.EnderecoEletronico;
+import br.ufg.jatai.fsw.squest.email.domain.Mensagem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,7 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.Iterator;
 
 /**
  * @author vilela
@@ -67,9 +70,45 @@ public class EmailMain {
             MimeMessage mensagem = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mensagem, true);
             helper.setFrom("squest@jataiufg.net");
-            helper.setTo(m.getDestinatario());
             helper.setSubject(m.getAssunto());
             helper.setText(m.getCorpo(),true);
+
+            Iterator<EnderecoEletronico> iD = m.getDestinatarios().iterator();
+
+            while (iD.hasNext()){
+
+                EnderecoEletronico e = iD.next();
+
+                helper.addTo(e.getEmail());
+
+            }
+
+            try{
+            Iterator<EnderecoEletronico> iB = m.getBcc().iterator();
+
+            while (iB.hasNext()){
+
+                EnderecoEletronico e = iB.next();
+
+                helper.addBcc(e.getEmail());
+
+            }} catch(NullPointerException e){
+                e.printStackTrace();
+            }
+
+            try{
+            Iterator<EnderecoEletronico> iC = m.getCc().iterator();
+
+            while (iC.hasNext()){
+
+                EnderecoEletronico e = iC.next();
+
+                helper.addCc(e.getEmail());
+
+            }}catch(NullPointerException e){
+                e.printStackTrace();
+            }
+
 
             javaMailSender.send(mensagem);
 
@@ -81,7 +120,6 @@ public class EmailMain {
         }
 
 
-
     }
 
     public void setAtivo(boolean ativo) {
@@ -91,6 +129,8 @@ public class EmailMain {
     public boolean isAtivo(){
         return this.ativo;
     }
+
+
 
 }
 

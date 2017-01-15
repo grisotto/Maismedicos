@@ -8,12 +8,17 @@ package br.ufg.jatai.fsw.squest.facade;
 import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.domain.Aluno;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
+import br.ufg.jatai.fsw.squest.email.component.EmailMain;
+import br.ufg.jatai.fsw.squest.email.domain.FabricaEndereco;
+import br.ufg.jatai.fsw.squest.email.domain.Mensagem;
 import br.ufg.jatai.fsw.squest.service.AlunoService;
 import br.ufg.jatai.fsw.squest.service.EquipeService;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -31,6 +36,10 @@ public class EquipeFacade {
     private AutenticateUser autenticateUser;
     @Autowired
     private AlunoService alunoService;
+    @Autowired
+    private EmailMain mailService;
+    @Autowired
+    private FabricaEndereco fabrica;
 
     /**
      * Periste um nova tarefa
@@ -94,19 +103,58 @@ public class EquipeFacade {
     }
 
     public void ativarEquipe(Integer idEquipe) {
-Equipe equipe = equipeService.find(idEquipe);
-        equipe.setAtiva(!equipe.isAtiva());
-        //Se a atual situação de ativa for true Envia um mail para todos da equipe
-        //Falando que a equipe está ativa e o pessoal pode entrar no sistema.
-        //Pode avisar que apenas pode ficar logado uma vez
 
-        /*
-        if(equipe.isAtiva()){
-            //Envia email falando que vai ativar. Falando que o o professor logado ativou
-        }else{
-            //Fala que é impossivel acessar apartir de agora porque o professor logado bloqueou o acessos
-        }
-        */
+        Equipe equipe = equipeService.find(idEquipe);
+        boolean ativa = equipe.isAtiva();
+        equipe.setAtiva(!ativa);
+
         equipeService.atualizar(equipe);
+
+        Mensagem m = new Mensagem();
+
+        Iterator<Aluno> i = equipe.getAlunos().iterator();
+
+        if(equipe.isAtiva()){
+
+            m.setAssunto("A sua equipe está ativa!");
+
+            StringBuilder corpo = new StringBuilder();
+
+            corpo.append("<h4>O professor " + autenticateUser.getProfessor().getNome()
+                    + " liberou o acesso da equipe '" + equipe.getNome() + "'. À partir de agora a equipe já pode enviar suas questões. "
+                    + "<br><br><b>. Membros:");
+
+
+            while (i.hasNext()){
+
+                Aluno a = i.next();
+                corpo.append("<br><br> _ " + a.getNome());
+
+            }
+
+            corpo.append("</b><br><br>PS.: A equipe pode estar logada apenas uma vez!</h4>");
+
+            m.setCorpo(corpo.toString());
+
+
+        }else{
+
+
+            m.setAssunto("Bloqueio de acesso da equipe!");
+
+            m.setCorpo("O professor " + autenticateUser.getProfessor().getNome()
+                + " bloqueou o acesso da equipe '" + equipe.getNome() + "'!");
+
+        }
+
+        m.setDestinatarios(fabrica.criaEndereco(equipe));
+
+        try {
+            mailService.sendMail(m);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
