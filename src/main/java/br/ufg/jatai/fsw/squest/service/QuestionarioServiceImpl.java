@@ -51,5 +51,10 @@ public class QuestionarioServiceImpl implements QuestionarioService {
     public List<Questionario> findAll() {
         return questionarioRepository.findAll();
     }
-    
+
+
+    @Override
+    public List<Questionario> questoesDaTarefa(Integer tarefaID) {
+        return questionarioRepository.questoesDaTarefa(tarefaID);
+    }
 }
