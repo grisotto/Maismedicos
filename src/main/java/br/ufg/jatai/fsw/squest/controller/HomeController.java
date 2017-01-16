@@ -26,7 +26,7 @@ public class HomeController {
     @RequestMapping("/")
     public String home() {
         log.debug("Funcionando");
-        return "/home/index";
+        return "home/index";
     }
 
     /**
@@ -35,7 +35,7 @@ public class HomeController {
      */
     @RequestMapping(value = "/login")
     public String login() {
-        return "/home/login";
+        return "home/login";
     }
 
 

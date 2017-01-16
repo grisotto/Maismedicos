@@ -58,7 +58,7 @@ public class TarefaController {
      */
     @GetMapping(value = {"/app/tarefa"})
     public String tarefaHome(final Tarefa tarefa) {
-        return "/app/tarefa/home";
+        return "app/tarefa/home";
     }
 
     /**
@@ -72,7 +72,7 @@ public class TarefaController {
     public String saveTarefa(@Valid final Tarefa tarefa, final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("tarefa", tarefa);
-            return "/app/tarefa/home";
+            return "app/tarefa/home";
         }
 
         tarefa.setTurma(turmaService.find(tarefa.getTurma().getId()));
@@ -122,7 +122,7 @@ public class TarefaController {
         //aqui eu tenho que pegar os dados dos grupos desta Tarefa
         map.addAttribute("etapas", new EtapasModel().buildeOvjeto(find.getEtapaEventos()));
 
-        return "/app/tarefa/show";
+        return "app/tarefa/show";
     }
 
     /**
@@ -167,7 +167,7 @@ public class TarefaController {
         //aqui eu tenho que pegar os dados dos grupos desta Tarefa
 
 
-        return "/app/tarefa/questoes";
+        return "app/tarefa/questoes";
     }
 
 

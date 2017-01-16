@@ -43,7 +43,7 @@ public class EquipeController implements Serializable {
      */
     @GetMapping()
     public String equipeHome(final Equipe equipe) {
-        return "/app/equipe/home";
+        return "app/equipe/home";
     }
 
     /**
@@ -60,7 +60,7 @@ public class EquipeController implements Serializable {
         }
         if (bindingResult.hasErrors()) {
             model.addAttribute("equipe", equipe);
-            return "/app/equipe/home";
+            return "app/equipe/home";
 
         }
 
@@ -133,7 +133,7 @@ public class EquipeController implements Serializable {
         map.addAttribute("todosAlunos", alunos);
         log.info("ALUNOS: " + alunos.size() + "\n" +
                 "" + alunos);
-        return "/app/equipe/show";
+        return "app/equipe/show";
     }
 
 
