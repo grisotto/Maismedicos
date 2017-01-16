@@ -50,7 +50,7 @@ public class TurmaController implements Serializable {
      */
     @RequestMapping(value = "/app/turma")
     public String turmaHome(final Turma turma) {
-        return "/app/turma/home";
+        return "app/turma/home";
     }
 
     /**
@@ -66,7 +66,7 @@ public class TurmaController implements Serializable {
 //        bindingResult.addError(new ObjectError("Deu erro", "Deu erro"));
         if (bindingResult.hasErrors()) {
             model.addAttribute("turma", turma);
-            return "/app/turma/home";
+            return "app/turma/home";
         }
         facade.createTurma(turma);
         model.clear();
@@ -100,7 +100,7 @@ public class TurmaController implements Serializable {
         //NUNCA MAIS FAZ ISSO DYEIMYS
         map.addAttribute("todosAlunos", aService.findAll());
 
-        return "/app/turma/show";
+        return "app/turma/show";
     }
 
     /**

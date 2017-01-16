@@ -112,7 +112,7 @@ public class QuestionarioController implements Serializable {
      */
     @RequestMapping(value = "/inserir")
     public String QuestoesEquipeInserir(QuestãoModel questionario) {
-        return "/app/questionario/inserir";
+        return "app/questionario/inserir";
     }
 
     /**
@@ -120,7 +120,7 @@ public class QuestionarioController implements Serializable {
      */
     @RequestMapping(value = "/responder")
     public String QuestoesEquipeResponder(Questionario questionario) {
-        return "/app/questionario/responder";
+        return "app/questionario/responder";
     }
 
     /**
@@ -128,7 +128,7 @@ public class QuestionarioController implements Serializable {
      */
     @RequestMapping(value = "/pontuacao")
     public String QuestoesEquipePontuacao(Questionario questionario) {
-        return "/app/questionario/pontuacao";
+        return "app/questionario/pontuacao";
     }
 
 

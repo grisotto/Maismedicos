@@ -77,7 +77,7 @@ public class AppController {
 
         LOGGER.info("ENTROU NO CONTROLLER");
 
-        return "/app/dash";
+        return "app/dash";
     }
     @Autowired
     private QuestaoService questaoService;

@@ -55,7 +55,7 @@ public class AlunoController implements Serializable {
      * @param aluno
      * @return
      */
-    @RequestMapping(value = "/app/aluno")
+    @RequestMapping(value = "app/aluno")
     public String alunoHome(final Aluno aluno) {
         return "/app/aluno/home";
     }
@@ -79,7 +79,7 @@ public class AlunoController implements Serializable {
         }
         if (bindingResult.hasErrors()) {
             model.addAttribute("aluno", aluno);
-            return "/app/aluno/home";
+            return "app/aluno/home";
         }
         this.alunoFacade.inserirAluno(aluno);
 

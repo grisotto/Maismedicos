@@ -54,7 +54,7 @@ public class ProfessorController implements Serializable {
      */
     @RequestMapping(value = "/app/professor")
     public String professorHome(final Professor professor) {
-        return "/app/professor/home";
+        return "app/professor/home";
     }
 
     /**
@@ -68,7 +68,7 @@ public class ProfessorController implements Serializable {
     public String saveProfessor(@Valid final Professor professor, final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("professor", professor);
-            return "/app/professor/home";
+            return "app/professor/home";
         }       
         professor.getUsuario().setTipoUsuario(Usuario.TipoUsuario.PROFESSOR);
 
