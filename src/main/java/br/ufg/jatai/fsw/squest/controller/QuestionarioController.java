@@ -6,7 +6,7 @@
 package br.ufg.jatai.fsw.squest.controller;
 
 import br.ufg.jatai.fsw.squest.AutenticateUser;
-import br.ufg.jatai.fsw.squest.controller.modelForm.QuestãoModel;
+import br.ufg.jatai.fsw.squest.controller.modelForm.QuestaoModel;
 import br.ufg.jatai.fsw.squest.domain.Questao;
 import br.ufg.jatai.fsw.squest.domain.Questionario;
 import br.ufg.jatai.fsw.squest.facade.QuestionarioFacade;
@@ -19,13 +19,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author dfranco
@@ -52,7 +50,7 @@ public class QuestionarioController implements Serializable {
     private QuestaoService questaoService;
 
     @PostMapping("/addQuestao")
-    public String inserirQuestão(final String correto, final QuestãoModel questaoModel,
+    public String inserirQuestão(final String correto, final QuestaoModel questaoModel,
             final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("questaoModel", questaoModel);
@@ -111,7 +109,7 @@ public class QuestionarioController implements Serializable {
      * @return
      */
     @RequestMapping(value = "/inserir")
-    public String QuestoesEquipeInserir(QuestãoModel questionario) {
+    public String QuestoesEquipeInserir(QuestaoModel questionario) {
         return "app/questionario/inserir";
     }
 
