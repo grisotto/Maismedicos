@@ -93,7 +93,7 @@ public class QuestionarioController implements Serializable {
             questionario = new Questionario();//Coloca uma instancia nele 
             questionario.setTime(user.getEquipe());//Coloca a euipe
             questionario.setTarefa(user.getEquipe().getTarefa());//Coloca a Tarefa
-            questionario.setquestions(new ArrayList<>());//Inicia as Questões dele
+            questionario.setquestions(new ArrayList<Questao>());//Inicia as Questões dele
             
            
         }
