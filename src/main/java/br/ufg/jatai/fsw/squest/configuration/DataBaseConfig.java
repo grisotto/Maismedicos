@@ -158,7 +158,7 @@ public class DataBaseConfig {
             taf.setTitulo("Atividade primeiro semestre");
             taf.setTamanhoQuestoes(5);
             tarefaService.inserir(taf);
-            
+
             
 
             LOGGER.info("LOCALE DEFAULT: " + LocaleContextHolder.getLocale());

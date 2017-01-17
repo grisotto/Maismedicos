@@ -47,12 +47,12 @@ and open the template in the editor.
                     <a class="navbar-brand" href="#">Sistema de Base de Questões Colaborativas e Avaliativo</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <form class="navbar-form navbar-right" role="form"   method="POST" action="/login">
+                    <form class="navbar-form navbar-right" role="form"   th:action="@{/login}" method="post">
                         <div class="form-group">
-                            <input type="text" placeholder="Email" name="login" class="form-control"/>
+                            <input type="text" placeholder="Email" id="username" name="username" required="true" class="form-control"/>
                         </div>
                         <div class="form-group">
-                            <input type="password" placeholder="Password" name="senha" class="form-control"/>
+                            <input type="password" placeholder="Password" id="password" name="password" required="true" class="form-control"/>
                         </div>
                         <button type="submit" class="btn btn-success">Entrar</button>
                     </form>
