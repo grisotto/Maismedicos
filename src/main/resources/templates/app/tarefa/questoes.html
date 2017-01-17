@@ -53,6 +53,7 @@ and open the template in the editor.
 
 
 
+
                 </div>
 
 
@@ -89,25 +90,21 @@ and open the template in the editor.
                     </thead>
                     <tbody>
 
-                    <!--Aqui se nao tiver questoes-->
-                    <!--<tr  >-->
-                    <!--<td colspan="4" class=" text-center">Equipe sem Alunos</td>-->
-                    <!--</tr>-->
-                    <tr th:each="q : ${questoesturma}">
-                        <td >1</td>
-                        <td th:text="${q.time.nome}">1</td>
-                        <td th:text="${q.questoes}">1</td>
+                    <tr th:each="q , iter : ${questoesturma}">
+                        <td th:text="${iter.index + 1}" >1</td>
+                        <td th:text="${q.questionario.time.nome}">1</td>
+                        <td th:text="${q.question}">1</td>
 
                         <td>
                             <div class="btn-group" role="group">
 
-                                <a th:href="@{/app/questionario//show}" class="btn btn-sm  btn-success fa fa-send"/>
+                                <a th:href="@{/app/questionario/}+${q.id}" class="btn btn-sm  btn-success fa fa-send"/>
                             </div>
                         </td>
 
 
-                        <td th:if="${q.time.ativa == true}" ><a class="btn btn-success btn-sm fa fa-check-square"></a></td>
-                        <td th:if="${q.time.ativa == false}" ><a th:href="@{/app/questionario/responder/}+${tarefa.id}" class="btn btn-danger btn-sm fa fa-times-circle-o"></a></td>
+                        <td th:if="${q == true}" ><a class="btn btn-success btn-sm fa fa-check-square"></a></td>
+                        <td th:if="${q == false}" ><a th:href="@{/app/questionario/}+${tarefa.id}" class="btn btn-danger btn-sm fa fa-times-circle-o"></a></td>
 
 
                     </tr>
