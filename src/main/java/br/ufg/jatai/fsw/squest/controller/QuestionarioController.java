@@ -9,6 +9,7 @@ import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.controller.modelForm.QuestãoModel;
 import br.ufg.jatai.fsw.squest.domain.Questao;
 import br.ufg.jatai.fsw.squest.domain.Questionario;
+import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.facade.QuestionarioFacade;
 import br.ufg.jatai.fsw.squest.repository.QuestionarioRepository;
 import br.ufg.jatai.fsw.squest.service.QuestaoService;
@@ -21,6 +22,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +104,15 @@ public class QuestionarioController implements Serializable {
         questaoService.inserir(questao);// Insere no banco o questionario
 //        questaoService.inserir(questao);//Agora insere 
 
-        return "redirect:/app/questionario/inserir";
+        return "redirect:/app/";
+    }
+    @PostMapping ("{idQuestao}/ativar")
+    public String ativarQuestao (@PathVariable ("idQuestao") Integer idQuestao, @Valid Tarefa tarefa){
+        questaoService.ativarQuestao(idQuestao);
+
+
+        return "redirect:/app/tarefa/" + tarefa.getId() + "/questoes";
+
     }
 
     /**
