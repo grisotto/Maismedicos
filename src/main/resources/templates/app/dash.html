@@ -208,7 +208,7 @@ and open the template in the editor.
                                         <div th:if="${questionario != null}">
 
 
-                                            <tr th:each="e, itr : ${questoes}">
+                                            <tr th:each="e, itr : ${questoesOutros}">
 
                                                 <td th:text="${itr.count}" >1</td>
                                                 <td th:text="${#strings.abbreviate(e.question,100)}"></td>
