@@ -48,25 +48,25 @@ and open the template in the editor.
 								</div>
 									<div th:if="${iter.index == 1}">
 									<input type="checkbox" value="alternativaA" id="roundedOneB" name="alternativaB"  />
-									<label for="roundedOneB" th:text="B">B</label>
+									<label for="roundedOneB" th:text="B"> B</label>
 								</div>
 									<div th:if="${iter.index == 2}">
 									<input type="checkbox" value="alternativaA" id="roundedOneC" name="alternativaC"  />
-									<label for="roundedOneC"  th:text="C">C</label>
+									<label for="roundedOneC"  th:text="C"> C</label>
 										</div>
 									<div th:if="${iter.index == 3}">
 									<input type="checkbox" value="alternativaA" id="roundedOneD" name="alternativaD"  />
-									<label for="roundedOneD"  th:text="D">D</label>
+									<label for="roundedOneD"  th:text="D"> D</label>
 								</div>
 									<div th:if="${iter.index == 4}">
 									<input type="checkbox" value="alternativaA" id="roundedOneE" name="alternativaE"  />
-									<label for="roundedOneE"  th:text="E">E</label>
+									<label for="roundedOneE"  th:text="E"> E</label>
 									</div>
       										
       								
     								</div>&nbsp;
-    								<span class="bold">A. </span>
-									<span  th:text="${q.descricao}">Algoritmo de Jose </span>
+    								<!--<span class="bold">A. </span>-->
+									<span  th:text="${q.descricao}">Algoritmo do Jose </span>
 
 								</div>
 									</div>
@@ -84,40 +84,7 @@ and open the template in the editor.
     								<!--<span class="bold">B. </span>  <span class="alternativaB" th:text="${questao.alternativas}">Algoritmo de Jose </span>-->
                            <!---->
 							<!--</div>-->
-							<!---->
-							<!--<div class="clearfix">	-->
-    							<!--<div class="roundedOne pull-left">-->
-      								<!--<input type="checkbox" value="alternativaC" id="roundedOneC" name="optionsRadios"  />-->
-      								<!--<label for="roundedOneC"></label> -->
-      										<!---->
-      								<!---->
-    								<!--</div>&nbsp;-->
-    								<!--<span class="bold">C. </span>  <span class="alternativaC">Algoritmo de Jose </span>-->
-                           <!---->
-							<!--</div>-->
-							<!---->
-							<!--<div class="clearfix">	-->
-    							<!--<div class="roundedOne pull-left">-->
-      								<!--<input type="checkbox" value="alternativaC" id="roundedOneD" name="optionsRadios"  />-->
-      								<!--<label for="roundedOneD"></label> -->
-      										<!---->
-      								<!---->
-    								<!--</div>&nbsp;-->
-    								<!--<span class="bold">D. </span>  <span class="alternativaC">Algoritmo de Jose </span>-->
-                           <!---->
-							<!--</div>-->
-							<!---->
-							<!--<div class="clearfix">	-->
-    							<!--<div class="roundedOne pull-left">-->
-      								<!--<input type="checkbox" value="alternativaC" id="roundedOneE" name="optionsRadios"  />-->
-      								<!--<label for="roundedOneE"></label> -->
-      										<!---->
-      								<!---->
-    								<!--</div>&nbsp;-->
-    								<!--<span class="bold">E. </span>  <span class="alternativaC">Algoritmo de Jose </span>-->
-                           <!---->
-							<!--</div>-->
-    								
+					    								
 
 
 
@@ -136,15 +103,11 @@ and open the template in the editor.
 						<button type="submit" class="btn btn-info">
 							<i class="fa fa-floppy-o  "> </i> Salvar Resposta
 						</button>
-						<button type="reset" class="btn btn-danger">Sair</button>
+						<button type="sair" th:href="@{/app}" class="btn btn-danger">Sair</button>
 					</div>
 				</div>
 			</div>
-<!--                    forma antiga             <li >
-                                <input type="radio" name="optionsRadios" id="optionsRadiosA" value="optionA" class="btn btn-circle "
-										 />  <span class="bold">A. </span> 
-										 <span class="alternativa1">Algoritmo de Disktraa </span>
-										</li> -->
+
 		</div>
 		
 		
