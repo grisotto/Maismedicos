@@ -84,6 +84,7 @@ and open the template in the editor.
                         <th>#</th>
                         <th>Equipe</th>
                         <th>Questão</th>
+                        <th>Situação</th>
                         <th>Ver Respostas</th>
                         <th></th>
                     </tr>
@@ -95,16 +96,24 @@ and open the template in the editor.
                         <td th:text="${q.questionario.time.nome}">1</td>
                         <td th:text="${q.question}">1</td>
 
+                        <td  th:if="${q.ativa}" >
+                                        <span class="label label-info">
+                                            Validada
+                                        </span>
+                        </td>
+                        <td  th:if="${!q.ativa}" >
+                                        <span class="label label-warning fa-1">
+                                            Desativada
+                                        </span>
+                        </td>
+
+
                         <td>
                             <div class="btn-group" role="group">
 
                                 <a th:href="@{/app/questionario/}+${q.id}" class="btn btn-sm  btn-success fa fa-send"/>
                             </div>
                         </td>
-
-
-                        <td th:if="${q == true}" ><a class="btn btn-success btn-sm fa fa-check-square"></a></td>
-                        <td th:if="${q == false}" ><a th:href="@{/app/questionario/}+${tarefa.id}" class="btn btn-danger btn-sm fa fa-times-circle-o"></a></td>
 
 
                     </tr>

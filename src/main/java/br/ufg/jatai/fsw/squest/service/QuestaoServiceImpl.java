@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author vilela
  */
 @Service
@@ -57,5 +57,16 @@ public class QuestaoServiceImpl implements QuestaoService {
     @Override
     public Set<Questao> questoesDoQuestionario(Integer questionarioID) {
         return questaoRepository.questoesDoQuestionario(questionarioID);
+    }
+
+    @Override
+    public void ativarQuestao(Integer idQuestao) {
+
+        Questao questao = questaoRepository.findOne(idQuestao);
+        boolean ativa = questao.isAtiva();
+        questao.setAtiva(!ativa);
+        atualizar(questao);
+
+
     }
 }

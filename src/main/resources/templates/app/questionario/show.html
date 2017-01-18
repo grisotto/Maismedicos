@@ -22,7 +22,7 @@ and open the template in the editor.
 
 
 		<div class="col-md-12 col-sm-8">
-			<form action="#" th:action="@{/app/questionario/valQuestao}" th:object="${questao}" role="form"
+			<form action="#" th:action="@{/app/questionario/}+${questao.id}+@{/ativar}" th:object="${questao}" role="form"
 				  method="POST">
 
 				<div class="panel panel-info">
@@ -64,15 +64,17 @@ and open the template in the editor.
 
 
 						</div>
+						<input hidden="true" name="tarefa" th:value="${questao.questionario.tarefa.id}"/>
 
 
 					</div>
 
 					<div class="panel-footer  clearfix">
-						<button type="submit" class="btn btn-info">
+
+						<button type="submit"  class="btn btn-info" th:if="${!questao.ativa}">
 							<i class="fa fa-floppy-o  "> </i> Aceitar Questão
 						</button>
-						<button type="recusar" class="btn btn-danger">Recusar Questão</button>
+						<button type="submit" class="btn btn-danger" th:if="${questao.ativa}">Recusar Questão</button>
 					</div>
 				</div>
 			</form>

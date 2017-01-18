@@ -26,6 +26,8 @@ public class Questao implements Serializable {
     @Lob
     private String question;
 
+    private boolean ativa;
+
     @OneToMany(mappedBy = "questao", cascade = CascadeType.ALL)
     private List<Alternativa> alternativas = new ArrayList<>();
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -38,10 +40,11 @@ public class Questao implements Serializable {
      * @param question
      * @param alternativas
      */
-    public Questao(Integer id, String question, List<Alternativa> alternativas) {
+    public Questao(Integer id, String question, List<Alternativa> alternativas, boolean ativa) {
         this.id = id;
         this.question = question;
         this.alternativas = alternativas;
+        this.ativa = ativa;
     }
 
     /**
@@ -104,6 +107,7 @@ public class Questao implements Serializable {
         hash = 67 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 67 * hash + (this.question != null ? this.question.hashCode() : 0);
         hash = 67 * hash + (this.alternativas != null ? this.alternativas.hashCode() : 0);
+        hash = 67 * hash + (this.ativa ? 1 : 0);
         return hash;
     }
 
@@ -128,6 +132,9 @@ public class Questao implements Serializable {
         if (this.alternativas != other.alternativas && (this.alternativas == null || !this.alternativas.equals(other.alternativas))) {
             return false;
         }
+        if (this.ativa != other.ativa) {
+            return false;
+        }
         return true;
     }
 
@@ -141,8 +148,22 @@ public class Questao implements Serializable {
 
     @Override
     public String toString() {
-        return "Questao{" + "id=" + id + ", question=" + question + ", alternativas=" + alternativas + '}';
+        return "Questao{" + "id=" + id + ", question=" + question + ", alternativas=" + alternativas + ", ativa=" + ativa + '}';
     }
 
-    
+    /**
+     *
+     * @return
+     */
+    public boolean isAtiva() {
+        return ativa;
+    }
+
+    /**
+     *
+     * @param ativa
+     */
+    public void setAtiva(boolean ativa) {
+        this.ativa = ativa;
+    }
 }
