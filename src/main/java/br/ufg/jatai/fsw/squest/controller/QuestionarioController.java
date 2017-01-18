@@ -6,7 +6,7 @@
 package br.ufg.jatai.fsw.squest.controller;
 
 import br.ufg.jatai.fsw.squest.AutenticateUser;
-import br.ufg.jatai.fsw.squest.controller.modelForm.QuestãoModel;
+import br.ufg.jatai.fsw.squest.controller.modelForm.QuestaoModel;
 import br.ufg.jatai.fsw.squest.domain.Questao;
 import br.ufg.jatai.fsw.squest.domain.Questionario;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
@@ -20,12 +20,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author dfranco
@@ -52,7 +54,7 @@ public class QuestionarioController implements Serializable {
     private QuestaoService questaoService;
 
     @PostMapping("/addQuestao")
-    public String inserirQuestão(final String correto, final QuestãoModel questaoModel,
+    public String inserirQuestão(final String correto, final QuestaoModel questaoModel,
             final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("questaoModel", questaoModel);
@@ -95,7 +97,7 @@ public class QuestionarioController implements Serializable {
             questionario = new Questionario();//Coloca uma instancia nele 
             questionario.setTime(user.getEquipe());//Coloca a euipe
             questionario.setTarefa(user.getEquipe().getTarefa());//Coloca a Tarefa
-            questionario.setquestions(new ArrayList<>());//Inicia as Questões dele
+            questionario.setquestions(new ArrayList<Questao>());//Inicia as Questões dele
             
            
         }
@@ -119,7 +121,7 @@ public class QuestionarioController implements Serializable {
      * @return
      */
     @RequestMapping(value = "/inserir")
-    public String QuestoesEquipeInserir(QuestãoModel questionario) {
+    public String QuestoesEquipeInserir(QuestaoModel questionario) {
         return "app/questionario/inserir";
     }
 

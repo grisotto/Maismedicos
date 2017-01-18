@@ -120,16 +120,7 @@ public class EtapasModel {
         retorno.add(validandoQuestoes);
         retorno.add(respondendo);
         retorno.add(finalizado);
-        retorno.sort(new Comparator<EtapaEvento>() {
-            @Override
-            public int compare(EtapaEvento o1, EtapaEvento o2) {
-                if (o1.getTipo().id() > o2.getTipo().id()) {
-                    return 0;
-                } else {
-                    return 1;
-                }
-            }
-        });
+
         return retorno;
     }
 

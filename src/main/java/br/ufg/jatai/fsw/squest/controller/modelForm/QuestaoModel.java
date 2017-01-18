@@ -10,7 +10,7 @@ import br.ufg.jatai.fsw.squest.domain.Questionario;
  *         <p>
  *         Classe para modelo para inserçaõ de questão
  */
-public class QuestãoModel {
+public class QuestaoModel {
     private Questionario questionario;
     private String descricao;
     private Alternativa alternativaA;
