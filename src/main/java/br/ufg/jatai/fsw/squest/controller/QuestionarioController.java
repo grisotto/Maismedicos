@@ -126,8 +126,11 @@ public class QuestionarioController implements Serializable {
     /**
      * @return
      */
-    @RequestMapping(value = "/responder")
-    public String QuestoesEquipeResponder(Questionario questionario) {
+    @GetMapping(value = "/responder/{questaoID}")
+    public String QuestoesEquipeResponder(@PathVariable Integer questaoID, ModelMap map) {
+
+        map.addAttribute("questao", questaoService.find(questaoID));
+
         return "app/questionario/responder";
     }
 
@@ -144,8 +147,6 @@ public class QuestionarioController implements Serializable {
     public String showTurma(@PathVariable Integer id, ModelMap map) {
 
         map.addAttribute("questao", questaoService.find(id));
-
-
 
         return "app/questionario/show";
     }
