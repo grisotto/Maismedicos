@@ -6,6 +6,7 @@
 package br.ufg.jatai.fsw.squest.repository;
 
 import br.ufg.jatai.fsw.squest.domain.Questionario;
+import br.ufg.jatai.fsw.squest.domain.Questao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,6 +23,13 @@ public interface QuestionarioRepository extends JpaRepository<Questionario, Inte
     @Query("select q from  Questionario q where q.time.id=:equipeID")
     public Questionario getFromTarefaEquipe(@Param("equipeID") Integer equipeID);
 
-    @Query("select q from Questionario q where q.tarefa.id = :tarefaID")
+
+    @Query("select q from Questao q inner join q.questionario qe " +
+            "where qe.tarefa.id = :tarefaID")
     public List<Questionario> questoesDaTarefa(@Param("tarefaID") Integer tarefaID);
+
+
+    @Query("select q from Questao q inner join q.questionario qe " +
+            "where qe.tarefa.id = :tarefaID AND qe.time.id is NOT :equipeID AND q.ativa = 1 ")
+    public List<Questionario> questoesDasOutrasEquipes(@Param("tarefaID") Integer tarefaID,@Param("equipeID") Integer equipeID );
 }

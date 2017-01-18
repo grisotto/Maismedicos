@@ -22,7 +22,7 @@ and open the template in the editor.
 
 
 		<div class="col-md-12 col-sm-8">
-			<form action="#" th:action="@{/app/questionario/valQuestao}" th:object="${questaoModel}" role="form"
+			<form action="#" th:action="@{/app/questionario/}+${questao.id}+@{/ativar}" th:object="${questao}" role="form"
 				  method="POST">
 
 				<div class="panel panel-info">
@@ -41,115 +41,47 @@ and open the template in the editor.
 								<label>Questão</label>
 								<textarea class="form-control" disabled = "true"
 										  th:name="descricao"
+										  th:text="${questao.question}"
 										  rows="3"
 										  placeholder="Descreva a questão"></textarea>
 
 							</div>
+						<div th:each="q, iter : ${questao.alternativas}">
 
-
-							<div class="form-group input-group has-success">
-								<span class="input-group-addon">A</span>
+							<div class="form-group input-group " th:classappend="${q.correto} ? has-success">
+								<span class="input-group-addon" th:if="${iter.index == 0}" th:text="A">A</span>
+								<span class="input-group-addon" th:if="${iter.index == 1}" th:text="B">B</span>
+								<span class="input-group-addon" th:if="${iter.index == 2}" th:text="C">C</span>
+								<span class="input-group-addon" th:if="${iter.index == 3}" th:text="D">D</span>
+								<span class="input-group-addon" th:if="${iter.index == 4}" th:text="E">E</span>
 								<textarea  th:name="alternativaA.descricao"
-										   class="form-control" disabled="true" id="inputSuccess"></textarea>
-								<span
-										class="input-group-addon">
-                                            <input type="radio"
-												   name="correto" id="optionsRadios1" value="A"
-												   checked="true"/>
-
-                                        </span>
-							</div>
-
-
-							<div class="form-group input-group">
-								<span class="input-group-addon">B</span>
-								<textarea class="form-control"
-										  th:name="alternativaB.descricao"
-										  disabled="true"
-										  id="inputError"></textarea>
-								<span class="input-group-addon">
-                                            <input type="radio"
-												   name="correto"
-												   id="optionx  sRadios2"
-												   value="B"/>
-                                        </span>
-							</div>
-
-
-							<div class="form-group input-group">
-								<span class="input-group-addon">C</span>
-								<textarea
-										class="form-control"
-										th:name="alternativaC.descricao"
-										disabled="true"
-										id="inputError"></textarea> <span
-									class="input-group-addon"> <input type="radio"
-																	  name="correto" id="optionsRadios3" value="C"/>
-
-                                        </span>
-							</div>
-
-
-							<div class="form-group input-group">
-								<span class="input-group-addon">D</span>
-								<textarea
-										class="form-control"
-										th:name="alternativaD.descricao"
-										disabled="true"
-
-										id="inputError"></textarea> <span
-									class="input-group-addon"> <input type="radio"
-																	  name="correto" id="optionsRadios4" value="D"/>
-
-                                        </span>
-							</div>
-
-
-							<div class="form-group input-group">
-								<span class="input-group-addon">E</span>
-								<input hidden="true" value="Nenhuma das alternativas" th:name="alternativaE.descricao"/>
-								<input type="text"
-									   class="form-control" id="inputError"
-									   disabled="true"
-									   value="Nenhuma das alternativas"/> <span
-									class="input-group-addon">
-                                            <input type="radio"
-												   name="correto" id="optionsRadios5" value="E"/>
-
-                                        </span>
-
+										   th:text="${q.descricao}"
+										   class="form-control" disabled="true"></textarea>
 
 							</div>
+						</div>
+
 
 
 						</div>
+						<input hidden="true" name="tarefa" th:value="${questao.questionario.tarefa.id}"/>
 
 
 					</div>
 
 					<div class="panel-footer  clearfix">
-						<button type="submit" class="btn btn-info">
+
+						<button type="submit"  class="btn btn-info" th:if="${!questao.ativa}">
 							<i class="fa fa-floppy-o  "> </i> Aceitar Questão
 						</button>
-						<button type="reset" class="btn btn-danger">Recusar Questão</button>
+						<button type="submit" class="btn btn-danger" th:if="${questao.ativa}">Recusar Questão</button>
 					</div>
 				</div>
 			</form>
 		</div>
 
 		<div th:fragment="customCSS">
-			<script type="text/javascript">
-                $(document).ready(
-                    function () {
-                        $('input').click(
-                            function () {
-                                $('input:not(:checked)').closest("div")
-                                    .removeClass("has-success");
-                                $('input:checked').closest("div")
-                                    .addClass("has-success");
-                            });
-                    });
-			</script>
+
 		</div>
 	</div>
 </div>

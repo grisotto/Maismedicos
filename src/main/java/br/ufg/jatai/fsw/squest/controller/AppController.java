@@ -7,6 +7,7 @@ package br.ufg.jatai.fsw.squest.controller;
 
 import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
+import br.ufg.jatai.fsw.squest.domain.Questionario;
 import br.ufg.jatai.fsw.squest.domain.Usuario;
 import br.ufg.jatai.fsw.squest.service.QuestaoService;
 import br.ufg.jatai.fsw.squest.service.QuestionarioService;
@@ -69,9 +70,10 @@ public class AppController {
             Equipe equipe = autenticateUser.getEquipe();
             model.addAttribute("equipe", equipe);
             model.addAttribute("questionario", equipe.getQuestionario());
+
             try {
                 model.addAttribute("questoes", questaoService.questoesDoQuestionario(equipe.getQuestionario().getId()));
-
+                model.addAttribute("questoesOutros", questionarioService.questoesDasOutrasEquipes( equipe.getTarefa().getId(),equipe.getQuestionario().getId() ));
             }catch (Exception e){}
         }
 
@@ -81,6 +83,9 @@ public class AppController {
     }
     @Autowired
     private QuestaoService questaoService;
+
+    @Autowired
+    private QuestionarioService questionarioService;
 
     /**
      *
@@ -132,4 +137,7 @@ public class AppController {
         model.addAttribute("loginError", true);
         return "login.html";
     }
+
+
+
 }

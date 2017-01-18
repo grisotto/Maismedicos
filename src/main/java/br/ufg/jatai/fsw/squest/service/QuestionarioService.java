@@ -16,5 +16,9 @@ import java.util.List;
 public interface QuestionarioService extends AbstractService<Questionario, Integer> {
 
     public List<Questionario> questoesDaTarefa(Integer tarefaID);
+
+    public List<Questionario> questoesDasOutrasEquipes(Integer tarefaID, Integer equipeID );
+
+
     
 }

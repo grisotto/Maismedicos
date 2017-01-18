@@ -139,9 +139,9 @@ and open the template in the editor.
                                             <div th:if="${questionario != null}">
 
 
-                                                <tr th:each="e : ${questoes}">
+                                                <tr th:each="e, itr : ${questoes}">
 
-                                                    <td>1</td>
+                                                    <td th:text="${itr.count}" >1</td>
                                                     <td th:text="${#strings.abbreviate(e.question,100)}"></td>
                                                     <td></td>
                                                 </tr>
@@ -185,11 +185,43 @@ and open the template in the editor.
 
                                 <div class="alert alert-info">
                                     <strong>Respondendo</strong> 
-                                    <a href="/app/questionario/responder"
-                                       class="btn btn-sm btn-default pull-right"> Responder
-                                        <span class="fa fa-check-square-o"></span>
-                                    </a>
+                                    <!--<a href="/app/questionario/responder"-->
+                                       <!--class="btn btn-sm btn-default pull-right"> Responder-->
+                                        <!--<span class="fa fa-check-square-o"></span>-->
+                                    <!--</a>-->
                                     <p>Responda as questões dos outros grupos.</p>
+                                </div>
+
+                                <div class="panel-body">
+                                    <table class="table table-responsive" id="Questoes">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Questão</th>
+                                            <th>Respondida</th>
+
+
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <div th:if="${questionario != null}">
+
+
+                                            <tr th:each="e, itr : ${questoesOutros}">
+
+                                                <td th:text="${itr.count}" >1</td>
+                                                <td th:text="${#strings.abbreviate(e.question,100)}"></td>
+                                                <td>
+                                                    <div class="btn-group" role="group">
+
+                                                        <a th:href="@{/app/questionario/responder/}+${e.id}" class="btn btn-sm  btn-success fa fa-send"/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                        </tbody>
+                                    </table>
                                 </div>
 
                             </div>
