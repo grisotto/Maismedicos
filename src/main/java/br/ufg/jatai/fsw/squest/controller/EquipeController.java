@@ -128,8 +128,9 @@ public class EquipeController implements Serializable {
 
         Equipe equipe = equipeFacade.findEquipe(id);
 
+        log.info("Turma ID: {}, Tarefa ID: {}",equipe.getTarefa().getTurma().getId(),equipe.getTarefa().getId());
+        List<Aluno> alunos = equipeFacade.alunosElegiveisParaEquipe(equipe.getTarefa().getTurma().getId(),equipe.getTarefa().getId());
 
-        List<Aluno> alunos = equipeFacade.alunosElegiveisParaEquipe(equipe.getTarefa().getTurma().getId());
         map.addAttribute("todosAlunos", alunos);
         log.info("ALUNOS: " + alunos.size() + "\n" +
                 "" + alunos);

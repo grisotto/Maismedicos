@@ -22,16 +22,26 @@ public interface AlunoRepository extends JpaRepository<Aluno, Integer> {
     public Aluno findByEmail(String email);
 
     public Aluno findByMatricula(String matricula);
-//
-//    @Query("select a from Aluno a inner join a.turmas as turmaAlunos where turmaAlunos.id = :turmaID " +
-//            "and a.id not in " +
-//            "(" +
-//            "select b.id from Aluno b " +
-//            "inner join b.equipes as alunoEquipe " +
-//            "where alunoEquipe.tarefa.turma.id= :turmaID" +
-//            ")" +
-//            "GROUP BY a.nome")
-    @Query("select a from Aluno  a left outer join a.equipes as equipes inner join a.turmas as turmas " +
-            "where equipes.id IS NULL  and turmas.id= :turmaID")
-    public List<Aluno> alunosElegiveisParaEquipe(@Param("turmaID") Integer turmaID);
+
+//    SELECT
+//    FROM
+//    aluno
+//    INNER JOIN turma_alunos ON turma_alunos.alunos_id = aluno.id
+//    INNER JOIN turma ON turma_alunos.turmas_id = turma.id
+//            WHERE
+//              turma_alunos.turmas_id = 1 AND aluno.id
+        //            not in (
+        //                    SELECT aluno.id FROM aluno
+        //                    INNER JOIN equipe_alunos ON aluno.id = equipe_alunos.alunos_id
+        //                    INNER JOIN equipe ON equipe_alunos.equipes_id = equipe.id
+        //                    INNER JOIN tarefa ON equipe.tarefa_id = tarefa.id
+        //                          WHERE tarefa.id = 1
+    //                      )
+
+    @Query("SELECT a1 FROM Aluno  a1 INNER  JOIN a1.turmas AS t1 " +
+            "WHERE  t1.id = :turmaID AND a1.id NOT IN " +
+            "(SELECT a2.id FROM Aluno a2 " +
+            "INNER JOIN a2.equipes as e2 " +
+            "INNER JOIN e2.tarefa AS t2 where t2.id=:tarefaID)")
+    public List<Aluno> alunosElegiveisParaEquipe(@Param("turmaID") Integer turmaID, @Param("tarefaID") Integer tarefaID);
 }

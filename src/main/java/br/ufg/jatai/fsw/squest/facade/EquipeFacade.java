@@ -93,8 +93,8 @@ public class EquipeFacade {
         return equipeService.find(id);
     }
 
-    public List<Aluno> alunosElegiveisParaEquipe(Integer turmaID) {
-        return alunoService.alunosElegiveisParaEquipe(turmaID);
+    public List<Aluno> alunosElegiveisParaEquipe(Integer turmaID, Integer tarefaID) {
+        return alunoService.alunosElegiveisParaEquipe(turmaID, tarefaID);
 
     }
 
