@@ -63,8 +63,8 @@ public class AlunoServiceImpl implements AlunoService {
     }
 
     @Override
-    public List<Aluno> alunosElegiveisParaEquipe(Integer turmaID) {
-        return alunoRepository.alunosElegiveisParaEquipe(turmaID);
+    public List<Aluno> alunosElegiveisParaEquipe(Integer turmaID, Integer tarefaID) {
+        return alunoRepository.alunosElegiveisParaEquipe(turmaID, tarefaID);
     }
 
 }

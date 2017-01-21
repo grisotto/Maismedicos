@@ -17,5 +17,5 @@ public interface AlunoService extends AbstractService<Aluno, Integer> {
 
     public Aluno findByEmail(String email);
     public Aluno findByMatricula(String matricula);
-    public List<Aluno> alunosElegiveisParaEquipe(Integer turmaID);
+    public List<Aluno>  alunosElegiveisParaEquipe(Integer turmaID, Integer tarefaID) ;
 }
