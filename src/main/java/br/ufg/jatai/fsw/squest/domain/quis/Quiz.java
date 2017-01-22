@@ -55,7 +55,7 @@ public class Quiz {
     public Set<QuestaoQuiz> questaoToEquipe(Equipe equipe) {
         Set<QuestaoQuiz> retorno = new HashSet<>();
         for (QuestaoQuiz questaoQuize : questaoQuizes) {
-            if (!questaoQuize.getQuestao().getQuestionario().getTime().equals(equipe)) {
+            if (!questaoQuize.getQuestaoDe().equals(equipe)) {
                 retorno.add(questaoQuize);
             }
         }

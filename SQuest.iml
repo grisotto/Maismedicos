@@ -1,26 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="FacetManager">
-    <facet type="hibernate" name="Hibernate">
-      <configuration>
-        <datasource-map />
-        <naming-strategy-map />
-      </configuration>
-    </facet>
-    <facet type="Spring" name="Spring">
-      <configuration />
-    </facet>
-    <facet type="jpa" name="JPA">
-      <configuration>
-        <setting name="validation-enabled" value="true" />
-        <setting name="provider-name" value="" />
-        <datasource-mapping>
-          <factory-entry name="NewPersistenceUnit" />
-        </datasource-mapping>
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/java/META-INF/persistence.xml" />
-      </configuration>
-    </facet>
-  </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -32,12 +11,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="org.thymeleaf:thymeleaf:Release" level="project" />
-    <orderEntry type="library" name="org.thymeleaf.extras:thymeleaf-extras-springsecurity4:Release" level="project" />
-    <orderEntry type="library" name="org.thymeleaf:thymeleaf-spring4:Release" level="project" />
-    <orderEntry type="library" name="org.thymeleaf:thymeleaf:Release1" level="project" />
-    <orderEntry type="library" name="org.thymeleaf.extras:thymeleaf-extras-springsecurity4:Release1" level="project" />
-    <orderEntry type="library" name="org.thymeleaf:thymeleaf-spring4:Release1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-aop:1.4.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:1.4.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-logging:1.4.3.RELEASE" level="project" />
@@ -138,14 +111,5 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.3.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-oxm:4.3.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.22" level="project" />
-    <orderEntry type="library" name="org.thymeleaf:thymeleaf:Release2" level="project" />
-    <orderEntry type="library" name="org.thymeleaf.extras:thymeleaf-extras-springsecurity4:Release2" level="project" />
-    <orderEntry type="library" name="org.thymeleaf:thymeleaf-spring4:Release2" level="project" />
-    <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
-    <orderEntry type="library" name="org.thymeleaf.extras:thymeleaf-extras-springsecurity4:Release1" level="project" />
-    <orderEntry type="library" name="org.thymeleaf.extras:thymeleaf-extras-springsecurity4:Release1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.3.5.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-jpa:1.10.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" level="project" />
   </component>
 </module>

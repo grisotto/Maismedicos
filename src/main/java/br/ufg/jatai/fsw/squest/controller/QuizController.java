@@ -2,10 +2,15 @@ package br.ufg.jatai.fsw.squest.controller;
 
 import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.configuration.SecurityConfig;
+import br.ufg.jatai.fsw.squest.domain.Alternativa;
+import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Questao;
+import br.ufg.jatai.fsw.squest.domain.QuestoDoQuiz;
+import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Usuario;
 import br.ufg.jatai.fsw.squest.domain.quis.QuestaoQuiz;
 import br.ufg.jatai.fsw.squest.domain.quis.Quiz;
+import br.ufg.jatai.fsw.squest.domain.quis.RespotaQuestaoQuiz;
 import br.ufg.jatai.fsw.squest.repository.TarefaRepository;
 import br.ufg.jatai.fsw.squest.service.QuestaoService;
 import br.ufg.jatai.fsw.squest.service.QuizService;
@@ -18,6 +23,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/app/quiz")
 public class QuizController {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(SecurityConfig.class);
 
     @Autowired
@@ -42,26 +50,49 @@ public class QuizController {
     private QuestaoService questaoService;
 
     @GetMapping
-    public String home(final Quiz quiz, ModelMap model){
-        if(autenticateUser.getUsuario().getTipoUsuario().equals(Usuario.TipoUsuario.PROFESSOR)){
-            model.addAttribute("turmas",tarefaService.allOfProfessor(autenticateUser.getProfessor()));
+    public String home(final Quiz quiz, ModelMap model) {
+        if (autenticateUser.getUsuario().getTipoUsuario().equals(Usuario.TipoUsuario.PROFESSOR)) {
+            model.addAttribute("turmas", tarefaService.allOfProfessor(autenticateUser.getProfessor()));
         }
         return "app/quiz/home";
     }
 
     @GetMapping("/{tarefaID}/novo")
-    public String criarQuiz(@PathVariable Integer tarefaID, ModelMap model){
+    public String criarQuiz(@PathVariable Integer tarefaID, ModelMap model) {
         LOGGER.info("Novo quiz, para tarefa {}", tarefaID);
-        Quiz q = new Quiz();
-        q.setTarefa(tarefaService.find(tarefaID));
-        Set<Questao> questoes = questaoService.questoesParaQuiz(tarefaID);
-        LOGGER.info("Quatidade de Questões para o Quiz: {}",questoes.size());
-        q.setQuestaoQuizes(QuestaoQuiz.AjusteTecnico.create(questoes));
-        
-        quizService.inserir(q);
+        Tarefa tarefa = tarefaService.find(tarefaID);//Recuprar a tarefa
+        Quiz q = new Quiz();//Inicializa o quiz
+        q.setTarefa(tarefa);//Coloca Tarefa
+        Set<Questao> questoes = questaoService.questoesParaQuiz(tarefaID);//Recupera as questões
+        LOGGER.info("Quatidade de Questões para o Quiz: {}", questoes.size());
+        q.setQuestaoQuizes(QuestaoQuiz.AjusteTecnico.create(questoes));//Coloca questões
 
-        model.addAttribute(String.format("msg","Quiz adicionado \n %s", q));
+        quizService.inserir(q);//Salva quiz
+        //TODO colocar a etapa para respondendo
+        
+
+        model.addAttribute(String.format("msg", "Quiz adicionado \n %s", q));
         return "redirect:/app/quiz/";
 
     }
+    @PostMapping("/{quizID}/equipe")
+    public Set<QuestaoQuiz> getQuestoes(@PathVariable("quizID")Integer quizID,@RequestBody Equipe equipe){
+        return quizService.find(quizID).questaoToEquipe(equipe);
+    }
+    
+    @PostMapping("/quizID/responder")
+    public void responderQuestao(QuestaoQuiz questaoQuiz, Alternativa alternativa){
+        Equipe equipe = autenticateUser.getEquipe();//Requcuperando equipe
+        RespotaQuestaoQuiz respotaQuestaoQuiz = new RespotaQuestaoQuiz();//Cria Obbjeto de reposta
+        respotaQuestaoQuiz.setAlternativa(alternativa);//Colocando a autenrativa
+        respotaQuestaoQuiz.setEquipe(equipe);//Colocando a equipe
+        
+        questaoQuiz.getRespotaQuestaoQuizs().add(respotaQuestaoQuiz);//Adicionando a resposta
+
+//        quizService.atualizar()
+        
+    
+    }
+    
+   
 }

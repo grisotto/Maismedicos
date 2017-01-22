@@ -24,6 +24,9 @@ public class QuestaoQuiz implements Serializable {
 
     @ManyToOne
     private Equipe questaoDe;
+    
+   
+    private Quiz quiz;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<RespotaQuestaoQuiz> respotaQuestaoQuizs;
