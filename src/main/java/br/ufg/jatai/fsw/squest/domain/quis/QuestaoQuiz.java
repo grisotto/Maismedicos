@@ -1,5 +1,6 @@
 package br.ufg.jatai.fsw.squest.domain.quis;
 
+import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Questao;
 
 import javax.persistence.*;
@@ -16,6 +17,11 @@ public class QuestaoQuiz {
 
     @OneToOne
     private Questao questao;
+
+
+    @ManyToOne
+    private Equipe questaoDe;
+
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<RespotaQuestaoQuiz> respotaQuestaoQuizs;
@@ -34,5 +40,21 @@ public class QuestaoQuiz {
 
     public void setRespotaQuestaoQuizs(List<RespotaQuestaoQuiz> respotaQuestaoQuizs) {
         this.respotaQuestaoQuizs = respotaQuestaoQuizs;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Equipe getQuestaoDe() {
+        return questaoDe;
+    }
+
+    public void setQuestaoDe(Equipe questaoDe) {
+        this.questaoDe = questaoDe;
     }
 }

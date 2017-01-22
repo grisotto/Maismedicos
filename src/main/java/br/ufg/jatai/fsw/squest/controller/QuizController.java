@@ -52,7 +52,7 @@ public class QuizController {
         Quiz q = new Quiz();
         q.setTarefa(tarefaService.find(tarefaID));
 
-
+        LOGGER.info("Quatidade de Questões para o Quiz: {}",questaoService.questoesParaQuiz(tarefaID).size());
 
 
         quizService.inserir(q);
