@@ -58,7 +58,7 @@ public class QuestaoServiceImpl implements QuestaoService {
     }
 
     @Override
-    public Questao aceitarQuestao(Integer idQuestao) {
+    public Questao aprovarQuestao(Integer idQuestao) {
 
         Questao questao = questaoRepository.findOne(idQuestao);
         questao.setSituacaoQuestao(Questao.SituacaoQuestao.APROVADO);
@@ -67,11 +67,11 @@ public class QuestaoServiceImpl implements QuestaoService {
 
     }
     @Override
-    public void reprovarQuestao(Integer idQuestao, String motivo) {
+    public Questao reprovarQuestao(Integer idQuestao, String motivo) {
 
         Questao questao = questaoRepository.findOne(idQuestao);
         questao.setSituacaoQuestao(Questao.SituacaoQuestao.REPROVADO);
-        atualizar(questao);
+        return atualizar(questao);
 
 
     }

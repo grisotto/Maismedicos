@@ -97,16 +97,16 @@ and open the template in the editor.
                         <td th:text="${q.question}">1</td>
 
 
-                        <td  th:if="${q.isAprovada()}" >
-                                        <span class="label label-info">
+                        <td  >
+                                        <span th:text="${q.situacaoQuestao}">
                                             Validada
                                         </span>
                         </td>
-                        <td  th:if="${!q.isAprovada()}" >
+<!--                        <td  th:if="${!q.isAprovada()}" >
                                         <span class="label label-warning fa-1">
                                             Desativada
                                         </span>
-                        </td>
+                        </td>-->
 
 
                         <td>
