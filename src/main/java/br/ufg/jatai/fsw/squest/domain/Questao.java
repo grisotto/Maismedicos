@@ -1,7 +1,7 @@
 package br.ufg.jatai.fsw.squest.domain;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +11,8 @@ import java.util.List;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
- *
  * @author dfranco
  */
 @Entity
@@ -33,10 +33,18 @@ public class Questao implements Serializable {
     private List<Alternativa> alternativas = new ArrayList<>();
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Questionario questionario;
-   
+
+    @Transient
+    private boolean aprovada;
+
+    @Transient
+    private boolean reprovada;
+
+    @Transient
+    private boolean aguardando;
+
 
     /**
-     *
      * @param id
      * @param question
      * @param alternativas
@@ -55,7 +63,6 @@ public class Questao implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public Integer getId() {
@@ -63,7 +70,6 @@ public class Questao implements Serializable {
     }
 
     /**
-     *
      * @param id
      */
     public void setId(Integer id) {
@@ -71,7 +77,6 @@ public class Questao implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public String getQuestion() {
@@ -79,7 +84,6 @@ public class Questao implements Serializable {
     }
 
     /**
-     *
      * @param question
      */
     public void setQuestion(String question) {
@@ -87,7 +91,6 @@ public class Questao implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public List<Alternativa> getAlternativas() {
@@ -95,7 +98,6 @@ public class Questao implements Serializable {
     }
 
     /**
-     *
      * @param alternativas
      */
     public void setAlternativas(List<Alternativa> alternativas) {
@@ -149,7 +151,20 @@ public class Questao implements Serializable {
         this.situacaoQuestao = situacaoQuestao;
     }
 
-    public enum SituacaoQuestao{
+    public boolean isAprovada() {
+        return situacaoQuestao.equals(SituacaoQuestao.APROVADO);
+    }
+
+    public boolean isReprovado() {
+        return situacaoQuestao.equals(SituacaoQuestao.REPROVADO);
+    }
+
+    public boolean isAguardando() {
+        return situacaoQuestao.equals(SituacaoQuestao.AGUARDANDO);
+    }
+
+
+    public enum SituacaoQuestao {
         AGUARDANDO, APROVADO, REPROVADO;
     }
 }

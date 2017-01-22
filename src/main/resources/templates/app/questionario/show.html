@@ -71,10 +71,11 @@ and open the template in the editor.
 
 					<div class="panel-footer  clearfix">
 
-						<button type="submit"  class="btn btn-info" th:if="${!questao.ativa}">
-							<i class="fa fa-floppy-o  "> </i> Aceitar Questão
+						<button type="submit"  class="btn btn-info" >
+							<i class="fa fa-check  "> </i> Aprovar
 						</button>
-						<button type="submit" class="btn btn-danger" th:if="${questao.ativa}">Recusar Questão</button>
+                                            
+						<button type="submit" class="btn btn-danger" > <i class="fa fa-times  "> </i>Reprovar</button>
 					</div>
 				</div>
 			</form>
