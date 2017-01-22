@@ -26,7 +26,7 @@ public class QuestaoQuiz implements Serializable {
     private Questao questao;
 
     @ManyToOne
-    private Equipe questaoDe;
+    private Equipe equipe;
     
   
 
@@ -57,12 +57,12 @@ public class QuestaoQuiz implements Serializable {
         this.id = id;
     }
 
-    public Equipe getQuestaoDe() {
-        return questaoDe;
+    public Equipe getEquipe() {
+        return equipe;
     }
 
-    public void setQuestaoDe(Equipe questaoDe) {
-        this.questaoDe = questaoDe;
+    public void setEquipe(Equipe questaoDe) {
+        this.equipe = questaoDe;
     }
 
     public static class AjusteTecnico {
@@ -77,7 +77,7 @@ public class QuestaoQuiz implements Serializable {
             for (Questao q : questoes) {
                 QuestaoQuiz qq = new QuestaoQuiz();
                 qq.setQuestao(q);
-                qq.setQuestaoDe(q.getQuestionario().getTime());
+                qq.setEquipe(q.getQuestionario().getTime());
                 
                 retorno.add(qq);
             }
