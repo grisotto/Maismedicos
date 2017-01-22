@@ -15,6 +15,9 @@ import java.util.Set;
 @Entity
 public class QuestaoQuiz implements Serializable {
 
+//    @ManyToOne(cascade = CascadeType.PERSIST)
+//    private Quiz quiz;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -25,8 +28,7 @@ public class QuestaoQuiz implements Serializable {
     @ManyToOne
     private Equipe questaoDe;
     
-   
-    private Quiz quiz;
+  
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<RespotaQuestaoQuiz> respotaQuestaoQuizs;
@@ -83,4 +85,13 @@ public class QuestaoQuiz implements Serializable {
             return retorno;
         }
     }
+//
+//    public Quiz getQuiz() {
+//        return quiz;
+//    }
+//
+//    public void setQuiz(Quiz quiz) {
+//        this.quiz = quiz;
+//    }
+    
 }

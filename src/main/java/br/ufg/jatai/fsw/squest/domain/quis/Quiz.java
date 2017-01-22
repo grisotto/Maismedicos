@@ -26,7 +26,7 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = {CascadeType.PERSIST})
     private Set<QuestaoQuiz> questaoQuizes;
 
     @OneToOne
@@ -55,7 +55,7 @@ public class Quiz {
     public Set<QuestaoQuiz> questaoToEquipe(Equipe equipe) {
         Set<QuestaoQuiz> retorno = new HashSet<>();
         for (QuestaoQuiz questaoQuize : questaoQuizes) {
-            if (!questaoQuize.getQuestaoDe().equals(equipe)) {
+            if (!questaoQuize.getQuestaoDe().getId().equals(equipe.getId())) {
                 retorno.add(questaoQuize);
             }
         }

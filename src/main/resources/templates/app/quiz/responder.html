@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link href="/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+    <link href="/plugins/font-awesome/css/font-awesome.min.css" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}" rel="stylesheet" media="screen" />
+
+
+</head>
+<body>
+
+<div>
+    <h1>Pagina teste para responder quiz</h1>
+    <p>Lista em uma tabela todas as questẽos que elle tem que responder</p>
+    <table th:class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr th:each="q : ${questoes}">
+            <td th:text="${q.id}">id</td>
+            <td th:text="${q.questao.question}">id</td>
+            <td ><a href="#" ><span class="fa fa-check"></span>Responder</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
