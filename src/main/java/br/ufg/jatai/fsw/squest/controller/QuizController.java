@@ -2,12 +2,15 @@ package br.ufg.jatai.fsw.squest.controller;
 
 import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.configuration.SecurityConfig;
+import br.ufg.jatai.fsw.squest.domain.Questao;
 import br.ufg.jatai.fsw.squest.domain.Usuario;
+import br.ufg.jatai.fsw.squest.domain.quis.QuestaoQuiz;
 import br.ufg.jatai.fsw.squest.domain.quis.Quiz;
 import br.ufg.jatai.fsw.squest.repository.TarefaRepository;
 import br.ufg.jatai.fsw.squest.service.QuestaoService;
 import br.ufg.jatai.fsw.squest.service.QuizService;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,10 +54,10 @@ public class QuizController {
         LOGGER.info("Novo quiz, para tarefa {}", tarefaID);
         Quiz q = new Quiz();
         q.setTarefa(tarefaService.find(tarefaID));
-
-        LOGGER.info("Quatidade de Questões para o Quiz: {}",questaoService.questoesParaQuiz(tarefaID).size());
-
-
+        Set<Questao> questoes = questaoService.questoesParaQuiz(tarefaID);
+        LOGGER.info("Quatidade de Questões para o Quiz: {}",questoes.size());
+        q.setQuestaoQuizes(QuestaoQuiz.AjusteTecnico.create(questoes));
+        
         quizService.inserir(q);
 
         model.addAttribute(String.format("msg","Quiz adicionado \n %s", q));
