@@ -22,69 +22,69 @@ and open the template in the editor.
 
 
                 <div class="col-md-12 col-sm-8">
-                    <form action="#" th:action="@{/app/questionario/}+${questao.id}+@{/ativar}" th:object="${questao}" role="form"
-                          method="POST">
-
-                        <div class="panel panel-info">
-                            <div class="panel-heading clearfix">
-                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">
-                                    <i class="fa fa-plus fa-fw"></i> Validando Questão
-                                </h4>
-
-                            </div>
 
 
-                            <div class="panel-body">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Questão</label>
-                                        <textarea class="form-control" disabled = "true"
-                                                  th:name="descricao"
-                                                  th:text="${questao.question}"
-                                                  rows="3"
-                                                  placeholder="Descreva a questão"></textarea>
+                    <div class="panel panel-info">
+                        <div class="panel-heading clearfix">
+                            <h4 class="panel-title pull-left" style="padding-top: 7.5px;">
+                                <i class="fa fa-plus fa-fw"></i> Validando Questão
+                            </h4>
 
-                                    </div>
-                                    <div th:each="q, iter : ${questao.alternativas}">
-
-                                        <div class="form-group input-group " th:classappend="${q.correto} ? has-success">
-                                            <span class="input-group-addon" th:if="${iter.index == 0}" th:text="A">A</span>
-                                            <span class="input-group-addon" th:if="${iter.index == 1}" th:text="B">B</span>
-                                            <span class="input-group-addon" th:if="${iter.index == 2}" th:text="C">C</span>
-                                            <span class="input-group-addon" th:if="${iter.index == 3}" th:text="D">D</span>
-                                            <span class="input-group-addon" th:if="${iter.index == 4}" th:text="E">E</span>
-                                            <textarea  th:name="alternativaA.descricao"
-                                                       th:text="${q.descricao}"
-                                                       class="form-control" disabled="true"></textarea>
-
-                                        </div>
-                                    </div>
+                        </div>
 
 
+                        <div class="panel-body">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Questão</label>
+                                    <textarea class="form-control" disabled = "true"
+                                              th:name="descricao"
+                                              th:text="${questao.question}"
+                                              rows="3"
+                                              placeholder="Descreva a questão"></textarea>
 
                                 </div>
-                                <input hidden="true" name="tarefa" th:value="${questao.questionario.tarefa.id}"/>
+                                <div th:each="q, iter : ${questao.alternativas}">
+
+                                    <div class="form-group input-group " th:classappend="${q.correto} ? has-success">
+                                        <span class="input-group-addon" th:if="${iter.index == 0}" th:text="A">A</span>
+                                        <span class="input-group-addon" th:if="${iter.index == 1}" th:text="B">B</span>
+                                        <span class="input-group-addon" th:if="${iter.index == 2}" th:text="C">C</span>
+                                        <span class="input-group-addon" th:if="${iter.index == 3}" th:text="D">D</span>
+                                        <span class="input-group-addon" th:if="${iter.index == 4}" th:text="E">E</span>
+                                        <textarea   th:name="alternativaA.descricao"
+                                                    th:text="${q.descricao}"
+                                                    class="form-control" readonly="true"></textarea>
+
+                                    </div>
+                                </div>
+
 
 
                             </div>
+                            <input hidden="true" name="tarefa" th:value="${questao.questionario.tarefa.id}"/>
 
-                            <div class="panel-footer  clearfix">
-                                <form action="#" th:action="@{/app/questionario/}+${questao.id}+@{/aprovar}" th:object="${questao}" role="form"
-                                    method="POST">
-                                          
+
+                        </div>
+
+                        <div class="panel-footer  clearfix">
+                            <form action="#" th:action="@{/app/questionario/}+${questao.id}+@{/aprovar}" th:object="${questao}" role="form"
+                                  method="POST">
+                                <input th:value="${questao}" name="questaoID"/>
                                 <button type="submit"  class="btn btn-info" >
                                     <i class="fa fa-check  "> </i> Aprovar
                                 </button>     
-                                </form>
-                               
-  <form action="#" th:action="@{/app/questionario/}+${questao.id}+@{/reprovar}" th:object="${questao}" role="form"
-      method="POST">
-                                            <button type="submit" class="btn btn-danger" > <i class="fa fa-times  "> </i>Reprovar</button>
+                            </form>
 
-  </form>
-                            </div>
+                            <form action="#" th:action="@{/app/questionario/}+${questao.id}+@{/reprovar}" th:object="${questao}" role="form"
+                                  method="POST">
+                                <input th:value="${questao}"/>
+                                <button type="submit" class="btn btn-danger" > <i class="fa fa-times  "> </i>Reprovar</button>
+
+                            </form>
                         </div>
+                    </div>
                 </div>
 
                 <div th:fragment="customCSS">

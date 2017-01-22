@@ -112,12 +112,12 @@ public class QuestionarioController implements Serializable {
 
         return "redirect:/app/";
     }
-    @PostMapping ("{idQuestao}/ativar")
-    public String ativarQuestao (@PathVariable ("idQuestao") Integer idQuestao, @Valid Tarefa tarefa){
-        questaoService.aceitarQuestao(idQuestao);
+    @PostMapping ("{questaoID}/aprovar")
+    public String ativarQuestao (@PathVariable ("questaoID") Integer idQuestao){
+        Questao q = questaoService.aceitarQuestao(idQuestao);
 
 
-        return "redirect:/app/tarefa/" + tarefa.getId() + "/questoes";
+        return "redirect:/app/tarefa/" + q.getQuestionario().getTarefa().getId() + "/questoes";
 
     }
 
