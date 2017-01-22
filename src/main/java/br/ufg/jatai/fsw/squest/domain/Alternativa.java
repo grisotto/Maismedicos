@@ -22,7 +22,7 @@ public class Alternativa implements Serializable {
 
     private String descricao;
     private boolean correto;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Questao questao;
 
     /**

@@ -8,12 +8,10 @@ package br.ufg.jatai.fsw.squest.service;
 import br.ufg.jatai.fsw.squest.domain.Questao;
 import br.ufg.jatai.fsw.squest.repository.QuestaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
-
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Service;
 
 /**
  * @author vilela
@@ -60,13 +58,26 @@ public class QuestaoServiceImpl implements QuestaoService {
     }
 
     @Override
-    public void ativarQuestao(Integer idQuestao) {
+    public void aceitarQuestao(Integer idQuestao) {
 
         Questao questao = questaoRepository.findOne(idQuestao);
-        boolean ativa = questao.isAtiva();
-        questao.setAtiva(!ativa);
+        questao.setSituacaoQuestao(Questao.SituacaoQuestao.APROVADO);
         atualizar(questao);
 
 
+    }
+    @Override
+    public void reprovarQuestao(Integer idQuestao, String motivo) {
+
+        Questao questao = questaoRepository.findOne(idQuestao);
+        questao.setSituacaoQuestao(Questao.SituacaoQuestao.REPROVADO);
+        atualizar(questao);
+
+
+    }
+
+    @Override
+    public Set<Questao> questoesParaQuiz(Integer tarefaID) {
+        return questaoRepository.questoesPorSituacao(tarefaID, Questao.SituacaoQuestao.APROVADO);
     }
 }

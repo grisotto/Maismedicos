@@ -69,11 +69,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .sessionManagement()
                 .enableSessionUrlRewriting(true)
-                .invalidSessionUrl("/login?invalidSection=true?" + passwordEncoder.encode(this.toString()))
+                .invalidSessionUrl("/login?invalidSection=true?")
                 .maximumSessions(1)
                 
                 .sessionRegistry(sessionRegistry())
-                .expiredUrl("/login?sessionExpire=true&" + passwordEncoder.encode(this.toString()));
+                .expiredUrl("/login?sessionExpire=true&");
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }

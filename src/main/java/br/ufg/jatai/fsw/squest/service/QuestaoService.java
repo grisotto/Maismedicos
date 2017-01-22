@@ -16,6 +16,10 @@ import java.util.Set;
 public interface  QuestaoService extends AbstractService<Questao, Integer> {
     public Set<Questao> questoesDoQuestionario(Integer questionarioID);
 
-    public void ativarQuestao(Integer idQuestao);
+    public void aceitarQuestao(Integer idQuestao);
+
+    public void reprovarQuestao(Integer idQuestao, String motivo);
+
+    public  Set<Questao> questoesParaQuiz(Integer tarefaID);
 
 }

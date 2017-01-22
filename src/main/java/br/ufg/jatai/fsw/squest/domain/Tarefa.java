@@ -10,6 +10,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
+
+import br.ufg.jatai.fsw.squest.domain.quis.Quiz;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -48,6 +50,9 @@ public class Tarefa implements Serializable {
     @OneToMany(mappedBy = "tarefa")
     private List<Equipe> equipes;
 
+
+    @OneToOne(mappedBy = "tarefa", fetch = FetchType.EAGER)
+    private Quiz quiz;
     /**
      *
      */
@@ -279,5 +284,13 @@ public class Tarefa implements Serializable {
                 ", turma=" + turma +
                 ", tamanhoQuestoes=" + tamanhoQuestoes +
                 '}';
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 }

@@ -29,7 +29,7 @@ public interface QuestionarioRepository extends JpaRepository<Questionario, Inte
     public List<Questionario> questoesDaTarefa(@Param("tarefaID") Integer tarefaID);
 
 
-    @Query("select q from Questao q inner join q.questionario qe " +
-            "where qe.tarefa.id = :tarefaID AND qe.time.id is NOT :equipeID AND q.ativa = 1 ")
-    public List<Questionario> questoesDasOutrasEquipes(@Param("tarefaID") Integer tarefaID,@Param("equipeID") Integer equipeID );
+//    @Query("select q from Questao q inner join q.questionario qe " +
+//            "where qe.tarefa.id = :tarefaID AND qe.time.id is NOT :equipeID AND q. = 1 ")
+//    public List<Questionario> questoesDasOutrasEquipes(@Param("tarefaID") Integer tarefaID,@Param("equipeID") Integer equipeID );
 }

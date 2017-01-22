@@ -60,6 +60,11 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 
     @Override
     public List<Questionario> questoesDasOutrasEquipes(Integer tarefaID, Integer equipeID) {
-        return questionarioRepository.questoesDasOutrasEquipes(tarefaID, equipeID);
+        return null;
     }
+
+//    @Override
+//    public List<Questionario> questoesDasOutrasEquipes(Integer tarefaID, Integer equipeID) {
+//        return questionarioRepository.questoesDasOutrasEquipes(tarefaID, equipeID);
+//    }
 }
