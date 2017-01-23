@@ -169,9 +169,7 @@ and open the template in the editor.
                                 <!--<span th:text="${questionario}"></span>-->
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        Questões Inseridas
-                                        <span th:text="${questoes!=null? questoes.size():0}"></span> de <span th:text="${equipe.tarefa.tamanhoQuestoes}"></span>
-                                            
+                                        Questões Inseridas  d<span th:text="${questoes.size()}"></span>
                                         <a href="/app/questionario/inserir"
                                            class="btn btn-sm btn-default pull-right"> Add Nova Questão
                                             <span class="fa fa-plus"></span>
