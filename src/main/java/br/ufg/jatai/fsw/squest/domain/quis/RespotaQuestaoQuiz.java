@@ -21,6 +21,9 @@ public class RespotaQuestaoQuiz {
     @ManyToOne
     private Equipe equipe;
 
+    @ManyToOne
+    private Questao questao;
+
     public Alternativa getAlternativa() {
         return alternativa;
     }
@@ -35,5 +38,21 @@ public class RespotaQuestaoQuiz {
 
     public void setEquipe(Equipe equipe) {
         this.equipe = equipe;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Questao getQuestao() {
+        return questao;
+    }
+
+    public void setQuestao(Questao questao) {
+        this.questao = questao;
     }
 }

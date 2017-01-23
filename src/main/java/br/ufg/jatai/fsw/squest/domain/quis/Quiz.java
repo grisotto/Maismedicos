@@ -1,13 +1,10 @@
 package br.ufg.jatai.fsw.squest.domain.quis;
 
-import br.ufg.jatai.fsw.squest.domain.Alternativa;
 import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,7 +23,7 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = {CascadeType.PERSIST})
     private Set<QuestaoQuiz> questaoQuizes;
 
     @OneToOne
@@ -55,7 +52,7 @@ public class Quiz {
     public Set<QuestaoQuiz> questaoToEquipe(Equipe equipe) {
         Set<QuestaoQuiz> retorno = new HashSet<>();
         for (QuestaoQuiz questaoQuize : questaoQuizes) {
-            if (!questaoQuize.getQuestao().getQuestionario().getTime().equals(equipe)) {
+            if (!questaoQuize.getEquipe().equals(equipe)) {
                 retorno.add(questaoQuize);
             }
         }

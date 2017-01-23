@@ -15,6 +15,9 @@ import java.util.Set;
 @Entity
 public class QuestaoQuiz implements Serializable {
 
+//    @ManyToOne(cascade = CascadeType.PERSIST)
+//    private Quiz quiz;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,7 +26,13 @@ public class QuestaoQuiz implements Serializable {
     private Questao questao;
 
     @ManyToOne
-    private Equipe questaoDe;
+    private Equipe equipe;
+
+
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private Set<Equipe> equipeResponderam = new HashSet<>();
+    
+  
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<RespotaQuestaoQuiz> respotaQuestaoQuizs;
@@ -52,12 +61,33 @@ public class QuestaoQuiz implements Serializable {
         this.id = id;
     }
 
-    public Equipe getQuestaoDe() {
-        return questaoDe;
+    public Equipe getEquipe() {
+        return equipe;
     }
 
-    public void setQuestaoDe(Equipe questaoDe) {
-        this.questaoDe = questaoDe;
+    public void setEquipe(Equipe questaoDe) {
+        this.equipe = questaoDe;
+    }
+
+
+    public boolean respondido(Integer equipeID){
+        for(Equipe e : equipeResponderam){
+            if(e.getId().equals(equipeID)){
+                return true;
+            }
+
+        }
+        return false;
+
+
+    }
+
+    public Set<Equipe> getEquipeResponderam() {
+        return equipeResponderam;
+    }
+
+    public void setEquipeResponderam(Set<Equipe> equipeResponderam) {
+        this.equipeResponderam = equipeResponderam;
     }
 
     public static class AjusteTecnico {
@@ -72,7 +102,7 @@ public class QuestaoQuiz implements Serializable {
             for (Questao q : questoes) {
                 QuestaoQuiz qq = new QuestaoQuiz();
                 qq.setQuestao(q);
-                qq.setQuestaoDe(q.getQuestionario().getTime());
+                qq.setEquipe(q.getQuestionario().getTime());
                 
                 retorno.add(qq);
             }
@@ -80,4 +110,13 @@ public class QuestaoQuiz implements Serializable {
             return retorno;
         }
     }
+//
+//    public Quiz getQuiz() {
+//        return quiz;
+//    }
+//
+//    public void setQuiz(Quiz quiz) {
+//        this.quiz = quiz;
+//    }
+    
 }

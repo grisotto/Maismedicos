@@ -21,6 +21,8 @@ public interface AlunoRepository extends JpaRepository<Aluno, Integer> {
 
     public Aluno findByEmail(String email);
 
+    public List<Aluno> findAllByOrderByNomeAsc();
+
     public Aluno findByMatricula(String matricula);
 
 //    SELECT
