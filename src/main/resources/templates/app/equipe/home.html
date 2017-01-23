@@ -44,7 +44,7 @@ and open the template in the editor.
                             <label for="nomeEquipe" class="control-label">Nome da Equipe</label>
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1" >#</span>
-                                <input id="nomeEquipe" class="form-control" th:field="*{nome}"/>
+                                <input id="nomeEquipe" class="form-control" th:field="*{nome}" required="true"/>
                             </div>
                         </div>
 
@@ -91,7 +91,7 @@ and open the template in the editor.
                     </thead>
                     <tbody>
                     <tr th:if="${allEquipes.empty}">
-                        <td colspan="4">nao pegou as equipes. Usuario ID toda hora alterando!!</td>
+                        <td colspan="4">Nenhuma Equipe cadastrada</td>
                     </tr>
 
                     <tr th:each="t : ${allEquipes}">

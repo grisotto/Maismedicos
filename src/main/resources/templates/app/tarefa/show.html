@@ -34,7 +34,7 @@ and open the template in the editor.
                     As equipes estão respondendo
                 </div>
                 <div class="alert alert-success" th:if="${tarefa.etapaAtual.isEsperandoSubmissao()}">
-                    As equpipes estão inserindo questões
+                    As equpes estão inserindo questões
                 </div>
             </div>
             <div class="col-md-7">
@@ -95,7 +95,7 @@ and open the template in the editor.
                                                placeholder="Data Inicial" required="true" /> <input
                                                class="form-control" id='datetimeAguardandoFim'
                                                th:field="${etapas.aguardando.dataFinal}"
-                                               placeholder="Data Final" required="true" />
+                                               placeholder="Data Final" required="true" autocomplete="off" />
                                     </div>
 
                                 </div>
@@ -108,7 +108,7 @@ and open the template in the editor.
                                                placeholder="Data Inicial" required="true" /> <input
                                                class="form-control" id='datetimeEsperandoSubmissaoFim'
                                                th:field="${etapas.esperandoSubmissao.dataFinal}"
-                                               placeholder="Data Final" required="true" />
+                                               placeholder="Data Final" required="true" autocomplete="off"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -119,7 +119,7 @@ and open the template in the editor.
                                                placeholder="Data Inicial" required="true" /> <input
                                                class="form-control" id='datetimeValidandoQuestoesFim'
                                                th:field="${etapas.validandoQuestoes.dataFinal}"
-                                               placeholder="Data Final" required="true" />
+                                               placeholder="Data Final" required="true" autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -131,7 +131,7 @@ and open the template in the editor.
                                                placeholder="Data Inicial" required="true" /> <input
                                                class="form-control" id='datetimeRespondendoQuestoesFim'
                                                th:field="${etapas.respondendo.dataFinal}"
-                                               placeholder="Data Final" />
+                                               placeholder="Data Final" autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -142,7 +142,7 @@ and open the template in the editor.
                                                placeholder="Data " required="true" /> <input
                                                class="form-control" id='datetimeFinalizadoFim'
                                                th:field="${etapas.finalizado.dataFinal}"
-                                               placeholder="Data Final" required="true" />
+                                               placeholder="Data Final" required="true" autocomplete="off"/>
 
                                     </div>
                                 </div>
@@ -172,7 +172,7 @@ and open the template in the editor.
                         <div th:if="${!tarefa.etapaEventos.empty}" class="pull-right">
                             <a class="btn btn-sm btn-default" data-toggle="modal"
                                data-target="#grupoADD"><span class="fa fa-plus"></span>
-                                Adiociona Grupo</a>
+                                Adiociona Equipe</a>
 
                         </div>
                     </div>
@@ -180,7 +180,7 @@ and open the template in the editor.
                         <div class="alert alert-warning"
                              th:if="${tarefa.etapaEventos.empty}">
                             <b>Atenção</b>
-                            <p>Antes de criar grupos é nescessário que você defina as
+                            <p>Antes de criar equipes é nescessário que você defina as
                                 datas referente a cada estapa tarefa</p>
                         </div>
 
@@ -228,7 +228,7 @@ and open the template in the editor.
 
             </div>
 
-            <!-- Modal Para adicionar o grupo -->
+            <!-- Modal Para adicionar o equipe -->
             <div class="modal fade" id="grupoADD" tabindex="-1" role="dialog"
                  aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -238,7 +238,7 @@ and open the template in the editor.
                             <button type="button" class="close" data-dismiss="modal"
                                     aria-hidden="true">&times;</button>
                             <h4 class="modal-title" id="myModalLabel" th:object="${tarefa}">
-                                Adicionar Grupo na Tarefa: <span th:text="${tarefa.titulo}"></span>
+                                Adicionar equipe na Tarefa: <span th:text="${tarefa.titulo}"></span>
                             </h4>
                         </div>
 

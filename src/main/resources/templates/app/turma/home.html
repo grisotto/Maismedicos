@@ -39,13 +39,13 @@ and open the template in the editor.
                             <!-- Text input-->
                             <div class="form-group">
                                 <label class="control-label" for="nome">Nome</label>  
-                                <input id="nome"  th:field="${turma.nome}" name="nome" placeholder="Nome da Turma (POO 2016)" class="form-control input-md" required="" type="text"/>
+                                <input id="nome"  th:field="${turma.nome}" name="nome" class="form-control input-md" required="true" type="text"/>
                             </div>
 
                             <!-- Text input-->
                             <div class="form-group">
                                 <label class="control-label" for="descricao">Descrição</label>  
-                                <textarea id="descricao" name="descricao" th:field="${turma.descricao}" required="" placeholder="" class="form-control input-md" type="text"/>
+                                <textarea id="descricao" name="descricao" th:field="${turma.descricao}" required="true" placeholder="" class="form-control input-md" type="text"/>
                             </div>
 
                         </fieldset>
@@ -89,7 +89,7 @@ and open the template in the editor.
                                 <td th:text="${t.descricao}">1</td>
                                 <td>
                                     <a  class="btn btn-success btn-sm "  th:href="@{/app/turma/}+${{t.id}}" >
-                                        <span class="fa fa-send"> </span>
+                                        <span class="fa  fa-arrow-right"> </span>
                                     </a>
 
                                 </td>
