@@ -58,6 +58,7 @@ public class QuestionarioController implements Serializable {
     @PostMapping("/addQuestao")
     public String inserirQuestão(final String correto, final QuestaoModel questaoModel,
             final BindingResult bindingResult, final ModelMap model) {
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("questaoModel", questaoModel);
             model.addAttribute("correto", "C");

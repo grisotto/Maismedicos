@@ -88,13 +88,6 @@ and open the template in the editor.
 
 
 
-
-
-
-
-
-
-
 							</blockquote>
 						</form>
 					</div>
@@ -200,7 +193,7 @@ and open the template in the editor.
 			.funkyradio-primary input[type="radio"]:checked ~ label:before,
 			.funkyradio-primary input[type="checkbox"]:checked ~ label:before {
 				color: #fff;
-				background-color: #337ab7;
+				background-color: #2780e3;
 			}
 
 			.funkyradio-success input[type="radio"]:checked ~ label:before,
@@ -227,6 +220,19 @@ and open the template in the editor.
 				background-color: #5bc0de;
 			}
 		</style>
+
+        <script type="text/javascript">
+            $(document).ready(
+                function () {
+                    $('input').click(
+                        function () {
+                            $('input:not(:checked)').closest("div")
+                                .removeClass("has-success");
+                            $('input:checked').closest("div")
+                                .addClass("has-success");
+                        });
+                });
+        </script>
 
 
 

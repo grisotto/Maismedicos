@@ -74,7 +74,7 @@ public class QuizController {
         return quizService.find(quizID).questaoToEquipe(equipe);
     }
 
-    @PostMapping("/{quizID}/responder")
+    @PostMapping("/{quizID}/responder/{questaoID}")
     public void respostaQuestao(QuestaoQuiz questaoQuiz, Alternativa alternativa) {
         Equipe equipe = autenticateUser.getEquipe();//Requcuperando equipe
         RespotaQuestaoQuiz respotaQuestaoQuiz = new RespotaQuestaoQuiz();//Cria Obbjeto de reposta
