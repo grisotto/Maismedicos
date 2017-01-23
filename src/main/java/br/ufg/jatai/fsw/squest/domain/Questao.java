@@ -1,8 +1,12 @@
 package br.ufg.jatai.fsw.squest.domain;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -43,6 +47,8 @@ public class Questao implements Serializable {
     @Transient
     private boolean aguardando;
 
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime updated;
 
     /**
      * @param id
@@ -60,6 +66,12 @@ public class Questao implements Serializable {
      *
      */
     public Questao() {
+    }
+
+    @PreUpdate
+    @PrePersist
+    protected void onUpdate() {
+        updated = DateTime.now();
     }
 
     /**
@@ -163,6 +175,9 @@ public class Questao implements Serializable {
         return situacaoQuestao.equals(SituacaoQuestao.AGUARDANDO);
     }
 
+    public DateTime getUpdated() {
+        return updated;
+    }
 
     public enum SituacaoQuestao {
         AGUARDANDO, APROVADO, REPROVADO;

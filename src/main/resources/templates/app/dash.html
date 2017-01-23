@@ -197,7 +197,10 @@ and open the template in the editor.
                                             <tr>
                                                 <th>#</th>
                                                 <th>Questão</th>
+                                                <th>Situação</th>
                                                 <th>Última modificação</th>
+                                                <th></th>
+                                                <th></th>
 
 
                                             </tr>
@@ -210,7 +213,10 @@ and open the template in the editor.
 
                                                     <td th:text="${itr.count}" >1</td>
                                                     <td th:text="${#strings.abbreviate(e.question,100)}"></td>
-                                                    <td></td>
+                                                    <td th:text="${e.situacaoQuestao}"></td>
+                                                    <td th:text="${#dates.format(e.updated, 'dd/MM/yyyy hh:mm')}"></td>
+                                                    <td><a class="fa fa-trash btn btn-sm btn-danger"></a></td>
+                                                    <td><a class="fa fa-edit btn btn-sm btn-info"></a></td>
                                                 </tr>
                                             </div>
                                         </tbody>

@@ -3,10 +3,10 @@ nbactions.xml
 node_modules/
 !src/main/resources/static/
 /src/templatefsw/
-.idea/
+#.idea/
 /.apt_generated/
-/.idea/
-SQuest.iml
+#/.idea/
+#SQuest.iml
 web/
 .classpath
 .factorypath
@@ -15,3 +15,5 @@ web/
 /lib/
 /out/*
 
+.idea/
+SQuest.iml
