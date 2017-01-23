@@ -109,8 +109,9 @@ and open the template in the editor.
                                                         <!--Estou primeiramente interceptando o botao respondendo, para abrir o modal-->
                                                         <td th:case="${etapas.respondendo.tipo}"> <a  class="btn btn-danger btn-sm fa fa-square" data-toggle="modal"
                                                            data-target="#criarQuiz"></a></td>
-
+                                                        <td  th:case="${etapas.finalizado.tipo}"> <a disabled="true" class="btn btn-danger btn-sm fa fa-square"></a></td>
                                                         <td  th:case="*"> <a th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${e.id}" class="btn btn-danger btn-sm fa fa-square"></a></td>
+
                                                     </div>
 
                                                 </div>
