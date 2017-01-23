@@ -90,6 +90,8 @@ public class QuestionarioController implements Serializable {
 
         //Gerar a questão por meio do modelo
         Questao questao = questaoModel.getQuestao();
+        //Colocando como aguardando
+        questao.setSituacaoQuestao(Questao.SituacaoQuestao.AGUARDANDO);
 
         //Pegar o questionario dessa equipe
         Questionario questionario = questionarioRepository.getFromTarefaEquipe(user.getEquipe().getId());
@@ -110,12 +112,20 @@ public class QuestionarioController implements Serializable {
 
         return "redirect:/app/";
     }
-    @PostMapping ("{idQuestao}/ativar")
-    public String ativarQuestao (@PathVariable ("idQuestao") Integer idQuestao, @Valid Tarefa tarefa){
-        questaoService.ativarQuestao(idQuestao);
+    @PostMapping ("{questaoID}/aprovar")
+    public String aprovarQuestao (@PathVariable ("questaoID") Integer idQuestao){
+        Questao q = questaoService.aprovarQuestao(idQuestao);
 
 
-        return "redirect:/app/tarefa/" + tarefa.getId() + "/questoes";
+        return "redirect:/app/tarefa/" + q.getQuestionario().getTarefa().getId() + "/questoes";
+
+    }
+    @PostMapping ("{questaoID}/reprovar")
+    public String reprovarQuestao (@PathVariable ("questaoID") Integer idQuestao){
+        Questao q = questaoService.reprovarQuestao(idQuestao, "Mensagem");
+
+
+        return "redirect:/app/tarefa/" + q.getQuestionario().getTarefa().getId() + "/questoes";
 
     }
 

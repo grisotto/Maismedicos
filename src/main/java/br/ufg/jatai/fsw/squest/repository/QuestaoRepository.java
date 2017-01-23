@@ -17,6 +17,15 @@ import java.util.Set;
  */
 public interface QuestaoRepository extends JpaRepository<Questao, Integer> {
 
+    /**
+     *        AGUARDANDO, APROVADO, REPROVADO;
+     * @param tarefaID
+     * @return
+     */
+    @Query("SELECT q FROM Questao q WHERE q.questionario.tarefa.id=:tarefaID AND q.situacaoQuestao=:situacaoQuestao")
+    public Set<Questao> questoesPorSituacao(@Param("tarefaID") Integer tarefaID, @Param("situacaoQuestao") Questao.SituacaoQuestao situacaoQuestao);
+
+
     @Query("select q from Questao q where q.questionario.id=:questionarioID")
     public Set<Questao> questoesDoQuestionario(@Param("questionarioID") Integer questionarioID);
 }
