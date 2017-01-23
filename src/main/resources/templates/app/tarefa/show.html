@@ -98,19 +98,19 @@ and open the template in the editor.
                             <div class="modal-content">
                                 <div class="modal-header bg-warning">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Desabilitar Equipe</h4>
+                                    <h4 class="modal-title">Geração do Quiz</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Ao desbilitar a equipe <b>todos</b> integerantes da equipe receberão um
-                                        email com as informações de que eles não tem mais acesso ao  Sistema</p>
+                                    <p>Ao alterar para a etapa <b>Respondendo</b> será gerado o quiz com as questões validadas
+                                        e não será mais possível voltar para as etapas anteriores</p>
                                     <p></p>
                                     <big class="text-danger">TEM CERTEZA DISSO?</big>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Fechar
                                     </button>
-                                    <!--<a th:href="@{/app/equipe/}+${equipe.id}+@{/ativar}" class="btn btn-danger">Desativar-->
-                                    <!--</a>-->
+                                    <a th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${etapas.respondendo.id}" class="btn btn-danger">Aceitar
+                                    </a>
                                 </div>
                             </div>
 
