@@ -68,22 +68,32 @@ and open the template in the editor.
 
                         </div>
 
-                        <div class="panel-footer  clearfix">
+                        <div class="panel-footer clear-fix ">
+                            <div class="input-group">
+                            <div class="col-lg-6">
                             <form action="#" th:action="@{/app/questionario/}+${questao.id}+@{/aprovar}" th:object="${questao}" role="form"
                                   method="POST">
-                                <input th:value="${questao.id}" name="questaoID"/>
+                                <input hidden="true" th:value="${questao.id}" name="questaoID"/>
                                 <button type="submit"  class="btn btn-info" >
                                     <i class="fa fa-check  "> </i> Aprovar
                                 </button>     
                             </form>
+                            </div>
 
+
+
+
+                            <div class="col-md-6">
                             <form action="#" th:action="@{/app/questionario/}+${questao.id}+@{/reprovar}" th:object="${questao}" role="form"
                                   method="POST">
-                                <input th:value="${questao.id}" name="questaoID"/>
+                                <input hidden="true" th:value="${questao.id}" name="questaoID"/>
                                 <button type="submit" class="btn btn-danger" > <i class="fa fa-times  "> </i>Reprovar</button>
 
                             </form>
+                            </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
