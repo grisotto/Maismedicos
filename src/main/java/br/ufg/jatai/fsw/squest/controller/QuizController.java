@@ -16,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -41,6 +42,8 @@ public class QuizController {
     @Autowired
     private QuestaoService questaoService;
 
+    private static Logger log = LoggerFactory.getLogger(QuestionarioController.class.getName());
+
     @GetMapping
     public String home(final Quiz quiz, ModelMap model) {
         if (autenticateUser.getUsuario().getTipoUsuario().equals(Usuario.TipoUsuario.PROFESSOR)) {
@@ -64,7 +67,8 @@ public class QuizController {
 
 
         model.addAttribute(String.format("msg", "Quiz adicionado \n %s", q));
-        return "redirect:/app/quiz/";
+//        return "redirect:/app/quiz/";
+        return "redirect:/app/tarefa/" + tarefaID;
 
     }
 
@@ -73,21 +77,53 @@ public class QuizController {
         return quizService.find(quizID).questaoToEquipe(equipe);
     }
 
-    @PostMapping("/{quizID}/responder")
-    public void responderQuestao(QuestaoQuiz questaoQuiz, Alternativa alternativa) {
+    @PostMapping("/{quizID}/responder/{questaoID}")
+    public String respostaQuestao(QuestaoQuiz questaoQuiz, Alternativa alternativaSelecionada, final BindingResult bindingResult , final String alternativa,@PathVariable Integer quizID ) {
+
+
+        if (bindingResult.hasErrors()) {
+
+        }
+        log.info("Entrda de Dados no @Controller");
+        log.info("Equipe: " + autenticateUser.getEquipe());
+        log.info("Alternativa: " + alternativaSelecionada.getDescricao());
+        log.info("Alternativaa: " + alternativa);
+//        log.info("Alternativa: " + alternativa.getQuestao());
+//        log.info("Descrição: " + questaoQuiz.respondido());
+//        log.info("Alternativa A: " + questaoQuiz.getQuestao().getAlternativas()..getAlternativaA().getDescricao());
+//        log.info("Alternativa B: " + questaoModel.getAlternativaB().getDescricao());
+//        log.info("Alternativa C: " + questaoModel.getAlternativaC().getDescricao());
+//        log.info("Alternativa D: " + questaoModel.getAlternativaD().getDescricao());
+//        log.info("Alternativa E: " + questaoModel.getAlternativaE().getDescricao());
+//        log.info("CORRETA: " + correto);
+
         Equipe equipe = autenticateUser.getEquipe();//Requcuperando equipe
         RespotaQuestaoQuiz respotaQuestaoQuiz = new RespotaQuestaoQuiz();//Cria Obbjeto de reposta
-        respotaQuestaoQuiz.setAlternativa(alternativa);//Colocando a autenrativa
+        respotaQuestaoQuiz.setAlternativa(alternativaSelecionada);//Colocando a autenrativa
+        log.info("Cheguei: ");
         respotaQuestaoQuiz.setEquipe(equipe);//Colocando a equipe
         respotaQuestaoQuiz.setQuestao(questaoQuiz.getQuestao());
 
-        questaoQuiz.getRespotaQuestaoQuizs().add(respotaQuestaoQuiz);//Adicionando a resposta
+//        questaoQuiz.getRespotaQuestaoQuizs().add(respotaQuestaoQuiz);//Adicionando a resposta
 
         questaoQuiz.getEquipeResponderam().add(equipe);
 
 
 
 //        quizService.atualizar()
+
+        return "redirect:/app/quiz/"+ quizID +"/responder/";
+
+
+    }
+
+    @PreAuthorize("hasAuthority('GRUPO')")
+    @GetMapping("/{quizID}/responder/{questaoID}")
+    public String responderQuestao(@PathVariable Integer questaoID, @PathVariable Integer quizID, Model model) {
+        model.addAttribute("quiz", quizService.find(quizID));
+        model.addAttribute("questao", questaoService.find(questaoID));
+
+        return "app/quiz/responder";
 
 
     }
@@ -102,9 +138,10 @@ public class QuizController {
         Set<QuestaoQuiz> paraEquipe = quizService.find(quizID).questaoToEquipe(autenticateUser.getEquipe());
 
         model.addAttribute("questoes", paraEquipe);
+        model.addAttribute("quiz", quizService.find(quizID));
         LOGGER.info("Temos {} questẽos para equipe e ao todo são {}", paraEquipe,todas);
 
-        return "app/quiz/responder";
+        return "app/quiz/questoes";
     }
 
 

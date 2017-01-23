@@ -150,6 +150,11 @@ public class TarefaController {
                 + "\nidEtapa: "+idEtapa
         );
         tarefaFacade.atualizaEtapaAtual(idTarefa, idEtapa);
+        Tarefa tarefa = tarefaFacade.findTarefa(idTarefa);
+
+        if (tarefa.getEtapaAtual().isRespondendo()){
+            return "redirect:/app/quiz/" + idTarefa + "/novo";
+        }
         return "redirect:/app/tarefa/" + idTarefa;
     }
 
