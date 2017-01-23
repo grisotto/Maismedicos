@@ -21,6 +21,7 @@
             <th>ID</th>
             <th>Descricao</th>
             <th>Equipe</th>
+            <th>Respondido</th>
             <th></th>
         </tr>
 
@@ -30,6 +31,8 @@
             <td th:text="${q.id}">id</td>
             <td th:text="${q.questao.question}">id</td>
             <td th:text="${q.equipe.nome}">id</td>
+            <!--TODO organizar para poder responder ser for false-->
+            <td th:text="${q.respondido(#authentication.principal.id)}">id</td>
             <td ><a href="#" ><span class="fa fa-check"></span>Responder</a></td>
         </tr>
         </tbody>

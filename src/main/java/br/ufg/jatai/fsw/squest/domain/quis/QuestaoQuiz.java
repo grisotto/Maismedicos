@@ -29,8 +29,8 @@ public class QuestaoQuiz implements Serializable {
     private Equipe equipe;
 
 
-    @OneToMany
-    private List<Equipe> equipeResponderam;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private Set<Equipe> equipeResponderam = new HashSet<>();
     
   
 
@@ -70,17 +70,23 @@ public class QuestaoQuiz implements Serializable {
     }
 
 
-    public boolean respondido(Equipe equipe){
-        return equipeResponderam.contains(equipe);
+    public boolean respondido(Integer equipeID){
+        for(Equipe e : equipeResponderam){
+            if(e.getId().equals(equipeID)){
+                return true;
+            }
+
+        }
+        return false;
 
 
     }
 
-    public List<Equipe> getEquipeResponderam() {
+    public Set<Equipe> getEquipeResponderam() {
         return equipeResponderam;
     }
 
-    public void setEquipeResponderam(List<Equipe> equipeResponderam) {
+    public void setEquipeResponderam(Set<Equipe> equipeResponderam) {
         this.equipeResponderam = equipeResponderam;
     }
 

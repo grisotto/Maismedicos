@@ -79,8 +79,13 @@ public class QuizController {
         RespotaQuestaoQuiz respotaQuestaoQuiz = new RespotaQuestaoQuiz();//Cria Obbjeto de reposta
         respotaQuestaoQuiz.setAlternativa(alternativa);//Colocando a autenrativa
         respotaQuestaoQuiz.setEquipe(equipe);//Colocando a equipe
+        respotaQuestaoQuiz.setQuestao(questaoQuiz.getQuestao());
 
         questaoQuiz.getRespotaQuestaoQuizs().add(respotaQuestaoQuiz);//Adicionando a resposta
+
+        questaoQuiz.getEquipeResponderam().add(equipe);
+
+
 
 //        quizService.atualizar()
 
@@ -101,5 +106,7 @@ public class QuizController {
 
         return "app/quiz/responder";
     }
+
+
 
 }
