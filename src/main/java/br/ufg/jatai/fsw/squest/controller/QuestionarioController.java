@@ -16,6 +16,7 @@ import br.ufg.jatai.fsw.squest.service.QuestionarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -110,6 +111,7 @@ public class QuestionarioController implements Serializable {
         return "redirect:/app/";
     }
 
+    @PreAuthorize("hasAuthority('PROFESSOR')")
     @PostMapping("{questaoID}/aprovar")
     public String aprovarQuestao(@PathVariable("questaoID") Integer idQuestao) {
         Questao q = questaoService.aprovarQuestao(idQuestao);
@@ -118,6 +120,17 @@ public class QuestionarioController implements Serializable {
 
     }
 
+
+
+    @PreAuthorize("hasAuthority('PROFESSOR')")
+    @PostMapping("{questaoID}/reprovar")
+    public String reprovarQuestao(@PathVariable("questaoID") Integer idQuestao) {
+        Questao q = questaoService.reprovarQuestao(idQuestao, "Mensagem");
+
+        return "redirect:/app/tarefa/" + q.getQuestionario().getTarefa().getId() + "/questoes";
+
+    }
+    @PreAuthorize("hasAuthority('GRUPO')")
     @GetMapping("{questaoID}/remover")        //TODO colocar como post
     public String removeQuestao(@PathVariable("questaoID") Integer questaoID) {
         Questao questao = questaoService.find(questaoID);
@@ -126,17 +139,10 @@ public class QuestionarioController implements Serializable {
         return "redirect:/app/";
     }
 
-    @PostMapping("{questaoID}/reprovar")
-    public String reprovarQuestao(@PathVariable("questaoID") Integer idQuestao) {
-        Questao q = questaoService.reprovarQuestao(idQuestao, "Mensagem");
-
-        return "redirect:/app/tarefa/" + q.getQuestionario().getTarefa().getId() + "/questoes";
-
-    }
-
     /**
      * @return
      */
+    @PreAuthorize("hasAuthority('GRUPO')")
     @RequestMapping(value = "/inserir")
     public String QuestoesEquipeInserir(QuestaoModel questionario) {
         Integer qntQuestoes = user.getEquipe().getQuestionario() != null ? questaoService.questoesDoQuestionario(user.getEquipe().getQuestionario().getId()).size() : 0;
