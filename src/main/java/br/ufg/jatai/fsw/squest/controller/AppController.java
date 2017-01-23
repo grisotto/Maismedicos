@@ -11,6 +11,7 @@ import br.ufg.jatai.fsw.squest.domain.Questionario;
 import br.ufg.jatai.fsw.squest.domain.Usuario;
 import br.ufg.jatai.fsw.squest.service.QuestaoService;
 import br.ufg.jatai.fsw.squest.service.QuestionarioService;
+import br.ufg.jatai.fsw.squest.service.QuizService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +74,7 @@ public class AppController {
 
             try {
                 model.addAttribute("questoes", questaoService.questoesDoQuestionario(equipe.getQuestionario().getId()));
-                model.addAttribute("questoesOutros", questionarioService.questoesDasOutrasEquipes( equipe.getTarefa().getId(),equipe.getQuestionario().getId() ));
+                model.addAttribute("quiz", equipe.getTarefa().getQuiz());
             }catch (Exception e){}
         }
 
@@ -85,7 +86,7 @@ public class AppController {
     private QuestaoService questaoService;
 
     @Autowired
-    private QuestionarioService questionarioService;
+    private QuizService quizService;
 
     /**
      *

@@ -236,8 +236,9 @@ and open the template in the editor.
                             <div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.isRespondendo()}">
 
                                 <div class="alert alert-info">
-                                    <strong>Respondendo</strong> 
-                                    <a href="/app/quiz/responder"
+                                    <strong>Respondendo</strong>
+                                    quiz
+                                    <a th:href="@{/app/quiz/}+${quiz.id}+@{/responder/}"
                                        class="btn btn-sm btn-default pull-right"> Responder
                                         <span class="fa fa-check-square-o"></span>
                                     </a>
