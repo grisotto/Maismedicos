@@ -170,10 +170,10 @@ and open the template in the editor.
                             </thead>
                             <tbody>
 
-                                <tr  th:if="${todasTarefas.empty}">
+                                <tr  th:if="${tarefas.empty}">
                                     <td colspan="4">Turma sem Tarefas</td>
                                 </tr>
-                                <tr data-th-each="t : ${todasTarefas}">
+                                <tr data-th-each="t : ${tarefas}">
                                     <td th:text="${t.titulo}">1</td>
 <!--                                    <td >
                                         <div class="btn-group" role="group" aria-label="Basic example">
