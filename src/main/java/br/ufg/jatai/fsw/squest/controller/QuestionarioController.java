@@ -9,7 +9,6 @@ import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.controller.modelForm.QuestaoModel;
 import br.ufg.jatai.fsw.squest.domain.Questao;
 import br.ufg.jatai.fsw.squest.domain.Questionario;
-import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.facade.QuestionarioFacade;
 import br.ufg.jatai.fsw.squest.repository.QuestionarioRepository;
 import br.ufg.jatai.fsw.squest.service.QuestaoService;
@@ -20,13 +19,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -56,7 +53,7 @@ public class QuestionarioController implements Serializable {
 
     @PostMapping("/addQuestao")
     public String inserirQuestão(final String correto, final QuestaoModel questaoModel,
-            final BindingResult bindingResult, final ModelMap model) {
+                                 final BindingResult bindingResult, final ModelMap model) {
 
         //Verificar, se pode adicionar
         if (bindingResult.hasErrors()) {
@@ -121,6 +118,14 @@ public class QuestionarioController implements Serializable {
 
     }
 
+    @GetMapping("{questaoID}/remover")        //TODO colocar como post
+    public String removeQuestao(@PathVariable("questaoID") Integer questaoID) {
+        Questao questao = questaoService.find(questaoID);
+        log.info("Removendo questão [id: {}, Descrição: {}", questao.getId(), questao.getQuestion());
+        questaoService.apagar(questao);
+        return "redirect:/app/";
+    }
+
     @PostMapping("{questaoID}/reprovar")
     public String reprovarQuestao(@PathVariable("questaoID") Integer idQuestao) {
         Questao q = questaoService.reprovarQuestao(idQuestao, "Mensagem");
@@ -134,16 +139,16 @@ public class QuestionarioController implements Serializable {
      */
     @RequestMapping(value = "/inserir")
     public String QuestoesEquipeInserir(QuestaoModel questionario) {
-        Integer qntQuestoes = user.getEquipe().getQuestionario()!= null?questaoService.questoesDoQuestionario(user.getEquipe().getQuestionario().getId()).size():0;
+        Integer qntQuestoes = user.getEquipe().getQuestionario() != null ? questaoService.questoesDoQuestionario(user.getEquipe().getQuestionario().getId()).size() : 0;
         Integer maxQuestoes = user.getEquipe().getTarefa().getTamanhoQuestoes();
 
         if (qntQuestoes < maxQuestoes) {
             return "app/questionario/inserir";
 
-        }else{
+        } else {
             throw new ArrayIndexOutOfBoundsException(String.format("O limite máximo de questões permitidas são: %d", maxQuestoes));
         }
-        
+
     }
 
     /**
