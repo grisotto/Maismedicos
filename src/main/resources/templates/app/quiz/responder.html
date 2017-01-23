@@ -6,84 +6,85 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	th:include="fragments/basetemplate :: page">
+	  xmlns:th="http://www.thymeleaf.org"
+	  th:include="fragments/basetemplate :: page">
 <head>
-<title>TODO supply a title</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>TODO supply a title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-	<div th:fragment="content">
+<div th:fragment="content">
 
-		<div class="col-lg-12">
-			<h1 class="page-header">Respondendo Questões</h1>
-
-
-			<div class="col-md-12 col-sm-8">
-
-				<div class="panel panel-info">
-					<div class="panel-heading clearfix">
-						<h4 class="panel-title pull-left" style="padding-top: 7.5px;">
-							<i class="fa fa-check-square-o fa-fw"></i> Questão
-						</h4>
-
-					</div>
+	<div class="col-lg-12">
+		<h1 class="page-header">Respondendo Questões</h1>
 
 
+		<div class="col-md-12 col-sm-8">
+
+			<div class="panel panel-info">
+				<div class="panel-heading clearfix">
+					<h4 class="panel-title pull-left" style="padding-top: 7.5px;">
+						<i class="fa fa-check-square-o fa-fw"></i> Questão
+					</h4>
+
+				</div>
 
 
-					<div class="panel-body">
-						<div class="col-md-3"></div>
-						<div class="col-md-6">
-							<form role="form">
-								<p class="lead" th:text="${questao.question}">Qual o nome do primeiro algoritmo de geração de circuferencias?</p>
+
+
+				<div class="panel-body">
+					<div class="col-md-3"></div>
+					<div class="col-md-6">
+						<form role="form">
+							<p class="lead" th:text="${questao.question}">Qual o nome do primeiro algoritmo de geração de circuferencias?</p>
 							<blockquote>
 
 								<div th:each="q, iter : ${questao.alternativas}">
-                            	<div class="clearfix">
-                            	<div class="roundedOne pull-left">
-								<div th:if="${iter.index == 0}">
-      								<input type="checkbox" value="alternativaA" id="roundedOneA" name="alternativaA"  />
-									<label for="roundedOneA"  th:text="A">A</label>
-								</div>
-									<div th:if="${iter.index == 1}">
-									<input type="checkbox" value="alternativaA" id="roundedOneB" name="alternativaB"  />
-									<label for="roundedOneB" th:text="B"> B</label>
-								</div>
-									<div th:if="${iter.index == 2}">
-									<input type="checkbox" value="alternativaA" id="roundedOneC" name="alternativaC"  />
-									<label for="roundedOneC"  th:text="C"> C</label>
+									<div class="funkyradio">
+										<!--http://bootsnipp.com/snippets/featured/funky-radio-buttons-->
+
+										<div th:if="${iter.index == 0}" class="radio">
+
+											<div class="funkyradio-primary">
+												<input type="radio" id="radio1" name="alternativa" value=""  />
+												<label for="radio1" th:text="${q.descricao}"></label>
+											</div>
+
 										</div>
-									<div th:if="${iter.index == 3}">
-									<input type="checkbox" value="alternativaA" id="roundedOneD" name="alternativaD"  />
-									<label for="roundedOneD"  th:text="D"> D</label>
-								</div>
-									<div th:if="${iter.index == 4}">
-									<input type="checkbox" value="alternativaA" id="roundedOneE" name="alternativaE"  />
-									<label for="roundedOneE"  th:text="E"> E</label>
+										<div th:if="${iter.index == 1}" class="radio">
+
+											<div class="funkyradio-primary">
+												<input type="radio" id="radio2" name="alternativa" value=""  />
+												<label for="radio2" th:text="${q.descricao}"></label>
+											</div>
+
+										</div>
+										<div th:if="${iter.index == 2}" class="radio">
+											<div class="funkyradio-primary">
+												<input type="radio" id="radio3" name="alternativa" value=""  />
+												<label for="radio3" th:text="${q.descricao}"></label>
+											</div>
+										</div>
+										<div th:if="${iter.index == 3}" class="radio">
+
+
+											<div class="funkyradio-primary">
+												<input type="radio" id="radio4" name="alternativa" value=""  />
+												<label for="radio4" th:text="${q.descricao}"></label>
+											</div>
+										</div>
+										<div th:if="${iter.index == 4}" class="radio">
+											<div class="funkyradio-primary">
+												<input type="radio" id="radio5" name="alternativa"  value="" />
+												<label for="radio5" th:text="${q.descricao}"></label>
+											</div>
+										</div>
+
+
 									</div>
-      										
-      								
-    								</div>&nbsp;
-    								<!--<span class="bold">A. </span>-->
-									<span  th:text="${q.descricao}">Algoritmo do Jose </span>
+
 
 								</div>
-									</div>
-
-
-    						
-    								<!---->
-    							<!--<div class="clearfix">	-->
-    							<!--<div class="roundedOne pull-left">-->
-      								<!--<input type="checkbox" value="alternativaB" id="roundedOneB" name="optionsRadios"  />-->
-      								<!--<label for="roundedOneB"></label> -->
-      										<!---->
-      								<!---->
-    								<!--</div>&nbsp;-->
-    								<!--<span class="bold">B. </span>  <span class="alternativaB" th:text="${questao.alternativas}">Algoritmo de Jose </span>-->
-                           <!---->
-							<!--</div>-->
 
 
 
@@ -91,101 +92,148 @@ and open the template in the editor.
 
 
 
-</blockquote>
-							</form>
-						</div>
 
 
 
+							</blockquote>
+						</form>
 					</div>
 
-					<div class="panel-footer  clearfix">
-						<button type="submit" class="btn btn-info">
-							<i class="fa fa-floppy-o  "> </i> Salvar Resposta
-						</button>
-						<button type="sair" th:href="@{/app}" class="btn btn-danger">Sair</button>
-					</div>
+
+
+				</div>
+
+				<div class="panel-footer  clearfix">
+					<button type="submit" class="btn btn-info">
+						<i class="fa fa-floppy-o  "> </i> Salvar Resposta
+					</button>
+					<button type="sair" th:href="@{/app}" class="btn btn-danger">Sair</button>
 				</div>
 			</div>
-
 		</div>
-		
-		
-		     <div th:fragment="customCSS">
 
-				<style>
-
-					.roundedOne {
-						width: 28px;
-						height: 28px;
-						position: relative;
-						margin: 2px auto;
-						background: #fcfff4;
-						background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-						border-radius: 50px;
-						box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
-					}
-					.roundedOne label {
-						width: 20px;
-						height: 20px;
-						cursor: pointer;
-						position: absolute;
-						left: 4px;
-						top: 4px;
-						background: linear-gradient(to bottom, #222222 0%, #45484d 100%);
-						border-radius: 50px;
-						box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
-					}
-					.roundedOne label:after {
-						content: '';
-						width: 16px;
-						height: 16px;
-						position: absolute;
-						top: 2px;
-						left: 2px;
-						background: #27ae60;
-						background: linear-gradient(to bottom, #27ae60 0%, #145b32 100%);
-						opacity: 0;
-						border-radius: 50px;
-						box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
-					}
-					.roundedOne label:hover::after {
-						opacity: 0.3;
-					}
-					.roundedOne input[type=checkbox] {
-						visibility: hidden;
-					}
-					.roundedOne input[type=checkbox]:checked + label:after {
-						opacity: 1;
-					}
-
-					/* end .roundedOne */
-
-				</style>
-		     
-			<SCRIPT type="text/javascript">
-			$("input:checkbox").on('click', function() {
-				  // in the handler, 'this' refers to the box clicked on
-				  var $box = $(this);
-				  if ($box.is(":checked")) {
-				    // the name of the box is retrieved using the .attr() method
-				    // as it is assumed and expected to be immutable
-				    var group = "input:checkbox[name='" + $box.attr("name") + "']";
-				    // the checked state of the group/box on the other hand will change
-				    // and the current value is retrieved using .prop() method
-				    $(group).prop("checked", false);
-				    $box.prop("checked", true);
-				  } else {
-				    $box.prop("checked", false);
-				  }
-				});
-			
-			</SCRIPT>
-
-
-		     
-		     
-		     </div>
 	</div>
+
+
+	<div th:fragment="customCSS">
+
+		<style>
+			.funkyradio div {
+				clear: both;
+				overflow: hidden;
+			}
+
+			.funkyradio label {
+				width: 100%;
+				border-radius: 3px;
+				border: 1px solid #D1D3D4;
+				font-weight: normal;
+			}
+
+			.funkyradio input[type="radio"]:empty,
+			.funkyradio input[type="checkbox"]:empty {
+				display: none;
+			}
+
+			.funkyradio input[type="radio"]:empty ~ label,
+			.funkyradio input[type="checkbox"]:empty ~ label {
+				position: relative;
+				line-height: 2.5em;
+				text-indent: 3.25em;
+				margin-top: 2em;
+				cursor: pointer;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			.funkyradio input[type="radio"]:empty ~ label:before,
+			.funkyradio input[type="checkbox"]:empty ~ label:before {
+				position: absolute;
+				display: block;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				content: '';
+				width: 2.5em;
+				background: #D1D3D4;
+				border-radius: 3px 0 0 3px;
+			}
+
+			.funkyradio input[type="radio"]:hover:not(:checked) ~ label,
+			.funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
+				color: #888;
+			}
+
+			.funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
+			.funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
+				content: '\2714';
+				text-indent: .9em;
+				color: #C2C2C2;
+			}
+
+			.funkyradio input[type="radio"]:checked ~ label,
+			.funkyradio input[type="checkbox"]:checked ~ label {
+				color: #777;
+			}
+
+			.funkyradio input[type="radio"]:checked ~ label:before,
+			.funkyradio input[type="checkbox"]:checked ~ label:before {
+				content: '\2714';
+				text-indent: .9em;
+				color: #333;
+				background-color: #ccc;
+			}
+
+			.funkyradio input[type="radio"]:focus ~ label:before,
+			.funkyradio input[type="checkbox"]:focus ~ label:before {
+				box-shadow: 0 0 0 3px #999;
+			}
+
+			.funkyradio-default input[type="radio"]:checked ~ label:before,
+			.funkyradio-default input[type="checkbox"]:checked ~ label:before {
+				color: #333;
+				background-color: #ccc;
+			}
+
+			.funkyradio-primary input[type="radio"]:checked ~ label:before,
+			.funkyradio-primary input[type="checkbox"]:checked ~ label:before {
+				color: #fff;
+				background-color: #337ab7;
+			}
+
+			.funkyradio-success input[type="radio"]:checked ~ label:before,
+			.funkyradio-success input[type="checkbox"]:checked ~ label:before {
+				color: #fff;
+				background-color: #5cb85c;
+			}
+
+			.funkyradio-danger input[type="radio"]:checked ~ label:before,
+			.funkyradio-danger input[type="checkbox"]:checked ~ label:before {
+				color: #fff;
+				background-color: #d9534f;
+			}
+
+			.funkyradio-warning input[type="radio"]:checked ~ label:before,
+			.funkyradio-warning input[type="checkbox"]:checked ~ label:before {
+				color: #fff;
+				background-color: #f0ad4e;
+			}
+
+			.funkyradio-info input[type="radio"]:checked ~ label:before,
+			.funkyradio-info input[type="checkbox"]:checked ~ label:before {
+				color: #fff;
+				background-color: #5bc0de;
+			}
+		</style>
+
+
+
+
+
+
+	</div>
+</div>
 </body>
 </html>
