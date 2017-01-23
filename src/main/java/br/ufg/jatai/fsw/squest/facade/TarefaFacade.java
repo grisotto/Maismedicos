@@ -86,6 +86,7 @@ public class TarefaFacade {
 
     @Autowired
     EtapaEventoService etapaEventoService;
+
     public void atualizaEtapaAtual(Integer idTarefa, Integer idEtapa) {
         Tarefa tarefa = tarefaService.find(idTarefa);
         EtapaEvento etapaEvento = etapaEventoService.find(idEtapa);

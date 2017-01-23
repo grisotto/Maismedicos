@@ -21,9 +21,6 @@ and open the template in the editor.
                 <h1  sec:authorize="!hasAuthority('GRUPO')" class="page-header">Dashboard</h1>
                 <h1  sec:authorize="hasAuthority('GRUPO')" class="page-header"> Equipe: <span th:text="${equipe.nome}"></span></h1>
 
-                Logged user: <span sec:authentication="name">Bob</span> Roles: <span
-                    sec:authentication="principal.authorities">[ALUNO, ADMIN,
-                    PROFESSOR, GRUPO]</span>
                 <div sec:authorize="hasAuthority('ADMIN')">
 
 
@@ -197,7 +194,10 @@ and open the template in the editor.
                                             <tr>
                                                 <th>#</th>
                                                 <th>Questão</th>
+                                                <th>Situação</th>
                                                 <th>Última modificação</th>
+                                                <th></th>
+                                                <th></th>
 
 
                                             </tr>
@@ -210,7 +210,11 @@ and open the template in the editor.
 
                                                     <td th:text="${itr.count}" >1</td>
                                                     <td th:text="${#strings.abbreviate(e.question,100)}"></td>
-                                                    <td></td>
+                                                    <td th:text="${e.situacaoQuestao}"></td>
+                                                    <td th:text="${#dates.format(e.updated, 'dd/MM/yyyy hh:mm')}"></td>
+                                                   <!--TODO colocar confirmação se deseja apagar-->
+                                                    <td><a  th:href="@{/app/questionario/}+${e.id}+@{/remover/}" class="fa fa-trash btn btn-sm btn-danger"></a></td>
+                                                    <td><a class="fa fa-edit btn btn-sm btn-info"></a></td>
                                                 </tr>
                                             </div>
                                         </tbody>
