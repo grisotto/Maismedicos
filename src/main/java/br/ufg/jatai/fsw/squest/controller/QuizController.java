@@ -75,7 +75,7 @@ public class QuizController {
     }
 
     @PostMapping("/{quizID}/responder")
-    public void responderQuestao(QuestaoQuiz questaoQuiz, Alternativa alternativa) {
+    public void respostaQuestao(QuestaoQuiz questaoQuiz, Alternativa alternativa) {
         Equipe equipe = autenticateUser.getEquipe();//Requcuperando equipe
         RespotaQuestaoQuiz respotaQuestaoQuiz = new RespotaQuestaoQuiz();//Cria Obbjeto de reposta
         respotaQuestaoQuiz.setAlternativa(alternativa);//Colocando a autenrativa
@@ -91,6 +91,19 @@ public class QuizController {
 //        quizService.atualizar()
 
 
+
+
+    }
+
+    @PreAuthorize("hasAuthority('GRUPO')")
+    @GetMapping("/{quizID}/responder/{questaoID}")
+    public String responderQuestao(@PathVariable Integer questaoID, Model model) {
+
+        model.addAttribute("questao", questaoService.find(questaoID));
+
+        return "app/quiz/responder";
+
+
     }
 
     @PreAuthorize("hasAuthority('GRUPO')")
@@ -103,9 +116,10 @@ public class QuizController {
         Set<QuestaoQuiz> paraEquipe = quizService.find(quizID).questaoToEquipe(autenticateUser.getEquipe());
 
         model.addAttribute("questoes", paraEquipe);
+        model.addAttribute("quiz", quizService.find(quizID));
         LOGGER.info("Temos {} questẽos para equipe e ao todo são {}", paraEquipe,todas);
 
-        return "app/quiz/responder";
+        return "app/quiz/questoes";
     }
 
 

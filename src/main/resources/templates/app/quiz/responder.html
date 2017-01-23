@@ -1,42 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <!DOCTYPE html>
-<html
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	th:include="fragments/basetemplate :: page">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-    <link href="/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
-    <link href="/plugins/font-awesome/css/font-awesome.min.css" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}" rel="stylesheet" media="screen" />
-
-
+<title>TODO supply a title</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
+	<div th:fragment="content">
 
-<div>
-    <h1>Pagina teste para responder quiz</h1>
-    <p>Lista em uma tabela todas as questẽos que elle tem que responder</p>
-    <table th:class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Descricao</th>
-            <th>Equipe</th>
-            <th>Respondido</th>
-            <th></th>
-        </tr>
+		<div class="col-lg-12">
+			<h1 class="page-header">Respondendo Questões</h1>
 
-        </thead>
-        <tbody>
-        <tr th:each="q : ${questoes}">
-            <td th:text="${q.id}">id</td>
-            <td th:text="${q.questao.question}">id</td>
-            <td th:text="${q.equipe.nome}">id</td>
-            <!--TODO organizar para poder responder ser for false-->
-            <td th:text="${q.respondido(#authentication.principal.id)}">id</td>
-            <td ><a href="#" ><span class="fa fa-check"></span>Responder</a></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+
+			<div class="col-md-12 col-sm-8">
+
+				<div class="panel panel-info">
+					<div class="panel-heading clearfix">
+						<h4 class="panel-title pull-left" style="padding-top: 7.5px;">
+							<i class="fa fa-check-square-o fa-fw"></i> Questão
+						</h4>
+
+					</div>
+
+
+
+
+					<div class="panel-body">
+						<div class="col-md-3"></div>
+						<div class="col-md-6">
+							<form role="form">
+								<p class="lead" th:text="${questao.question}">Qual o nome do primeiro algoritmo de geração de circuferencias?</p>
+							<blockquote>
+
+								<div th:each="q, iter : ${questao.alternativas}">
+                            	<div class="clearfix">
+                            	<div class="roundedOne pull-left">
+								<div th:if="${iter.index == 0}">
+      								<input type="checkbox" value="alternativaA" id="roundedOneA" name="alternativaA"  />
+									<label for="roundedOneA"  th:text="A">A</label>
+								</div>
+									<div th:if="${iter.index == 1}">
+									<input type="checkbox" value="alternativaA" id="roundedOneB" name="alternativaB"  />
+									<label for="roundedOneB" th:text="B"> B</label>
+								</div>
+									<div th:if="${iter.index == 2}">
+									<input type="checkbox" value="alternativaA" id="roundedOneC" name="alternativaC"  />
+									<label for="roundedOneC"  th:text="C"> C</label>
+										</div>
+									<div th:if="${iter.index == 3}">
+									<input type="checkbox" value="alternativaA" id="roundedOneD" name="alternativaD"  />
+									<label for="roundedOneD"  th:text="D"> D</label>
+								</div>
+									<div th:if="${iter.index == 4}">
+									<input type="checkbox" value="alternativaA" id="roundedOneE" name="alternativaE"  />
+									<label for="roundedOneE"  th:text="E"> E</label>
+									</div>
+      										
+      								
+    								</div>&nbsp;
+    								<!--<span class="bold">A. </span>-->
+									<span  th:text="${q.descricao}">Algoritmo do Jose </span>
+
+								</div>
+									</div>
+
+
+    						
+    								<!---->
+    							<!--<div class="clearfix">	-->
+    							<!--<div class="roundedOne pull-left">-->
+      								<!--<input type="checkbox" value="alternativaB" id="roundedOneB" name="optionsRadios"  />-->
+      								<!--<label for="roundedOneB"></label> -->
+      										<!---->
+      								<!---->
+    								<!--</div>&nbsp;-->
+    								<!--<span class="bold">B. </span>  <span class="alternativaB" th:text="${questao.alternativas}">Algoritmo de Jose </span>-->
+                           <!---->
+							<!--</div>-->
+
+
+
+
+
+
+
+</blockquote>
+							</form>
+						</div>
+
+
+
+					</div>
+
+					<div class="panel-footer  clearfix">
+						<button type="submit" class="btn btn-info">
+							<i class="fa fa-floppy-o  "> </i> Salvar Resposta
+						</button>
+						<button type="sair" th:href="@{/app}" class="btn btn-danger">Sair</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		
+		
+		     <div th:fragment="customCSS">
+
+				<style>
+
+					.roundedOne {
+						width: 28px;
+						height: 28px;
+						position: relative;
+						margin: 2px auto;
+						background: #fcfff4;
+						background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+						border-radius: 50px;
+						box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+					}
+					.roundedOne label {
+						width: 20px;
+						height: 20px;
+						cursor: pointer;
+						position: absolute;
+						left: 4px;
+						top: 4px;
+						background: linear-gradient(to bottom, #222222 0%, #45484d 100%);
+						border-radius: 50px;
+						box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
+					}
+					.roundedOne label:after {
+						content: '';
+						width: 16px;
+						height: 16px;
+						position: absolute;
+						top: 2px;
+						left: 2px;
+						background: #27ae60;
+						background: linear-gradient(to bottom, #27ae60 0%, #145b32 100%);
+						opacity: 0;
+						border-radius: 50px;
+						box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+					}
+					.roundedOne label:hover::after {
+						opacity: 0.3;
+					}
+					.roundedOne input[type=checkbox] {
+						visibility: hidden;
+					}
+					.roundedOne input[type=checkbox]:checked + label:after {
+						opacity: 1;
+					}
+
+					/* end .roundedOne */
+
+				</style>
+		     
+			<SCRIPT type="text/javascript">
+			$("input:checkbox").on('click', function() {
+				  // in the handler, 'this' refers to the box clicked on
+				  var $box = $(this);
+				  if ($box.is(":checked")) {
+				    // the name of the box is retrieved using the .attr() method
+				    // as it is assumed and expected to be immutable
+				    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+				    // the checked state of the group/box on the other hand will change
+				    // and the current value is retrieved using .prop() method
+				    $(group).prop("checked", false);
+				    $box.prop("checked", true);
+				  } else {
+				    $box.prop("checked", false);
+				  }
+				});
+			
+			</SCRIPT>
+
+
+		     
+		     
+		     </div>
+	</div>
 </body>
 </html>
