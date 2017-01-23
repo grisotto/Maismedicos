@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.squest.domain;
 
+import br.ufg.jatai.fsw.squest.domain.quis.RespotaQuestaoQuiz;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  *
@@ -35,7 +37,9 @@ public class Equipe implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Aluno> alunos = new ArrayList<>();
 
-    
+
+
+
     private boolean ativa;
 
 

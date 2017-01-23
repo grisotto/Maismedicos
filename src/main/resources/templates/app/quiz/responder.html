@@ -19,6 +19,9 @@
         <thead>
         <tr>
             <th>ID</th>
+            <th>Descricao</th>
+            <th>Equipe</th>
+            <th></th>
         </tr>
 
         </thead>
@@ -26,6 +29,7 @@
         <tr th:each="q : ${questoes}">
             <td th:text="${q.id}">id</td>
             <td th:text="${q.questao.question}">id</td>
+            <td th:text="${q.equipe.nome}">id</td>
             <td ><a href="#" ><span class="fa fa-check"></span>Responder</a></td>
         </tr>
         </tbody>

@@ -27,6 +27,10 @@ public class QuestaoQuiz implements Serializable {
 
     @ManyToOne
     private Equipe equipe;
+
+
+    @OneToMany
+    private List<Equipe> equipeResponderam;
     
   
 
@@ -63,6 +67,21 @@ public class QuestaoQuiz implements Serializable {
 
     public void setEquipe(Equipe questaoDe) {
         this.equipe = questaoDe;
+    }
+
+
+    public boolean respondido(Equipe equipe){
+        return equipeResponderam.contains(equipe);
+
+
+    }
+
+    public List<Equipe> getEquipeResponderam() {
+        return equipeResponderam;
+    }
+
+    public void setEquipeResponderam(List<Equipe> equipeResponderam) {
+        this.equipeResponderam = equipeResponderam;
     }
 
     public static class AjusteTecnico {
