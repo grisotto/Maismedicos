@@ -13,4 +13,5 @@ web/
 .project
 /.settings/
 /lib/
+/out/*
 
