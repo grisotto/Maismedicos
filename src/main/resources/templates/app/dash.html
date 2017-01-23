@@ -215,7 +215,8 @@ and open the template in the editor.
                                                     <td th:text="${#strings.abbreviate(e.question,100)}"></td>
                                                     <td th:text="${e.situacaoQuestao}"></td>
                                                     <td th:text="${#dates.format(e.updated, 'dd/MM/yyyy hh:mm')}"></td>
-                                                    <td><a class="fa fa-trash btn btn-sm btn-danger"></a></td>
+                                                   <!--TODO colocar confirmação se deseja apagar-->
+                                                    <td><a  th:href="@{/app/questionario/}+${e.id}+@{/remover/}" class="fa fa-trash btn btn-sm btn-danger"></a></td>
                                                     <td><a class="fa fa-edit btn btn-sm btn-info"></a></td>
                                                 </tr>
                                             </div>
