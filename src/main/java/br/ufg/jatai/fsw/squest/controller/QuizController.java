@@ -27,6 +27,7 @@ import java.util.Set;
 @Controller
 @RequestMapping("/app/quiz")
 //TODO Criar fachada para essas ações
+//TODO Colocar os metodos de acesso a grupo tudo como post, evitando PathVariable
 public class QuizController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SecurityConfig.class);
@@ -79,7 +80,7 @@ public class QuizController {
         return quizService.find(quizID).questaoToEquipe(equipe);
     }
 
-    @PostMapping("/{quizID}/responder/{questaoID}")
+    @PostMapping("/{quizID}/responder/{questaoID}")//TODO colocar como post o QuestãoID porque os cara vão mecher com essas URLs
     public String respostaQuestao(QuestaoQuiz questaoQuiz, Alternativa alternativaSelecionada, final BindingResult bindingResult , final String alternativa,@PathVariable Integer quizID ) {
 
 
@@ -90,19 +91,12 @@ public class QuizController {
         log.info("Equipe: " + autenticateUser.getEquipe());
         log.info("Alternativa: " + alternativaSelecionada.getDescricao());
         log.info("Alternativaa: " + alternativa);
-//        log.info("Alternativa: " + alternativa.getQuestao());
-//        log.info("Descrição: " + questaoQuiz.respondido());
-//        log.info("Alternativa A: " + questaoQuiz.getQuestao().getAlternativas()..getAlternativaA().getDescricao());
-//        log.info("Alternativa B: " + questaoModel.getAlternativaB().getDescricao());
-//        log.info("Alternativa C: " + questaoModel.getAlternativaC().getDescricao());
-//        log.info("Alternativa D: " + questaoModel.getAlternativaD().getDescricao());
-//        log.info("Alternativa E: " + questaoModel.getAlternativaE().getDescricao());
-//        log.info("CORRETA: " + correto);
+
 
         Equipe equipe = autenticateUser.getEquipe();//Requcuperando equipe
         RespotaQuestaoQuiz respotaQuestaoQuiz = new RespotaQuestaoQuiz();//Cria Obbjeto de reposta
         respotaQuestaoQuiz.setAlternativa(alternativaSelecionada);//Colocando a autenrativa
-        log.info("Cheguei: ");
+
         respotaQuestaoQuiz.setEquipe(equipe);//Colocando a equipe
         respotaQuestaoQuiz.setQuestao(questaoQuiz.getQuestao());
 
