@@ -20,7 +20,7 @@ and open the template in the editor.
 <div th:fragment="content">
     <div class="page-header">
         <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" th:href="@{/app/tarefa/}+${tarefa.id}"></a><b>
-            Questões da turma: </b>
+            Questões da tarefa: </b>
             <span class="text-muted" th:text="${{tarefa.titulo}}"></span></h2>
     </div>
     <div class="col-md-12 col-sm-8">
@@ -78,14 +78,14 @@ and open the template in the editor.
 
 
                 </div>
-                <table class="table table-condensed " id="questosProf">
+                <table class="table table-condensed  table-hover" id="questosProf">
                     <thead>
                     <tr>
                         <th>#</th>
                         <th>Equipe</th>
                         <th>Questão</th>
                         <th>Situação</th>
-                        <th>Ver Respostas</th>
+                        <th class="pull-right">Ver Respostas</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -96,21 +96,29 @@ and open the template in the editor.
                         <td th:text="${q.questionario.time.nome}">1</td>
                         <td th:text="${q.question}">1</td>
 
-
-                        <td  >
-                                        <span th:text="${q.situacaoQuestao}">
+                        <td  th:if="${q.isAguardando()}" >
+                                        <span class="label label-info ">
+                                            Aguardando
+                                        </span>
+                        </td>
+                        <td  th:if="${q.isAprovada()}" >
+                                        <span class="label label-success ">
                                             Validada
                                         </span>
                         </td>
-<!--                        <td  th:if="${!q.isAprovada()}" >
-                                        <span class="label label-warning fa-1">
-                                            Desativada
+
+                        <td  th:if="${q.isReprovado()}" >
+                        <span class="label  label-danger">
+                                            Invalida
                                         </span>
-                        </td>-->
+                        </td>
+
+
+
 
 
                         <td>
-                            <div class="btn-group" role="group">
+                            <div class="btn-group pull-right" role="group">
 
                                 <a th:href="@{/app/questionario/}+${q.id}" class="btn btn-sm  btn-success fa fa-arrow-right"/>
                             </div>
