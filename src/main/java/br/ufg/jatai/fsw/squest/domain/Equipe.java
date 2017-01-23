@@ -38,8 +38,6 @@ public class Equipe implements Serializable {
     private List<Aluno> alunos = new ArrayList<>();
 
 
-
-
     private boolean ativa;
 
 
@@ -62,6 +60,9 @@ public class Equipe implements Serializable {
      *
      * @param nome
      * @param alunos
+     * @param ativa
+     * @param tarefa
+     * @param usuario
      */
     public Equipe(String nome, List<Aluno> alunos, boolean ativa, Tarefa tarefa, Usuario usuario) {
         this.nome = nome;

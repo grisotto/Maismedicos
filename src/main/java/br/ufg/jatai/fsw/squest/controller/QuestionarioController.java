@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -59,6 +58,7 @@ public class QuestionarioController implements Serializable {
     public String inserirQuestão(final String correto, final QuestaoModel questaoModel,
             final BindingResult bindingResult, final ModelMap model) {
 
+        //Verificar, se pode adicionar
         if (bindingResult.hasErrors()) {
             model.addAttribute("questaoModel", questaoModel);
             model.addAttribute("correto", "C");
@@ -103,8 +103,7 @@ public class QuestionarioController implements Serializable {
             questionario.setTime(user.getEquipe());//Coloca a euipe
             questionario.setTarefa(user.getEquipe().getTarefa());//Coloca a Tarefa
             questionario.setquestions(new ArrayList<Questao>());//Inicia as Questões dele
-            
-           
+
         }
         questao.setQuestionario(questionario);
         questionario.getQuestoes().add(questao);//Adiciona a questão que foi recuperada
@@ -113,18 +112,18 @@ public class QuestionarioController implements Serializable {
 
         return "redirect:/app/";
     }
-    @PostMapping ("{questaoID}/aprovar")
-    public String aprovarQuestao (@PathVariable ("questaoID") Integer idQuestao){
-        Questao q = questaoService.aprovarQuestao(idQuestao);
 
+    @PostMapping("{questaoID}/aprovar")
+    public String aprovarQuestao(@PathVariable("questaoID") Integer idQuestao) {
+        Questao q = questaoService.aprovarQuestao(idQuestao);
 
         return "redirect:/app/tarefa/" + q.getQuestionario().getTarefa().getId() + "/questoes";
 
     }
-    @PostMapping ("{questaoID}/reprovar")
-    public String reprovarQuestao (@PathVariable ("questaoID") Integer idQuestao){
-        Questao q = questaoService.reprovarQuestao(idQuestao, "Mensagem");
 
+    @PostMapping("{questaoID}/reprovar")
+    public String reprovarQuestao(@PathVariable("questaoID") Integer idQuestao) {
+        Questao q = questaoService.reprovarQuestao(idQuestao, "Mensagem");
 
         return "redirect:/app/tarefa/" + q.getQuestionario().getTarefa().getId() + "/questoes";
 
@@ -135,7 +134,16 @@ public class QuestionarioController implements Serializable {
      */
     @RequestMapping(value = "/inserir")
     public String QuestoesEquipeInserir(QuestaoModel questionario) {
-        return "app/questionario/inserir";
+        Integer qntQuestoes = user.getEquipe().getQuestionario()!= null?questaoService.questoesDoQuestionario(user.getEquipe().getQuestionario().getId()).size():0;
+        Integer maxQuestoes = user.getEquipe().getTarefa().getTamanhoQuestoes();
+
+        if (qntQuestoes < maxQuestoes) {
+            return "app/questionario/inserir";
+
+        }else{
+            throw new ArrayIndexOutOfBoundsException(String.format("O limite máximo de questões permitidas são: %d", maxQuestoes));
+        }
+        
     }
 
     /**
@@ -157,7 +165,6 @@ public class QuestionarioController implements Serializable {
         return "app/questionario/pontuacao";
     }
 
-
     @GetMapping(value = "/{id}")
     public String showTurma(@PathVariable Integer id, ModelMap map) {
 
@@ -165,8 +172,5 @@ public class QuestionarioController implements Serializable {
 
         return "app/questionario/show";
     }
-
-
-
 
 }

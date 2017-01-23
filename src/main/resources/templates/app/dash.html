@@ -18,7 +18,8 @@ and open the template in the editor.
         <div th:fragment="content">
 
             <div class="col-lg-12">
-                <h1 class="page-header">Dashboard</h1>
+                <h1  sec:authorize="!hasAuthority('GRUPO')" class="page-header">Dashboard</h1>
+                <h1  sec:authorize="hasAuthority('GRUPO')" class="page-header"> Equipe: <span th:text="${equipe.nome}"></span></h1>
 
                 Logged user: <span sec:authentication="name">Bob</span> Roles: <span
                     sec:authentication="principal.authorities">[ALUNO, ADMIN,
@@ -38,6 +39,8 @@ and open the template in the editor.
                                         <tr>
                                             <td>Usuário</td>
                                             <td>Tipo de Usuario</td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,8 +49,11 @@ and open the template in the editor.
                                                 <td th:text="${u.login}">A Smoke Test'</td>
 
                                                 <td th:text="${u.tipoUsuario}">A Smoke Test'</td>
-                                                <td th:class="col-md-1"><a
-                                                        class="btn btn-danger btn-sm fa fa-trash-o"></a></td>
+                                                <td th:class="col-md-1">
+                                                    <a class="btn btn-danger btn-sm fa fa-trash-o"></a>
+                                                </td>
+                                                <td> <span th:class="fa fa-edit"></span></td>
+                                                <td> <span th:class="fa fa-trash"></span></td>
                                             </tr>
                                         </th:block>
                                     </tbody>
@@ -83,16 +89,21 @@ and open the template in the editor.
 
                                     <div class="panel-heading">
                                         <h3 class="panel-title">
-                                            Equipe: <span th:text="${equipe.nome}"></span>
+                                        Tarefa para Turma: <span th:text="${equipe.tarefa.turma.nome}">a</span>
                                         </h3>
                                     </div>
                                     <div class="panel-body">
-
+                                        <h4>
+                                            <b>Tarefa criada por: </b><span th:text="${equipe.tarefa.turma.professor.nome}"></span>
+                                        </h4>
                                         <h4>
                                             <b>Titulo: </b><span th:text="${equipe.tarefa.titulo}"></span>
                                         </h4>
                                         <h4>
                                             <b>Descriçao: </b><span th:text="${equipe.tarefa.descricao}"></span>
+                                        </h4>
+                                        <h4>
+                                            <b>Quantidade de Questões: </b><span th:text="${equipe.tarefa.tamanhoQuestoes}"></span>
                                         </h4>
                                     </div>
                                 </div>
@@ -111,6 +122,7 @@ and open the template in the editor.
                                             <thead>
                                             <tr>
                                                 <th>Nome</th>
+                                                <th >Email</th>
 
                                             </tr>
                                             </thead>
@@ -118,6 +130,7 @@ and open the template in the editor.
                                             <tr th:each="e :${equipe.alunos}">
 
                                                 <td th:text="${e.nome}">1</td>
+                                                <td th:text="${e.email}">1</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -169,7 +182,9 @@ and open the template in the editor.
                                 <!--<span th:text="${questionario}"></span>-->
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        Questões Inseridas  
+                                        Questões Inseridas
+                                        <span th:text="${questoes!=null? questoes.size():0}"></span> de <span th:text="${equipe.tarefa.tamanhoQuestoes}"></span>
+                                            
                                         <a href="/app/questionario/inserir"
                                            class="btn btn-sm btn-default pull-right"> Add Nova Questão
                                             <span class="fa fa-plus"></span>
