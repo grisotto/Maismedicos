@@ -30,12 +30,13 @@ and open the template in the editor.
 				</div>
 
 
-
+                <form role="form" th:action="@{/app/quiz/}+${quiz.id}+@{/responder/}+${questao.id}" method="POST">
 
 				<div class="panel-body">
 					<div class="col-md-3"></div>
+
 					<div class="col-md-6">
-						<form role="form">
+
 							<p class="lead" th:text="${questao.question}">Qual o nome do primeiro algoritmo de geração de circuferencias?</p>
 							<blockquote>
 
@@ -46,7 +47,7 @@ and open the template in the editor.
 										<div th:if="${iter.index == 0}" class="radio">
 
 											<div class="funkyradio-primary">
-												<input type="radio" id="radio1" name="alternativa" value=""  />
+												<input type="radio" id="radio1" name="alternativa" th:value="${q.descricao}"  />
 												<label for="radio1" th:text="${q.descricao}"></label>
 											</div>
 
@@ -54,14 +55,14 @@ and open the template in the editor.
 										<div th:if="${iter.index == 1}" class="radio">
 
 											<div class="funkyradio-primary">
-												<input type="radio" id="radio2" name="alternativa" value=""  />
+												<input type="radio" id="radio2" name="alternativa" th:value="${q.descricao}"  />
 												<label for="radio2" th:text="${q.descricao}"></label>
 											</div>
 
 										</div>
 										<div th:if="${iter.index == 2}" class="radio">
 											<div class="funkyradio-primary">
-												<input type="radio" id="radio3" name="alternativa" value=""  />
+												<input type="radio" id="radio3" name="alternativa" th:value="${q.descricao}"  />
 												<label for="radio3" th:text="${q.descricao}"></label>
 											</div>
 										</div>
@@ -69,13 +70,13 @@ and open the template in the editor.
 
 
 											<div class="funkyradio-primary">
-												<input type="radio" id="radio4" name="alternativa" value=""  />
+												<input type="radio" id="radio4" name="alternativa" th:value="${q.descricao}"  />
 												<label for="radio4" th:text="${q.descricao}"></label>
 											</div>
 										</div>
 										<div th:if="${iter.index == 4}" class="radio">
 											<div class="funkyradio-primary">
-												<input type="radio" id="radio5" name="alternativa"  value="" />
+												<input type="radio" id="radio5" name="alternativa"  th:value="${q.descricao}" />
 												<label for="radio5" th:text="${q.descricao}"></label>
 											</div>
 										</div>
@@ -89,19 +90,20 @@ and open the template in the editor.
 
 
 							</blockquote>
-						</form>
+
 					</div>
 
 
 
 				</div>
 
-				<div class="panel-footer  clearfix">
+				<div class="panel-footer">
 					<button type="submit" class="btn btn-info">
 						<i class="fa fa-floppy-o  "> </i> Salvar Resposta
 					</button>
 					<button type="sair" th:href="@{/app}" class="btn btn-danger">Sair</button>
 				</div>
+                </form>
 			</div>
 		</div>
 
@@ -221,18 +223,6 @@ and open the template in the editor.
 			}
 		</style>
 
-        <script type="text/javascript">
-            $(document).ready(
-                function () {
-                    $('input').click(
-                        function () {
-                            $('input:not(:checked)').closest("div")
-                                .removeClass("has-success");
-                            $('input:checked').closest("div")
-                                .addClass("has-success");
-                        });
-                });
-        </script>
 
 
 
