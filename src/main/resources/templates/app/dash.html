@@ -21,9 +21,6 @@ and open the template in the editor.
                 <h1  sec:authorize="!hasAuthority('GRUPO')" class="page-header">Dashboard</h1>
                 <h1  sec:authorize="hasAuthority('GRUPO')" class="page-header"> Equipe: <span th:text="${equipe.nome}"></span></h1>
 
-                Logged user: <span sec:authentication="name">Bob</span> Roles: <span
-                    sec:authentication="principal.authorities">[ALUNO, ADMIN,
-                    PROFESSOR, GRUPO]</span>
                 <div sec:authorize="hasAuthority('ADMIN')">
 
 
