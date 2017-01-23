@@ -66,32 +66,88 @@ and open the template in the editor.
                                     <!--<td th:text="${e.dataFinal}">1</td>-->
                                     <td th:text="${#dates.format(e.dataFinal, 'dd/MM/yyyy hh:mm')}">1</td>
 
-                                    <!--<div th:if="${tarefa.etapaAtual.tipo} == ${etapas.aguardando.tipo} " >-->
-                                        <!--<td>-->
-                                            <!--<a th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${e.id}" class="btn btn-danger btn-sm fa fa-square"></a> </td>-->
+
+                                    <!--<div th:switch="${e.tipo} " >-->
+                                        <!--<td> <a th:case="${etapas.respondendo.tipo}" class="btn btn-success btn-sm fa fa-check-square"></a></td>-->
+                                        <!--<td> <a th:case="${etapas.finalizado.tipo}" class="btn btn-success btn-sm fa fa-check-square"></a></td>-->
+                                        <!--<td> <a th:case="*" disabled="true" class="btn btn-success btn-sm fa fa-check-square"></a></td>-->
+
+
                                     <!--</div>-->
 
 
 
-                                    <td th:if="${tarefa.etapaAtual== e}">
-                                        <a class="btn btn-success btn-sm fa fa-check-square"></a>
-                                    </td>
+                                        <!--Esta na etapa respondendo-->
+                                        <div th:if="${tarefa.etapaAtual.tipo} == ${etapas.respondendo.tipo} " >
+                                            <div th:if="${tarefa.etapaAtual== e}">
+                                                <td> <a class="btn btn-success btn-sm fa fa-check-square"></a></td>
 
-                                    <td  th:if="${tarefa.etapaAtual!= e}">
-                                        <div th:switch="${e.tipo} " >
-                                            <!--Estou primeiramente interceptando o botao respondendo, para abrir o modal-->
-                                            <a th:case="${etapas.respondendo.tipo}" class="btn btn-danger btn-sm fa fa-square" data-toggle="modal"
-                                               data-target="#criarQuiz"></a>
+                                            </div>
+                                            <div th:if="${tarefa.etapaAtual!= e}">
+                                            <div th:switch="${e.tipo} " >
 
-                                            <a th:case="*" th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${e.id}" class="btn btn-danger btn-sm fa fa-square"></a>
+                                                <td th:case="${etapas.finalizado.tipo}"> <a  th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${e.id}" class="btn btn-danger btn-sm fa fa-square"></a></td>
+                                                <td th:case="*" > <a disabled="true" class="btn btn-danger btn-sm fa fa-square"></a></td>
+                                            </div>
+
+                                            </div>
+
+
                                         </div>
 
-                                    </td>
+                                        <!--Não esta na etapa respondendo-->
+                                        <div th:if="${tarefa.etapaAtual.tipo} != ${etapas.respondendo.tipo} " >
+
+                                            <div th:if="${tarefa.etapaAtual.tipo} != ${etapas.finalizado.tipo} " >
+                                                <div th:if="${tarefa.etapaAtual== e}">
+                                                    <td> <a class="btn btn-success btn-sm fa fa-check-square"></a></td>
+
+                                                </div>
+
+                                                <div th:if="${tarefa.etapaAtual!= e}">
+                                                    <div th:switch="${e.tipo} " >
+                                                        <!--Estou primeiramente interceptando o botao respondendo, para abrir o modal-->
+                                                        <td th:case="${etapas.respondendo.tipo}"> <a  class="btn btn-danger btn-sm fa fa-square" data-toggle="modal"
+                                                           data-target="#criarQuiz"></a></td>
+
+                                                        <td  th:case="*"> <a th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${e.id}" class="btn btn-danger btn-sm fa fa-square"></a></td>
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </div>
+
+                                            <div th:if="${tarefa.etapaAtual.tipo} == ${etapas.finalizado.tipo} " >
+                                                <div th:if="${tarefa.etapaAtual== e}">
+                                                    <td> <a class="btn btn-success btn-sm fa fa-check-square"></a></td>
+
+                                                </div>
+
+                                                <div th:if="${tarefa.etapaAtual!= e}">
+                                                    <div th:switch="${e.tipo} " >
+
+                                                        <td th:case="${etapas.respondendo.tipo}"> <a  th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${e.id}" class="btn btn-danger btn-sm fa fa-square"></a></td>
+                                                        <td th:case="*" > <a disabled="true" class="btn btn-danger btn-sm fa fa-square"></a></td>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+
+                                            <!--<td><a class="btn btn-success btn-sm fa fa-check-square"></a></td>-->
+
+                                        </div>
+
+
+
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="modal fade" id="criarQuiz" role="dialog">
+                    <div class="modal fade" id="criarQuiz" th:if="${!tarefa.etapaEventos.empty}" role="dialog">
                         <div class="modal-dialog">
 
                             <!-- Modal content-->
