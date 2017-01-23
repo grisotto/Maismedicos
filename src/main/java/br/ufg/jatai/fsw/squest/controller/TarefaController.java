@@ -150,7 +150,8 @@ public class TarefaController {
                 + "\nidEtapa: "+idEtapa
         );
         tarefaFacade.atualizaEtapaAtual(idTarefa, idEtapa);
-        return "redirect:/app/tarefa/" + idTarefa;
+        return "redirect:/app/quiz/" + idTarefa + "/novo";
+
     }
 
 

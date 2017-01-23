@@ -64,7 +64,8 @@ public class QuizController {
 
 
         model.addAttribute(String.format("msg", "Quiz adicionado \n %s", q));
-        return "redirect:/app/quiz/";
+//        return "redirect:/app/quiz/";
+        return "redirect:/app/tarefa/" + tarefaID;
 
     }
 

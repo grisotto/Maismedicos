@@ -90,7 +90,7 @@ and open the template in the editor.
                         </div>
                         <div class="form-control-static" th:if="${!equipe.ativa}">
                             <span class="text-warning">Desativada</span>
-                            <button type="button" data-toggle="modal"
+                            <button th:disabled="${equipe.alunos.size() == 0}" type="button" data-toggle="modal"
                                     data-target="#myModalEnable" class="btn btn-sm btn-warning"><span
                                     class=" fa  fa-toggle-off"></span>
                             </button>
