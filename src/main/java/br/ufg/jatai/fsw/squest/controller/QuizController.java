@@ -26,6 +26,7 @@ import java.util.Set;
  */
 @Controller
 @RequestMapping("/app/quiz")
+//TODO Criar fachada para essas ações
 public class QuizController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SecurityConfig.class);
@@ -55,6 +56,7 @@ public class QuizController {
     @GetMapping("/{tarefaID}/novo")
     public String criarQuiz(@PathVariable Integer tarefaID, Model model) {
         LOGGER.info("Novo quiz, para tarefa {}", tarefaID);
+        //TODO Passar passar a lógica para o local correto
         Tarefa tarefa = tarefaService.find(tarefaID);//Recuprar a tarefa
         Quiz q = new Quiz();//Inicializa o quiz
         q.setTarefa(tarefa);//Coloca Tarefa
@@ -118,7 +120,7 @@ public class QuizController {
     }
 
     @PreAuthorize("hasAuthority('GRUPO')")
-    @GetMapping("/{quizID}/responder/{questaoID}")
+    @GetMapping("/{quizID}/responder/{questaoID}")//TODO Mover para post -  REMOVER PathVariable - Aqui o pessoal vai ficar brincando com URL, e para não ter que tratar isso é bom trocar
     public String responderQuestao(@PathVariable Integer questaoID, @PathVariable Integer quizID, Model model) {
         model.addAttribute("quiz", quizService.find(quizID));
         model.addAttribute("questao", questaoService.find(questaoID));

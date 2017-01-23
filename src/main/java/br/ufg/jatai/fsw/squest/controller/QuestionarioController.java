@@ -33,6 +33,8 @@ import java.util.ArrayList;
  */
 @Controller
 @RequestMapping("/app/questionario")
+//TODO Levar todas a lógica para uma fachada (Tá meio lotado de  Service por aqui
+//TODO Mover alguns metodos para post (Alunos da computação gostão de ficar mexendo com URL e isso vai afetar nós
 public class QuestionarioController implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(QuestionarioController.class.getName());
@@ -106,7 +108,6 @@ public class QuestionarioController implements Serializable {
         questao.setQuestionario(questionario);
         questionario.getQuestoes().add(questao);//Adiciona a questão que foi recuperada
         questaoService.inserir(questao);// Insere no banco o questionario
-//        questaoService.inserir(questao);//Agora insere 
 
         return "redirect:/app/";
     }
@@ -143,7 +144,7 @@ public class QuestionarioController implements Serializable {
      * @return
      */
     @PreAuthorize("hasAuthority('GRUPO')")
-    @RequestMapping(value = "/inserir")
+    @RequestMapping(value = "/inserir")//TODO Verificar se é POST ou GET (Melhor que seja post)
     public String QuestoesEquipeInserir(QuestaoModel questionario) {
         Integer qntQuestoes = user.getEquipe().getQuestionario() != null ? questaoService.questoesDoQuestionario(user.getEquipe().getQuestionario().getId()).size() : 0;
         Integer maxQuestoes = user.getEquipe().getTarefa().getTamanhoQuestoes();
@@ -160,7 +161,7 @@ public class QuestionarioController implements Serializable {
     /**
      * @return
      */
-    @GetMapping(value = "/responder/{questaoID}")
+    @GetMapping(value = "/responder/{questaoID}")//TODO mover para post
     public String QuestoesEquipeResponder(@PathVariable Integer questaoID, ModelMap map) {
 
         map.addAttribute("questao", questaoService.find(questaoID));

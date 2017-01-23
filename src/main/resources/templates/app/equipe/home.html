@@ -30,7 +30,8 @@ and open the template in the editor.
             </div>
 
             <form th:object="${equipe}" th:action="@{/app/equipe}" method="POST">
-                <!--TODO <input name="METHOD" value="PUT" th:if="equipe.id!=null"/> -->
+                <!--TODO Fazer os formularios em arquivos separados e fazelos híbridos
+                 <input name="METHOD" value="PUT" th:if="equipe.id!=null"/> -->
                 <div class="panel-body">
                     <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

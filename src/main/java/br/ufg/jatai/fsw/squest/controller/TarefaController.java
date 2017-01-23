@@ -145,6 +145,7 @@ public class TarefaController {
     private static final Logger LOGGER = LoggerFactory.getLogger(TarefaController.class);
     @GetMapping("/app/tarefa/{idTarefa}/set/{idEtapa}")
     public String modificaEtapaAtual(@PathVariable final Integer idTarefa, @PathVariable final Integer idEtapa) {
+
         LOGGER.info("Entrou aqui com: \n"
                 + "\nidTarefa: "+idTarefa
                 + "\nidEtapa: "+idEtapa
