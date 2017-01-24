@@ -235,14 +235,11 @@ and open the template in the editor.
 //                    allowclear: true,
             language: {
                 noResults: function (term) {
-//                            term = '<button data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm" type="submit">Aqui</button>';
-                    term = '<a href="/app/aluno"><i class="fa fa-male   fa-fw"></i> Alunos</a>';
+//
+                    term = '<a th:object="${equipe}" th:href="@{/app/turma/}+${equipe.tarefa.turma.id}"><i class="fa fa-male   fa-fw"></i> Alunos</a>';
 
-                    return "Não foi encontrado o aluno, apara cadastrar acesse: " + term;
+                    return "Não foi encontrado nenhum aluno, para adicionar alunos para esta turma acesse: " + term;
 
-//                            console.log(term);
-//                            console.log(event.target);
-//                            console.log(event.target.value);
                 }
             },
             escapeMarkup: function (markup) {
