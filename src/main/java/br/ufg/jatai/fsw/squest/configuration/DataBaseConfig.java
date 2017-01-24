@@ -47,16 +47,16 @@ public class DataBaseConfig {
      *
      * @return
      */
-   // @Bean
-   // public DataSource dataSourceH2() {
-   //     DataSource build = DataSourceBuilder.create()
-   //             .driverClassName("org.h2.Driver")
-   //             .username("su")
-   //             .password("")
-   //             .url("jdbc:h2:mem:~/squest")
-   //             .build();
-   //     return build;
-   // }
+   @Bean
+   public DataSource dataSourceH2() {
+       DataSource build = DataSourceBuilder.create()
+               .driverClassName("org.h2.Driver")
+               .username("su")
+               .password("")
+               .url("jdbc:h2:mem:~/squest")
+               .build();
+       return build;
+   }
 
     @Component
     class DataLoader implements ApplicationRunner {
