@@ -16,6 +16,10 @@ import br.ufg.jatai.fsw.squest.service.EquipeService;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import br.ufg.jatai.fsw.squest.util.GeradorSenha;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import java.util.Iterator;
@@ -40,6 +44,12 @@ public class EquipeFacade {
     private EmailMain mailService;
     @Autowired
     private FabricaEndereco fabrica;
+
+    @Autowired
+    private GeradorSenha geradorSenha;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * Periste um nova tarefa
@@ -119,9 +129,18 @@ public class EquipeFacade {
             m.setAssunto("A sua equipe está ativa!");
 
             StringBuilder corpo = new StringBuilder();
+            /*
+             String gerarSenha = geradorSenha.gerarSenha();
+        professor.getUsuario().setSenha(passwordEncoder.encode(gerarSenha));
+
+
+             */
+            String gerarSenha = geradorSenha.gerarSenha();
+            equipe.getUsuario().setSenha(passwordEncoder.encode(gerarSenha));
+
 
             corpo.append("<h4>O professor " + autenticateUser.getProfessor().getNome()
-                    + " liberou o acesso da equipe '" + equipe.getNome() + "'. À partir de agora a equipe já pode enviar suas questões. "
+                    + " liberou o acesso da equipe '" + equipe.getNome() + "<br>Senha: " + gerarSenha+ ".<br> À partir de agora a equipe já pode enviar suas questões. "
                     + "<br><br><b>. Membros:");
 
 

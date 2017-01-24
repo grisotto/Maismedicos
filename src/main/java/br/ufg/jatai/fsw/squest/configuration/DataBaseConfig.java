@@ -47,16 +47,16 @@ public class DataBaseConfig {
      *
      * @return
      */
-   // @Bean
-   // public DataSource dataSourceH2() {
-   //     DataSource build = DataSourceBuilder.create()
-   //             .driverClassName("org.h2.Driver")
-   //             .username("su")
-   //             .password("")
-   //             .url("jdbc:h2:mem:~/squest")
-   //             .build();
-   //     return build;
-   // }
+//    @Bean
+//    public DataSource dataSourceH2() {
+//        DataSource build = DataSourceBuilder.create()
+//                .driverClassName("org.h2.Driver")
+//                .username("su")
+//                .password("")
+//                .url("jdbc:h2:mem:~/squest")
+//                .build();
+//        return build;
+//    }
 
     @Component
     class DataLoader implements ApplicationRunner {
@@ -93,71 +93,71 @@ public class DataBaseConfig {
             LOGGER.info("RUN in ApplicationRunner");
 
 ////
-            // Aluno a1 = new Aluno();
-            // a1.setEmail("jose@email.com");
-            // a1.setMatricula("1245");
-            // a1.setNome("José Antonio");
-
-            // Aluno a2 = new Aluno();
-            // a2.setEmail("maria@email.com");
-            // a2.setMatricula("12469");
-            // a2.setNome("Maria José");
-
-            // Aluno a3 = new Aluno();
-            // a3.setEmail("pedro@email.com");
-            // a3.setMatricula("9438");
-            // a3.setNome("Pesro Silva");
-
-            // Aluno a4 = new Aluno();
-            // a4.setEmail("aparecida@email.com");
-            // a4.setMatricula("63853");
-            // a4.setNome("Aparecida Antonio");
-
-
-
-            // Usuario u = new Usuario("admin", "admin");
-            // u.setSenha(passwordEncoder.encode("sistf@bsw"));
-            // u.setTipoUsuario(Usuario.TipoUsuario.ADMIN);
-
-            // LOGGER.info("Inserindo ADMIN:" + u);
-            // usuarioService.inserir(u);
-
-            // LOGGER.info("Inserindo A1" + a1);
-            // alunoService.inserir(a1);
-
-            // LOGGER.info("Inserindo A2" + a2);
-            // alunoService.inserir(a2);
-
-            // LOGGER.info("Inserindo A3" + a3);
-            // alunoService.inserir(a3);
-
-            // LOGGER.info("Inserindo A4" + a4);
-            // alunoService.inserir(a4);
-
-            // Professor p = new Professor();
-            // p.setNome("Professor Algusto");
-            // p.setEmail("professor@email.com");
-            // p.setUsuario(
-            //         new Usuario("professor",
-            //        passwordEncoder.encode(geradorSenha.gerarSenha()),
-            //         Usuario.TipoUsuario.PROFESSOR));
-            // LOGGER.info("Inserindo P1" + p);
-            // Professor professor = professorService.inserir(p);
-
-            // Turma t = new Turma();
-            // t.setNome("Turma 1");
-            // t.setDescricao("Tuma numero 01");
-            // t.setProfessor(professor);
-
-            // LOGGER.info("Inserindo T1: " + t);
-            // turmaService.inserir(t);
-
-            // Tarefa taf = new Tarefa();
-            // taf.setTurma(t);
-            // taf.setDescricao("Muita coisa acontecendo nesta cidade");
-            // taf.setTitulo("Atividade primeiro semestre");
-            // taf.setTamanhoQuestoes(5);
-            // tarefaService.inserir(taf);
+//             Aluno a1 = new Aluno();
+//             a1.setEmail("jose@email.com");
+//             a1.setMatricula("1245");
+//             a1.setNome("José Antonio");
+//
+//             Aluno a2 = new Aluno();
+//             a2.setEmail("maria@email.com");
+//             a2.setMatricula("12469");
+//             a2.setNome("Maria José");
+//
+//             Aluno a3 = new Aluno();
+//             a3.setEmail("pedro@email.com");
+//             a3.setMatricula("9438");
+//             a3.setNome("Pesro Silva");
+//
+//             Aluno a4 = new Aluno();
+//             a4.setEmail("aparecida@email.com");
+//             a4.setMatricula("63853");
+//             a4.setNome("Aparecida Antonio");
+//
+//
+//
+//             Usuario u = new Usuario("admin", "admin");
+//             u.setSenha(passwordEncoder.encode("sistf@bsw"));
+//             u.setTipoUsuario(Usuario.TipoUsuario.ADMIN);
+//
+//             LOGGER.info("Inserindo ADMIN:" + u);
+//             usuarioService.inserir(u);
+//
+//             LOGGER.info("Inserindo A1" + a1);
+//             alunoService.inserir(a1);
+//
+//             LOGGER.info("Inserindo A2" + a2);
+//             alunoService.inserir(a2);
+//
+//             LOGGER.info("Inserindo A3" + a3);
+//             alunoService.inserir(a3);
+//
+//             LOGGER.info("Inserindo A4" + a4);
+//             alunoService.inserir(a4);
+//
+//             Professor p = new Professor();
+//             p.setNome("Professor Algusto");
+//             p.setEmail("professor@email.com");
+//             p.setUsuario(
+//                     new Usuario("professor",
+//                    passwordEncoder.encode(geradorSenha.gerarSenha()),
+//                     Usuario.TipoUsuario.PROFESSOR));
+//             LOGGER.info("Inserindo P1" + p);
+//             Professor professor = professorService.inserir(p);
+//
+//             Turma t = new Turma();
+//             t.setNome("Turma 1");
+//             t.setDescricao("Tuma numero 01");
+//             t.setProfessor(professor);
+//
+//             LOGGER.info("Inserindo T1: " + t);
+//             turmaService.inserir(t);
+//
+//             Tarefa taf = new Tarefa();
+//             taf.setTurma(t);
+//             taf.setDescricao("Muita coisa acontecendo nesta cidade");
+//             taf.setTitulo("Atividade primeiro semestre");
+//             taf.setTamanhoQuestoes(5);
+//             tarefaService.inserir(taf);
 
             
 
