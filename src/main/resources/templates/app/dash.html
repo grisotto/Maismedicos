@@ -182,7 +182,7 @@ and open the template in the editor.
                                         Questões Inseridas
                                         <span th:text="${questoes!=null? questoes.size():0}"></span> de <span th:text="${equipe.tarefa.tamanhoQuestoes}"></span>
                                             
-                                        <a href="/app/questionario/inserir"
+                                        <a href="/app/questionario/inserir" th:if="${equipe.tarefa.tamanhoQuestoes} != ${questoes!=null? questoes.size():0}"
                                            class="btn btn-sm btn-default pull-right"> Add Nova Questão
                                             <span class="fa fa-plus"></span>
                                         </a>
@@ -210,17 +210,65 @@ and open the template in the editor.
 
                                                     <td th:text="${itr.count}" >1</td>
                                                     <td th:text="${#strings.abbreviate(e.question,100)}"></td>
-                                                    <td th:text="${e.situacaoQuestao}"></td>
+                                                    <td  th:if="${e.isAguardando()}" >
+                                        <span class="label label-info ">
+                                            Aguardando
+                                        </span>
+                                                    </td>
+                                                    <td  th:if="${e.isAprovada()}" >
+                                        <span class="label label-success ">
+                                            Aprovada
+                                        </span>
+                                                    </td>
+
+                                                    <td  th:if="${e.isReprovado()}" >
+                        <span class="label  label-danger">
+                                            Reprovada
+                                        </span>
+                                                    </td>
                                                     <td th:text="${#dates.format(e.updated, 'dd/MM/yyyy hh:mm')}"></td>
                                                    <!--TODO colocar confirmação se deseja apagar-->
-                                                    <td><a  th:href="@{/app/questionario/}+${e.id}+@{/remover/}" class="fa fa-trash btn btn-sm btn-danger"></a></td>
-                                                    <td><a class="fa fa-edit btn btn-sm btn-info"></a></td>
+                                                    <td><a  data-toggle="modal"
+                                                            data-target="#removerQuestao" class="fa fa-trash btn btn-sm btn-danger"></a>
+
+                                                        <div class="modal fade" id="removerQuestao" th:if="${!questoes.empty}" role="dialog">
+                                                            <div class="modal-dialog">
+
+                                                                <!-- Modal content-->
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header bg-warning">
+                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                        <h4 class="modal-title">Remover Questão</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>Tem certeza que quer remover esta questão?</p>
+                                                                        <p th:text="${e.question}"></p>
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar
+                                                                        </button>
+                                                                        <!--TODO Colocar isso como post para evitar algumas complicações-->
+                                                                        <a th:href="@{/app/questionario/}+${e.id}+@{/remover/}"
+                                                                           class="btn btn-danger">Remover
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><a  class="fa fa-edit btn btn-sm btn-info"></a></td>
+
                                                 </tr>
                                             </div>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+
+
+
 
 
 
