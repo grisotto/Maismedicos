@@ -115,12 +115,12 @@ public class DataBaseConfig {
 
 
 
-            Usuario u = new Usuario("admin", "admin");
-            u.setSenha(passwordEncoder.encode("sistf@bsw"));
-            u.setTipoUsuario(Usuario.TipoUsuario.ADMIN);
+            // Usuario u = new Usuario("admin", "admin");
+            // u.setSenha(passwordEncoder.encode("sistf@bsw"));
+            // u.setTipoUsuario(Usuario.TipoUsuario.ADMIN);
 
-            LOGGER.info("Inserindo ADMIN:" + u);
-            usuarioService.inserir(u);
+            // LOGGER.info("Inserindo ADMIN:" + u);
+            // usuarioService.inserir(u);
 
             // LOGGER.info("Inserindo A1" + a1);
             // alunoService.inserir(a1);
