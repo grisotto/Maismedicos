@@ -171,14 +171,14 @@ and open the template in the editor.
                             <p>Ao alterar para a etapa <b>Respondendo</b> será gerado o quiz com as questões validadas
                                 e não será mais possível voltar para as etapas anteriores</p>
                             <p></p>
-                            <big class="text-danger">TEM CERTEZA DISSO?</big>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Fechar
                             </button>
                             <!--TODO Colocar isso como post para evitar algumas complicações-->
                             <a th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${etapas.respondendo.id}"
-                               class="btn btn-danger">Aceitar
+                               class="btn btn-danger">Confirma
                             </a>
                         </div>
                     </div>
