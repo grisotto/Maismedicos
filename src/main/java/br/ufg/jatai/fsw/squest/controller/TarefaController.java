@@ -9,6 +9,7 @@ import br.ufg.jatai.fsw.squest.controller.modelForm.EtapasModel;
 import br.ufg.jatai.fsw.squest.domain.Questionario;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
+import br.ufg.jatai.fsw.squest.facade.EquipeFacade;
 import br.ufg.jatai.fsw.squest.facade.QuestionarioFacade;
 import br.ufg.jatai.fsw.squest.facade.TarefaFacade;
 import br.ufg.jatai.fsw.squest.service.QuestionarioService;
@@ -50,6 +51,9 @@ public class TarefaController {
 
     @Autowired
     private QuestionarioFacade questionarioFacade;
+
+    @Autowired
+    private EquipeFacade equipeFacade;
 
     /**
      *
@@ -165,7 +169,11 @@ public class TarefaController {
 
         Tarefa find = tarefaFacade.findTarefa(tarefaid);
 
+        map.addAttribute("questoesequipe", questionarioService.questoesDaTarefa(tarefaid));
+
         map.addAttribute("questoesturma", questionarioService.questoesDaTarefa(tarefaid));
+
+//        map.addAttribute("equipequestoes", equipeFacade.   )
 
         map.addAttribute("tarefa", find);
 

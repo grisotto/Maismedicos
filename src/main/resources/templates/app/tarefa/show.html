@@ -34,7 +34,10 @@ and open the template in the editor.
             As equipes estão respondendo
         </div>
         <div class="alert alert-success" th:if="${tarefa.etapaAtual.isEsperandoSubmissao()}">
-            As equipes estão inserindo questões
+            As equipes estão inserindo questões <a th:href="@{/app/tarefa/}+${tarefa.id}+@{/questoes}"
+                                                   class="btn btn-sm btn-default pull-right"> Ver Questões
+            <span class="fa fa-plus"></span>
+        </a>
         </div>
     </div>
     <div class="col-md-7">
