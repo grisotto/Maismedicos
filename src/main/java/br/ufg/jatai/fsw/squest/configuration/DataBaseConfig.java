@@ -92,7 +92,7 @@ public class DataBaseConfig {
         public void run(ApplicationArguments args) throws Exception {
             LOGGER.info("RUN in ApplicationRunner");
 
-////
+//
 //             Aluno a1 = new Aluno();
 //             a1.setEmail("jose@email.com");
 //             a1.setMatricula("1245");
