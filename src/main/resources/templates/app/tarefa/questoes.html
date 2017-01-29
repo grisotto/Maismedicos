@@ -91,11 +91,14 @@ and open the template in the editor.
                     </thead>
                     <tbody>
 
-                    <tr th:each="q , iter : ${questoesequipe}">
+                    <tr th:each="e , iter : ${questoesturma}">
                         <td th:text="${iter.index + 1}" >1</td>
-                        <td th:text="${q.questionario.time.nome}">1</td>
-                        <!--<td th:text="${questoesequipe.questionario}">1</td>-->
-                        <!--<td th:text="${q.question}">1</td>-->
+                        <td th:text="${e.nome}">1</td>
+
+                        <td th:text="${e.questionario.questoes.size() / 15}" >
+
+                        </td>
+
 
 
 
@@ -105,7 +108,7 @@ and open the template in the editor.
                         <td>
                             <div class="btn-group " role="group">
 
-                                <a th:href="@{/app/questionario/}+${q.id}" class="btn btn-sm  btn-success fa fa-arrow-right"/>
+                                <a th:href="@{/app/questionario/}+${e.id}" class="btn btn-sm  btn-success fa fa-arrow-right"/>
                             </div>
                         </td>
 

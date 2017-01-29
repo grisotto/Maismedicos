@@ -20,9 +20,6 @@ public interface EquipeRepository extends JpaRepository<Equipe, Integer> {
     @Query("select e from Equipe e where e.tarefa.turma.professor.id = :professorID")
     public List<Equipe> equipesDoProfessor(@Param("professorID") Integer professorID);
 
-//    @Query("select e from Equipe e where e.tarefa.tarefa.tarefa.id = :tarefaID")
-//    public List<Equipe> equipesDoProfessor(@Param("tarefaID") Integer tarefaID);
-
 
     @Query("select e from Equipe e where e.nome = :nome")
     public Equipe findEqipePorNome(@Param("nome") String nome);

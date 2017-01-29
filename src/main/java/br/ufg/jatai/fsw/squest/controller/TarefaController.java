@@ -171,9 +171,10 @@ public class TarefaController {
 
         map.addAttribute("questoesequipe", questionarioService.questoesDaTarefa(tarefaid));
 
-        map.addAttribute("questoesturma", questionarioService.questoesDaTarefa(tarefaid));
+//        map.addAttribute("questoesturma", questionarioService.questoesDaTarefa(tarefaid));
 
-//        map.addAttribute("equipequestoes", equipeFacade.   )
+//        model.addAttribute("questionario", equipe.getQuestionario());
+        map.addAttribute("questoesturma", find.getEquipes());
 
         map.addAttribute("tarefa", find);
 
