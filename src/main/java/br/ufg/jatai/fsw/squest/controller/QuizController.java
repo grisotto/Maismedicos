@@ -58,6 +58,7 @@ public class QuizController {
     public String criarQuiz(@PathVariable Integer tarefaID, Model model) {
         LOGGER.info("Novo quiz, para tarefa {}", tarefaID);
         //TODO Passar passar a lógica para o local correto
+
         Tarefa tarefa = tarefaService.find(tarefaID);//Recuprar a tarefa
         Quiz q = new Quiz();//Inicializa o quiz
         q.setTarefa(tarefa);//Coloca Tarefa
@@ -80,8 +81,9 @@ public class QuizController {
         return quizService.find(quizID).questaoToEquipe(equipe);
     }
 
-    @PostMapping("/{quizID}/responder/{questaoID}")//TODO colocar como post o QuestãoID porque os cara vão mecher com essas URLs
-    public String respostaQuestao(QuestaoQuiz questaoQuiz, Alternativa alternativaSelecionada, final BindingResult bindingResult , final String alternativa,@PathVariable Integer quizID ) {
+    @PreAuthorize("hasAuthority('GRUPO')")
+    @PostMapping("/{quizID}/resposta")//TODO colocar como post o QuestãoID porque os cara vão mecher com essas URLs
+    public String respostaQuestao(QuestaoQuiz questaoQuiz, Alternativa alternativaSelecionada, final BindingResult bindingResult , final String alternativa, @PathVariable Integer quizID, final Integer questaoID  ) {
 
 
         if (bindingResult.hasErrors()) {
@@ -100,7 +102,7 @@ public class QuizController {
         respotaQuestaoQuiz.setEquipe(equipe);//Colocando a equipe
         respotaQuestaoQuiz.setQuestao(questaoQuiz.getQuestao());
 
-//        questaoQuiz.getRespotaQuestaoQuizs().add(respotaQuestaoQuiz);//Adicionando a resposta
+        questaoQuiz.getRespotaQuestaoQuizs().add(respotaQuestaoQuiz);//Adicionando a resposta
 
         questaoQuiz.getEquipeResponderam().add(equipe);
 
@@ -108,14 +110,14 @@ public class QuizController {
 
 //        quizService.atualizar()
 
-        return "redirect:/app/quiz/"+ quizID +"/responder/";
+        return "redirect:/app/quiz/"+ quizID +"/questoes";
 
 
     }
 
     @PreAuthorize("hasAuthority('GRUPO')")
-    @GetMapping("/{quizID}/responder/{questaoID}")//TODO Mover para post -  REMOVER PathVariable - Aqui o pessoal vai ficar brincando com URL, e para não ter que tratar isso é bom trocar
-    public String responderQuestao(@PathVariable Integer questaoID, @PathVariable Integer quizID, Model model) {
+    @PostMapping("/{quizID}/responder/")//TODO Mover para post -  REMOVER PathVariable - Aqui o pessoal vai ficar brincando com URL, e para não ter que tratar isso é bom trocar
+    public String responderQuestao(Integer questaoID, @PathVariable Integer quizID, Model model) {
         model.addAttribute("quiz", quizService.find(quizID));
         model.addAttribute("questao", questaoService.find(questaoID));
 
@@ -125,7 +127,7 @@ public class QuizController {
     }
 
     @PreAuthorize("hasAuthority('GRUPO')")
-    @GetMapping("/{quizID}/responder")
+    @GetMapping("/{quizID}/questoes")
     public String viewResponder(@PathVariable("quizID") Integer quizID, Model model) {
         //lista todas as questẽos do bagulho
         Set<QuestaoQuiz> todas = quizService.find(quizID).getQuestaoQuizes();

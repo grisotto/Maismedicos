@@ -6,11 +6,14 @@
 package br.ufg.jatai.fsw.squest.controller;
 
 import br.ufg.jatai.fsw.squest.controller.modelForm.EtapasModel;
+import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Questionario;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
+import br.ufg.jatai.fsw.squest.facade.EquipeFacade;
 import br.ufg.jatai.fsw.squest.facade.QuestionarioFacade;
 import br.ufg.jatai.fsw.squest.facade.TarefaFacade;
+import br.ufg.jatai.fsw.squest.service.QuestaoService;
 import br.ufg.jatai.fsw.squest.service.QuestionarioService;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
 import br.ufg.jatai.fsw.squest.service.TurmaService;
@@ -50,6 +53,13 @@ public class TarefaController {
 
     @Autowired
     private QuestionarioFacade questionarioFacade;
+
+    @Autowired
+    private EquipeFacade equipeFacade;
+
+
+    @Autowired
+    private QuestaoService questaoService;
 
     /**
      *
@@ -154,26 +164,41 @@ public class TarefaController {
         Tarefa tarefa = tarefaFacade.findTarefa(idTarefa);
 
         if (tarefa.getEtapaAtual().isRespondendo()){
-            return "redirect:/app/quiz/" + idTarefa + "/novo";
+            //usando fachada
+            tarefaFacade.criarQuiz(idTarefa);
+
         }
         return "redirect:/app/tarefa/" + idTarefa;
     }
 
 
-    @GetMapping(value = "/app/tarefa/{tarefaid}/questoes")
-    public String showQuestoesTurma(@PathVariable Integer tarefaid, ModelMap map, final EtapasModel etapas) {
+    @GetMapping(value = "/app/tarefa/{equipeID}/questoes")
+    public String showQuestoesEquipe(@PathVariable Integer equipeID, ModelMap map, final EtapasModel etapas) {
 
-        Tarefa find = tarefaFacade.findTarefa(tarefaid);
 
-        map.addAttribute("questoesturma", questionarioService.questoesDaTarefa(tarefaid));
+        Equipe equipe = equipeFacade.findEquipe(equipeID);
 
-        map.addAttribute("tarefa", find);
 
-//        map.addAttribute("equipe", new Equipe());
-        //aqui eu tenho que pegar os dados dos grupos desta Tarefa
+        map.addAttribute("equipe", equipe);
+        map.addAttribute("questoesequipe", questaoService.questoesDoQuestionario(equipe.getQuestionario().getId()));
+
 
 
         return "app/tarefa/questoes";
+    }
+
+    @GetMapping(value = "/app/tarefa/{tarefaid}/questoesequipe")
+    public String showQuestoesPorEquipe(@PathVariable Integer tarefaid, ModelMap map, final EtapasModel etapas) {
+
+        Tarefa find = tarefaFacade.findTarefa(tarefaid);
+
+
+        map.addAttribute("questoesturma", find.getEquipes());
+
+        map.addAttribute("tarefa", find);
+
+
+        return "app/tarefa/questoesequipe";
     }
 
 

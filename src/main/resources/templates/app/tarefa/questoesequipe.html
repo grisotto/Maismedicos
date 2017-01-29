@@ -19,9 +19,9 @@ and open the template in the editor.
 <body>
 <div th:fragment="content">
     <div class="page-header">
-        <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" th:href="@{/app/tarefa/}+${equipe.tarefa.id}+@{/questoesequipe}"></a><b>
-            Questões da Equipe: </b>
-            <span class="text-muted" th:text="${{equipe.nome}}"></span></h2>
+        <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" th:href="@{/app/tarefa/}+${tarefa.id}"></a><b>
+            Questões da tarefa: </b>
+            <span class="text-muted" th:text="${{tarefa.titulo}}"></span></h2>
     </div>
     <div class="col-md-12">
 
@@ -35,21 +35,21 @@ and open the template in the editor.
             <div class="panel-body">
                 <div class="form-inline">
                     <div class="form-group col-md-3">
-                        <label class="control-label" for="nome">Nome:</label>
-                        <span class="form-control-static" th:text="${{equipe.nome}}"></span>
+                        <label class="control-label" for="nome">Título:</label>
+                        <span class="form-control-static" th:text="${{tarefa.titulo}}"></span>
 
                     </div>
                     <div class="form-group col-md-3">
-                        <label class="control-label" for="tarefas">Quantidade de alunos: </label>
-                        <span class="form-control-static" th:text="${equipe.alunos.size()}">0</span>
+                        <label class="control-label" for="tarefas">Descrição: </label>
+                        <span class="form-control-static" th:text="${tarefa.descricao}">0</span>
 
                     </div>
 
-                    <!--<div class="form-group col-md-3">-->
-                        <!--<label class="control-label" for="tarefas">Turma: </label>-->
-                        <!--<span class="form-control-static" th:text="${tarefa.turma.nome}">0</span>-->
+                    <div class="form-group col-md-3">
+                        <label class="control-label" for="tarefas">Turma: </label>
+                        <span class="form-control-static" th:text="${tarefa.turma.nome}">0</span>
 
-                    <!--</div>-->
+                    </div>
 
 
 
@@ -83,35 +83,23 @@ and open the template in the editor.
                     <tr>
                         <th>#</th>
                         <th>Equipe</th>
-                        <th>Questão</th>
-                        <th>Situação</th>
-                        <th class="pull-right">Ver Respostas</th>
+                        <th>Quantidade de Questões</th>
+
+                        <th class="pull-right" >Ver Questões</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    <tr th:each="e , iter : ${questoesequipe}">
+                    <tr th:each="e , iter : ${questoesturma}">
                         <td th:text="${iter.index + 1}" >1</td>
-                        <td th:text="${e.question}">1</td>
-                        <td th:text="${e.question}">1</td>
+                        <td th:text="${e.nome}">1</td>
 
-                        <td  th:if="${e.isAguardando()}" >
-                                        <span class="label label-info ">
-                                            Aguardando
-                                        </span>
-                        </td>
-                        <td  th:if="${e.isAprovada()}" >
-                                        <span class="label label-success ">
-                                            Aprovada
-                                        </span>
+                        <td th:text="${e.questionario.questoes.size() / 15}" >
+
                         </td>
 
-                        <td  th:if="${e.isReprovado()}" >
-                        <span class="label  label-danger">
-                                            Reprovada
-                                        </span>
-                        </td>
+
 
 
 
@@ -120,7 +108,7 @@ and open the template in the editor.
                         <td>
                             <div class="btn-group pull-right" role="group">
 
-                                <a th:href="@{/app/questionario/}+${e.id}" class="btn btn-sm  btn-success fa fa-arrow-right"/>
+                                <a th:href="@{/app/tarefa/}+${e.id}+@{/questoes}" class="btn btn-sm  btn-success fa fa-arrow-right"/>
                             </div>
                         </td>
 

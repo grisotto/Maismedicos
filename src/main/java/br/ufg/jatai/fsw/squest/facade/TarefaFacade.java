@@ -3,15 +3,17 @@ package br.ufg.jatai.fsw.squest.facade;
 import br.ufg.jatai.fsw.squest.AutenticateUser;
 import br.ufg.jatai.fsw.squest.controller.modelForm.EtapasModel;
 import br.ufg.jatai.fsw.squest.domain.EtapaEvento;
+import br.ufg.jatai.fsw.squest.domain.Questao;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
-import br.ufg.jatai.fsw.squest.service.EtapaEventoService;
-import br.ufg.jatai.fsw.squest.service.TarefaService;
-import br.ufg.jatai.fsw.squest.service.TurmaService;
+import br.ufg.jatai.fsw.squest.domain.quis.QuestaoQuiz;
+import br.ufg.jatai.fsw.squest.domain.quis.Quiz;
+import br.ufg.jatai.fsw.squest.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by dyeimys on 06/01/17.
@@ -23,6 +25,12 @@ public class TarefaFacade {
     private TarefaService tarefaService;
     @Autowired
     private TurmaService turmaService;
+
+    @Autowired
+    private QuestaoService questaoService;
+
+    @Autowired
+    private QuizService quizService;
 
     @Autowired
     private AutenticateUser autenticateUser;
@@ -95,5 +103,18 @@ public class TarefaFacade {
         tarefaService.atualizar(tarefa);
         
         
+    }
+
+    public void criarQuiz (Integer tarefaID){
+
+        Tarefa tarefa = tarefaService.find(tarefaID);//Recuprar a tarefa
+        Quiz q = new Quiz();//Inicializa o quiz
+        q.setTarefa(tarefa);//Coloca Tarefa
+        Set<Questao> questoes = questaoService.questoesParaQuiz(tarefaID);//Recupera as questões
+        q.setQuestaoQuizes(QuestaoQuiz.AjusteTecnico.create(questoes));//Coloca questões
+
+        quizService.inserir(q);//Salva quiz
+
+
     }
 }

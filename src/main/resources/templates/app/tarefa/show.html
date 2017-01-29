@@ -25,7 +25,7 @@ and open the template in the editor.
     </div>
     <div th:if="${tarefa.etapaAtual!=null}">
         <div class="alert alert-info" th:if="${tarefa.etapaAtual.isValidando()}">
-            Agora o professor precisa validar as questões <a th:href="@{/app/tarefa/}+${tarefa.id}+@{/questoes}"
+            Agora o professor precisa validar as questões <a th:href="@{/app/tarefa/}+${tarefa.id}+@{/questoesequipe}"
                                                              class="btn btn-sm btn-default pull-right"> Validar Questões
             <span class="fa fa-plus"></span>
         </a>
@@ -34,7 +34,10 @@ and open the template in the editor.
             As equipes estão respondendo
         </div>
         <div class="alert alert-success" th:if="${tarefa.etapaAtual.isEsperandoSubmissao()}">
-            As equipes estão inserindo questões
+            As equipes estão inserindo questões <a th:href="@{/app/tarefa/}+${tarefa.id}+@{/questoesequipe}"
+                                                   class="btn btn-sm btn-default pull-right"> Ver Questões
+            <span class="fa fa-plus"></span>
+        </a>
         </div>
     </div>
     <div class="col-md-7">
@@ -46,7 +49,7 @@ and open the template in the editor.
                         </span>
             </div>
             <div th:if="${!tarefa.etapaEventos.empty}" class="panel-body">
-                <table class="table table-responsive" id="EtapasTarefa">
+                <table class="table dt-responsive table-responsive" id="EtapasTarefa">
                     <thead>
                     <tr>
                         <th>#</th>
