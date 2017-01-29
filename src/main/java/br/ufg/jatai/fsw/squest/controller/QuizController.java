@@ -83,7 +83,7 @@ public class QuizController {
 
     @PreAuthorize("hasAuthority('GRUPO')")
     @PostMapping("/{quizID}/resposta")//TODO colocar como post o QuestãoID porque os cara vão mecher com essas URLs
-    public String respostaQuestao(QuestaoQuiz questaoQuiz, Alternativa alternativaSelecionada, final BindingResult bindingResult , final String alternativa,@PathVariable Integer quizID, final Integer questaoID  ) {
+    public String respostaQuestao(QuestaoQuiz questaoQuiz, Alternativa alternativaSelecionada, final BindingResult bindingResult , final String alternativa, @PathVariable Integer quizID, final Integer questaoID  ) {
 
 
         if (bindingResult.hasErrors()) {
@@ -110,7 +110,7 @@ public class QuizController {
 
 //        quizService.atualizar()
 
-        return "redirect:/app/quiz/"+ quizID +"/responder/";
+        return "redirect:/app/quiz/"+ quizID +"/questoes";
 
 
     }
