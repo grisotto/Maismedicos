@@ -96,7 +96,7 @@ and open the template in the editor.
                         </div>
                         <div class="panel-footer clear-fix " th:if="${!questao.questionario.tarefa.etapaAtual.isValidando()}">
                             <div class="input-group">
-                        <a class="btn btn-info" th:href="@{/app/tarefa/}+${questao.id}+@{/questoes}">   <i class="fa fa-arrow-circle-o-left  "> </i> Voltar</a>
+                        <a class="btn btn-info" th:href="@{/app/tarefa/}+${questao.questionario.time.id}+@{/questoes}">   <i class="fa fa-arrow-circle-o-left  "> </i> Voltar</a>
                             </div>
                         </div>
 
