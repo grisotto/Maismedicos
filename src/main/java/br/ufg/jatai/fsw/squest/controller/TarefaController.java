@@ -164,7 +164,7 @@ public class TarefaController {
         Tarefa tarefa = tarefaFacade.findTarefa(idTarefa);
 
         if (tarefa.getEtapaAtual().isRespondendo()){
-
+            //usando fachada
             tarefaFacade.criarQuiz(idTarefa);
 
         }
