@@ -82,7 +82,6 @@ and open the template in the editor.
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Equipe</th>
                         <th>Questão</th>
                         <th>Situação</th>
                         <th class="pull-right">Ver Respostas</th>
@@ -93,7 +92,7 @@ and open the template in the editor.
 
                     <tr th:each="e , iter : ${questoesequipe}">
                         <td th:text="${iter.index + 1}" >1</td>
-                        <td th:text="${e.question}">1</td>
+
                         <td th:text="${e.question}">1</td>
 
                         <td  th:if="${e.isAguardando()}" >

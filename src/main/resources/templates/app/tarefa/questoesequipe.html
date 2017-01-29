@@ -94,11 +94,18 @@ and open the template in the editor.
                     <tr th:each="e , iter : ${questoesturma}">
                         <td th:text="${iter.index + 1}" >1</td>
                         <td th:text="${e.nome}">1</td>
+                        <div th:if="${e.questionario}">
+                        <td th:text="${e.questionario.questoes.size() / (e.questionario.tarefa.tamanhoQuestoes / 2)}" >0
 
-                        <td th:text="${e.questionario.questoes.size() / 15}" >
 
                         </td>
+                        </div>
 
+                        <div th:unless="${e.questionario}">
+                            <td >0
+
+                            </td>
+                        </div>
 
 
 
@@ -106,9 +113,13 @@ and open the template in the editor.
 
 
                         <td>
-                            <div class="btn-group pull-right" role="group">
+                            <div class="btn-group pull-right" role="group" th:if="${e.questionario}">
 
                                 <a th:href="@{/app/tarefa/}+${e.id}+@{/questoes}" class="btn btn-sm  btn-success fa fa-arrow-right"/>
+                            </div>
+                            <div class="btn-group pull-right" role="group" th:unless="${e.questionario}">
+
+                                <a href="#" class="btn btn-sm  btn-danger fa fa-square"/>
                             </div>
                         </td>
 
