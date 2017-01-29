@@ -2,6 +2,7 @@
 <html
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
+      sec:authorize="hasAuthority('ADMIN')"
 >
 <head>
     <meta charset="UTF-8"/>
@@ -10,7 +11,7 @@
 
 
 </head>
-<body>
+<body >
 
 <div>
     <h1>Pagina teste para quiz</h1>
@@ -20,7 +21,7 @@
 
     
     <div th:text="${msg}" th:class="text-info" >!</div>
-    <table class="table">
+    <table class="table" >
  <thead>
             <tr>
                 <th>Tarefa ID</th>

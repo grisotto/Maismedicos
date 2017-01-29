@@ -65,8 +65,19 @@ and open the template in the editor.
 
                                     <td th:text="${itr.count}" >1</td>
                                     <td th:text="${#strings.abbreviate(q.questao.question,200)}"></td>
-                                    <!--<td th:text="${q.respondido(#authentication.principal.id)}">id</td>-->
-                                    <td class="pull-right"> <a  th:href="@{/app/quiz/}+${quiz.id}+@{/responder/}+${q.id}" class="btn btn-info btn-md fa fa-file-o"></a></td>
+
+                                    <td class="pull-right">
+                                    <form action="#" th:action="@{/app/quiz/}+${quiz.id}+@{/responder/}" th:object="${questao}" method="POST">
+
+                                        <input hidden="true" name="questaoID" th:value="${q.questao.id}"/>
+                                        <button type="submit"  class="btn btn-info" >
+                                            <i class="fa fa-file-o "> </i> Responder
+                                        </button>
+
+                                    </form>
+
+
+                                     </td>
                                 </tr>
                             </div>
                             </tbody>
