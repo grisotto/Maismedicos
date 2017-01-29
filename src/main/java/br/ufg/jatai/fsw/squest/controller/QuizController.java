@@ -58,6 +58,7 @@ public class QuizController {
     public String criarQuiz(@PathVariable Integer tarefaID, Model model) {
         LOGGER.info("Novo quiz, para tarefa {}", tarefaID);
         //TODO Passar passar a lógica para o local correto
+
         Tarefa tarefa = tarefaService.find(tarefaID);//Recuprar a tarefa
         Quiz q = new Quiz();//Inicializa o quiz
         q.setTarefa(tarefa);//Coloca Tarefa

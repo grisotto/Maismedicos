@@ -164,7 +164,9 @@ public class TarefaController {
         Tarefa tarefa = tarefaFacade.findTarefa(idTarefa);
 
         if (tarefa.getEtapaAtual().isRespondendo()){
-            return "redirect:/app/quiz/" + idTarefa + "/novo";
+
+            tarefaFacade.criarQuiz(idTarefa);
+
         }
         return "redirect:/app/tarefa/" + idTarefa;
     }

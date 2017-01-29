@@ -117,7 +117,7 @@ public class QuestionarioController implements Serializable {
     public String aprovarQuestao(@PathVariable("questaoID") Integer idQuestao) {
         Questao q = questaoService.aprovarQuestao(idQuestao);
 
-        return "redirect:/app/tarefa/" + q.getQuestionario().getTarefa().getId() + "/questoes";
+        return "redirect:/app/tarefa/" + q.getQuestionario().gettime().getId() + "/questoes";
 
     }
 
@@ -128,7 +128,7 @@ public class QuestionarioController implements Serializable {
     public String reprovarQuestao(@PathVariable("questaoID") Integer idQuestao) {
         Questao q = questaoService.reprovarQuestao(idQuestao, "Mensagem");
 
-        return "redirect:/app/tarefa/" + q.getQuestionario().getTarefa().getId() + "/questoes";
+        return "redirect:/app/tarefa/" + q.getQuestionario().gettime().getId() + "/questoes";
 
     }
     @PreAuthorize("hasAuthority('GRUPO')")
