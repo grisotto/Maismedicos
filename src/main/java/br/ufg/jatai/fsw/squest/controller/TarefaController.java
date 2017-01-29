@@ -6,12 +6,14 @@
 package br.ufg.jatai.fsw.squest.controller;
 
 import br.ufg.jatai.fsw.squest.controller.modelForm.EtapasModel;
+import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Questionario;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
 import br.ufg.jatai.fsw.squest.facade.EquipeFacade;
 import br.ufg.jatai.fsw.squest.facade.QuestionarioFacade;
 import br.ufg.jatai.fsw.squest.facade.TarefaFacade;
+import br.ufg.jatai.fsw.squest.service.QuestaoService;
 import br.ufg.jatai.fsw.squest.service.QuestionarioService;
 import br.ufg.jatai.fsw.squest.service.TarefaService;
 import br.ufg.jatai.fsw.squest.service.TurmaService;
@@ -54,6 +56,10 @@ public class TarefaController {
 
     @Autowired
     private EquipeFacade equipeFacade;
+
+
+    @Autowired
+    private QuestaoService questaoService;
 
     /**
      *
@@ -164,25 +170,33 @@ public class TarefaController {
     }
 
 
-    @GetMapping(value = "/app/tarefa/{tarefaid}/questoes")
-    public String showQuestoesTurma(@PathVariable Integer tarefaid, ModelMap map, final EtapasModel etapas) {
+    @GetMapping(value = "/app/tarefa/{equipeID}/questoes")
+    public String showQuestoesEquipe(@PathVariable Integer equipeID, ModelMap map, final EtapasModel etapas) {
+
+
+        Equipe equipe = equipeFacade.findEquipe(equipeID);
+
+
+        map.addAttribute("equipe", equipe);
+        map.addAttribute("questoesequipe", questaoService.questoesDoQuestionario(equipe.getQuestionario().getId()));
+
+
+
+        return "app/tarefa/questoes";
+    }
+
+    @GetMapping(value = "/app/tarefa/{tarefaid}/questoesequipe")
+    public String showQuestoesPorEquipe(@PathVariable Integer tarefaid, ModelMap map, final EtapasModel etapas) {
 
         Tarefa find = tarefaFacade.findTarefa(tarefaid);
 
-        map.addAttribute("questoesequipe", questionarioService.questoesDaTarefa(tarefaid));
 
-//        map.addAttribute("questoesturma", questionarioService.questoesDaTarefa(tarefaid));
-
-//        model.addAttribute("questionario", equipe.getQuestionario());
         map.addAttribute("questoesturma", find.getEquipes());
 
         map.addAttribute("tarefa", find);
 
-//        map.addAttribute("equipe", new Equipe());
-        //aqui eu tenho que pegar os dados dos grupos desta Tarefa
 
-
-        return "app/tarefa/questoes";
+        return "app/tarefa/questoesequipe";
     }
 
 
