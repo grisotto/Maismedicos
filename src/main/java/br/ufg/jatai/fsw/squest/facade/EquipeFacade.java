@@ -185,7 +185,7 @@ public class EquipeFacade {
 
 
             corpo.append("<h4>O professor " + autenticateUser.getProfessor().getNome()
-                    + " liberou o acesso da equipe " + equipe.getNome() + "<br>Senha: " + gerarSenha+ " .<br> À partir de agora a equipe já pode enviar suas questões. "
+                    + " liberou o acesso da equipe " + equipe.getNome() + "<br>Senha: " + gerarSenha+ " <br> À partir de agora a equipe já pode enviar suas questões. "
                     + "<br><br><b>. Membros:");
 
 

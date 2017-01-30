@@ -20,6 +20,7 @@ public class Alternativa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Lob
     private String descricao;
     private boolean correto;
     @ManyToOne(fetch = FetchType.EAGER)
