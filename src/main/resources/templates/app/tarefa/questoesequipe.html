@@ -85,7 +85,7 @@ and open the template in the editor.
                     <tr>
                         <th>#</th>
                         <th>Equipe</th>
-                        <th>Quantidade de Questões</th>
+                        <!--<th>Quantidade de Questões</th>-->
 
                         <th class="pull-right" >Ver Questões</th>
                         <th></th>
@@ -96,19 +96,19 @@ and open the template in the editor.
                     <tr th:each="e , iter : ${questoesturma}">
                         <td th:text="${iter.index + 1}" >1</td>
                         <td th:text="${e.nome}">1</td>
-                        <div th:if="${e.questionario}">
-                        <td th:text="${e.questionario.questoes.size() / (e.questionario.tarefa.tamanhoQuestoes)}" >0
+                        <!--<div th:if="${e.questionario}">-->
+                        <!--<td th:text="${e.questionario.questoes.size() / (e.questionario.tarefa.tamanhoQuestoes)}" >0-->
 
 
-                        </td>
+                        <!--</td>-->
 
-                        </div>
+                        <!--</div>-->
 
-                        <div th:unless="${e.questionario}">
-                            <td >0
+                        <!--<div th:unless="${e.questionario}">-->
+                            <!--<td >0-->
 
-                            </td>
-                        </div>
+                            <!--</td>-->
+                        <!--</div>-->
 
 
 
