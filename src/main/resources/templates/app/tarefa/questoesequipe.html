@@ -54,6 +54,8 @@ and open the template in the editor.
 
 
 
+
+
                 </div>
 
 
@@ -95,10 +97,11 @@ and open the template in the editor.
                         <td th:text="${iter.index + 1}" >1</td>
                         <td th:text="${e.nome}">1</td>
                         <div th:if="${e.questionario}">
-                        <td th:text="${e.questionario.questoes.size() / (e.questionario.tarefa.tamanhoQuestoes / 2)}" >0
+                        <td th:text="${e.questionario.questoes.size() / (e.questionario.tarefa.tamanhoQuestoes)}" >0
 
 
                         </td>
+
                         </div>
 
                         <div th:unless="${e.questionario}">
