@@ -109,10 +109,18 @@ public class EquipeController implements Serializable {
         equipeFacade.addAluno(aluno, equipe);
         return "redirect:/app/equipe/" + equipe.getId();
     }
+
     @GetMapping("{idEquipe}/ativar")
     public String ativarEquipe(@PathVariable("idEquipe")Integer idEquipe) {
         log.info("Acessando aqui o controller Equipe no metodo ativar com a equipe: "+idEquipe);
         equipeFacade.ativarEquipe(idEquipe);
+        return "redirect:/app/equipe/" + idEquipe;
+    }
+
+    @GetMapping("{idEquipe}/gerarsenha")
+    public String gerarNovaSenhaEquipe(@PathVariable("idEquipe")Integer idEquipe) {
+
+        equipeFacade.gerarNovaSenhaEquipe(idEquipe);
         return "redirect:/app/equipe/" + idEquipe;
     }
 
