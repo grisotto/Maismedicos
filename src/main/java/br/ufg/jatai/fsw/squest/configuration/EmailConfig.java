@@ -27,6 +27,9 @@ public class EmailConfig {
     @Value("${spring.mail.password}")
     private String password;
 
+    @Value("${spring.mail.default-encoding}")
+    private String encoding;
+
 
     @Bean
     public JavaMailSender mailService(){
@@ -37,6 +40,7 @@ public class EmailConfig {
         mailSender.setHost(host);
         mailSender.setPort(Integer.parseInt(port));
 
+        mailSender.setDefaultEncoding(encoding);
         mailSender.setPassword(password);
         mailSender.setUsername(userName);
 
@@ -52,6 +56,7 @@ public class EmailConfig {
         p.setProperty("mail.smtp.starttls.enable", "true");
         p.setProperty("mail.smtp.port", port);
         p.setProperty("mail.smtp.auth", "true");
+        p.setProperty("mail.mime.charset", "utf8");
         p.put("mail.debug", "true");
         p.put("mail.transport.protocol", "smtp");
         p.put("mail.debug.auth", "true");

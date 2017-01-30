@@ -72,10 +72,9 @@ and open the template in the editor.
                                             <h4 class="modal-title">Desabilitar Equipe</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Ao desbilitar a equipe <b>todos</b> integerantes da equipe receberão um
-                                                email com as informações de que eles não tem mais acesso ao  Sistema</p>
+                                            <p>Ao desabilitar a equipe, ela não terá mais acesso ao sistema e todos os alunos da equipe receberam um email</p>
                                             <p></p>
-                                            <big class="text-danger">TEM CERTEZA DISSO?</big>
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Fechar
@@ -122,6 +121,45 @@ and open the template in the editor.
                             </div>
                         </div>
                     </div>
+
+                    <!--Colocar opcao para o professor gerar uma nova senha para a equipe-->
+                    <div class="form-group col-md-3" th:if="${equipe.ativa}">
+
+                        <div class="form-control-static" >
+                            <button class="btn btn-sm btn-info" type="button" data-toggle="modal"
+                                    data-target="#gerarSenha">Gerar Nova Senha
+
+                            </button>
+
+                            <div class="modal fade" id="gerarSenha" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-warning">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Gerar Nova Senha</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>A equipe terá que utilizar esta nova senha para acessar o sistema.</p>
+                                            <p></p>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar
+                                            </button>
+                                            <a th:href="@{/app/equipe/}+${equipe.id}+@{/gerarsenha}" class="btn btn-danger">Gerar
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                       </div>
+
+                    </div>
+
+                    <!--final gerar nova senha-->
 
                 </div>
 

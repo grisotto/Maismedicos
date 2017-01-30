@@ -112,6 +112,51 @@ public class EquipeFacade {
         return equipeService.findEquipePorNome(nome)!=null;
     }
 
+    public void gerarNovaSenhaEquipe (Integer equipeID){
+
+        Equipe equipe = equipeService.find(equipeID);
+        Mensagem m = new Mensagem();
+        Iterator<Aluno> i = equipe.getAlunos().iterator();
+
+        m.setAssunto("Senha Alterada!");
+
+        StringBuilder corpo = new StringBuilder();
+
+        String gerarSenha = geradorSenha.gerarSenha();
+        equipe.getUsuario().setSenha(passwordEncoder.encode(gerarSenha));
+
+
+        corpo.append("<h4>O professor " + autenticateUser.getProfessor().getNome()
+                + " alterou a senha da equipe " + equipe.getNome() + " para a <br>nova Senha: " + gerarSenha+ " <br> À partir de agora utilize esta nova senha para acessar o sistema. "
+                + "<br><br><b>. Membros:");
+
+
+        while (i.hasNext()){
+
+            Aluno a = i.next();
+            corpo.append("<br><br> _ " + a.getNome());
+
+        }
+
+        corpo.append("</b><br><br>PS.: A equipe pode estar logada apenas uma vez!</h4>");
+
+        m.setCorpo(corpo.toString());
+
+
+        m.setDestinatarios(fabrica.criaEndereco(equipe));
+
+        try {
+            mailService.sendMail(m);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+    }
+
+
     public void ativarEquipe(Integer idEquipe) {
 
         Equipe equipe = equipeService.find(idEquipe);
@@ -140,7 +185,7 @@ public class EquipeFacade {
 
 
             corpo.append("<h4>O professor " + autenticateUser.getProfessor().getNome()
-                    + " liberou o acesso da equipe " + equipe.getNome() + "<br>Senha: " + gerarSenha+ ".<br> À partir de agora a equipe já pode enviar suas questões. "
+                    + " liberou o acesso da equipe " + equipe.getNome() + "<br>Senha: " + gerarSenha+ " .<br> À partir de agora a equipe já pode enviar suas questões. "
                     + "<br><br><b>. Membros:");
 
 
