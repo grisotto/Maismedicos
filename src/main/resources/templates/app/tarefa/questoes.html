@@ -19,7 +19,7 @@ and open the template in the editor.
 <body>
 <div th:fragment="content">
     <div class="page-header">
-        <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" th:href="@{/app/tarefa/}+${equipe.tarefa.id}+@{/questoesequipe}"></a><b>
+        <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" th:href="@{/app/tarefa/}+${equipe.tarefa.id}"></a><b>
             Questões da Equipe: </b>
             <span class="text-muted" th:text="${{equipe.nome}}"></span></h2>
     </div>

@@ -187,19 +187,7 @@ public class TarefaController {
         return "app/tarefa/questoes";
     }
 
-    @GetMapping(value = "/app/tarefa/{tarefaid}/questoesequipe")
-    public String showQuestoesPorEquipe(@PathVariable Integer tarefaid, ModelMap map, final EtapasModel etapas) {
 
-        Tarefa find = tarefaFacade.findTarefa(tarefaid);
-
-
-        map.addAttribute("questoesturma", find.getEquipes());
-
-        map.addAttribute("tarefa", find);
-
-
-        return "app/tarefa/questoesequipe";
-    }
 
 
 
