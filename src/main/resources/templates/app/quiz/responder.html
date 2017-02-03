@@ -30,62 +30,59 @@ and open the template in the editor.
 				</div>
 
 
-                <form role="form" th:action="@{/app/quiz/}+${quiz.id}+@{/resposta/}" method="POST">
+                <form role="form" th:action="@{/app/quiz/}+${quiz.id}+@{/resposta/}"  method="POST">
 
 				<div class="panel-body">
 					<div class="col-md-3"></div>
 
 					<div class="col-md-6">
+						<!--<input type="hidden" th:field="*{questao.id}" name="QuestaoQuiz" />-->
+						<input type="hidden" name="questaoID" th:value="*{questao.id}"  />
 
-							<p class="lead" th:text="${questao.question}">Qual o nome do primeiro algoritmo de geração de circuferencias?</p>
+
+						<p class="lead" th:text="${questao.question}">Qual o nome do primeiro algoritmo de geração de circuferencias?</p>
 							<blockquote>
 
-								<div th:each="q, iter : ${questao.alternativas}">
+
 									<div class="funkyradio">
 										<!--http://bootsnipp.com/snippets/featured/funky-radio-buttons-->
 
-										<div th:if="${iter.index == 0}" class="radio">
-
-											<div class="funkyradio-primary">
-												<input type="radio" id="radio1" name="alternativa" th:value="${q.descricao}"  />
-												<label for="radio1" th:text="${q.descricao}"></label>
-											</div>
-
-										</div>
-										<div th:if="${iter.index == 1}" class="radio">
-
-											<div class="funkyradio-primary">
-												<input type="radio" id="radio2" name="alternativa" th:value="${q.descricao}"  />
-												<label for="radio2" th:text="${q.descricao}"></label>
-											</div>
-
-										</div>
-										<div th:if="${iter.index == 2}" class="radio">
-											<div class="funkyradio-primary">
-												<input type="radio" id="radio3" name="alternativa" th:value="${q.descricao}"  />
-												<label for="radio3" th:text="${q.descricao}"></label>
-											</div>
-										</div>
-										<div th:if="${iter.index == 3}" class="radio">
 
 
 											<div class="funkyradio-primary">
-												<input type="radio" id="radio4" name="alternativa" th:value="${q.descricao}"  />
-												<label for="radio4" th:text="${q.descricao}"></label>
+												<input type="radio" id="radio1" name="alternativa" th:value="${questao.alternativas[0].id}" />
+												<label for="radio1" th:text="${questao.alternativas[0].descricao}" ></label>
 											</div>
-										</div>
-										<div th:if="${iter.index == 4}" class="radio">
+
+
+
 											<div class="funkyradio-primary">
-												<input type="radio" id="radio5" name="alternativa"  th:value="${q.descricao}" />
-												<label for="radio5" th:text="${q.descricao}"></label>
+												<input type="radio" id="radio2" name="alternativa" th:value="${questao.alternativas[1].id}"  />
+												<label for="radio2" th:text="${questao.alternativas[1].descricao}"></label>
 											</div>
-										</div>
+
+
+											<div class="funkyradio-primary">
+												<input type="radio" id="radio3" name="alternativa" th:value="${questao.alternativas[2].id}"  />
+												<label for="radio3" th:text="${questao.alternativas[2].descricao}"></label>
+											</div>
+
+
+											<div class="funkyradio-primary">
+												<input type="radio" id="radio4" name="alternativa" th:value="${questao.alternativas[3].id}"  />
+												<label for="radio4" th:text="${questao.alternativas[3].descricao}"></label>
+											</div>
+
+											<div class="funkyradio-primary">
+												<input type="radio" id="radio5" name="alternativa"  th:value="${questao.alternativas[4].id}" />
+												<label for="radio5" th:text="${questao.alternativas[4].descricao}"></label>
+											</div>
+
 
 
 									</div>
 
 
-								</div>
 
 
 
