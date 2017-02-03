@@ -25,19 +25,21 @@ and open the template in the editor.
     </div>
     <div th:if="${tarefa.etapaAtual!=null}">
         <div class="alert alert-info" th:if="${tarefa.etapaAtual.isValidando()}">
-            Agora o professor precisa validar as questões <a th:href="@{/app/tarefa/}+${tarefa.id}+@{/questoesequipe}"
-                                                             class="btn btn-sm btn-default pull-right"> Validar Questões
-            <span class="fa fa-plus"></span>
-        </a>
+            Agora o professor precisa validar as questões
+            <!--<a th:href="@{/app/tarefa/}+${tarefa.id}+@{/questoesequipe}"-->
+                                                             <!--class="btn btn-sm btn-default pull-right"> Validar Questões-->
+            <!--<span class="fa fa-plus"></span>-->
+        <!--</a>-->
         </div>
         <div class="alert alert-success" th:if="${tarefa.etapaAtual.isRespondendo()}">
             As equipes estão respondendo
         </div>
         <div class="alert alert-success" th:if="${tarefa.etapaAtual.isEsperandoSubmissao()}">
-            As equipes estão inserindo questões <a th:href="@{/app/tarefa/}+${tarefa.id}+@{/questoesequipe}"
-                                                   class="btn btn-sm btn-default pull-right"> Ver Questões
-            <span class="fa fa-plus"></span>
-        </a>
+            As equipes estão inserindo questões
+            <!--<a th:href="@{/app/tarefa/}+${tarefa.id}+@{/questoesequipe}"-->
+                                                   <!--class="btn btn-sm btn-default pull-right"> Ver Questões-->
+            <!--<span class="fa fa-plus"></span>-->
+        <!--</a>-->
         </div>
     </div>
     <div class="col-md-7">
@@ -308,6 +310,8 @@ and open the template in the editor.
                         <th>Qnt. Part</th>
                         <th>Situação</th>
                         <th></th>
+                        <th></th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -333,7 +337,29 @@ and open the template in the editor.
                                 <a th:href="@{/app/equipe/}+${a.id}" class="btn btn-sm  btn-success fa fa-arrow-right"/>
                             </div>
 
+
+
+
                         </td>
+
+                        <div th:unless="${tarefa.etapaAtual.isAguardando()}">
+                            <td>
+                            <div class="btn-group pull-right" role="group" th:if="${a.questionario}">
+
+                                <a th:href="@{/app/tarefa/}+${a.id}+@{/questoes}" class="btn btn-sm  btn-info fa  fa-edit"> Questões</a>
+                            </div>
+                            <div class="btn-group pull-right" role="group" th:unless="${a.questionario}">
+
+                                <a href="#" class="btn btn-sm  btn-danger fa fa-times"/>
+                            </div>
+
+
+
+
+                            </td>
+                            </div>
+
+
                     </tr>
                     </tbody>
                 </table>
