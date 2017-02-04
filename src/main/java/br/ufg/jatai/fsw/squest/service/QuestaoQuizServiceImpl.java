@@ -1,5 +1,6 @@
 package br.ufg.jatai.fsw.squest.service;
 
+import br.ufg.jatai.fsw.squest.domain.Questao;
 import br.ufg.jatai.fsw.squest.domain.quis.QuestaoQuiz;
 import br.ufg.jatai.fsw.squest.repository.QuestaoQuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,10 @@ public class QuestaoQuizServiceImpl implements QuestaoQuizService {
     @Override
     public List<QuestaoQuiz> findAll() {
         return questaoQuizRepository.findAll();
+    }
+
+    @Override
+    public QuestaoQuiz findByQuestaoId(Integer id) {
+        return questaoQuizRepository.findByQuestaoId(id);
     }
 }

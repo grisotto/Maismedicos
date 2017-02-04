@@ -112,30 +112,32 @@ public class QuizController {
         respotaQuestaoQuiz.setAlternativa(alternativaSelecionada);//Colocando a autenrativa
 
         respotaQuestaoQuiz.setEquipe(equipe);//Colocando a equipe
-
-        //A relacao entre QuestaoQuiz e Questao nao esta correta
-        //isso é gambiarra
         Questao questao = questaoService.find(questaoID);
 
         respotaQuestaoQuiz.setQuestao(questao);
-
-
         respotaQuestaoQuizService.inserir(respotaQuestaoQuiz);
 
-//        QuestaoQuiz questaoQuiz1 = new QuestaoQuiz();
+
+
+
+        QuestaoQuiz questaoQuiz1 = questaoQuizService.findByQuestaoId(questao.getId());
+        log.info("Retorno: " + questaoQuiz1.getId());
 
         log.info("Cheguei");
 //        questaoQuizService.
 //        questaoQuiz1.setRespotaQuestaoQuizs(); //adicionar o servico da respotaQuestaoQuiz para trazer todos
 //        questaoQuiz1.getRespotaQuestaoQuizs().add(respotaQuestaoQuiz);//Adicionando a resposta
-//        questaoQuiz.setRespotaQuestaoQuizs(respotaQuestaoQuiz);//Adicionando a resposta
+        questaoQuiz1.setRespotaQuestaoQuizs(respotaQuestaoQuizService.findAll());//Adicionando a resposta
 
 
-//        questaoQuiz1.getEquipeResponderam().add(equipe);
+        questaoQuiz1.getEquipeResponderam().add(equipe);
+//        questaoQuizService.atualizar(questaoQuiz1);
 
 
 
-//        quizService.atualizar();
+
+
+//        quizService.atualizar(quizID);
 
         return "redirect:/app/quiz/"+ quizID +"/questoes";
 
