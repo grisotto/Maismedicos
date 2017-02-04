@@ -17,6 +17,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -124,10 +126,8 @@ public class QuizController {
         log.info("Retorno: " + questaoQuiz1.getId());
 
         log.info("Cheguei");
-//        questaoQuizService.
-//        questaoQuiz1.setRespotaQuestaoQuizs(); //adicionar o servico da respotaQuestaoQuiz para trazer todos
-//        questaoQuiz1.getRespotaQuestaoQuizs().add(respotaQuestaoQuiz);//Adicionando a resposta
-        questaoQuiz1.setRespotaQuestaoQuizs(respotaQuestaoQuizService.findAll());//Adicionando a resposta
+        questaoQuiz1.getRespotaQuestaoQuizs().add(respotaQuestaoQuiz);//Adicionando a resposta
+//        questaoQuiz1.setRespotaQuestaoQuizs(respotaQuestaoQuizService.findAll());//Adicionando a resposta
 
 
         questaoQuiz1.getEquipeResponderam().add(equipe);
@@ -147,8 +147,22 @@ public class QuizController {
     @PreAuthorize("hasAuthority('GRUPO')")
     @PostMapping("/{quizID}/responder/")//TODO Mover para post -  REMOVER PathVariable - Aqui o pessoal vai ficar brincando com URL, e para não ter que tratar isso é bom trocar
     public String responderQuestao(Integer questaoID, @PathVariable Integer quizID, Model model) {
+
+        Questao questao = questaoService.find(questaoID);
+
+        LOGGER.info("{}", questao.getAlternativas());
+
+        //Dando uma embaralhada nas alternativas
+        List<Alternativa> alternativas = questao.getAlternativas();
+
+        Collections.shuffle(alternativas);
+
+
+        model.addAttribute("alternativas", alternativas );
+
         model.addAttribute("quiz", quizService.find(quizID));
-        model.addAttribute("questao", questaoService.find(questaoID));
+        model.addAttribute("questao", questao);
+
 
         return "app/quiz/responder";
 

@@ -8,10 +8,15 @@ package br.ufg.jatai.fsw.squest.repository;
 import br.ufg.jatai.fsw.squest.domain.Alternativa;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  *
  * @author dfranco
  */
 public interface AlternativaRepository extends JpaRepository<Alternativa, Integer> {
+
+
+
     
 }
