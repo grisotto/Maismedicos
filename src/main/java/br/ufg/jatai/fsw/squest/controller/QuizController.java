@@ -97,26 +97,37 @@ public class QuizController {
             return "redirect:/app";
         }
 
+
+
         log.info("Entrda de Dados no @Controller");
         log.info("Equipe: " + autenticateUser.getEquipe());
         log.info("Alternativa: " + alternativaSelecionada.getDescricao());
         log.info("Alternativa: " + alternativaSelecionada.getId());
 
         log.info("Questao: " + questaoID);
-
-
-
-
-
-
-
         Equipe equipe = autenticateUser.getEquipe();//Requcuperando equipe
+        Questao questao = questaoService.find(questaoID);
+        QuestaoQuiz questaoQuiz1 = questaoQuizService.findByQuestaoId(questao.getId());
+
+        //se a questao que esta sendo pedida para mostrar ja foi respondida por esta equipe, então não deixa entrar!
+        if(questaoQuiz1.respondido(equipe.getId())){
+
+
+            log.info("Ja respondeu");
+            return "redirect:/app/quiz/"+ quizID +"/questoes";
+
+        }
+
+
+
+
+
 
         RespotaQuestaoQuiz respotaQuestaoQuiz = new RespotaQuestaoQuiz();//Cria Obbjeto de reposta
         respotaQuestaoQuiz.setAlternativa(alternativaSelecionada);//Colocando a autenrativa
 
         respotaQuestaoQuiz.setEquipe(equipe);//Colocando a equipe
-        Questao questao = questaoService.find(questaoID);
+
 
         respotaQuestaoQuiz.setQuestao(questao);
         respotaQuestaoQuizService.inserir(respotaQuestaoQuiz);
@@ -124,7 +135,7 @@ public class QuizController {
 
 
 
-        QuestaoQuiz questaoQuiz1 = questaoQuizService.findByQuestaoId(questao.getId());
+//        QuestaoQuiz questaoQuiz1 = questaoQuizService.findByQuestaoId(questao.getId());
         log.info("Retorno: " + questaoQuiz1.getId());
 
         log.info("Cheguei");
@@ -154,7 +165,19 @@ public class QuizController {
 
         Questao questao = questaoService.find(questaoID);
 
-        LOGGER.info("{}", questao.getAlternativas());
+        QuestaoQuiz questaoQuiz1 = questaoQuizService.findByQuestaoId(questao.getId());
+
+        //se a questao que esta sendo pedida para mostrar ja foi respondida por esta equipe, então não deixa entrar!
+        if(questaoQuiz1.respondido(autenticateUser.getEquipe().getId())){
+
+
+            log.info("Ja respondeu. sai fora");
+            return "redirect:/app/quiz/"+ quizID +"/questoes";
+
+        }
+
+
+         LOGGER.info("{}", questao.getAlternativas());
 
         //Dando uma embaralhada nas alternativas
         List<Alternativa> alternativas = questao.getAlternativas();
