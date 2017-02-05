@@ -43,7 +43,7 @@ and open the template in the editor.
         </div>
 
         <div class="alert alert-success" th:if="${tarefa.etapaAtual.isFinalizado()}">
-            As equipes estão inserindo questões
+            Ver as respostas de todas as equipes
             <a th:href="@{/app/tarefa/respostas}"
             class="btn btn-sm btn-default pull-right"> Ver Respostas
             <span class="fa fa-plus"></span>
@@ -371,7 +371,7 @@ and open the template in the editor.
                             <td>
                                 <div class="btn-group pull-right" role="group" th:if="${a.questionario}">
 
-                                    <a th:href="@{/app/tarefa/}+${a.id}+@{/questoesrespostas}" class="btn btn-sm  btn-info fa  fa-edit"> Questões</a>
+                                    <a th:href="@{/app/tarefa/}+${a.id}+@{/questoesrespostas}" class="btn btn-sm  btn-info fa  fa-edit"> Respostas</a>
                                 </div>
                                 <div class="btn-group pull-right" role="group" th:unless="${a.questionario}">
 
