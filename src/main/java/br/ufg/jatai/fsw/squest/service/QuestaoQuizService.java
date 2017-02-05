@@ -5,6 +5,7 @@
  */
 package br.ufg.jatai.fsw.squest.service;
 
+import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Questao;
 import br.ufg.jatai.fsw.squest.domain.quis.QuestaoQuiz;
 
@@ -14,6 +15,7 @@ import java.util.Set;
 public interface QuestaoQuizService extends AbstractService<QuestaoQuiz, Integer> {
 
     public QuestaoQuiz findByQuestaoId(Integer id);
+
 
 
 }

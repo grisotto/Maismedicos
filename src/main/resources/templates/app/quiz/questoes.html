@@ -62,9 +62,10 @@ and open the template in the editor.
 
 
                                 <tr th:each="q, itr : ${questoes}">
-
+                                <div th:unless="${q.respondido(equipe.id)}">
                                     <td th:text="${itr.count}" >1</td>
                                     <td th:text="${#strings.abbreviate(q.questao.question,200)}"></td>
+                                    <!--<td th:text="${q.respondido(equipe.id)}" >1</td>-->
 
                                     <td class="pull-right">
                                     <form action="#" th:action="@{/app/quiz/}+${quiz.id}+@{/responder/}" th:object="${questao}" method="POST">
@@ -78,8 +79,14 @@ and open the template in the editor.
 
 
                                      </td>
+                                </div>
                                 </tr>
                             </div>
+                            <div th:if="${questoes == null}">
+                                <td >Nenhuma questão para ser respondida</td>
+
+                            </div>
+
                             </tbody>
                         </table>
                     </div>

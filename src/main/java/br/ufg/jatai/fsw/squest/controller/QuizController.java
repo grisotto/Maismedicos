@@ -178,6 +178,8 @@ public class QuizController {
         //Lista apenas as questẽos que a Equipe vai responder.
         Set<QuestaoQuiz> paraEquipe = quizService.find(quizID).questaoToEquipe(autenticateUser.getEquipe());
 
+        model.addAttribute("equipe", autenticateUser.getEquipe());
+
         model.addAttribute("questoes", paraEquipe);
         model.addAttribute("quiz", quizService.find(quizID));
         LOGGER.info("Temos {} questẽos para equipe e ao todo são {}", paraEquipe,todas);
