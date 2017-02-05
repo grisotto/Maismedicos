@@ -15,13 +15,13 @@ public class RespotaQuestaoQuiz {
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Alternativa alternativa;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Equipe equipe;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Questao questao;
 
     public Alternativa getAlternativa() {

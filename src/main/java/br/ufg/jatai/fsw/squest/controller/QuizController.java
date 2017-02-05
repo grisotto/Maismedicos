@@ -109,11 +109,11 @@ public class QuizController {
         Questao questao = questaoService.find(questaoID);
         QuestaoQuiz questaoQuiz1 = questaoQuizService.findByQuestaoId(questao.getId());
 
-        //se a questao que esta sendo pedida para mostrar ja foi respondida por esta equipe, então não deixa entrar!
+        //CASO CONSIGA ABRIR AINDA, ENTÃO EU NEGO
         if(questaoQuiz1.respondido(equipe.getId())){
 
 
-            log.info("Ja respondeu");
+            log.info("conseguiu abrir uma questao que ja foi respondida. xau!");
             return "redirect:/app/quiz/"+ quizID +"/questoes";
 
         }
@@ -130,7 +130,7 @@ public class QuizController {
 
 
         respotaQuestaoQuiz.setQuestao(questao);
-        respotaQuestaoQuizService.inserir(respotaQuestaoQuiz);
+
 
 
 
@@ -139,14 +139,15 @@ public class QuizController {
         log.info("Retorno: " + questaoQuiz1.getId());
 
         log.info("Cheguei");
-        questaoQuiz1.getRespotaQuestaoQuizs().add(respotaQuestaoQuiz);//Adicionando a resposta
+
 //        questaoQuiz1.setRespotaQuestaoQuizs(respotaQuestaoQuizService.findAll());//Adicionando a resposta
 
+        questaoQuiz1.getRespotaQuestaoQuizs().add(respotaQuestaoQuiz);//Adicionando a resposta
 
         questaoQuiz1.getEquipeResponderam().add(equipe);
 //        questaoQuizService.atualizar(questaoQuiz1);
 
-
+        respotaQuestaoQuizService.inserir(respotaQuestaoQuiz);
 
 
 

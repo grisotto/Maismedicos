@@ -29,7 +29,7 @@ public class QuestaoQuiz implements Serializable {
     private Equipe equipe;
 
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<Equipe> equipeResponderam = new HashSet<>();
     
   

@@ -50,7 +50,6 @@ and open the template in the editor.
                         <table class="table table-responsive" id="Questoes">
                             <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Questão</th>
                                 <th></th>
 
@@ -64,8 +63,8 @@ and open the template in the editor.
                                 <tr th:each="q, itr : ${questoes}">
                                 <div th:unless="${q.respondido(equipe.id)}">
 
-                                    <td th:text="${itr.count}" >1</td>
-                                    <td th:text="${#strings.abbreviate(q.questao.question,200)}"></td>
+
+                                    <td th:text="${#strings.abbreviate(q.questao.question,250)}"></td>
                                     <!--<td th:text="${q.respondido(equipe.id)}" >1</td>-->
 
                                     <td class="pull-right">
