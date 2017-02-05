@@ -41,6 +41,14 @@ and open the template in the editor.
             <!--<span class="fa fa-plus"></span>-->
         <!--</a>-->
         </div>
+
+        <div class="alert alert-success" th:if="${tarefa.etapaAtual.isFinalizado()}">
+            As equipes estão inserindo questões
+            <a th:href="@{/app/tarefa/respostas}"
+            class="btn btn-sm btn-default pull-right"> Ver Respostas
+            <span class="fa fa-plus"></span>
+            </a>
+        </div>
     </div>
     <div class="col-md-7">
         <div class="panel panel-info">

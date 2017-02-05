@@ -10,13 +10,12 @@ import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Questionario;
 import br.ufg.jatai.fsw.squest.domain.Tarefa;
 import br.ufg.jatai.fsw.squest.domain.Turma;
+import br.ufg.jatai.fsw.squest.domain.quis.RespotaQuestaoQuiz;
 import br.ufg.jatai.fsw.squest.facade.EquipeFacade;
 import br.ufg.jatai.fsw.squest.facade.QuestionarioFacade;
 import br.ufg.jatai.fsw.squest.facade.TarefaFacade;
-import br.ufg.jatai.fsw.squest.service.QuestaoService;
-import br.ufg.jatai.fsw.squest.service.QuestionarioService;
-import br.ufg.jatai.fsw.squest.service.TarefaService;
-import br.ufg.jatai.fsw.squest.service.TurmaService;
+import br.ufg.jatai.fsw.squest.service.*;
+
 import java.util.List;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -60,6 +59,15 @@ public class TarefaController {
 
     @Autowired
     private QuestaoService questaoService;
+
+    @Autowired
+    private QuizService quizService;
+
+    @Autowired
+    private QuestaoQuizService questaoQuizService;
+
+    @Autowired
+    private RespotaQuestaoQuizService respotaQuestaoQuizService;
 
     /**
      *
@@ -185,6 +193,19 @@ public class TarefaController {
 
 
         return "app/tarefa/questoes";
+    }
+
+    @GetMapping(value = "/app/tarefa/respostas")
+    public String showRespostasQuestoesEquipe(ModelMap map, final EtapasModel etapas) {
+
+        List<RespotaQuestaoQuiz>  respotaQuestaoQuiz = respotaQuestaoQuizService.findAll();
+
+        map.addAttribute("resposta", respotaQuestaoQuizService.findAll());
+
+
+
+
+        return "app/tarefa/respostas";
     }
 
 
