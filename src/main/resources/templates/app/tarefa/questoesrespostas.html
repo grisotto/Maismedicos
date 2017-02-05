@@ -20,7 +20,7 @@ and open the template in the editor.
 <div th:fragment="content">
     <div class="page-header">
         <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" th:href="@{/app/tarefa/}+${equipe.tarefa.id}"></a><b>
-            Questões da Equipe: </b>
+            Resposta das Questões da Equipe: </b>
             <span class="text-muted" th:text="${{equipe.nome}}"></span></h2>
     </div>
     <div class="col-md-12">
@@ -83,9 +83,9 @@ and open the template in the editor.
                     <tr>
                         <th>#</th>
                         <th>Questão</th>
-                        <th>Situação</th>
-                        <th class="pull-right">Ver Respostas</th>
-                        <th></th>
+                        <th>Resposta</th>
+                        <th class="pull-right">Correta</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -93,34 +93,20 @@ and open the template in the editor.
                     <tr th:each="e , iter : ${questoesequipe}">
                         <td th:text="${iter.index + 1}" >1</td>
 
-                        <td th:text="${e.question}">1</td>
+                        <td th:text="${e.questao.question}">1</td>
 
-                        <td  th:if="${e.isAguardando()}" >
-                                        <span class="label label-info ">
-                                            Aguardando
-                                        </span>
-                        </td>
-                        <td  th:if="${e.isAprovada()}" >
+                        <td th:text="${e.alternativa.descricao}">1</td>
+
+                        <td  th:if="${e.alternativa.isCorreto() }" >
                                         <span class="label label-success ">
-                                            Aprovada
+                                            Correta
                                         </span>
                         </td>
 
-                        <td  th:if="${e.isReprovado()}" >
-                        <span class="label  label-danger">
-                                            Reprovada
+                        <td  th:unless="${e.alternativa.isCorreto() }" >
+                                        <span class="label label-danger ">
+                                            Errada
                                         </span>
-                        </td>
-
-
-
-
-
-                        <td>
-                            <div class="btn-group pull-right" role="group">
-
-                                <a th:href="@{/app/questionario/}+${e.id}" class="btn btn-sm  btn-success fa fa-arrow-right"/>
-                            </div>
                         </td>
 
 

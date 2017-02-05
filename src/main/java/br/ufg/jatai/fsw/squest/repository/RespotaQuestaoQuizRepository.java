@@ -5,18 +5,17 @@
  */
 package br.ufg.jatai.fsw.squest.repository;
 
-import br.ufg.jatai.fsw.squest.domain.Alternativa;
+import br.ufg.jatai.fsw.squest.domain.quis.RespotaQuestaoQuiz;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- *
- * @author dfranco
- */
-public interface AlternativaRepository extends JpaRepository<Alternativa, Integer> {
+
+@Repository
+public interface RespotaQuestaoQuizRepository extends JpaRepository<RespotaQuestaoQuiz, Integer> {
+
+    public List<RespotaQuestaoQuiz> findAllByEquipe_Id(Integer equipeID);
 
 
-
-    
 }

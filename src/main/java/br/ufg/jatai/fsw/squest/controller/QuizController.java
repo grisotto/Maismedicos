@@ -6,9 +6,7 @@ import br.ufg.jatai.fsw.squest.domain.*;
 import br.ufg.jatai.fsw.squest.domain.quis.QuestaoQuiz;
 import br.ufg.jatai.fsw.squest.domain.quis.Quiz;
 import br.ufg.jatai.fsw.squest.domain.quis.RespotaQuestaoQuiz;
-import br.ufg.jatai.fsw.squest.service.QuestaoService;
-import br.ufg.jatai.fsw.squest.service.QuizService;
-import br.ufg.jatai.fsw.squest.service.TarefaService;
+import br.ufg.jatai.fsw.squest.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +17,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -43,6 +43,12 @@ public class QuizController {
 
     @Autowired
     private QuestaoService questaoService;
+
+    @Autowired
+    private QuestaoQuizService questaoQuizService;
+
+    @Autowired
+    private RespotaQuestaoQuizService respotaQuestaoQuizService;
 
     private static Logger log = LoggerFactory.getLogger(QuestionarioController.class.getName());
 
@@ -83,32 +89,69 @@ public class QuizController {
 
     @PreAuthorize("hasAuthority('GRUPO')")
     @PostMapping("/{quizID}/resposta")//TODO colocar como post o QuestãoID porque os cara vão mecher com essas URLs
-    public String respostaQuestao(QuestaoQuiz questaoQuiz, Alternativa alternativaSelecionada, final BindingResult bindingResult , final String alternativa, @PathVariable Integer quizID, final Integer questaoID  ) {
+    public String respostaQuestao(QuestaoQuiz questaoQuiz, Alternativa alternativaSelecionada, final BindingResult bindingResult , @PathVariable Integer quizID, Integer questaoID  ) {
 
 
         if (bindingResult.hasErrors()) {
 
+            return "redirect:/app";
         }
+
+
+
         log.info("Entrda de Dados no @Controller");
         log.info("Equipe: " + autenticateUser.getEquipe());
         log.info("Alternativa: " + alternativaSelecionada.getDescricao());
-        log.info("Alternativaa: " + alternativa);
+        log.info("Alternativa: " + alternativaSelecionada.getId());
 
-
+        log.info("Questao: " + questaoID);
         Equipe equipe = autenticateUser.getEquipe();//Requcuperando equipe
+        Questao questao = questaoService.find(questaoID);
+        QuestaoQuiz questaoQuiz1 = questaoQuizService.findByQuestaoId(questao.getId());
+
+        //CASO CONSIGA ABRIR AINDA, ENTÃO EU NEGO
+        if(questaoQuiz1.respondido(equipe.getId())){
+
+
+            log.info("conseguiu abrir uma questao que ja foi respondida. xau!");
+            return "redirect:/app/quiz/"+ quizID +"/questoes";
+
+        }
+
+
+
+
+
+
         RespotaQuestaoQuiz respotaQuestaoQuiz = new RespotaQuestaoQuiz();//Cria Obbjeto de reposta
         respotaQuestaoQuiz.setAlternativa(alternativaSelecionada);//Colocando a autenrativa
 
         respotaQuestaoQuiz.setEquipe(equipe);//Colocando a equipe
-        respotaQuestaoQuiz.setQuestao(questaoQuiz.getQuestao());
 
-        questaoQuiz.getRespotaQuestaoQuizs().add(respotaQuestaoQuiz);//Adicionando a resposta
 
-        questaoQuiz.getEquipeResponderam().add(equipe);
+        respotaQuestaoQuiz.setQuestao(questao);
 
 
 
-//        quizService.atualizar()
+
+
+//        QuestaoQuiz questaoQuiz1 = questaoQuizService.findByQuestaoId(questao.getId());
+        log.info("Retorno: " + questaoQuiz1.getId());
+
+        log.info("Cheguei");
+
+//        questaoQuiz1.setRespotaQuestaoQuizs(respotaQuestaoQuizService.findAll());//Adicionando a resposta
+
+        questaoQuiz1.getRespotaQuestaoQuizs().add(respotaQuestaoQuiz);//Adicionando a resposta
+
+        questaoQuiz1.getEquipeResponderam().add(equipe);
+//        questaoQuizService.atualizar(questaoQuiz1);
+
+        respotaQuestaoQuizService.inserir(respotaQuestaoQuiz);
+
+
+
+//        quizService.atualizar(quizID);
 
         return "redirect:/app/quiz/"+ quizID +"/questoes";
 
@@ -118,8 +161,36 @@ public class QuizController {
     @PreAuthorize("hasAuthority('GRUPO')")
     @PostMapping("/{quizID}/responder/")//TODO Mover para post -  REMOVER PathVariable - Aqui o pessoal vai ficar brincando com URL, e para não ter que tratar isso é bom trocar
     public String responderQuestao(Integer questaoID, @PathVariable Integer quizID, Model model) {
+
+
+
+        Questao questao = questaoService.find(questaoID);
+
+        QuestaoQuiz questaoQuiz1 = questaoQuizService.findByQuestaoId(questao.getId());
+
+        //se a questao que esta sendo pedida para mostrar ja foi respondida por esta equipe, então não deixa entrar!
+        if(questaoQuiz1.respondido(autenticateUser.getEquipe().getId())){
+
+
+            log.info("Ja respondeu. sai fora");
+            return "redirect:/app/quiz/"+ quizID +"/questoes";
+
+        }
+
+
+         LOGGER.info("{}", questao.getAlternativas());
+
+        //Dando uma embaralhada nas alternativas
+        List<Alternativa> alternativas = questao.getAlternativas();
+
+        Collections.shuffle(alternativas);
+
+
+        model.addAttribute("alternativas", alternativas );
+
         model.addAttribute("quiz", quizService.find(quizID));
-        model.addAttribute("questao", questaoService.find(questaoID));
+        model.addAttribute("questao", questao);
+
 
         return "app/quiz/responder";
 
@@ -134,6 +205,8 @@ public class QuizController {
 
         //Lista apenas as questẽos que a Equipe vai responder.
         Set<QuestaoQuiz> paraEquipe = quizService.find(quizID).questaoToEquipe(autenticateUser.getEquipe());
+
+        model.addAttribute("equipe", autenticateUser.getEquipe());
 
         model.addAttribute("questoes", paraEquipe);
         model.addAttribute("quiz", quizService.find(quizID));

@@ -19,48 +19,13 @@ and open the template in the editor.
 <body>
 <div th:fragment="content">
     <div class="page-header">
-        <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" th:href="@{/app/tarefa/}+${tarefa.id}"></a><b>
-            Questões da tarefa: </b>
-            <span class="text-muted" th:text="${{tarefa.titulo}}"></span></h2>
+        <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" th:href="@{/app/tarefa/}+${resposta[0].equipe.tarefa.id}"></a><b>
+            Questões Respondidas: </b>
+            <span class="text-muted" th:text="${{resposta.size()}}"></span></h2>
     </div>
     <div class="col-md-12">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                        <span class="panel-title">
-                            <i class="fa fa-info-circle fa-fw"></i>Info
 
-                        </span>
-            </div>
-            <div class="panel-body">
-                <div class="form-inline">
-                    <div class="form-group col-md-3">
-                        <label class="control-label" for="nome">Título:</label>
-                        <span class="form-control-static" th:text="${{tarefa.titulo}}"></span>
-
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label class="control-label" for="tarefas">Descrição: </label>
-                        <span class="form-control-static" th:text="${tarefa.descricao}">0</span>
-
-                    </div>
-
-                    <div class="form-group col-md-3">
-                        <label class="control-label" for="tarefas">Turma: </label>
-                        <span class="form-control-static" th:text="${tarefa.turma.nome}">0</span>
-
-                    </div>
-
-
-
-
-
-
-                </div>
-
-
-            </div>
-        </div>
     </div>
 
 
@@ -85,46 +50,59 @@ and open the template in the editor.
                     <tr>
                         <th>#</th>
                         <th>Equipe</th>
-                        <!--<th>Quantidade de Questões</th>-->
+                        <th>Questão</th>
+                        <th>Resposta</th>
 
-                        <th class="pull-right" >Ver Questões</th>
-                        <th></th>
+                        <th>Correta</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    <tr th:each="e , iter : ${questoesturma}">
+                    <tr th:each="e , iter : ${resposta}">
                         <td th:text="${iter.index + 1}" >1</td>
-                        <td th:text="${e.nome}">1</td>
-                        <!--<div th:if="${e.questionario}">-->
-                        <!--<td th:text="${e.questionario.questoes.size() / (e.questionario.tarefa.tamanhoQuestoes)}" >0-->
+
+                        <td th:text="${e.equipe.nome}">1</td>
+
+                        <td th:text="${e.questao.question}">1</td>
+
+                        <td th:text="${e.alternativa.descricao}">1</td>
 
 
+
+
+                        <td  th:if="${e.alternativa.isCorreto() }" >
+                                        <span class="label label-success ">
+                                            Correta
+                                        </span>
+                        </td>
+
+                        <td  th:unless="${e.alternativa.isCorreto() }" >
+                                        <span class="label label-danger ">
+                                            Errada
+                                        </span>
+                        </td>
+                        <!--<td  th:if="${e.isAprovada()}" >-->
+                                        <!--<span class="label label-success ">-->
+                                            <!--Aprovada-->
+                                        <!--</span>-->
                         <!--</td>-->
 
-                        <!--</div>-->
-
-                        <!--<div th:unless="${e.questionario}">-->
-                            <!--<td >0-->
-
-                            <!--</td>-->
-                        <!--</div>-->
+                        <!--<td  th:if="${e.isReprovado()}" >-->
+                        <!--<span class="label  label-danger">-->
+                                            <!--Reprovada-->
+                                        <!--</span>-->
+                        <!--</td>-->
 
 
 
 
 
+                        <!--<td>-->
+                            <!--<div class="btn-group pull-right" role="group">-->
 
-                        <td>
-                            <div class="btn-group pull-right" role="group" th:if="${e.questionario}">
-
-                                <a th:href="@{/app/tarefa/}+${e.id}+@{/questoes}" class="btn btn-sm  btn-success fa fa-arrow-right"/>
-                            </div>
-                            <div class="btn-group pull-right" role="group" th:unless="${e.questionario}">
-
-                                <a href="#" class="btn btn-sm  btn-danger fa fa-square"/>
-                            </div>
-                        </td>
+                                <!--<a th:href="@{/app/questionario/}+${e.id}" class="btn btn-sm  btn-success fa fa-arrow-right"/>-->
+                            <!--</div>-->
+                        <!--</td>-->
 
 
                     </tr>

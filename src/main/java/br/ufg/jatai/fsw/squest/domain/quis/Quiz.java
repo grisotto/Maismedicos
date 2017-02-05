@@ -52,6 +52,8 @@ public class Quiz {
     public Set<QuestaoQuiz> questaoToEquipe(Equipe equipe) {
         Set<QuestaoQuiz> retorno = new HashSet<>();
         for (QuestaoQuiz questaoQuize : questaoQuizes) {
+            //adiciona toda questao que não é daquela equipe para um set.
+            //vamos fazer ela olhar na relacao questaoQuiz equipe-responderam
             if (!questaoQuize.getEquipe().equals(equipe)) {
                 retorno.add(questaoQuize);
             }
