@@ -41,7 +41,7 @@ and open the template in the editor.
 
 
 						<p class="lead" th:text="${questao.question}">Qual o nome do primeiro algoritmo de geração de circuferencias?</p>
-							<blockquote>
+
 
 
 									<div class="funkyradio">
@@ -58,19 +58,19 @@ and open the template in the editor.
 
 											<div class="funkyradio-primary">
 												<input type="radio" id="radio2" name="alternativa" th:value="${alternativas[1].id}"  />
-												<label for="radio2" th:text="${alternativas[1].descricao}"></label>
+												<label for="radio2"  th:text="${alternativas[1].descricao}"></label>
 											</div>
 
 
 											<div class="funkyradio-primary">
 												<input type="radio" id="radio3" name="alternativa" th:value="${alternativas[2].id}"  />
-												<label for="radio3" th:text="${alternativas[2].descricao}"></label>
+												<label for="radio3"  th:text="${alternativas[2].descricao}"></label>
 											</div>
 
 
 											<div class="funkyradio-primary">
 												<input type="radio" id="radio4" name="alternativa" th:value="${alternativas[3].id}"  />
-												<label for="radio4" th:text="${alternativas[3].descricao}"></label>
+												<label for="radio4"  th:text="${alternativas[3].descricao}"></label>
 											</div>
 
 											<div class="funkyradio-primary">
@@ -86,7 +86,7 @@ and open the template in the editor.
 
 
 
-							</blockquote>
+
 
 					</div>
 
@@ -98,7 +98,7 @@ and open the template in the editor.
 					<button type="submit" class="btn btn-info">
 						<i class="fa fa-floppy-o  "> </i> Salvar Resposta
 					</button>
-					<button type="sair" th:href="@{/app}" class="btn btn-danger">Sair</button>
+
 				</div>
                 </form>
 			</div>
@@ -120,6 +120,8 @@ and open the template in the editor.
 				border-radius: 3px;
 				border: 1px solid #D1D3D4;
 				font-weight: normal;
+				padding-left:50px;
+
 			}
 
 			.funkyradio input[type="radio"]:empty,

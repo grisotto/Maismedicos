@@ -94,7 +94,9 @@ public class QuizController {
 
         if (bindingResult.hasErrors()) {
 
+            return "redirect:/app";
         }
+
         log.info("Entrda de Dados no @Controller");
         log.info("Equipe: " + autenticateUser.getEquipe());
         log.info("Alternativa: " + alternativaSelecionada.getDescricao());
@@ -147,6 +149,8 @@ public class QuizController {
     @PreAuthorize("hasAuthority('GRUPO')")
     @PostMapping("/{quizID}/responder/")//TODO Mover para post -  REMOVER PathVariable - Aqui o pessoal vai ficar brincando com URL, e para não ter que tratar isso é bom trocar
     public String responderQuestao(Integer questaoID, @PathVariable Integer quizID, Model model) {
+
+
 
         Questao questao = questaoService.find(questaoID);
 
