@@ -41,4 +41,9 @@ public class RespotaQuestaoQuizServiceImpl implements RespotaQuestaoQuizService 
     public List<RespotaQuestaoQuiz> findAll() {
         return respotaQuestaoQuizRepository.findAll();
     }
+
+    @Override
+    public List<RespotaQuestaoQuiz> findAllByEquipe_Id(Integer equipeID) {
+        return respotaQuestaoQuizRepository.findAllByEquipe_Id(equipeID);
+    }
 }

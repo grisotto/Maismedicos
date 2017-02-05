@@ -195,6 +195,22 @@ public class TarefaController {
         return "app/tarefa/questoes";
     }
 
+    @GetMapping(value = "/app/tarefa/{equipeID}/questoesrespostas")
+    public String showQuestoesRespostasEquipe(@PathVariable Integer equipeID, ModelMap map, final EtapasModel etapas) {
+
+
+        Equipe equipe = equipeFacade.findEquipe(equipeID);
+
+        respotaQuestaoQuizService.findAllByEquipe_Id(equipeID);
+
+        map.addAttribute("equipe", equipe);
+        map.addAttribute("questoesequipe",  respotaQuestaoQuizService.findAllByEquipe_Id(equipeID));
+
+
+
+        return "app/tarefa/questoesrespostas";
+    }
+
     @GetMapping(value = "/app/tarefa/respostas")
     public String showRespostasQuestoesEquipe(ModelMap map, final EtapasModel etapas) {
 

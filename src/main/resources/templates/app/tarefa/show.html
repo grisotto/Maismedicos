@@ -350,7 +350,7 @@ and open the template in the editor.
 
                         </td>
 
-                        <div th:unless="${tarefa.etapaAtual.isAguardando()}">
+                        <div th:unless="${tarefa.etapaAtual.isAguardando() OR tarefa.etapaAtual.isFinalizado() }">
                             <td>
                             <div class="btn-group pull-right" role="group" th:if="${a.questionario}">
 
@@ -366,6 +366,21 @@ and open the template in the editor.
 
                             </td>
                             </div>
+
+                        <div th:if="${tarefa.etapaAtual.isFinalizado()}" >
+                            <td>
+                                <div class="btn-group pull-right" role="group" th:if="${a.questionario}">
+
+                                    <a th:href="@{/app/tarefa/}+${a.id}+@{/questoesrespostas}" class="btn btn-sm  btn-info fa  fa-edit"> Questões</a>
+                                </div>
+                                <div class="btn-group pull-right" role="group" th:unless="${a.questionario}">
+
+                                    <a href="#" class="btn btn-sm  btn-danger fa fa-times"/>
+                                </div>
+
+                            </td>
+
+                        </div>
 
 
                     </tr>

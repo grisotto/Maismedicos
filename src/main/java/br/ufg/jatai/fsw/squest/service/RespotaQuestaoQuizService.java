@@ -8,8 +8,11 @@ package br.ufg.jatai.fsw.squest.service;
 
 import br.ufg.jatai.fsw.squest.domain.quis.RespotaQuestaoQuiz;
 
+import java.util.List;
+
 
 public interface RespotaQuestaoQuizService extends AbstractService<RespotaQuestaoQuiz, Integer> {
 
 
+    public List<RespotaQuestaoQuiz> findAllByEquipe_Id(Integer equipeID);
 }
