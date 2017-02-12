@@ -33,6 +33,28 @@ public class Tarefa implements Serializable {
     private String titulo;
     private String descricao;
 
+    /**
+     * Fator1 = quantidade de questoes validadas pelo professor das questoes que a equipe tem que enviar
+     * tamanho_do_questionario - quantidade_questos_equipe_reprovada = quantidade_questos_equipe_aprovadas
+     */
+    @Column(name="fator1", columnDefinition="Decimal(10,2) default '1.00'")
+    private double fator1;
+
+    /**
+     * Fator2 = quantidade de questoes acertadas pela quantidade de questoes disponiveis para a equipe
+     * questoes_disponiveis_para_respsota - Soma(respostasIncorretas) = Soma(respostasCorretas)
+     */
+    @Column(name="fator2", columnDefinition="Decimal(10,2) default '1.00'")
+    private double fator2;
+
+
+    /**
+     * Fator3 = Para cada questão disponivel no quis: verifica a quantidade de respostasIncorretas pela quantidade de equipes que responderiam ela.
+     * Para cada questão em QuestoesNoQuiz -> (Soma(respostasIncorretas)/ Soma(EquipesQueResponderam)  * 100)
+     */
+    @Column(name="fator3", columnDefinition="Decimal(10,2) default '1.00'")
+    private double fator3;
+
     @ManyToOne
     private Turma turma;
 
@@ -292,5 +314,29 @@ public class Tarefa implements Serializable {
 
     public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
+    }
+
+    public double getFator1() {
+        return fator1;
+    }
+
+    public void setFator1(double fator1) {
+        this.fator1 = fator1;
+    }
+
+    public double getFator2() {
+        return fator2;
+    }
+
+    public void setFator2(double fator2) {
+        this.fator2 = fator2;
+    }
+
+    public double getFator3() {
+        return fator3;
+    }
+
+    public void setFator3(double fator3) {
+        this.fator3 = fator3;
     }
 }
