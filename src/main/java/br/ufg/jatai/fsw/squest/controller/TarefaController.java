@@ -224,6 +224,24 @@ public class TarefaController {
         return "app/tarefa/respostas";
     }
 
+    @PostMapping(value = {"/app/tarefa/pontuacao"}, params = {"save"})
+    public String calcularPontuacao(final ModelMap model,
+                                    Integer tarefaID, double fator1, double fator2, double fator3) {
+
+        LOGGER.info("Entrou aqui pontuacao: \n"
+                + "\nfator1: "+fator1
+                + "\nfator2: "+fator2
+                + "\nfator3: "+fator3
+        );
+
+
+       tarefaFacade.calculoFator1(fator1,tarefaID);
+       tarefaFacade.calculoFator2(fator2,tarefaID);
+       tarefaFacade.calculoFator3(fator3,tarefaID);
+
+        return "redirect:/app/tarefa/" + tarefaID;
+    }
+
 
 
 

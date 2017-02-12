@@ -460,23 +460,24 @@ and open the template in the editor.
 
                         </span>
                 </div>
-                <form th:action="@{/app/tarefa}" method="POST">
+                <form th:action="@{/app/tarefa/pontuacao}" method="POST">
                 <div class="panel-body">
                     <div class="form-inline">
+                        <input type="hidden" name="tarefaID" th:value="*{tarefa.id}"  />
                         <div class="form-group col-md-3">
-                            <label class="control-label" for="nome">Fator 1:</label>
-                            <input class="form-control" th:field="${tarefa.fator1}" type="number" required="true" min="1"/>
+                            <label class="control-label" for="nome">Questões Aprovadas:</label>
+                            <input class="form-control" name="fator1" th:field="${tarefa.fator1}" type="number" step="0.10" required="true" min="1"/>
 
                         </div>
                         <div class="form-group col-md-3">
-                            <label class="control-label" for="nome">Fator 2:</label>
-                            <input class="form-control" th:field="${tarefa.fator2}" type="number" required="true" min="1"/>
+                            <label class="control-label" for="nome">Questoes Acertas:</label>
+                            <input class="form-control" name="fator2" th:field="${tarefa.fator2}" type="number" step="0.10" required="true" min="1"/>
 
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label class="control-label" for="nome">Fator 3:</label>
-                            <input class="form-control" th:field="${tarefa.fator3}" type="number" required="true" min="1"/>
+                            <label class="control-label" for="nome">Questões mais Difíceis:</label>
+                            <input class="form-control" name="fator3" th:field="${tarefa.fator3}" type="number" step="0.10" required="true" min="1"/>
 
                         </div>
 
@@ -529,6 +530,12 @@ and open the template in the editor.
 
                     <tr th:each="e , iter : ${tarefa.equipes}">
                         <td th:text="${iter.index + 1}" >1</td>
+
+                        <td th:text="${e.nome}" >1</td>
+                        <td th:text="${e.pontosFator1}" >1</td>
+                        <td th:text="${e.pontosFator2}" >1</td>
+                        <td th:text="${e.pontosFator3}" >1</td>
+                        <td th:text="${e.pontosFator1 + e.pontosFator2 + e.pontosFator3}" >1</td>
 
 
 

@@ -50,6 +50,17 @@ public class Equipe implements Serializable {
     @OneToOne(mappedBy = "time",fetch =FetchType.EAGER)
     private Questionario questionario;
 
+
+    @Column(name="pontosFator1", columnDefinition="Decimal(10,2) default '0.00'")
+    private double pontosFator1;
+
+    @Column(name="pontosFator2", columnDefinition="Decimal(10,2) default '0.00'")
+    private double pontosFator2;
+
+
+    @Column(name="pontosFator3", columnDefinition="Decimal(10,2) default '0.00'")
+    private double pontosFator3;
+
     /**
      *
      */
@@ -238,6 +249,28 @@ public class Equipe implements Serializable {
     }
 
 
-    
+    public double getPontosFator3() {
+        return pontosFator3;
+    }
+
+    public void setPontosFator3(double pontosFator3) {
+        this.pontosFator3 = pontosFator3;
+    }
+
+    public double getPontosFator2() {
+        return pontosFator2;
+    }
+
+    public void setPontosFator2(double pontosFator2) {
+        this.pontosFator2 = pontosFator2;
+    }
+
+    public double getPontosFator1() {
+        return pontosFator1;
+    }
+
+    public void setPontosFator1(double pontosFator1) {
+        this.pontosFator1 = pontosFator1;
+    }
 }
 
