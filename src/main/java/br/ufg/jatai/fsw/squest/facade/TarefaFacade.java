@@ -5,6 +5,7 @@ import br.ufg.jatai.fsw.squest.controller.modelForm.EtapasModel;
 import br.ufg.jatai.fsw.squest.domain.*;
 import br.ufg.jatai.fsw.squest.domain.quis.QuestaoQuiz;
 import br.ufg.jatai.fsw.squest.domain.quis.Quiz;
+import br.ufg.jatai.fsw.squest.domain.quis.RespotaQuestaoQuiz;
 import br.ufg.jatai.fsw.squest.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,6 +33,9 @@ public class TarefaFacade {
 
     @Autowired
     private AutenticateUser autenticateUser;
+
+    @Autowired
+    private RespotaQuestaoQuizService respotaQuestaoQuizService;
 
 
     /**
@@ -123,7 +127,6 @@ public class TarefaFacade {
      * @return
      */
     public void calculoFator1(double fator1, Integer taredaID) {
-
         int quantidadeAprovadas = 0;
        Tarefa tarefa = tarefaService.find(taredaID);
 
@@ -164,25 +167,42 @@ public class TarefaFacade {
 
     public void calculoFator2(double fator2, Integer taredaID) {
 
+        int quantidadeCorretas =0;
         Tarefa tarefa = tarefaService.find(taredaID);
 
         tarefa.setFator2(fator2);
 
 
+        //pego todas as equipes da tarefa
+        Iterator<Equipe> i = tarefa.getEquipes().iterator();
+
+
+        while(i.hasNext()){
+
+            Equipe e = i.next();
+
+            //verifico se ela esta ativa
+            if(e.isAtiva()){
+                //pego todas as questoes respondidas desta equipe
+        List<RespotaQuestaoQuiz> respotaQuestaoQuizs =  respotaQuestaoQuizService.findAllByEquipe_Id(e.getId());
+
+                //por todas as questoes respondidas, passado aumentando a quantidade de corretas.
+                for(RespotaQuestaoQuiz questoes : respotaQuestaoQuizs){
+                    if(questoes.getAlternativa().isCorreto()){
+                        quantidadeCorretas++;
+                    }
+                }
+               e.setPontosFator2(quantidadeCorretas * fator2);
+
+            }
+            quantidadeCorretas = 0;
 
 
 
+        }
 
 
 
-
-
-//        for(Equipe e : equipeResponderam){
-//            if(e.getId().equals(equipeID)){
-//                return true;
-//            }
-//
-//        }
         //para cada equipe ativa da tarefa
             //para todas as questoes que a equipe tinha que responder
                 //contar quantas ela acertou
@@ -201,6 +221,17 @@ public class TarefaFacade {
 
         tarefa.setFator3(fator3);
 
+
+
+
+
+
+        //        for(Equipe e : equipeResponderam){
+//            if(e.getId().equals(equipeID)){
+//                return true;
+//            }
+//
+//        }
         //para cada equipe ativa da tarefa
             //para todas as questoes que a equipe inseriu que foram aprovadas
                 //calcular a % de erro -
