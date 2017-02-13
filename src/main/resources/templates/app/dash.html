@@ -327,8 +327,13 @@ and open the template in the editor.
 
                     <div class="alert alert-info">
                         <strong>Finalizado</strong>
+                    <div th:if="${equipe.pontosFator1 == 0.00 OR equipe.pontosFator2 == 0.00 OR equipe.pontosFator3 == 0.00}" >
+                        <p>A pontuação ainda não foi calculada, Por favor aguarde.</p>
+                    </div>
 
-                        <p>Grupo pode ver sua pontuação.</p>
+                        <div th:if="${equipe.pontosFator1 != 0.00 AND equipe.pontosFator2 != 0.00 AND equipe.pontosFator3 != 0.00}" >
+                            <p>Pontuação total: <span th:text="${equipe.pontosFator1 + equipe.pontosFator2 + equipe.pontosFator3}"></span> pontos</p>
+                        </div>
 
                     </div>
                 </div>
