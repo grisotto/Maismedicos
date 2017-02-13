@@ -81,6 +81,9 @@ public class Equipe implements Serializable {
         this.ativa = ativa;
         this.tarefa = tarefa;
         this.usuario = usuario;
+        this.pontosFator1 = 0.0;
+        this.pontosFator2 = 0.0;
+        this.pontosFator3 = 0.0;
     }
     /**
      *

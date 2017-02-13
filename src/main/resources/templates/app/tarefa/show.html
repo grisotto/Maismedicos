@@ -529,6 +529,7 @@ and open the template in the editor.
                     <tbody>
 
                     <tr th:each="e , iter : ${tarefa.equipes}">
+                        <div th:if="${e.isAtiva()}" >
                         <td th:text="${iter.index + 1}" >1</td>
 
                         <td th:text="${e.nome}" >1</td>
@@ -536,7 +537,7 @@ and open the template in the editor.
                         <td th:text="${e.pontosFator2}" >1</td>
                         <td th:text="${e.pontosFator3}" >1</td>
                         <td th:text="${e.pontosFator1 + e.pontosFator2 + e.pontosFator3}" >1</td>
-
+                    </div>
 
 
 

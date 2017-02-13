@@ -228,11 +228,11 @@ public class TarefaController {
     public String calcularPontuacao(final ModelMap model,
                                     Integer tarefaID, double fator1, double fator2, double fator3) {
 
-        LOGGER.info("Entrou aqui pontuacao: \n"
-                + "\nfator1: "+fator1
-                + "\nfator2: "+fator2
-                + "\nfator3: "+fator3
-        );
+//        LOGGER.info("Entrou aqui pontuacao: \n"
+//                + "\nfator1: "+fator1
+//                + "\nfator2: "+fator2
+//                + "\nfator3: "+fator3
+//        );
 
 
        tarefaFacade.calculoFator1(fator1,tarefaID);

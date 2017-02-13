@@ -66,4 +66,9 @@ public class QuizServiceImpl implements QuizService {
     public List<Quiz> findAll() {
         return quizRepository.findAll();
     }
+
+    @Override
+    public List<Quiz> findAllByTarefa_Id(Integer id) {
+        return quizRepository.findAllByTarefa_Id(id);
+    }
 }

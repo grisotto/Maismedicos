@@ -15,4 +15,6 @@ public interface RespotaQuestaoQuizService extends AbstractService<RespotaQuesta
 
 
     public List<RespotaQuestaoQuiz> findAllByEquipe_Id(Integer equipeID);
+
+    public List<RespotaQuestaoQuiz> findAllByQuestao_Id(Integer equipeID);
 }

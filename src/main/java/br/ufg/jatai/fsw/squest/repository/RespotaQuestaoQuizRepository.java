@@ -17,5 +17,5 @@ public interface RespotaQuestaoQuizRepository extends JpaRepository<RespotaQuest
 
     public List<RespotaQuestaoQuiz> findAllByEquipe_Id(Integer equipeID);
 
-
+    public List<RespotaQuestaoQuiz> findAllByQuestao_Id(Integer questaoID);
 }

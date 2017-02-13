@@ -7,6 +7,8 @@ import br.ufg.jatai.fsw.squest.domain.quis.QuestaoQuiz;
 import br.ufg.jatai.fsw.squest.domain.quis.Quiz;
 import br.ufg.jatai.fsw.squest.domain.quis.RespotaQuestaoQuiz;
 import br.ufg.jatai.fsw.squest.service.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +39,7 @@ public class TarefaFacade {
     @Autowired
     private RespotaQuestaoQuizService respotaQuestaoQuizService;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TarefaFacade.class);
 
     /**
      * Persite uma tarefa
@@ -217,12 +220,75 @@ public class TarefaFacade {
 
     public void calculoFator3(double fator3, Integer taredaID) {
 
+        double somaPorcentagemDificuldades = 0.00;
+        double somaRespostaErradas = 0.00;
         Tarefa tarefa = tarefaService.find(taredaID);
 
         tarefa.setFator3(fator3);
 
+        //pego todas as equipes da tarefa
+        Iterator<Equipe> i = tarefa.getEquipes().iterator();
+
+        //pego todas as questoes do quiz
+        Set<QuestaoQuiz> todas = quizService.find(tarefa.getQuiz().getId()).getQuestaoQuizes();
+
+        while(i.hasNext()){
+
+            Equipe e = i.next();
+
+            //verifico se ela esta ativa
+            if(e.isAtiva()){
+                //por todas as questoes do quiz
+                for(QuestaoQuiz questoes : todas){
+                    //verifico se esta questao que estou olhando eh da equipe
+                    if(questoes.getEquipe().equals(e)){
+
+                        List<RespotaQuestaoQuiz> respostaParaQuestao = respotaQuestaoQuizService.findAllByQuestao_Id(questoes.getQuestao().getId());
+//                        LOGGER.info("respostaParaQuestao.size: "+respostaParaQuestao.size()
+//                                +" Equipe: " + e.getNome()
+//                                +" QuestaoID " + questoes.getQuestao().getId()
+//                                +" Questao: " + questoes.getQuestao().getQuestion()
+//
+//                        );
+
+                        for (RespotaQuestaoQuiz respostas : respostaParaQuestao){
+                            if(!respostas.getAlternativa().isCorreto()){
+                                somaRespostaErradas++;
+                            }
+                        }
 
 
+
+                        //depois que ele tem a quantidade de pessoas que erram
+                        //pode colocar para o fator multiplicar cada questao. Da valor para a questao
+//                        LOGGER.info("somaPorcentagemDificuldadesANTES: "+somaPorcentagemDificuldades
+
+
+
+                        somaPorcentagemDificuldades = (somaRespostaErradas / respostaParaQuestao.size() * fator3) + somaPorcentagemDificuldades;
+
+                                somaRespostaErradas = 0.00;
+                    }
+                }
+
+
+                e.setPontosFator3(somaPorcentagemDificuldades);
+
+
+            }
+
+            somaPorcentagemDificuldades = 0;
+
+
+
+        }
+
+        //para cada equipe ativa da tarefa
+            //para todas as questoes que a equipe inseriu que foram aprovadas
+                //calcular a % de erro -
+                //exemplo1 - 4 equipes erraram de 6, entao 0,666 taxa de erro
+                //multiplicar o fator3 com cada taxa de erro de cada questao
+                //somar de todas as questoes e salvar no equipePontosfator3 o resultado
 
 
 
@@ -232,14 +298,6 @@ public class TarefaFacade {
 //            }
 //
 //        }
-        //para cada equipe ativa da tarefa
-            //para todas as questoes que a equipe inseriu que foram aprovadas
-                //calcular a % de erro -
-                //exemplo1 - 4 equipes erraram de 6, entao 0,666 taxa de erro
-                //multiplicar o fator3 com cada taxa de erro de cada questao
-                //somar de todas as questoes e salvar no equipePontosfator3 o resultado
-
-
 
 
 

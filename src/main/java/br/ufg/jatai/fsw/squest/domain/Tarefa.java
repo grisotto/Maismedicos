@@ -99,6 +99,9 @@ public class Tarefa implements Serializable {
         this.etapaEventos = etapaEventos;
         this.tamanhoQuestoes = tamanhoQuestoes;
         this.questionarios = questionarios;
+        this.fator1 = 1.00;
+        this.fator2 = 1.00;
+        this.fator3 = 1.00;
     }
 
     /**
