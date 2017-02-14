@@ -49,11 +49,12 @@ and open the template in the editor.
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Equipe</th>
+                        <th>Equipe Destino</th>
                         <th>Questão</th>
                         <th>Resposta</th>
+                        <th>Equipe Origem</th>
 
-                        <th>Correta</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -67,7 +68,7 @@ and open the template in the editor.
 
                         <td th:text="${e.alternativa.descricao}">1</td>
 
-
+                        <td th:text="${e.questao.questionario.time.nome}">aaaaaaa</td>
 
 
                         <td  th:if="${e.alternativa.isCorreto() }" >
