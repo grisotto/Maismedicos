@@ -322,20 +322,89 @@ and open the template in the editor.
                 <!--      Inicio do finalizado -->
                 <!--          th:if="{equipe.tarefa.finalizado}"  -->
 
-                <div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.isFinalizado()}">
+                <!--<div class="col-lg-12" th:if="${equipe.tarefa.etapaAtual.isFinalizado()}">-->
 
 
-                    <div class="alert alert-info">
-                        <strong>Finalizado</strong>
-                    <div th:if="${equipe.pontosFator1 == 0.00 OR equipe.pontosFator2 == 0.00 OR equipe.pontosFator3 == 0.00}" >
-                        <p>A pontuação ainda não foi calculada, Por favor aguarde.</p>
-                    </div>
+                    <!--<div class="alert alert-info">-->
+                        <!--<strong>Finalizado</strong>-->
+                    <!--<div th:if="${equipe.pontosFator1 == 0.00 OR equipe.pontosFator2 == 0.00 OR equipe.pontosFator3 == 0.00}" >-->
+                        <!--<p>A pontuação ainda não foi calculada, Por favor aguarde.</p>-->
+                    <!--</div>-->
 
-                        <div th:if="${equipe.pontosFator1 != 0.00 AND equipe.pontosFator2 != 0.00 AND equipe.pontosFator3 != 0.00}" >
-                            <p>Pontuação total: <span th:text="${equipe.pontosFator1 + equipe.pontosFator2 + equipe.pontosFator3}"></span> pontos</p>
+                        <!--<div th:if="${equipe.pontosFator1 != 0.00 AND equipe.pontosFator2 != 0.00 AND equipe.pontosFator3 != 0.00}" >-->
+                            <!--&lt;!&ndash;<p>Pontuação total: <span th:text="${equipe.pontosFator1 + equipe.pontosFator2 + equipe.pontosFator3}"></span> pontos</p>&ndash;&gt;-->
+
+                        <!--</div>-->
+
+                    <!--</div>-->
+                <!--</div>-->
+
+                <div class="col-lg-12" th:if="${!equipe.tarefa.etapaEventos.empty AND equipe.tarefa.etapaAtual.isFinalizado()}">
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading">
+                        <span class="panel-title">
+
+                            <i class="fa fa-bar-chart-o fa-fw"></i>Pontuação
+                        </span>
+                        </div>
+
+                        <div th:if="${equipe.pontosFator1 == 0.00 OR equipe.pontosFator2 == 0.00 OR equipe.pontosFator3 == 0.00}" >
+                            <p>A pontuação ainda não foi calculada, Por favor aguarde.</p>
+                        </div>
+
+
+                        <div class="panel-body" th:if="${equipe.pontosFator1 != 0.00 AND equipe.pontosFator2 != 0.00 AND equipe.pontosFator3 != 0.00}">
+                            <div class="form-group">
+
+
+                            </div>
+                            <table class="table  table-hover dt-responsive" id="questosProf">
+                                <thead>
+                                <tr>
+
+                                    <th>Equipe</th>
+                                    <th>Fator 1</th>
+                                    <th>Fator 2</th>
+                                    <th>Fator 3</th>
+                                    <th>Total</th>
+                                    <th></th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr th:each="e , iter : ${equipe.tarefa.equipes}">
+                                    <div th:if="${e.isAtiva()}" >
+
+
+                                        <td th:text="${e.nome}" >1</td>
+                                        <td th:text="${e.pontosFator1}" >1</td>
+                                        <td th:text="${e.pontosFator2}" >1</td>
+                                        <td th:text="${e.pontosFator3}" >1</td>
+                                        <td th:text="${e.pontosFator1 + e.pontosFator2 + e.pontosFator3}" >1</td>
+                                        <td>
+                                        <div class="btn-group pull-right" role="group" th:if="${e.id == equipe.id}">
+
+                                            <a th:href="@{/app/tarefa/}+${e.id}+@{/questoesrespostas}" class="btn btn-sm  btn-info fa  fa-edit"> Respostas</a>
+                                        </div>
+                                        <div class="btn-group pull-right" role="group" th:unless="${e.id == equipe.id}">
+
+
+                                        </div>
+                                        </td>
+                                    </div>
+
+
+
+                                </tr>
+                                </tbody>
+                            </table>
+
                         </div>
 
                     </div>
+
                 </div>
 
                 <!--       Fim do finalizado -->
