@@ -83,7 +83,8 @@ and open the template in the editor.
                     <tr>
                         <th>#</th>
                         <th>Questão</th>
-                        <th>Resposta</th>
+                        <th>Resposta da Equipe</th>
+                        <th>Resposta Correta</th>
                         <th class="pull-right">Correta</th>
 
                     </tr>
@@ -96,6 +97,33 @@ and open the template in the editor.
                         <td th:text="${e.questao.question}">1</td>
 
                         <td th:text="${e.alternativa.descricao}">1</td>
+
+                        <div th:each="ec : ${e.questao}">
+
+                            <div th:if="${ec.alternativas[0].isCorreto()}">
+                                <td th:text="${ec.alternativas[0].descricao}">1</td>
+                            </div>
+
+                            <div th:if="${ec.alternativas[1].isCorreto()}">
+                                <td th:text="${ec.alternativas[1].descricao}">1</td>
+                            </div>
+
+                            <div th:if="${ec.alternativas[2].isCorreto()}">
+                                <td th:text="${ec.alternativas[2].descricao}">1</td>
+                            </div>
+
+                            <div th:if="${ec.alternativas[3].isCorreto()}">
+                                <td th:text="${ec.alternativas[3].descricao}">1</td>
+                            </div>
+
+                            <div th:if="${ec.alternativas[4].isCorreto()}">
+                                <td th:text="${ec.alternativas[4].descricao}">1</td>
+                            </div>
+
+
+
+
+                        </div>
 
                         <td  th:if="${e.alternativa.isCorreto() }" >
                                         <span class="label label-success ">
