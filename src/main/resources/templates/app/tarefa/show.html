@@ -342,7 +342,7 @@ and open the template in the editor.
                         <td>
                             <div class="btn-group" role="group">
                                 <!--<a class="btn btn-sm  btn-danger fa fa-trash" />-->
-                                <a th:href="@{/app/equipe/}+${a.id}" class="btn btn-sm  btn-success fa fa-arrow-right"/>
+                                <a th:href="@{/app/equipe/}+${a.id}" title="Detalhes da Equipes" class="btn btn-sm  btn-success fa fa-arrow-right"/>
                             </div>
 
 
@@ -350,11 +350,11 @@ and open the template in the editor.
 
                         </td>
 
-                        <div th:unless="${tarefa.etapaAtual.isAguardando() OR tarefa.etapaAtual.isFinalizado() }">
+                        <div th:unless="${tarefa.etapaAtual.isAguardando() }">
                             <td>
                             <div class="btn-group pull-right" role="group" th:if="${a.questionario}">
 
-                                <a th:href="@{/app/tarefa/}+${a.id}+@{/questoes}" class="btn btn-sm  btn-info fa  fa-edit"> Questões</a>
+                                <a th:href="@{/app/tarefa/}+${a.id}+@{/questoes}" class="btn btn-sm  btn-info fa  fa-file-text-o" title="Questões da Equipe"></a>
                             </div>
                             <div class="btn-group pull-right" role="group" th:unless="${a.questionario}">
 
@@ -371,7 +371,7 @@ and open the template in the editor.
                             <td>
                                 <div class="btn-group pull-right" role="group" th:if="${a.questionario}">
 
-                                    <a th:href="@{/app/tarefa/}+${a.id}+@{/questoesrespostas}" class="btn btn-sm  btn-info fa  fa-edit"> Respostas</a>
+                                    <a th:href="@{/app/tarefa/}+${a.id}+@{/questoesrespostas}" title="Respostas da Equipe" class="btn btn-sm  btn-info fa  fa-edit"></a>
                                 </div>
                                 <div class="btn-group pull-right" role="group" th:unless="${a.questionario}">
 

@@ -6,13 +6,17 @@
 package br.ufg.jatai.fsw.squest.controller;
 
 import br.ufg.jatai.fsw.squest.AutenticateUser;
+import br.ufg.jatai.fsw.squest.controller.modelForm.EtapasModel;
 import br.ufg.jatai.fsw.squest.controller.modelForm.QuestaoModel;
+import br.ufg.jatai.fsw.squest.domain.Equipe;
 import br.ufg.jatai.fsw.squest.domain.Questao;
 import br.ufg.jatai.fsw.squest.domain.Questionario;
+import br.ufg.jatai.fsw.squest.facade.EquipeFacade;
 import br.ufg.jatai.fsw.squest.facade.QuestionarioFacade;
 import br.ufg.jatai.fsw.squest.repository.QuestionarioRepository;
 import br.ufg.jatai.fsw.squest.service.QuestaoService;
 import br.ufg.jatai.fsw.squest.service.QuestionarioService;
+import br.ufg.jatai.fsw.squest.service.RespotaQuestaoQuizService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +57,12 @@ public class QuestionarioController implements Serializable {
 
     @Autowired
     private QuestaoService questaoService;
+    @Autowired
+    private EquipeFacade equipeFacade;
+
+    @Autowired
+    private RespotaQuestaoQuizService respotaQuestaoQuizService;
+
 
     @PostMapping("/addQuestao")
     public String inserirQuestão(final String correto, final QuestaoModel questaoModel,
@@ -183,6 +193,25 @@ public class QuestionarioController implements Serializable {
         map.addAttribute("questao", questaoService.find(id));
 
         return "app/questionario/show";
+    }
+
+    @PreAuthorize("hasAuthority('GRUPO')")
+    @GetMapping(value = "/tarefa/{equipeID}/questoesrespostas")
+    public String showQuestoesRespostasEquipeDash(@PathVariable Integer equipeID, ModelMap map, final EtapasModel etapas) {
+
+
+        Equipe equipe = equipeFacade.findEquipe(equipeID);
+
+        respotaQuestaoQuizService.findAllByEquipe_Id(equipeID);
+
+        map.addAttribute("equipe", equipe);
+        map.addAttribute("questoesequipe",  respotaQuestaoQuizService.findAllByEquipe_Id(equipeID));
+
+
+
+
+
+        return "app/questionario/questoesrespostas";
     }
 
 }
