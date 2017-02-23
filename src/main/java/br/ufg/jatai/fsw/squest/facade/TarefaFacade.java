@@ -195,7 +195,12 @@ public class TarefaFacade {
                         quantidadeCorretas++;
                     }
                 }
-               e.setPontosFator2(quantidadeCorretas * fator2);
+                LOGGER.info("respostaParaQuestao.size: " +respotaQuestaoQuizs.size()
+                                +" Respostas corretas: " + quantidadeCorretas
+                                +" porcentaegem: " + ((float)quantidadeCorretas / respotaQuestaoQuizs.size()) * 100 );
+
+
+               e.setPontosFator2(((float)quantidadeCorretas / respotaQuestaoQuizs.size()) * 100 * fator2);
 
             }
             quantidadeCorretas = 0;
