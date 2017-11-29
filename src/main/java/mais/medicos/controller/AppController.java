@@ -3,15 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufg.jatai.fsw.squest.controller;
+package mais.medicos.controller;
 
-import br.ufg.jatai.fsw.squest.AutenticateUser;
-import br.ufg.jatai.fsw.squest.domain.Equipe;
-import br.ufg.jatai.fsw.squest.domain.Questionario;
-import br.ufg.jatai.fsw.squest.domain.Usuario;
-import br.ufg.jatai.fsw.squest.service.QuestaoService;
-import br.ufg.jatai.fsw.squest.service.QuestionarioService;
-import br.ufg.jatai.fsw.squest.service.QuizService;
+import mais.medicos.AutenticateUser;
+import mais.medicos.domain.Usuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,39 +62,14 @@ public class AppController {
             model.addAttribute("usuarios", usuarios);
 
         }
-        if (autenticateUser.getUsuario().getTipoUsuario().equals(Usuario.TipoUsuario.GRUPO)) {
-            Equipe equipe = autenticateUser.getEquipe();
-            model.addAttribute("equipe", equipe);
-            model.addAttribute("questionario", equipe.getQuestionario());
-
-            try {
-                model.addAttribute("questoes", questaoService.questoesDoQuestionario(equipe.getQuestionario().getId()));
-                model.addAttribute("quiz", equipe.getTarefa().getQuiz());
-            }catch (Exception e){}
-        }
 
         LOGGER.info("ENTROU NO CONTROLLER");
 
         return "app/dash";
     }
-    @Autowired
-    private QuestaoService questaoService;
 
-    @Autowired
-    private QuizService quizService;
 
-    /**
-     *
-     * @return
-     */
-    @ModelAttribute("equipe")
-    public Equipe getEquipe() {
-        if (autenticateUser.getUsuario().getTipoUsuario().equals(Usuario.TipoUsuario.GRUPO)) {
-            return autenticateUser.getEquipe();
-        } else {
-            return null;
-        }
-    }
+
 
     // Login form'
     /**

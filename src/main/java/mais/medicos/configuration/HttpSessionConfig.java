@@ -1,4 +1,4 @@
-package br.ufg.jatai.fsw.squest.configuration;
+package mais.medicos.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.session.config.annotation.web.http.EnableSpringHttpSession;

@@ -1,4 +1,4 @@
-package br.ufg.jatai.fsw.squest.util;
+package mais.medicos.util;
 
 import org.springframework.beans.factory.annotation.Value;
 

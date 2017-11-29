@@ -1,4 +1,4 @@
-package br.ufg.jatai.fsw.squest;
+package mais.medicos;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

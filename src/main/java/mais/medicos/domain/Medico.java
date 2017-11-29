@@ -5,27 +5,18 @@
  */
 package mais.medicos.domain;
 
-import java.util.List;
-import java.util.Objects;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
-/**
- *
- * @author dfranco
- */
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Objects;
+
 @Entity
 @Table
 @SuppressWarnings("PersistenceUnitPresent")
-public class Professor extends Pessoa {
+public class Medico extends Pessoa {
 
     @Email
     @NotBlank
@@ -36,23 +27,28 @@ public class Professor extends Pessoa {
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "professor")
-    private List<Turma> turmas;
 
-    /**
-     *
-     * @param email
-     * @param usuario
-     */
-    public Professor(String email, Usuario usuario) {
+    public Medico(String email, Usuario usuario) {
         this.email = email;
         this.usuario = usuario;
+    }
+
+    @OneToOne
+    private Consulta consulta;
+
+
+    public Consulta getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
     }
 
     /**
      *
      */
-    public Professor() {
+    public Medico() {
     }
 
     /**
@@ -91,8 +87,8 @@ public class Professor extends Pessoa {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 43 * hash + Objects.hashCode(this.email);
-        hash = 43 * hash + Objects.hashCode(this.usuario);
+        hash = 48 * hash + Objects.hashCode(this.email);
+        hash = 48 * hash + Objects.hashCode(this.usuario);
         return hash;
     }
 
@@ -107,7 +103,7 @@ public class Professor extends Pessoa {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Professor other = (Professor) obj;
+        final Medico other = (Medico) obj;
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
@@ -116,29 +112,29 @@ public class Professor extends Pessoa {
         }
         return true;
     }
-
-    /**
-     *
-     * @return
-     */
-    public List<Turma> getTurmas() {
-        return turmas;
-    }
-
-    /**
-     *
-     * @param turmas
-     */
-    public void setTurmas(List<Turma> turmas) {
-        this.turmas = turmas;
-    }
+//
+//    /**
+//     *
+//     * @return
+//     */
+//    public List<Turma> getTurmas() {
+//        return turmas;
+//    }
+//
+//    /**
+//     *
+//     * @param turmas
+//     */
+//    public void setTurmas(List<Turma> turmas) {
+//        this.turmas = turmas;
+//    }
 
     @Override
     public String toString() {
-        return "Professor{" +
+        return "Medico{" +
                 "email='" + email + '\'' +
                 ", usuario.login=" + usuario.getLogin() +
-                ", turmas=" + turmas +
+//                ", turmas=" + turmas +
                 '}';
     }
 }

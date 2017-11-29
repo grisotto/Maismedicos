@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufg.jatai.fsw.squest.domain;
+package mais.medicos.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
-/**
- *
- * @author dfranco
- */
+
 @MappedSuperclass
 public class Pessoa implements Serializable {
 

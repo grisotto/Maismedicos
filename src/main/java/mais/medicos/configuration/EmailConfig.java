@@ -1,4 +1,4 @@
-package br.ufg.jatai.fsw.squest.configuration;
+package mais.medicos.configuration;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

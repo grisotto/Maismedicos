@@ -5,62 +5,60 @@
  */
 package mais.medicos.service;
 
-import mais.medicos.domain.Professor;
-import mais.medicos.domain.Turma;
-import mais.medicos.repository.TurmaRepository;
+import mais.medicos.domain.Medico;
+import mais.medicos.domain.Paciente;
+import mais.medicos.domain.Consulta;
+import mais.medicos.repository.ConsultaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author dyeimys
- */
+import java.util.List;
+
+
 @Service
-public class TurmaServiceImpl implements TurmaService {
+public class ConsultaServiceImpl implements ConsultaService {
 
     @Autowired
-    private TurmaRepository turmaRepository;
+    private ConsultaRepository consultaRepository;
 
     @Override
-    public Turma inserir(Turma entidade) {
-        return turmaRepository.save(entidade);
+    public Consulta inserir(Consulta entidade) {
+        return consultaRepository.save(entidade);
     }
 
     @Override
-    public void apagar(Turma entidade) {
-        turmaRepository.delete(entidade);
+    public void apagar(Consulta entidade) {
+        consultaRepository.delete(entidade);
     }
 
     @Override
-    public Turma atualizar(Turma entidade) {
-        return turmaRepository.save(entidade);
+    public Consulta atualizar(Consulta entidade) {
+        return consultaRepository.save(entidade);
     }
 
     @Override
-    public Turma find(Turma entidade) {
+    public Consulta find(Consulta entidade) {
         return find(entidade.getId());
     }
 
     @Override
-    public Turma find(Integer id) {
-        return turmaRepository.findOne(id);
+    public Consulta find(Integer id) {
+        return consultaRepository.findOne(id);
     }
 
     @Override
-    public List<Turma> findAll() {
-        return turmaRepository.findAll();
+    public List<Consulta> findAll() {
+        return consultaRepository.findAll();
     }
 
-    /**
-     *
-     * @param professor
-     * @return
-     */
+
     @Override
-    public List<Turma> allOfProfessor(Professor professor) {
-        return turmaRepository.findOfProfessor(professor.getId());
+    public List<Consulta> allOfPaciente(Paciente paciente) {
+        return consultaRepository.findOfPaciente(paciente.getId());
     }
 
+    @Override
+    public List<Consulta> allOfMedico(Medico medico) {
+        return consultaRepository.findOfMedico(medico.getId());
+    }
 }

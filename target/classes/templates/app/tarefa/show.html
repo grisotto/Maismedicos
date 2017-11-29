@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="fragments/basetemplate :: page">
+
+
+<head>
+    <title>TODO supply a title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<div th:fragment="content">
+    <div class="page-header">
+        <h2 class="">
+            <a class="btn btn-success fa fa-arrow-circle-o-left"
+               href="/app/tarefa"></a><b> Tarefa: </b> <span class="text-muted"
+                                                             th:text="${{tarefa.titulo}}"></span>
+        </h2>
+    </div>
+    <div th:if="${tarefa.etapaAtual!=null}">
+        <div class="alert alert-info" th:if="${tarefa.etapaAtual.isValidando()}">
+            Agora o professor precisa validar as questões
+            <!--<a th:href="@{/app/tarefa/}+${tarefa.id}+@{/questoesequipe}"-->
+                                                             <!--class="btn btn-sm btn-default pull-right"> Validar Questões-->
+            <!--<span class="fa fa-plus"></span>-->
+        <!--</a>-->
+        </div>
+        <div class="alert alert-success" th:if="${tarefa.etapaAtual.isRespondendo()}">
+            As equipes estão respondendo
+        </div>
+        <div class="alert alert-success" th:if="${tarefa.etapaAtual.isEsperandoSubmissao()}">
+            As equipes estão inserindo questões
+            <!--<a th:href="@{/app/tarefa/}+${tarefa.id}+@{/questoesequipe}"-->
+                                                   <!--class="btn btn-sm btn-default pull-right"> Ver Questões-->
+            <!--<span class="fa fa-plus"></span>-->
+        <!--</a>-->
+        </div>
+
+        <div class="alert alert-success" th:if="${tarefa.etapaAtual.isFinalizado()}">
+            Ver as respostas de todas as equipes
+            <a th:href="@{/app/tarefa/respostas}"
+            class="btn btn-sm btn-default pull-right"> Ver Respostas
+            <span class="fa fa-plus"></span>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="panel panel-info">
+
+            <div class="panel-heading">
+                        <span class="panel-title"> <i class="fa fa-calendar fa-fw"></i><span
+                                class=""> Etapas da tarefa</span>
+                        </span>
+            </div>
+            <div th:if="${!tarefa.etapaEventos.empty}" class="panel-body">
+                <table class="table dt-responsive table-responsive" id="EtapasTarefa">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Etapa</th>
+                        <th>Data Incial</th>
+                        <th>Data Final</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="e : ${tarefa.etapaEventos}">
+                        <td th:text="${e.tipo.id()}">1</td>
+                        <td th:text="${e.tipo}">1</td>
+
+                        <td
+                                th:text="${#dates.format(e.dataInicial, 'dd/MM/yyyy hh:mm')}">1
+                        </td>
+                        <!--<td th:text="${e.dataFinal}">1</td>-->
+                        <td th:text="${#dates.format(e.dataFinal, 'dd/MM/yyyy hh:mm')}">1</td>
+
+
+                        <!--<div th:switch="${e.tipo} " >-->
+                        <!--<td> <a th:case="${etapas.respondendo.tipo}" class="btn btn-success btn-sm fa fa-check-square"></a></td>-->
+                        <!--<td> <a th:case="${etapas.finalizado.tipo}" class="btn btn-success btn-sm fa fa-check-square"></a></td>-->
+                        <!--<td> <a th:case="*" disabled="true" class="btn btn-success btn-sm fa fa-check-square"></a></td>-->
+
+
+                        <!--</div>-->
+
+
+                        <!--Esta na etapa respondendo-->
+                        <!--TODO Melhorar essa lógica, está muito bagunçado. Muita lógica dentro da view (Isso afeta manutenibilidade) R: precisa ser entregue pelo controlador ou fachada
+                         -->
+                        <div th:if="${tarefa.etapaAtual.tipo} == ${etapas.respondendo.tipo} ">
+                            <div th:if="${tarefa.etapaAtual== e}">
+                                <td><a class="btn btn-success btn-sm fa fa-check-square"></a></td>
+
+                            </div>
+                            <div th:if="${tarefa.etapaAtual!= e}">
+                                <div th:switch="${e.tipo} ">
+
+                                    <td th:case="${etapas.finalizado.tipo}"><a
+                                            th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${e.id}"
+                                            class="btn btn-danger btn-sm fa fa-square"></a></td>
+                                    <td th:case="*"><a disabled="true" class="btn btn-danger btn-sm fa fa-square"></a>
+                                    </td>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <!--Não esta na etapa respondendo-->
+                        <div th:if="${tarefa.etapaAtual.tipo} != ${etapas.respondendo.tipo} ">
+
+                            <div th:if="${tarefa.etapaAtual.tipo} != ${etapas.finalizado.tipo} ">
+                                <div th:if="${tarefa.etapaAtual== e}">
+                                    <td><a class="btn btn-success btn-sm fa fa-check-square"></a></td>
+
+                                </div>
+
+                                <div th:if="${tarefa.etapaAtual!= e}">
+                                    <div th:switch="${e.tipo} ">
+                                        <!--Estou primeiramente interceptando o botao respondendo, para abrir o modal-->
+                                        <td th:case="${etapas.respondendo.tipo}"><a
+                                                class="btn btn-danger btn-sm fa fa-square" data-toggle="modal"
+                                                data-target="#criarQuiz"></a></td>
+                                        <td th:case="${etapas.finalizado.tipo}"><a disabled="true"
+                                                                                   class="btn btn-danger btn-sm fa fa-square"></a>
+                                        </td>
+                                        <td th:case="*"><a th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${e.id}"
+                                                           class="btn btn-danger btn-sm fa fa-square"></a></td>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                            <div th:if="${tarefa.etapaAtual.tipo} == ${etapas.finalizado.tipo} ">
+                                <div th:if="${tarefa.etapaAtual== e}">
+                                    <td><a class="btn btn-success btn-sm fa fa-check-square"></a></td>
+
+                                </div>
+
+                                <div th:if="${tarefa.etapaAtual!= e}">
+                                    <div th:switch="${e.tipo} ">
+
+                                        <td th:case="${etapas.respondendo.tipo}"><a
+                                                th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${e.id}"
+                                                class="btn btn-danger btn-sm fa fa-square"></a></td>
+                                        <td th:case="*"><a disabled="true"
+                                                           class="btn btn-danger btn-sm fa fa-square"></a></td>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                            <!--<td><a class="btn btn-success btn-sm fa fa-check-square"></a></td>-->
+
+                        </div>
+
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal fade" id="criarQuiz" th:if="${!tarefa.etapaEventos.empty}" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Geração do Quiz</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Ao alterar para a etapa <b>Respondendo</b> será gerado o quiz com as questões validadas
+                                e não será mais possível voltar para as etapas anteriores</p>
+                            <p></p>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar
+                            </button>
+                            <!--TODO Colocar isso como post para evitar algumas complicações-->
+                            <a th:href="@{/app/tarefa/}+${tarefa.id}+@{/set/}+${etapas.respondendo.id}"
+                               class="btn btn-danger">Confirma
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <form th:if="${tarefa.etapaEventos.empty}" th:object="${etapas}"
+                  th:action="@{/app/tarefa/etapas}" method="POST">
+                <input hidden="true" th:value="${tarefa.id}" name="idTarefa"/>
+                <div class="panel-body">
+                    <div th:if="false" class="text-danger">
+                        AQUI VAI TER QUE ORGANIZAR PARA QUANDO NAO TIVER ESSAS ETAPAS
+                        DEFINIDAS DEIXAR OS CAMPOS ABERTOS PARA COLOCAR E SALVAR E NAO
+                        DEIXAR FAZER MAIS NADA, NADA MSM.. NEM ADICIONAR EQUIPES E TALS.
+
+                        AI DEPOIS QUE TIVER COM AS DATAS AI PODE CRIAR OS EQUIPES
+                        <hr/>
+                    </div>
+
+                    <div class="form-horizontal ">
+                        <div class="form-group ">
+                            <label class="control-label col-sm-3">Aguardando</label>
+                            <div class="col-lg-8 form-inline">
+                                <input class="form-control" id='datetimeAguardandoIni'
+                                       th:field="${etapas.aguardando.dataInicial}"
+                                       placeholder="Data Inicial" required="true"/> <input
+                                    class="form-control" id='datetimeAguardandoFim'
+                                    th:field="${etapas.aguardando.dataFinal}"
+                                    placeholder="Data Final" required="true" autocomplete="off"/>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Esperando
+                                Submissão</label>
+                            <div class="col-lg-8 form-inline">
+                                <input class="form-control" id='datetimeEsperandoSubmissaoIni'
+                                       th:field="${etapas.esperandoSubmissao.dataInicial}"
+                                       placeholder="Data Inicial" required="true"/> <input
+                                    class="form-control" id='datetimeEsperandoSubmissaoFim'
+                                    th:field="${etapas.esperandoSubmissao.dataFinal}"
+                                    placeholder="Data Final" required="true" autocomplete="off"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Validando Questões</label>
+                            <div class="col-lg-8 form-inline">
+                                <input class="form-control" id='datetimeValidandoQuestoesIni'
+                                       th:field="${etapas.validandoQuestoes.dataInicial}"
+                                       placeholder="Data Inicial" required="true"/> <input
+                                    class="form-control" id='datetimeValidandoQuestoesFim'
+                                    th:field="${etapas.validandoQuestoes.dataFinal}"
+                                    placeholder="Data Final" required="true" autocomplete="off"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Respondendo
+                                Questões</label>
+                            <div class="col-lg-8 form-inline">
+                                <input class="form-control" id='datetimeRespondendoQuestoesIni'
+                                       th:field="${etapas.respondendo.dataInicial}"
+                                       placeholder="Data Inicial" required="true"/>
+                                <input
+                                        class="form-control" id='datetimeRespondendoQuestoesFim'
+                                        th:field="${etapas.respondendo.dataFinal}"
+                                        placeholder="Data Final" autocomplete="off" required="true"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Finalizado</label>
+                            <div class="col-lg-8 form-inline">
+                                <input class="form-control" id='datetimeFinalizadoIni'
+                                       th:field="${etapas.finalizado.dataInicial}"
+                                       placeholder="Data " required="true"/> <input
+                                    class="form-control" id='datetimeFinalizadoFim'
+                                    th:field="${etapas.finalizado.dataFinal}"
+                                    placeholder="Data Final" required="true" autocomplete="off"/>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <div class="panel-footer">
+                    <input class="btn btn-info pull-right" type="submit" name="save"
+                           value="Salvar"/>
+                    <div class="clearfix"></div>
+
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+    <div class="col-lg-5">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                        <span class="panel-title"> <i class="fa fa-group fa-fw"></i><span
+                                class=""> Equipes</span>
+                        </span>
+                <div th:if="${!tarefa.etapaEventos.empty}" class="pull-right">
+                    <a class="btn btn-sm btn-default" data-toggle="modal"
+                       data-target="#grupoADD"><span class="fa fa-plus"></span>
+                        Adicionar Equipe</a>
+
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-warning"
+                     th:if="${tarefa.etapaEventos.empty}">
+                    <b>Atenção</b>
+                    <p>Antes de criar equipes é nescessário que você defina as
+                        datas referente a cada estapa tarefa</p>
+                </div>
+
+                <table class="table table-responsive ">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Qnt. Part</th>
+                        <th>Situação</th>
+                        <th></th>
+                        <th></th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr data-th-each="a : ${tarefa.equipes}">
+                        <td th:text="${a.nome}">1</td>
+                        <td class="col-md-3 text-center"
+                            th:text="${a.alunos.size()}">3
+                        </td>
+                        <td th:if="${a.ativa}">
+                                        <span class="label label-info">
+                                            Ativada
+                                        </span>
+                        </td>
+                        <td th:if="${!a.ativa}">
+                                        <span class="label label-warning fa-1">
+                                            Desativada
+                                        </span>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <!--<a class="btn btn-sm  btn-danger fa fa-trash" />-->
+                                <a th:href="@{/app/equipe/}+${a.id}" title="Detalhes da Equipes" class="btn btn-sm  btn-success fa fa-arrow-right"/>
+                            </div>
+
+
+
+
+                        </td>
+
+                        <div th:unless="${tarefa.etapaAtual.isAguardando() }">
+                            <td>
+                            <div class="btn-group pull-right" role="group" th:if="${a.questionario}">
+
+                                <a th:href="@{/app/tarefa/}+${a.id}+@{/questoes}" class="btn btn-sm  btn-info fa  fa-file-text-o" title="Questões da Equipe"></a>
+                            </div>
+                            <div class="btn-group pull-right" role="group" th:unless="${a.questionario}">
+
+                                <a href="#" class="btn btn-sm  btn-danger fa fa-times"/>
+                            </div>
+
+
+
+
+                            </td>
+                            </div>
+
+                        <div th:if="${tarefa.etapaAtual.isFinalizado()}" >
+                            <td>
+                                <div class="btn-group pull-right" role="group" th:if="${a.questionario}">
+
+                                    <a th:href="@{/app/tarefa/}+${a.id}+@{/questoesrespostas}" title="Respostas da Equipe" class="btn btn-sm  btn-info fa  fa-edit"></a>
+                                </div>
+                                <div class="btn-group pull-right" role="group" th:unless="${a.questionario}">
+
+                                    <a href="#" class="btn btn-sm  btn-danger fa fa-times"/>
+                                </div>
+
+                            </td>
+
+                        </div>
+
+
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!-- Modal Para adicionar o equipe -->
+    <div class="modal fade" id="grupoADD" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel" th:object="${tarefa}">
+                        Adicionar equipe na Tarefa: <span th:text="${tarefa.titulo}"></span>
+                    </h4>
+                </div>
+
+                <form action="#" th:action="@{/app/equipe}" th:object="${equipe}"
+                      method="POST">
+
+
+                    <div class="modal-body">
+                        <div class="panel-body">
+                            <div class="form-group">
+
+
+                                <input type="hidden" name="tarefa" th:value="${tarefa.id}"/>
+                                <label>Nome da Equipe</label>
+                                <input class="form-control" required="true" name="nome"/>
+                            </div>
+                        </div>
+
+
+                        <!-- /.panel-body -->
+
+
+                    </div>
+                    <div class="modal-footer panel-footer">
+
+
+                        <input type="button" class="btn btn-default" data-dismiss="modal"
+                               value="Fechar"></input>
+                        <input class="btn btn-info pull-right"
+                               type="submit" name="modal" value="Salvar"/>
+
+
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+
+    <div class="col-md-12" th:if="${!tarefa.etapaEventos.empty AND tarefa.etapaAtual.isFinalizado()}">
+
+
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                        <span class="panel-title">
+                            <i class="fa fa-bar-chart-o fa-fw"></i>Fatores para cálculo da pontuação
+
+                        </span>
+                </div>
+                <form th:action="@{/app/tarefa/pontuacao}" method="POST">
+                <div class="panel-body">
+                    <div class="form-inline">
+                        <input type="hidden" name="tarefaID" th:value="*{tarefa.id}"  />
+                        <div class="form-group col-md-3">
+                            <label class="control-label" for="nome">Questões Aprovadas:</label>
+                            <input class="form-control" name="fator1" th:field="${tarefa.fator1}" type="number" step="0.10" required="true" min="0"/>
+
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label" for="nome">Questoes Acertas:</label>
+                            <input class="form-control" name="fator2" th:field="${tarefa.fator2}" type="number" step="0.10" required="true" min="0"/>
+
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label" for="nome">Questões Difíceis:</label>
+                            <input class="form-control" name="fator3" th:field="${tarefa.fator3}" type="number" step="0.10" required="true" min="0"/>
+
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <input class="btn btn-info pull-right" type="submit" name="save"  value="Calcular" />
+                        </div>
+
+
+
+
+                    </div>
+
+
+                </div>
+                </form>
+            </div>
+        </div>
+
+
+    <div class="col-lg-12" th:if="${!tarefa.etapaEventos.empty AND tarefa.etapaAtual.isFinalizado()}">
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">
+                        <span class="panel-title">
+
+                            <i class="fa fa-users fa-fw"></i>Pontuação de cada equipe
+                        </span>
+            </div>
+
+
+            <div class="panel-body">
+                <div class="form-group">
+
+
+                </div>
+                <table class="table  table-hover dt-responsive" id="questosProf">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Equipe</th>
+                        <th>Fator 1</th>
+                        <th>Fator 2</th>
+                        <th>Fator 3</th>
+                        <th>Total</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="e , iter : ${tarefa.equipes}">
+                        <div th:if="${e.isAtiva()}" >
+                        <td th:text="${iter.index + 1}" >1</td>
+
+                        <td th:text="${e.nome}" >1</td>
+                        <td th:text="${e.pontosFator1}" >1</td>
+                        <td th:text="${e.pontosFator2}" >1</td>
+                        <td th:text="${e.pontosFator3}" >1</td>
+                        <!--<td th:text="${e.pontosFator1 + e.pontosFator2 + e.pontosFator3}" >1</td>-->
+                        <td th:text="${#numbers.formatDecimal(e.pontosFator1 + e.pontosFator2 + e.pontosFator3, 0, 2)}"></td>
+                    </div>
+
+
+
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<div th:fragment="customCSS">
+
+    <link href="/plugins/datatables-plugins/dataTables.bootstrap.css"
+          th:href="@{/plugins/datatables-plugins/dataTables.bootstrap.css}"
+          rel="stylesheet" media="screen"/>
+    <link href="/plugins/datatables-responsive/dataTables.responsive.css"
+          th:href="@{/plugins/datatables-responsive/dataTables.responsive.css}"
+          rel="stylesheet" media="screen"/>
+    <script src="/plugins/datatables/js/jquery.dataTables.min.js"
+            th:src="@{/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+    <script src="/plugins/datatables-plugins/dataTables.bootstrap.min.js"
+            th:src="@{/plugins/datatables-plugins/dataTables.bootstrap.min.js}"></script>
+    <script src="/plugins/datatables-responsive/dataTables.responsive.js"
+            th:src="@{/plugins/datatables-responsive/dataTables.responsive.js}"></script>
+
+
+    <script src="/plugins/moment/min/moment-with-locales.js"
+            th:src="@{/plugins/moment/min/moment-with-locales.js}"></script>
+    <script
+            src="/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"
+            th:src="@{/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
+
+    <link
+            href="/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+            th:href="@{/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}"
+            rel="stylesheet" media="screen"/>
+
+
+    <!--<script src="/plugins/select2/js/i18n/pt-BR.js"  th:src="@{/plugins/select2/js/i18n/pt-BR.js}"></script>-->
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#EtapasTarefa').DataTable({
+                responsive: true,
+                "paging": false,
+                "searching": false,
+
+                "info": false,
+                "order": [[0, "asc"]]
+
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            //Definindo o formato padrao e o locale
+            $(
+                '#datetimeAguardandoIni, #datetimeEsperandoSubmissaoIni, #datetimeValidandoQuestoesIni, #datetimeRespondendoQuestoesIni, #datetimeFinalizadoIni')
+                .datetimepicker({
+                    dayViewHeaderFormat: 'DD/MM/YYYY hh:mm',
+                    locale: 'pt-br'
+                });
+            $(
+                '#datetimeAguardandoFim, #datetimeEsperandoSubmissaoFim, #datetimeValidandoQuestoesFim, #datetimeRespondendoQuestoesFim, #datetimeFinalizadoFim')
+                .datetimepicker({
+                    dayViewHeaderFormat: 'DD/MM/YYYY hh:mm',
+                    locale: 'pt-br',
+                    useCurrent: false
+                    //Important! See issue #1075
+                });
+
+            //Aqui eu olho para a data inicial e difinino uma data min para o Fim
+            $("#datetimeAguardandoIni").on(
+                "dp.change",
+                function (e) {
+
+                    $('#datetimeAguardandoFim').data("DateTimePicker")
+                        .minDate(e.date);
+
+                    // console.log(e.date);
+                    //Pego a data e converto pegando os millisegundos
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+                    // console.log(outputDate);
+
+                    //  console.log(Date.parse(outputDate));
+                    //  console.log(outputDate.getTime());
+                });
+
+            $("#datetimeEsperandoSubmissaoIni").on(
+                "dp.change",
+                function (e) {
+
+                    $('#datetimeEsperandoSubmissaoFim').data(
+                        "DateTimePicker").minDate(e.date);
+
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            $("#datetimeValidandoQuestoesIni").on(
+                "dp.change",
+                function (e) {
+
+                    $('#datetimeValidandoQuestoesFim').data(
+                        "DateTimePicker").minDate(e.date);
+
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            $("#datetimeRespondendoQuestoesIni").on(
+                "dp.change",
+                function (e) {
+
+                    $('#datetimeRespondendoQuestoesFim').data(
+                        "DateTimePicker").minDate(e.date);
+
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            $("#datetimeFinalizadoIni").on(
+                "dp.change",
+                function (e) {
+
+                    $('#datetimeFinalizadoFim').data("DateTimePicker")
+                        .minDate(e.date);
+
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            //Aqui ao contrario da anterior
+            $("#datetimeAguardandoFim").on(
+                "dp.change",
+                function (e) {
+                    $('#datetimeAguardandoIni').data("DateTimePicker")
+                        .maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+            $("#datetimeEsperandoSubmissaoFim").on(
+                "dp.change",
+                function (e) {
+                    $('#datetimeEsperandoSubmissaoIni').data(
+                        "DateTimePicker").maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            $("#datetimeValidandoQuestoesFim").on(
+                "dp.change",
+                function (e) {
+                    $('#datetimeValidandoQuestoesIni').data(
+                        "DateTimePicker").maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            $("#datetimeRespondendoQuestoesFim").on(
+                "dp.change",
+                function (e) {
+                    $('#datetimeRespondendoQuestoesIni').data(
+                        "DateTimePicker").maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+            $("#datetimeFinalizadoFim").on(
+                "dp.change",
+                function (e) {
+                    $('#datetimeFinalizadoIni').data("DateTimePicker")
+                        .maxDate(e.date);
+                    var outputDate = new Date(e.date);
+                    e.date = outputDate.getTime();
+
+                });
+
+        });
+    </script>
+
+
+</div>
+
+</body>
+</html>

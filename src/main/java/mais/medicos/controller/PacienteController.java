@@ -5,12 +5,13 @@
  */
 package mais.medicos.controller;
 
-import mais.medicos.domain.Medico;
+import mais.medicos.domain.Paciente;
 import mais.medicos.domain.Usuario;
-import mais.medicos.facade.MedicoFacade;
+import mais.medicos.facade.PacienteFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,42 +26,42 @@ import java.util.List;
 
 
 @Controller
-@PreAuthorize("hasAuthority('ADMIN')")
-public class MedicoController implements Serializable {
+@Secured({"ADMIN", "MEDICO"})
+public class PacienteController implements Serializable {
 
-    private static Logger log = LoggerFactory.getLogger(MedicoController.class.getName());
+    private static Logger log = LoggerFactory.getLogger(PacienteController.class.getName());
 
     @Autowired
-    private MedicoFacade medicoFacade;
+    private PacienteFacade pacienteFacade;
 
     /**
      *
      * @return
      */
-    @ModelAttribute("allMedicos")
-    public List<Medico> populateVisualizarMedico() {
-        return this.medicoFacade.listarMedicos();
+    @ModelAttribute("allPacientes")
+    public List<Paciente> populateVisualizarPaciente() {
+        return this.pacienteFacade.listarPacientes();
 
     }
 
 
-    @RequestMapping(value = "/app/medico")
-    public String medicoHome(final Medico medico) {
-        return "app/medico/home";
+    @RequestMapping(value = "/app/paciente")
+    public String pacienteHome(final Paciente paciente) {
+        return "app/paciente/home";
     }
 
 
-    @PostMapping(value = "/app/medico", params = {"save"})
-    public String saveMedico(@Valid final Medico medico, final BindingResult bindingResult, final ModelMap model) {
+    @PostMapping(value = "/app/paciente", params = {"save"})
+    public String savePaciente(@Valid final Paciente paciente, final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("medico", medico);
-            return "app/medico/home";
-        }       
-        medico.getUsuario().setTipoUsuario(Usuario.TipoUsuario.MEDICO);
+            model.addAttribute("paciente", paciente);
+            return "app/paciente/home";
+        }
+        paciente.getUsuario().setTipoUsuario(Usuario.TipoUsuario.PACIENTE);
 
-        this.medicoFacade.inserirMedico(medico);
+        this.pacienteFacade.inserirPaciente(paciente);
         model.clear();
-        return "redirect:/app/medico";
+        return "redirect:/app/paciente";
 
     }
 

@@ -1,9 +1,7 @@
-package br.ufg.jatai.fsw.squest;
+package mais.medicos;
 
-import br.ufg.jatai.fsw.squest.domain.Equipe;
-import br.ufg.jatai.fsw.squest.domain.Professor;
-import br.ufg.jatai.fsw.squest.domain.Usuario;
-import br.ufg.jatai.fsw.squest.service.UsuarioService;
+import mais.medicos.domain.*;
+import mais.medicos.service.UsuarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +9,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by dyeimys on 05/01/17.
- */
 
 @Service
 public class AutenticateUser {
@@ -31,22 +26,17 @@ public class AutenticateUser {
         return  (Usuario) usuarioService.usuarioForAuth(user.getUsername());
     }
 
-    /**
-     *
-     * @return
-     */
-    public Professor getProfessor(){
 
-        return getUsuario().getProfessor();
+
+    public Medico getMedico(){
+
+        return getUsuario().getMedico();
     }
 
-    /**
-     *
-     * @return
-     */
-    public Equipe getEquipe(){
+    public Paciente getPaciente(){
 
-        return getUsuario().getEquipe();
+        return getUsuario().getPaciente();
     }
+
 
 }

@@ -1,0 +1,45 @@
+{
+  "name": "templatefsw",
+  "homepage": "http://www.jatai.ufg.br",
+  "authors": [
+    "Dyemyis",
+    "Rafael Grisotto"
+  ],
+  "description": "Template para todos os projetos da Fábrica de Software da UFG Jataí",
+  "keywords": [
+    "bootstrap",
+    "theme",
+    "UFG"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "bower_manter.json",
+    "/js",
+    "package.json",
+    "/vendor",
+    "gulpfile.js",
+    "/less",
+    "Install-Template.sh",
+    "teste",
+    "tests",
+    "template"
+  ],
+  "main": [
+    "dist/css/sb-admin-2.css",
+    "dist/css/sb-admin-2.min.css",
+    "dist/js/sb-admin-2.js",
+    "dist/js/sb-admin-2.min.js"
+  ],
+  "_release": "e390d05697",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e390d0569781f61beee3350345942150ff6b38fa"
+  },
+  "_source": "https://github.com/grisotto/TemplateFSW.git",
+  "_target": "*",
+  "_originalSource": "FSWTemplate"
+}

@@ -5,76 +5,63 @@
  */
 package mais.medicos.controller;
 
-import java.util.List;
-
-import mais.medicos.domain.Professor;
+import mais.medicos.domain.Medico;
 import mais.medicos.domain.Usuario;
-import mais.medicos.facade.ProfessorFacade;
-
-import java.io.Serializable;
+import mais.medicos.facade.MedicoFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- *
- * @author rafael
- */
+import javax.validation.Valid;
+import java.io.Serializable;
+import java.util.List;
+
+
 @Controller
-@PreAuthorize("hasAuthority('ADMIN')")
-public class ProfessorController implements Serializable {
+@Secured({"ADMIN", "PACIENTE"})
+public class MedicoController implements Serializable {
 
-    private static Logger log = LoggerFactory.getLogger(ProfessorController.class.getName());
+    private static Logger log = LoggerFactory.getLogger(MedicoController.class.getName());
 
     @Autowired
-    private ProfessorFacade professorFacade;
+    private MedicoFacade medicoFacade;
 
     /**
      *
      * @return
      */
-    @ModelAttribute("allProfessores")
-    public List<Professor> populateVisualizarProfessor() {
-        return this.professorFacade.listarProfessores();
+    @ModelAttribute("allMedicos")
+    public List<Medico> populateVisualizarMedico() {
+        return this.medicoFacade.listarMedicos();
 
     }
 
-    /**
-     *
-     * @param professor
-     * @return
-     */
-    @RequestMapping(value = "/app/professor")
-    public String professorHome(final Professor professor) {
-        return "app/professor/home";
+
+    @RequestMapping(value = "/app/medico")
+    public String medicoHome(final Medico medico) {
+        return "app/medico/home";
     }
 
-    /**
-     *
-     * @param professor
-     * @param bindingResult
-     * @param model
-     * @return
-     */
-    @PostMapping(value = "/app/professor", params = {"save"})
-    public String saveProfessor(@Valid final Professor professor, final BindingResult bindingResult, final ModelMap model) {
+
+    @PostMapping(value = "/app/medico", params = {"save"})
+    public String saveMedico(@Valid final Medico medico, final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("professor", professor);
-            return "app/professor/home";
+            model.addAttribute("medico", medico);
+            return "app/medico/home";
         }       
-        professor.getUsuario().setTipoUsuario(Usuario.TipoUsuario.PROFESSOR);
+        medico.getUsuario().setTipoUsuario(Usuario.TipoUsuario.MEDICO);
 
-        this.professorFacade.inserirProfessor(professor);
+        this.medicoFacade.inserirMedico(medico);
         model.clear();
-        return "redirect:/app/professor";
+        return "redirect:/app/medico";
 
     }
 

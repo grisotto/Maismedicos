@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufg.jatai.fsw.squest;
+package mais.medicos;
 
-import br.ufg.jatai.fsw.squest.domain.Usuario;
-import br.ufg.jatai.fsw.squest.repository.UsuarioRepository;
+import mais.medicos.domain.Usuario;
+
 import java.util.ArrayList;
 import java.util.Collection;
+
+import mais.medicos.repository.UsuarioRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

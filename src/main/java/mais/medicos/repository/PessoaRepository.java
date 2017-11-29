@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufg.jatai.fsw.squest.repository;
+package mais.medicos.repository;
 
-import br.ufg.jatai.fsw.squest.domain.Pessoa;
+import mais.medicos.domain.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

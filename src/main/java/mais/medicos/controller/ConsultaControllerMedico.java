@@ -23,9 +23,9 @@ import java.util.List;
 
 @Controller
 @Secured({"MEDICO", "PACIENTE"})
-public class ConsultaController implements Serializable {
+public class ConsultaControllerMedico implements Serializable {
 
-    private static Logger log = LoggerFactory.getLogger(ConsultaController.class.getName());
+    private static Logger log = LoggerFactory.getLogger(ConsultaControllerMedico.class.getName());
 //    private static final long serialVersionUID = -2178567204438375167L;
 
     @Autowired
@@ -38,43 +38,34 @@ public class ConsultaController implements Serializable {
      *
      * @return
      */
-    @RequestMapping(value = "/app/consulta")
+    @RequestMapping(value = "/app/consultamedico")
     public String consultaHome(final Consulta consulta, ModelMap map) {
 
         map.addAttribute("todosMedicos", medicoService.findAll());
-        return "app/consulta/home";
+        return "app/consultamedico/home";
     }
 
 
-    @PostMapping(value = "/app/consulta", params = {"save"})
+    @PostMapping(value = "/app/consultamedico", params = {"save"})
     public String saveConsulta(@Valid final Consulta consulta, @Valid Integer idMedico, final BindingResult bindingResult, final ModelMap model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("consulta", consulta);
-            return "app/consulta/home";
+            return "app/consultamedico/home";
         }
         facade.createConsulta(consulta, idMedico);
         model.clear();
-        return "redirect:/app/consulta";
+        return "redirect:/app/consultamedico";
     }
 
-    /**
-     *
-     * @return
-     */
-    @ModelAttribute("allConsultasPaciente")
-    public List<Consulta> populateVisualizarConsultaPaciente() {
-        return facade.consultasOfPaciente();
+
+    @ModelAttribute("allConsultasMedico")
+    public List<Consulta> populateVisualizarConsultaMedico() {
+        return facade.consultasOfMedico();
 
     }
 
-//    @ModelAttribute("allConsultasMedico")
-//    public List<Consulta> populateVisualizarConsultaMedico() {
-//        return facade.consultasOfMedico();
-//
-//    }
-
-    @GetMapping(value = "/app/consulta/{id}")
+    @GetMapping(value = "/app/consultamedico/{id}")
     public String showTurma(@PathVariable Integer id, ModelMap map) {
 
 //        map.addAttribute("consulta", facade.findTurma(id));
@@ -83,7 +74,7 @@ public class ConsultaController implements Serializable {
 
         map.addAttribute("todosMedicos", medicoService.findAll());
 
-        return "app/consulta/show";
+        return "app/consultamedico/show";
     }
 
 

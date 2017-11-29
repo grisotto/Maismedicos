@@ -1,14 +1,13 @@
 package mais.medicos.facade;
 
 import mais.medicos.AutenticateUser;
-import mais.medicos.controller.ProfessorController;
-import mais.medicos.domain.Professor;
-import mais.medicos.domain.Turma;
+import mais.medicos.controller.MedicoController;
+import mais.medicos.domain.Medico;
 import mais.medicos.email.component.EmailMain;
 import mais.medicos.email.domain.EnderecoEletronico;
 import mais.medicos.email.domain.FabricaEndereco;
 import mais.medicos.email.domain.Mensagem;
-import mais.medicos.service.ProfessorService;
+import mais.medicos.service.MedicoService;
 import mais.medicos.util.GeradorSenha;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,17 +21,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by thevilela on 08/01/17.
- */
+
 
 @Component
-public class ProfessorFacade {
+public class MedicoFacade {
 
     @Autowired
-    ProfessorService professorService;
+    MedicoService medicoService;
 
-    private static Logger log = LoggerFactory.getLogger(ProfessorController.class.getName());
+    private static Logger log = LoggerFactory.getLogger(MedicoController.class.getName());
 
     @Autowired
     private AutenticateUser autenticateUser;
@@ -48,90 +45,73 @@ public class ProfessorFacade {
 
     @Autowired
     private FabricaEndereco fabrica;
-    /**
-     * Lista todos os professores
-     *
-     * @return
-     */
 
-    public List<Professor> listarProfessores(){
 
-        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando todos os professores");
+    public List<Medico> listarMedicos(){
 
-        return professorService.findAll();
+        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando todos os medicos");
+
+        return medicoService.findAll();
     }
 
-    /**
-     * Insere um novo professor
-     *
-     * @param professor
-     */
 
-    public void inserirProfessor(Professor professor){
 
-        log.trace("O usuário " + autenticateUser.getUsuario() + "está inserindo o professor: " + professor.getNome());
+    public void inserirMedico(Medico medico){
+
+        log.trace("O usuário " + autenticateUser.getUsuario() + "está inserindo o medico: " + medico.getNome());
 
         String gerarSenha = geradorSenha.gerarSenha();
-        professor.getUsuario().setSenha(passwordEncoder.encode(gerarSenha));
+        medico.getUsuario().setSenha(passwordEncoder.encode(gerarSenha));
 
-        professorService.inserir(professor);
+        medicoService.inserir(medico);
 
-        try {
-
-            Mensagem m = new Mensagem();
-
-            ArrayList<EnderecoEletronico> to = new ArrayList<>();
-
-            to.add(fabrica.criaEndereco(professor));
-
-            m.setDestinatarios(to);
-            m.setAssunto("Bem-vindo ao SisQuest!");
-            m.setCorpo("<h4>Olá, professor " + professor.getNome()
-                    + "br>Seu login é: " + professor.getUsuario().getLogin()
-                    + "<br>Sua senha é: " + gerarSenha + "</h4>");
-
-          emailMain.sendMail(m);
-
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    /**
-     * Atualiza um professor específico
-     *
-     * @param professor
-     */
-    public void updateProfessor(Professor professor){
-
-        log.trace("O usuário " + autenticateUser.getUsuario() + "está atualizando o professor: " + professor.getNome());
-
-        professorService.atualizar(professor);
+//        try {
+//
+//            Mensagem m = new Mensagem();
+//
+//            ArrayList<EnderecoEletronico> to = new ArrayList<>();
+//
+//            to.add(fabrica.criaEndereco(medico));
+//
+//            m.setDestinatarios(to);
+//            m.setAssunto("Bem-vindo ao SisQuest!");
+//            m.setCorpo("<h4>Olá, medico " + medico.getNome()
+//                    + "br>Seu login é: " + medico.getUsuario().getLogin()
+//                    + "<br>Sua senha é: " + gerarSenha + "</h4>");
+//
+//          emailMain.sendMail(m);
+//
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
-    /**
-     * Lista todas as turmas do professor
-     *
-     * @param professor
-     * @return
-     */
-    public Set<Turma> turmasDoProfessor(Professor professor) {
 
-        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando as turmas do professor: " + professor.getNome());
+    public void updateMedico(Medico medico){
 
-        return new HashSet<>(professorService.find(professor).getTurmas());
+        log.trace("O usuário " + autenticateUser.getUsuario() + "está atualizando o Medico: " + medico.getNome());
+
+        medicoService.atualizar(medico);
 
     }
 
-    public Set<Turma> turmasDoProfessor(Integer id){
 
-        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando as turmas do professor: " + professorService.find(id).getNome());
-
-        return new HashSet<>(professorService.find(id).getTurmas());
-
-    }
+//    public Set<Turma> turmasDoMedico(Medico medico) {
+//
+//        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando as turmas do medico: " + medico.getNome());
+//
+//        return new HashSet<>(medicoService.find(medico).getTurmas());
+//
+//    }
+//
+//    public Set<Turma> turmasDoMedico(Integer id){
+//
+//        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando as turmas do medico: " + medicoService.find(id).getNome());
+//
+//        return new HashSet<>(medicoService.find(id).getTurmas());
+//
+//    }
 
 
 

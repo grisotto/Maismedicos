@@ -5,13 +5,13 @@
  */
 package mais.medicos.repository;
 
-import mais.medicos.domain.Professor;
+import mais.medicos.domain.Medico;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author dfranco
  */
-public interface ProfessorRepository extends JpaRepository<Professor, Integer> {
+public interface MedicoRepository extends JpaRepository<Medico, Integer> {
     
 }

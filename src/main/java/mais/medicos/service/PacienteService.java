@@ -5,9 +5,9 @@
  */
 package mais.medicos.service;
 
-import mais.medicos.domain.Medico;
+import mais.medicos.domain.Paciente;
 
 
-public interface MedicoService extends AbstractService<Medico, Integer> {
+public interface PacienteService extends AbstractService<Paciente, Integer> {
     
 }

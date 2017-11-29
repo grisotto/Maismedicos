@@ -1,8 +1,7 @@
-package br.ufg.jatai.fsw.squest.email.domain;
+package mais.medicos.email.domain;
 
-import br.ufg.jatai.fsw.squest.domain.Aluno;
-import br.ufg.jatai.fsw.squest.domain.Equipe;
-import br.ufg.jatai.fsw.squest.domain.Professor;
+
+import mais.medicos.domain.Medico;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -16,48 +15,19 @@ import java.util.List;
 @Component
 public class FabricaEndereco {
 
-    public EnderecoEletronico criaEndereco(Aluno aluno){
+
+
+    public EnderecoEletronico criaEndereco(Medico medico){
 
         EnderecoEletronico endereco = new EnderecoEletronico();
 
-        endereco.setNome(aluno.getNome());
-        endereco.setEmail(aluno.getEmail());
+        endereco.setNome(medico.getNome());
+        endereco.setEmail(medico.getEmail());
 
         return endereco;
 
     }
 
-    public EnderecoEletronico criaEndereco(Professor professor){
 
-        EnderecoEletronico endereco = new EnderecoEletronico();
-
-        endereco.setNome(professor.getNome());
-        endereco.setEmail(professor.getEmail());
-
-        return endereco;
-
-    }
-
-    public List<EnderecoEletronico> criaEndereco(Equipe equipe){
-
-        Iterator<Aluno> i = equipe.getAlunos().iterator();
-
-        ArrayList<EnderecoEletronico> enderecos = new ArrayList<>();
-
-        while (i.hasNext()){
-
-            Aluno a = i.next();
-            EnderecoEletronico e = new EnderecoEletronico();
-
-            e.setNome(a.getNome());
-            e.setEmail(a.getEmail());
-
-            enderecos.add(e);
-
-        }
-
-        return enderecos;
-
-    }
 
 }

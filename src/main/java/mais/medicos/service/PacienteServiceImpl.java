@@ -5,8 +5,8 @@
  */
 package mais.medicos.service;
 
-import mais.medicos.domain.Medico;
-import mais.medicos.repository.MedicoRepository;
+import mais.medicos.domain.Paciente;
+import mais.medicos.repository.PacienteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,43 +16,43 @@ import java.util.List;
 
 
 @Service
-public class MedicoServiceImpl implements MedicoService {
+public class PacienteServiceImpl implements PacienteService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MedicoServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PacienteServiceImpl.class);
     /**
      *
      */
     @Autowired
-    public MedicoRepository repository;
+    public PacienteRepository repository;
 
 
     @Override
-    public Medico inserir(Medico entidade) {
+    public Paciente inserir(Paciente entidade) {
         return repository.save(entidade);
     }
 
     @Override
-    public void apagar(Medico entidade) {
+    public void apagar(Paciente entidade) {
         repository.delete(entidade);
     }
 
     @Override
-    public Medico atualizar(Medico entidade) {
+    public Paciente atualizar(Paciente entidade) {
         return repository.save(entidade);
     }
 
     @Override
-    public Medico find(Medico entidade) {
+    public Paciente find(Paciente entidade) {
         return this.find(entidade.getId());
     }
 
     @Override
-    public Medico find(Integer id) {
+    public Paciente find(Integer id) {
         return repository.getOne(id);
     }
 
     @Override
-    public List<Medico> findAll() {
+    public List<Paciente> findAll() {
         return repository.findAll();
     }
 

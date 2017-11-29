@@ -5,57 +5,54 @@
  */
 package mais.medicos.service;
 
-import mais.medicos.domain.Professor;
-import mais.medicos.repository.ProfessorRepository;
-import java.util.List;
-
+import mais.medicos.domain.Medico;
+import mais.medicos.repository.MedicoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author dyeimys
- */
-@Service
-public class ProfessorServiceImpl implements ProfessorService {
+import java.util.List;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProfessorServiceImpl.class);
+
+@Service
+public class MedicoServiceImpl implements MedicoService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MedicoServiceImpl.class);
     /**
      *
      */
     @Autowired
-    public ProfessorRepository repository;
+    public MedicoRepository repository;
 
 
     @Override
-    public Professor inserir(Professor entidade) {
+    public Medico inserir(Medico entidade) {
         return repository.save(entidade);
     }
 
     @Override
-    public void apagar(Professor entidade) {
+    public void apagar(Medico entidade) {
         repository.delete(entidade);
     }
 
     @Override
-    public Professor atualizar(Professor entidade) {
+    public Medico atualizar(Medico entidade) {
         return repository.save(entidade);
     }
 
     @Override
-    public Professor find(Professor entidade) {
+    public Medico find(Medico entidade) {
         return this.find(entidade.getId());
     }
 
     @Override
-    public Professor find(Integer id) {
+    public Medico find(Integer id) {
         return repository.getOne(id);
     }
 
     @Override
-    public List<Professor> findAll() {
+    public List<Medico> findAll() {
         return repository.findAll();
     }
 

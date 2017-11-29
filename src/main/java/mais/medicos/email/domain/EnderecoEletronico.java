@@ -1,4 +1,4 @@
-package br.ufg.jatai.fsw.squest.email.domain;
+package mais.medicos.email.domain;
 
 
 /**

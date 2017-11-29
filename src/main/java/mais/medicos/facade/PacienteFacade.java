@@ -1,14 +1,11 @@
 package mais.medicos.facade;
 
 import mais.medicos.AutenticateUser;
-import mais.medicos.controller.MedicoController;
-import mais.medicos.domain.Medico;
-import mais.medicos.domain.Turma;
+import mais.medicos.controller.PacienteController;
+import mais.medicos.domain.Paciente;
 import mais.medicos.email.component.EmailMain;
-import mais.medicos.email.domain.EnderecoEletronico;
 import mais.medicos.email.domain.FabricaEndereco;
-import mais.medicos.email.domain.Mensagem;
-import mais.medicos.service.MedicoService;
+import mais.medicos.service.PacienteService;
 import mais.medicos.util.GeradorSenha;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,21 +13,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import javax.mail.MessagingException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 
-
 @Component
-public class MedicoFacade {
+public class PacienteFacade {
 
     @Autowired
-    MedicoService medicoService;
+    PacienteService pacienteService;
 
-    private static Logger log = LoggerFactory.getLogger(MedicoController.class.getName());
+    private static Logger log = LoggerFactory.getLogger(PacienteController.class.getName());
 
     @Autowired
     private AutenticateUser autenticateUser;
@@ -48,71 +42,52 @@ public class MedicoFacade {
     private FabricaEndereco fabrica;
 
 
-    public List<Medico> listarMedicos(){
+    public List<Paciente> listarPacientes(){
 
-        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando todos os medicos");
+        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando todos os Paciente");
 
-        return medicoService.findAll();
+        return pacienteService.findAll();
     }
 
 
 
-    public void inserirMedico(Medico medico){
+    public void inserirPaciente(Paciente paciente){
 
-        log.trace("O usuário " + autenticateUser.getUsuario() + "está inserindo o medico: " + medico.getNome());
+        log.trace("O usuário " + autenticateUser.getUsuario() + "está inserindo o Paciente: " + paciente.getNome());
 
         String gerarSenha = geradorSenha.gerarSenha();
-        medico.getUsuario().setSenha(passwordEncoder.encode(gerarSenha));
+        paciente.getUsuario().setSenha(passwordEncoder.encode(gerarSenha));
 
-        medicoService.inserir(medico);
+        pacienteService.inserir(paciente);
 
-//        try {
-//
-//            Mensagem m = new Mensagem();
-//
-//            ArrayList<EnderecoEletronico> to = new ArrayList<>();
-//
-//            to.add(fabrica.criaEndereco(medico));
-//
-//            m.setDestinatarios(to);
-//            m.setAssunto("Bem-vindo ao SisQuest!");
-//            m.setCorpo("<h4>Olá, medico " + medico.getNome()
-//                    + "br>Seu login é: " + medico.getUsuario().getLogin()
-//                    + "<br>Sua senha é: " + gerarSenha + "</h4>");
-//
-//          emailMain.sendMail(m);
-//
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
 
     }
 
 
-    public void updateMedico(Medico medico){
+    public void updatePaciente(Paciente paciente){
 
-        log.trace("O usuário " + autenticateUser.getUsuario() + "está atualizando o Medico: " + medico.getNome());
+        log.trace("O usuário " + autenticateUser.getUsuario() + "está atualizando o paciente: " + paciente.getNome());
 
-        medicoService.atualizar(medico);
-
-    }
-
-
-    public Set<Turma> turmasDoMedico(Medico medico) {
-
-        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando as turmas do medico: " + medico.getNome());
-
-        return new HashSet<>(medicoService.find(medico).getTurmas());
+        pacienteService.atualizar(paciente);
 
     }
 
-    public Set<Turma> turmasDoMedico(Integer id){
 
-        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando as turmas do medico: " + medicoService.find(id).getNome());
-
-        return new HashSet<>(medicoService.find(id).getTurmas());
-
-    }
+//    public Set<Turma> turmasDoPaciente(Paciente paciente) {
+//
+//        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando as turmas do paciente: " + paciente.getNome());
+//
+//        return new HashSet<>(pacienteService.find(paciente).getTurmas());
+//
+//    }
+//
+//    public Set<Turma> turmasDoPaciente(Integer id){
+//
+//        log.trace("O usuário " + autenticateUser.getUsuario() + "está listando as turmas do paciente: " + pacienteService.find(id).getNome());
+//
+//        return new HashSet<>(pacienteService.find(id).getTurmas());
+//
+//    }
 
 
 

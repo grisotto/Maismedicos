@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufg.jatai.fsw.squest.configuration;
+package mais.medicos.configuration;
 
-import br.ufg.jatai.fsw.squest.SecurityUserService;
+import mais.medicos.SecurityUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

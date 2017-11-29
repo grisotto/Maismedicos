@@ -5,132 +5,99 @@
  */
 package mais.medicos.controller;
 
-import mais.medicos.domain.Tarefa;
-import mais.medicos.domain.Turma;
-import mais.medicos.facade.TurmaFacade;
-import mais.medicos.service.AlunoService;
-import java.io.Serializable;
-import java.util.List;
-import javax.validation.Valid;
-
+import mais.medicos.domain.Consulta;
+import mais.medicos.facade.ConsultaFacade;
+import mais.medicos.service.MedicoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-/**
- *
- * @author dfranco
- */
+import javax.validation.Valid;
+import java.io.Serializable;
+import java.util.List;
+
 @Controller
-@PreAuthorize("hasAuthority('PROFESSOR')")
-public class TurmaController implements Serializable {
+@Secured({"MEDICO", "PACIENTE"})
+public class ConsultaController implements Serializable {
 
-    private static Logger log = LoggerFactory.getLogger(TurmaController.class.getName());
-    private static final long serialVersionUID = -2178567604078375167L;
-
-//    @Autowired
-//    private TurmaService tService;
-    @Autowired
-    private AlunoService aService;
+    private static Logger log = LoggerFactory.getLogger(ConsultaController.class.getName());
+//    private static final long serialVersionUID = -2178567204438375167L;
 
     @Autowired
-    private TurmaFacade facade;
+    private MedicoService medicoService;
+
+    @Autowired
+    private ConsultaFacade facade;
 
     /**
      *
      * @return
      */
-    @RequestMapping(value = "/app/turma")
-    public String turmaHome(final Turma turma) {
-        return "app/turma/home";
+    @RequestMapping(value = "/app/consulta")
+    public String consultaHome(final Consulta consulta, ModelMap map) {
+
+        map.addAttribute("todosMedicos", medicoService.findAll());
+        return "app/consulta/home";
     }
 
-    /**
-     *
-     * @param turma
-     * @param bindingResult
-     * @param model
-     * @return
-     */
-    @PostMapping(value = "/app/turma", params = {"save"})
-    public String saveTurma(@Valid final Turma turma, final BindingResult bindingResult, final ModelMap model) {
 
-//        bindingResult.addError(new ObjectError("Deu erro", "Deu erro"));
+    @PostMapping(value = "/app/consulta", params = {"save"})
+    public String saveConsulta(@Valid final Consulta consulta, @Valid Integer idMedico, final BindingResult bindingResult, final ModelMap model) {
+
         if (bindingResult.hasErrors()) {
-            model.addAttribute("turma", turma);
-            return "app/turma/home";
+            model.addAttribute("consulta", consulta);
+            return "app/consulta/home";
         }
-        facade.createTurma(turma);
+        facade.createConsulta(consulta, idMedico);
         model.clear();
-        return "redirect:/app/turma";
+        return "redirect:/app/consulta";
     }
 
     /**
      *
      * @return
      */
-    @ModelAttribute("allTurmas")
-    public List<Turma> populateVisualizarTurma() {
-        return facade.turmasOfProfessor();
+    @ModelAttribute("allConsultasPaciente")
+    public List<Consulta> populateVisualizarConsultaPaciente() {
+        return facade.consultasOfPaciente();
 
     }
 
-    /**
-     *
-     * @param id
-     * @param map
-     * @return
-     */
-    @GetMapping(value = "/app/turma/{id}")
+//    @ModelAttribute("allConsultasMedico")
+//    public List<Consulta> populateVisualizarConsultaMedico() {
+//        return facade.consultasOfMedico();
+//
+//    }
+
+    @GetMapping(value = "/app/consulta/{id}")
     public String showTurma(@PathVariable Integer id, ModelMap map) {
 
-        map.addAttribute("turma", facade.findTurma(id));
+//        map.addAttribute("consulta", facade.findTurma(id));
+//
+//        map.addAttribute("tarefas", facade.findTurma(id).getTarefas());
 
+        map.addAttribute("todosMedicos", medicoService.findAll());
 
-//        map.addAttribute("turma", tService.find(id));
-//        map.addAttribute("alunos", tService.find(id).getAlunos());
-        map.addAttribute("tarefas", facade.findTurma(id).getTarefas());
-        //NUNCA MAIS FAZ ISSO DYEIMYS
-        map.addAttribute("todosAlunos", aService.findAll());
-
-        return "app/turma/show";
+        return "app/consulta/show";
     }
 
-    /**
-     *
-     * @return
-     */
-    @ModelAttribute("todasTarefas")
-    public List<Tarefa> todasTarefas() {
-        return facade.tarefasOfProfessor();
-    }
 
-    /**
-     *
-     * @param turmaID
-     * @param alunoID
-     * @param map
-     * @return
-     */
-    @PostMapping(value = "/app/turma/add/aluno", params = {"save"})
-    public String adicionarAuluno(@Valid Integer turmaID, @Valid Integer alunoID, ModelMap map) {
-        System.out.println("ENTROU AQUI");
-        Turma insertAluno = facade.insertAluno(turmaID, alunoID);
 
-        map.addAttribute("turma", insertAluno);
-
-        return "redirect:/app/turma/" + turmaID;
-
-    }
+//    @PostMapping(value = "/app/consulta/add/aluno", params = {"save"})
+//    public String adicionarAuluno(@Valid Integer turmaID, @Valid Integer alunoID, ModelMap map) {
+//
+//        Turma insertAluno = facade.insertAluno(turmaID, alunoID);
+//
+//        map.addAttribute("turma", insertAluno);
+//
+//        return "redirect:/app/consulta/" + turmaID;
+//
+//    }
 
 
 }

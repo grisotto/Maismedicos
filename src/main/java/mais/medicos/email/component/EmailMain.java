@@ -33,10 +33,10 @@
 //    }
 //}
 
-package br.ufg.jatai.fsw.squest.email.component;
+package mais.medicos.email.component;
 
-import br.ufg.jatai.fsw.squest.email.domain.EnderecoEletronico;
-import br.ufg.jatai.fsw.squest.email.domain.Mensagem;
+import mais.medicos.email.domain.EnderecoEletronico;
+import mais.medicos.email.domain.Mensagem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

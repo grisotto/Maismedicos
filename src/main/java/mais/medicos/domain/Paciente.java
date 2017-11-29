@@ -16,7 +16,7 @@ import java.util.Objects;
 @Entity
 @Table
 @SuppressWarnings("PersistenceUnitPresent")
-public class Medico extends Pessoa {
+public class Paciente extends Pessoa {
 
     @Email
     @NotBlank
@@ -27,15 +27,24 @@ public class Medico extends Pessoa {
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "Medico")
-    private List<Turma> turmas;
+    @OneToOne
+    private Consulta consulta;
+
+
+    public Consulta getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
+    }
 
     /**
      *
      * @param email
      * @param usuario
      */
-    public Medico(String email, Usuario usuario) {
+    public Paciente(String email, Usuario usuario) {
         this.email = email;
         this.usuario = usuario;
     }
@@ -43,7 +52,7 @@ public class Medico extends Pessoa {
     /**
      *
      */
-    public Medico() {
+    public Paciente() {
     }
 
     /**
@@ -82,8 +91,8 @@ public class Medico extends Pessoa {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 43 * hash + Objects.hashCode(this.email);
-        hash = 43 * hash + Objects.hashCode(this.usuario);
+        hash = 34 * hash + Objects.hashCode(this.email);
+        hash = 34 * hash + Objects.hashCode(this.usuario);
         return hash;
     }
 
@@ -98,7 +107,7 @@ public class Medico extends Pessoa {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Medico other = (Medico) obj;
+        final Paciente other = (Paciente) obj;
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
@@ -108,28 +117,28 @@ public class Medico extends Pessoa {
         return true;
     }
 
-    /**
-     *
-     * @return
-     */
-    public List<Turma> getTurmas() {
-        return turmas;
-    }
-
-    /**
-     *
-     * @param turmas
-     */
-    public void setTurmas(List<Turma> turmas) {
-        this.turmas = turmas;
-    }
+//    /**
+//     *
+//     * @return
+//     */
+//    public List<Turma> getTurmas() {
+//        return turmas;
+//    }
+//
+//    /**
+//     *
+//     * @param turmas
+//     */
+//    public void setTurmas(List<Turma> turmas) {
+//        this.turmas = turmas;
+//    }
 
     @Override
     public String toString() {
-        return "Medico{" +
+        return "Paciente{" +
                 "email='" + email + '\'' +
                 ", usuario.login=" + usuario.getLogin() +
-                ", turmas=" + turmas +
+//                ", turmas=" + turmas +
                 '}';
     }
 }

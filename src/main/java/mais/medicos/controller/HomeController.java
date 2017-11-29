@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufg.jatai.fsw.squest.controller;
+package mais.medicos.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufg.jatai.fsw.squest.domain;
+package mais.medicos.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -22,10 +22,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 
-/**
- *
- * @author dfranco
- */
 @Entity
 @Table
 @SuppressWarnings("PersistenceUnitPresent")
@@ -43,11 +39,11 @@ public class Usuario implements Serializable {
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
 
-    @OneToOne(mappedBy = "usuario",fetch = FetchType.EAGER)
-    private Equipe equipe;
+     @OneToOne(mappedBy = "usuario")
+    private Medico medico;
 
     @OneToOne(mappedBy = "usuario")
-    private Professor professor;
+    private Paciente paciente;
 
     /**
      *
@@ -81,15 +77,26 @@ public class Usuario implements Serializable {
 
     /**
      *
-     * @param u
+     * @param uu
      */
-    public Usuario(Usuario u) {
-        setId(u.getId());
-        setLogin(u.getLogin());
-        setProfessor(u.getProfessor());
-        setSenha(u.getSenha());
-        setTipoUsuario(u.getTipoUsuario());
+    public Usuario(Usuario uu) {
+        setId(uu.getId());
+        setLogin(uu.getLogin());
+        setSenha(uu.getSenha());
+        setTipoUsuario(uu.getTipoUsuario());
     }
+
+//    /**
+//     *
+//     * @param u
+//     */
+//    public Usuario(Usuario u) {
+//        setId(u.getId());
+//        setLogin(u.getLogin());
+//        setMedico(u.getMedico());
+//        setSenha(u.getSenha());
+//        setTipoUsuario(u.getTipoUsuario());
+//    }
 
     /**
      *
@@ -182,6 +189,14 @@ public class Usuario implements Serializable {
         return true;
     }
 
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
     /**
      *
      */
@@ -190,32 +205,19 @@ public class Usuario implements Serializable {
         /**
          *
          */
-        PROFESSOR {
+        PACIENTE {
             @Override
             public String getAuthority() {
-                return "PROFESSOR";
+                return "PACIENTE";
+            }
+        },
+        MEDICO {
+            @Override
+            public String getAuthority() {
+                return "MEDICO";
             }
         },
 
-        /**
-         *
-         */
-        GRUPO {
-            @Override
-            public String getAuthority() {
-                return "GRUPO";
-            }
-        },
-
-        /**
-         *
-         */
-        ALUNO {
-            @Override
-            public String getAuthority() {
-                return "ALUNO";
-            }
-        },
 
         /**
          *
@@ -255,16 +257,16 @@ public class Usuario implements Serializable {
      *
      * @return
      */
-    public Professor getProfessor() {
-        return professor;
+
+
+    public Medico getMedico() {
+        return medico;
     }
 
-    /**
-     *
-     * @param professor
-     */
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
+
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
     }
 
     @Override
@@ -277,19 +279,5 @@ public class Usuario implements Serializable {
                 '}';
     }
 
-    /**
-     *
-     * @return
-     */
-    public Equipe getEquipe() {
-        return equipe;
-    }
 
-    /**
-     *
-     * @param equipe
-     */
-    public void setEquipe(Equipe equipe) {
-        this.equipe = equipe;
-    }
 }

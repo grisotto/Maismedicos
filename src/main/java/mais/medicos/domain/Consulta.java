@@ -5,62 +5,71 @@
  */
 package mais.medicos.domain;
 
-import java.io.Serializable;
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
-/**
- * @author dfranco
- */
+import javax.persistence.*;
+import java.io.Serializable;
+
 @Entity
 @Table
 @SuppressWarnings("PersistenceUnitPresent")
-public class Turma implements Serializable {
+public class Consulta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String nome;
+//    private String nome;
     private String descricao;
 
-    //    @ElementCollection
-    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Tarefa> tarefas = new HashSet<>();
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime data;
 
-   
 
-    @ManyToOne
-    private Professor professor;
 
-    @ManyToOne
+//    //    @ElementCollection
+//    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    private Set<Tarefa> tarefas = new HashSet<>();
+
+
+
+    @OneToOne
     private Medico medico;
 
-    @ManyToOne
+    @OneToOne
     private Paciente paciente;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Aluno> alunos = new HashSet<>();
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
+
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
 
     /**
      *
      */
-    public Turma() {
+    public Consulta() {
     }
 
-    /**
-     * @param id
-     * @param nome
-     * @param descricao
-     * @param tarefas
-     * @param times
-     */
-    public Turma(Integer id, String nome, String descricao, Set<Tarefa> tarefas) {
+
+    public Consulta(Integer id, String descricao, DateTime dataInicial) {
         this.id = id;
-        this.nome = nome;
         this.descricao = descricao;
-        this.tarefas = tarefas;
+        this.data = dataInicial;
     }
 
     /**
@@ -77,23 +86,9 @@ public class Turma implements Serializable {
         this.id = id;
     }
 
-    /**
-     * @return
-     */
-    public String getNome() {
-        return nome;
-    }
 
-    /**
-     * @param nome
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
-    /**
-     * @return
-     */
+
     public String getDescricao() {
         return descricao;
     }
@@ -105,19 +100,6 @@ public class Turma implements Serializable {
         this.descricao = descricao;
     }
 
-    /**
-     * @return
-     */
-    public Set<Tarefa> getTarefas() {
-        return tarefas;
-    }
-
-    /**
-     * @param tarefas
-     */
-    public void setTarefas(Set<Tarefa> tarefas) {
-        this.tarefas = tarefas;
-    }
 
 
 
@@ -125,9 +107,9 @@ public class Turma implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 17 * hash + (this.nome != null ? this.nome.hashCode() : 0);
-        hash = 17 * hash + (this.descricao != null ? this.descricao.hashCode() : 0);
+        hash = 19 * hash + (this.id != null ? this.id.hashCode() : 0);
+//        hash = 17 * hash + (this.nome != null ? this.nome.hashCode() : 0);
+        hash = 19 * hash + (this.descricao != null ? this.descricao.hashCode() : 0);
 //        hash = 17 * hash + (this.tarefas != null ? this.tarefas.hashCode() : 0);
         return hash;
     }
@@ -143,61 +125,35 @@ public class Turma implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Turma other = (Turma) obj;
-        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
-            return false;
-        }
+        final Consulta other = (Consulta) obj;
+//        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
+//            return false;
+//        }
         if ((this.descricao == null) ? (other.descricao != null) : !this.descricao.equals(other.descricao)) {
             return false;
         }
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
-        if (this.tarefas != other.tarefas && (this.tarefas == null || !this.tarefas.equals(other.tarefas))) {
-            return false;
-        }
+
      
         return true;
     }
 
-    /**
-     *
-     * @return
-     */
-    public Professor getProfessor() {
-        return professor;
-    }
-
-    /**
-     *
-     * @param professor
-     */
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Set<Aluno> getAlunos() {
-        return alunos;
-    }
-
-    /**
-     *
-     * @param alunos
-     */
-    public void setAlunos(Set<Aluno> alunos) {
-        this.alunos = alunos;
-    }
 
     @Override
     public String toString() {
-        return "Turma{" +
+        return "consulta{" +
                 "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
+               ", descricao='" + descricao + '\'' +
                 '}';
+    }
+
+    public DateTime getData() {
+        return data;
+    }
+
+    public void setData(DateTime data) {
+        this.data = data;
     }
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      sec:authorize="hasAuthority('ADMIN')"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link href="/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"  />
+
+
+</head>
+<body >
+
+<div>
+    <h1>Pagina teste para quiz</h1>
+</div>
+<div>
+    Lista de Tarefas para criar quiz
+
+    
+    <div th:text="${msg}" th:class="text-info" >!</div>
+    <table class="table" >
+ <thead>
+            <tr>
+                <th>Tarefa ID</th>
+                <th>Tarefa Titulo </th>
+                <th>Turma ID</th>
+                <th>Quantidade de Questionarios</th>
+                <th></th>
+                <th>Quiz</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="t: ${turmas}">
+            <td th:text="${t.id}"></td>
+            <td th:text="${t.titulo}"></td>
+            <td th:text="${t.turma.id}"></td>
+            <td th:text="${t.questionarios.size()}"></td>
+            <td > <a th:href="@{/app/quiz/}+${t.id}+@{/novo}">Criar Quiz</a></td>
+            <td> <span  th:text="${t.quiz}">as</span></td>
+        </tr>    
+        </tbody>
+        
+    </table>
+</div>
+</body>
+</html>

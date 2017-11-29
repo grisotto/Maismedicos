@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="fragments/basetemplate :: page">
+
+
+<head>
+    <title>TODO supply a title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+</head>
+<body>
+<div th:fragment="content">
+    <div class="page-header">
+        <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" href="/app"></a><b> Quiz </b>
+            </h2>
+    </div>
+    <div class="col-md-12 col-sm-8">
+
+
+    </div>
+
+
+
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">
+                        <span class="panel-title">
+
+                            <i class="fa  fa-edit fa-fw"></i>Questões
+                        </span>
+
+            </div>
+
+
+
+
+
+
+                    <!--<span th:text="${questionario}"></span>-->
+
+                    <div class="panel-body">
+                        <table class="table table-responsive" id="Questoes">
+                            <thead>
+                            <tr>
+                                <th>Questão</th>
+                                <th></th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div th:if="${questoes != null}">
+
+
+                                <tr th:each="q, itr : ${questoes}">
+                                <div th:unless="${q.respondido(equipe.id)}">
+
+
+                                    <td th:text="${#strings.abbreviate(q.questao.question,250)}"></td>
+                                    <!--<td th:text="${q.respondido(equipe.id)}" >1</td>-->
+
+                                    <td class="pull-right">
+                                    <form action="#" th:action="@{/app/quiz/}+${quiz.id}+@{/responder/}" th:object="${questao}" method="POST">
+
+                                        <input hidden="true" name="questaoID" th:value="${q.questao.id}"/>
+                                        <button type="submit"  class="btn btn-info" >
+                                            <i class="fa fa-file-o "> </i> Responder
+                                        </button>
+
+                                    </form>
+
+
+                                     </td>
+                                </div>
+                                </tr>
+                            </div>
+                            <div th:if="${questoes == null}">
+                                <td >Nenhuma questão para ser respondida</td>
+
+                            </div>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+<div th:fragment="customCSS">
+
+
+
+    <script type="text/javascript">
+
+
+
+
+    </script>
+
+
+
+</div>
+</body>
+</html>

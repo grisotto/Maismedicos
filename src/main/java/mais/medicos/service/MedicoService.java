@@ -5,12 +5,9 @@
  */
 package mais.medicos.service;
 
-import mais.medicos.domain.Professor;
+import mais.medicos.domain.Medico;
 
-/**
- *
- * @author dfranco
- */
-public interface ProfessorService extends AbstractService<Professor, Integer> {
+
+public interface MedicoService extends AbstractService<Medico, Integer> {
     
 }

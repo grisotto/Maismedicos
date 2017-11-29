@@ -6,71 +6,60 @@
 package mais.medicos.facade;
 
 import mais.medicos.AutenticateUser;
-import mais.medicos.domain.Aluno;
-import mais.medicos.service.AlunoService;
-import mais.medicos.service.TarefaService;
-import mais.medicos.service.TurmaService;
+import mais.medicos.domain.*;
+import mais.medicos.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.List;
 
-import mais.medicos.domain.Professor;
-import mais.medicos.domain.Tarefa;
-import mais.medicos.domain.Turma;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-/**
- * @author dfranco
- */
 @Component
-public class TurmaFacade implements Serializable {
+public class ConsultaFacade implements Serializable {
 
     @Autowired
-    private TurmaService turmaService;
+    private ConsultaService consultaService;
     @Autowired
-    private AlunoService alunoService;
+    private PacienteService pacienteService;
     @Autowired
-    private TarefaService tarefaService;
+    private MedicoService medicoService;
     @Autowired
     private AutenticateUser autenticateUser;
 
     /**
      *
      */
-    public TurmaFacade() {
+    public ConsultaFacade() {
 
     }
 
-    /**
-     *
-     * @param professor
-     * @return
-     * @deprecated
-     */
+
     @Deprecated
-    public List<Turma> turmasOfProfessor(Professor professor) {
-        return turmaService.allOfProfessor(professor);
+    public List<Consulta> consultasOfPaciente(Paciente paciente) {
+        return consultaService.allOfPaciente(paciente);
     }
 
-    /**
-     * Turmas que o professor é "DONO"
-     *
-     * @return
-     */
-
-    public List<Turma> turmasOfProfessor() {
-        return this.turmasOfProfessor(autenticateUser.getProfessor());
+    @Deprecated
+    public List<Consulta> consultasOfMedico(Medico medico) {
+        return consultaService.allOfMedico(medico);
     }
 
-    /**
-     *
-     * @param turma
-     * @return
-     */
-    public Turma createTurma(Turma turma) {
-        turma.setProfessor(autenticateUser.getProfessor());
-        return turmaService.inserir(turma);
+
+    public List<Consulta> consultasOfPaciente() {
+        return this.consultasOfPaciente(autenticateUser.getPaciente());
+    }
+
+
+    public List<Consulta> consultasOfMedico() {
+        return this.consultasOfMedico(autenticateUser.getMedico());
+    }
+
+
+    public Consulta createConsulta(Consulta consulta, Integer idMedico) {
+        //set o paciente e escolhe o medico
+        consulta.setPaciente(autenticateUser.getPaciente());
+        consulta.setMedico(medicoService.find(idMedico));
+        return consultaService.inserir(consulta);
     }
 
     /**
@@ -78,40 +67,34 @@ public class TurmaFacade implements Serializable {
      * @param id
      * @return
      */
-    public Turma findTurma(Integer id) {
-        return turmaService.find(id);
+    public Consulta findConsulta(Integer id) {
+        return consultaService.find(id);
     }
 
-    /**
-     *
-     * @param turma
-     * @param aluno
-     * @return
-     */
-    public Turma insertAluno(Turma turma, Aluno aluno) {
-        turma.getAlunos().add(aluno);
-        return turmaService.atualizar(turma);
-    }
-
-    /**
-     *
-     * @param idTurma
-     * @param idAluno
-     * @return
-     */
-    public Turma insertAluno(Integer idTurma, Integer idAluno) {
-        return this.insertAluno(
-                turmaService.find(idTurma),
-                alunoService.find(idAluno)
-        );
-    }
+//
+//    public Turma insertAluno(Consulta consulta, Aluno aluno) {
+//        turma.getAlunos().add(aluno);
+//        return consultaService.atualizar(consulta);
+//    }
+//
+//
+//    public Turma insertAluno(Integer idTurma, Integer idAluno) {
+//        return this.insertAluno(
+//                consultaService.find(idTurma),
+//                alunoService.find(idAluno)
+//        );
+//    }
 
     /**
      *
      * @return
      */
-    public List<Tarefa> tarefasOfProfessor() {
-        return tarefaService.allOfProfessor(autenticateUser.getProfessor());
+    public List<Consulta> tarefasOfPaciente() {
+        return consultaService.allOfPaciente(autenticateUser.getPaciente());
+    }
+
+    public List<Consulta> tarefasOfMedico() {
+        return consultaService.allOfMedico(autenticateUser.getMedico());
     }
 
 }

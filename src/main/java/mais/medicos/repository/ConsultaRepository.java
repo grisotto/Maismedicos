@@ -5,26 +5,22 @@
  */
 package mais.medicos.repository;
 
-import mais.medicos.domain.Turma;
-import java.io.Serializable;
-import java.util.List;
-
+import mais.medicos.domain.Consulta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-/**
- *
- * @author vilela
- */
-public interface TurmaRepository extends JpaRepository<Turma, Integer>, Serializable {
+import java.io.Serializable;
+import java.util.List;
 
-    /**
-     *
-     * @param professor_id
-     * @return
-     */
-    @Query("select t from Turma t where t.professor.id = ?1")
-    public List<Turma> findOfProfessor(Integer professor_id);
+
+public interface ConsultaRepository extends JpaRepository<Consulta, Integer>, Serializable {
+
+
+    @Query("select t from Consulta t where t.paciente.id = ?1")
+    public List<Consulta> findOfPaciente(Integer paciente_id);
+
+    @Query("select t from Consulta t where t.medico.id = ?1")
+    public List<Consulta> findOfMedico(Integer medico_id);
 
 
 

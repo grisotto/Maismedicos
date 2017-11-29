@@ -1,4 +1,4 @@
-package br.ufg.jatai.fsw.squest;
+package mais.medicos;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

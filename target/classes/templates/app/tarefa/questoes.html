@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      th:include="fragments/basetemplate :: page">
+
+
+<head>
+    <title>TODO supply a title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+</head>
+<body>
+<div th:fragment="content">
+    <div class="page-header">
+        <h2 class=""><a class="btn btn-success fa fa-arrow-circle-o-left" th:href="@{/app/tarefa/}+${equipe.tarefa.id}"></a><b>
+            Questões da Equipe: </b>
+            <span class="text-muted" th:text="${{equipe.nome}}"></span></h2>
+    </div>
+    <div class="col-md-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                        <span class="panel-title">
+                            <i class="fa fa-info-circle fa-fw"></i>Info
+
+                        </span>
+            </div>
+            <div class="panel-body">
+                <div class="form-inline">
+                    <div class="form-group col-md-3">
+                        <label class="control-label" for="nome">Nome:</label>
+                        <span class="form-control-static" th:text="${{equipe.nome}}"></span>
+
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="control-label" for="tarefas">Quantidade de alunos: </label>
+                        <span class="form-control-static" th:text="${equipe.alunos.size()}">0</span>
+
+                    </div>
+
+                    <!--<div class="form-group col-md-3">-->
+                        <!--<label class="control-label" for="tarefas">Turma: </label>-->
+                        <!--<span class="form-control-static" th:text="${tarefa.turma.nome}">0</span>-->
+
+                    <!--</div>-->
+
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">
+                        <span class="panel-title">
+
+                            <i class="fa fa-users fa-fw"></i>Questões
+                        </span>
+            </div>
+
+
+            <div class="panel-body">
+                <div class="form-group">
+
+
+                </div>
+                <table class="table  table-hover dt-responsive" id="questosProf">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Questão</th>
+                        <th>Situação</th>
+                        <th class="pull-right">Ver Respostas</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="e , iter : ${questoesequipe}">
+                        <td th:text="${iter.index + 1}" >1</td>
+
+                        <td th:text="${e.question}">1</td>
+
+                        <td  th:if="${e.isAguardando()}" >
+                                        <span class="label label-info ">
+                                            Aguardando
+                                        </span>
+                        </td>
+                        <td  th:if="${e.isAprovada()}" >
+                                        <span class="label label-success ">
+                                            Aprovada
+                                        </span>
+                        </td>
+
+                        <td  th:if="${e.isReprovado()}" >
+                        <span class="label  label-danger">
+                                            Reprovada
+                                        </span>
+                        </td>
+
+
+
+
+
+                        <td>
+                            <div class="btn-group pull-right" role="group">
+
+                                <a th:href="@{/app/questionario/}+${e.id}" class="btn btn-sm  btn-success fa fa-arrow-right"/>
+                            </div>
+                        </td>
+
+
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<div th:fragment="customCSS">
+
+    <link href="/plugins/datatables-plugins/dataTables.bootstrap.css"
+          th:href="@{/plugins/datatables-plugins/dataTables.bootstrap.css}"
+          rel="stylesheet" media="screen"/>
+    <link href="/plugins/datatables-responsive/dataTables.responsive.css"
+          th:href="@{/plugins/datatables-responsive/dataTables.responsive.css}"
+          rel="stylesheet" media="screen"/>
+    <script src="/plugins/datatables/js/jquery.dataTables.min.js"
+            th:src="@{/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+    <script src="/plugins/datatables-plugins/dataTables.bootstrap.min.js"
+            th:src="@{/plugins/datatables-plugins/dataTables.bootstrap.min.js}"></script>
+    <script src="/plugins/datatables-responsive/dataTables.responsive.js"
+            th:src="@{/plugins/datatables-responsive/dataTables.responsive.js}"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#questosProf').DataTable({
+                responsive: true,
+                "paging": false,
+                "searching": false,
+
+                "info": false,
+                "order": [[0, "asc"]]
+
+            });
+        });
+    </script>
+
+
+</div>
+
+
+</body>
+</html>

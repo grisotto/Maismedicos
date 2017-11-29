@@ -9,7 +9,7 @@
             <goal>spring-boot:run</goal>
         </goals>
         <properties>
-            <run.mainClass>br.ufg.jatai.fsw.squest.SQuestApplication</run.mainClass>
+            <run.mainClass>mais.medicos.SQuestApplication</run.mainClass>
             <run.arguments>--spring.devtools.restart.trigger-file=.nbReloadTrigger</run.arguments>
         </properties>
     </action>
@@ -23,7 +23,7 @@
         </goals>
         <properties>
             <run.jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address}</run.jvmArguments>
-            <run.mainClass>br.ufg.jatai.fsw.squest.SQuestApplication</run.mainClass>
+            <run.mainClass>mais.medicos.SQuestApplication</run.mainClass>
             <jpda.listen>true</jpda.listen>
             <run.arguments>--spring.devtools.restart.trigger-file=.nbReloadTrigger</run.arguments>
         </properties>
@@ -38,7 +38,7 @@
             <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
         </goals>
         <properties>
-            <exec.args>-classpath %classpath br.ufg.jatai.fsw.squest.SQuestApplication</exec.args>
+            <exec.args>-classpath %classpath mais.medicos.SQuestApplication</exec.args>
             <exec.executable>java</exec.executable>
         </properties>
     </action>
