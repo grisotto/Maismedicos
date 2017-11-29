@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="fragments/basetemplate :: page">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <div th:fragment="content">
+
+        <div class="col-lg-12">
+            <h1 class="page-header">Consultas</h1>
+
+        </div>
+
+        <div class="col-lg-4">
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <span class="panel-title">
+                        <i class="fa fa-pencil fa-fw"></i>Inserir Consulta
+
+                    </span>
+                </div>
+                <form action="#" th:action="@{/app/consulta}" th:object="${consulta}" method="post">
+
+                    <div class="panel-body">
+                        <fieldset>
+
+                            <!-- Form Name -->
+
+                            <!-- Text input-->
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="control-label" for="descricao">Descrição</label>  
+                                <textarea id="descricao" name="descricao" th:field="${consulta.descricao}"  required="true" placeholder="" class="form-control input-md" type="text"/>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="control-label col-sm-3">Data</label>
+
+                                    <input class="form-control" id='data'
+                                           th:field="${consulta.data}"
+                                           placeholder="Data Inicial" required="true"/>
+
+
+                            </div>
+
+                            <div class="form-group ">
+
+                            <select   name="idMedico" data-placeholder="Selecione um médico" class="form-control " id="medico" >
+                                <option  th:each="p : ${todosMedicos}" th:value="${p.id}"  th:text="${p.nome}">1</option>
+                            </select>
+                    </div>
+
+
+                        </fieldset>
+
+                    </div>
+
+                    <!-- /.panel-body -->
+                    <div class="panel-footer  clearfix">
+                        <input class="btn btn-info pull-right" type="submit" name="save"  value="Salvar" />
+                    </div>
+                </form>
+            </div>
+
+
+
+        </div>
+        <div class="col-lg-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="panel-title">
+                        <i class="fa fa-list fa-fw"></i>Consultas Cadastradas
+                    </span>
+                </div>
+                <div class="panel-body">
+
+
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+
+                                <td>Descricao</td>
+                                <td>Data</td>
+                                <td>Médico</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${allConsultasPaciente.empty}">
+                                <td colspan="2">Não existem consultas cadastrados</td>
+                            </tr>
+                            <tr th:each="t : ${allConsultasPaciente}">
+                                <!--<td th:text="${t.nome}">1</td>-->
+                                <td th:text="${t.descricao}">1</td>
+                                <td th:text="${t.data}">1</td>
+                                <td th:text="${t.medico.nome}">1</td>
+                                <td>
+                                    <a  class="btn btn-success btn-sm "  th:href="@{/app/consulta/}+${{t.id}}" >
+                                        <span class="fa  fa-arrow-right"> </span>
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div th:fragment="customCSS">
+
+        <link href="/plugins/datatables-plugins/dataTables.bootstrap.css"
+              th:href="@{/plugins/datatables-plugins/dataTables.bootstrap.css}"
+              rel="stylesheet" media="screen"/>
+        <link href="/plugins/datatables-responsive/dataTables.responsive.css"
+              th:href="@{/plugins/datatables-responsive/dataTables.responsive.css}"
+              rel="stylesheet" media="screen"/>
+        <script src="/plugins/datatables/js/jquery.dataTables.min.js"
+                th:src="@{/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+        <script src="/plugins/datatables-plugins/dataTables.bootstrap.min.js"
+                th:src="@{/plugins/datatables-plugins/dataTables.bootstrap.min.js}"></script>
+        <script src="/plugins/datatables-responsive/dataTables.responsive.js"
+                th:src="@{/plugins/datatables-responsive/dataTables.responsive.js}"></script>
+
+
+        <script src="/plugins/moment/min/moment-with-locales.js"
+                th:src="@{/plugins/moment/min/moment-with-locales.js}"></script>
+        <script
+                src="/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"
+                th:src="@{/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
+
+        <link
+                href="/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+                th:href="@{/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}"
+                rel="stylesheet" media="screen"/>
+
+
+        <!--<script src="/plugins/select2/js/i18n/pt-BR.js"  th:src="@{/plugins/select2/js/i18n/pt-BR.js}"></script>-->
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#EtapasTarefa').DataTable({
+                    responsive: true,
+                    "paging": false,
+                    "searching": false,
+
+                    "info": false,
+                    "order": [[0, "asc"]]
+
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+
+                //Definindo o formato padrao e o locale
+                $(
+                    '#data')
+                    .datetimepicker({
+                        dayViewHeaderFormat: 'DD/MM/YYYY hh:mm',
+                        locale: 'pt-br'
+                    });
+
+            });
+        </script>
+
+
+    </div>
+</html>
